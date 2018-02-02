@@ -1,0 +1,65 @@
+!! make fonts look smooth
+Xft.antialias: true
+
+!! fix for home/end (disable this if using zsh)
+!!URxvt.keysym.Home:    \033[1~
+!!URxvt.keysym.End:     \033[4~
+!!URxvt.keysym.KP_Home: \033[1~
+!!URxvt.keysym.KP_End:  \033[4~
+
+!! scrolling
+URxvt.scrollBar:         false
+! do not scroll with output
+URxvt*scrollTtyOutput:   false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer:  true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+!! extensions
+URxvt.perl-ext-common: keyboard-select
+URxvt.keysym.M-j:      perl:keyboard-select:activate
+URxvt.keysym.M-s:      perl:keyboard-select:search
+
+!! theming
+URxvt.font:          xft:Fira Mono:pixelsize=16,style=regular
+URxvt.depth:         32
+URxvt.background:    [87]#000000
+URxvt.foreground:    #ffffff
+
+!! 'fake transparency'
+!! URxvt.inheritPixmap: true
+!! URxvt.transparent:   true
+!! URxvt.shading:       15
+
+! black
+URxvt.color0: #141414
+URxvt.color8: #262626
+
+! red
+URxvt.color1: #ff1111
+URxvt.color9: #ff6666
+
+! green
+URxvt.color2:  #11ff11
+URxvt.color10: #66ff66
+
+! yellow
+URxvt.color3:  #ffff11
+URxvt.color11: #ffff66
+
+! blue
+URxvt.color4:  #2222ff
+URxvt.color12: #7777ff
+
+! magenta
+URxvt.color5:  #ff11ff
+URxvt.color13: #ff66ff
+
+! cyan
+URxvt.color6:  #11ffff
+URxvt.color14: #66ffff
+
+! white
+URxvt.color7:  #dbdbdb
+URxvt.color15: #ffffff

@@ -1,0 +1,2 @@
+#!/bin/sh
+'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota2/loading_screens_2048_1024' '/home/jcarson/wallpapers/dota2/loading_screens_2560_1440' 
