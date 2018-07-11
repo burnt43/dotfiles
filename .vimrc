@@ -1,8 +1,11 @@
 set ts=2 sw=2 ai
 set expandtab
 set nowrap
+set number
+set hlsearch
 colorscheme default
 syn on
+hi Search cterm=NONE ctermfg=black ctermbg=red
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
@@ -26,11 +29,11 @@ imap <End> <nop>
 imap <PageDown> <nop>
 imap <PageUp> <nop>
 
-" Enable Ctrl+hjkl for insert mode movement
-inoremap <C-k> <C-o>gk
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-inoremap <C-j> <C-o>gj
+" Disable Ctrl+hjkl for insert mode movement
+inoremap <C-k> <nop>
+inoremap <C-h> <nop>
+inoremap <C-l> <nop>
+inoremap <C-j> <nop>
 
 " Other
 inoremap jj <Esc>

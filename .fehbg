@@ -1,2 +1,21 @@
 #!/bin/sh
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota2/loading_screens_2048_1024' '/home/jcarson/wallpapers/dota2/loading_screens_2560_1440' 
+# all dota
+#'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota2/loading_screens_2560_1440' '/home/jcarson/wallpapers/dota2/loading_screens_2048_1024'
+# big dota
+#'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota2/loading_screens_2560_1440' 
+# small dota
+#'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota2/loading_screens_2048_1024' 
+# archlinux
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
+# other
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
+# other2
+# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
+# other_3
+#'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other_3' 
+# tessalation 
+#'feh' '--bg-tile' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/tessalations' 
+# earthbound
+#'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/earthbound' 
+# pillars of eternity
+'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 

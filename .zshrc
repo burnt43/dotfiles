@@ -97,7 +97,8 @@ plugins=(
 # jcarson stuff
 export LANG=en_US.UTF-8
 export EDITOR='vim'
-export PATH=$PATH:/usr/local/ruby/ruby-2.3.3/bin
+export PATH=$PATH:/usr/local/ruby/ruby-2.3.3/bin:~/scripts/scripts_in_path
+export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
 
 # aliases
 alias hpbxgui_dev="cd ~/git_clones/hosted-burnt43/hpbxgui"
@@ -107,9 +108,16 @@ alias cti_dev="cd ~/git_clones/hosted-burnt43/crm_cti"
 alias cti_run="cti_dev && CTI_ENV=development ruby -I ./lib/ server.rb"
 alias hop_dev="cd ~/git_clones/hosted-burnt43/hop"
 alias hop_run="hop_dev && HOP_ENV=development ruby ./hop.rb"
+alias ami_dev="cd ~/git_clones/hosted-burnt43/ami_fw_proxy"
+alias ami_run="ami_dev &&  ruby -I /home/jcarson/git_clones/hosted-burnt43/ami_fw_proxy/ ./secure_multiplexer_proxy.rb"
+alias mtt_crm_dev="cd ~/git_clones/mtt_crm-burnt43/"
 alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
 alias grep="grep --color=auto"
 alias dotgit="git --git-dir=$HOME/.gitdotfiles --work-tree=$HOME"
+alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
+alias crm_git_add_all="git add app/models app/controllers app/views app/helpers app/assets/javascripts config lib test"
+# mysql-5.7.21 aliases
+alias standard_mysql="/usr/local/mysql/mysql-5.7.21/bin/mysql --defaults-file=/etc/my.cnf.standard_mysql"
 
 # source it!
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
@@ -119,19 +127,5 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-# this is stupid, leave the vim stuff to vim mode
-# vim like keybinds 
-# Alt+0 for beginning of line 
-#bindkey "0" beginning-of-line
-# Alt+$ for end of line 
-#bindkey "$" end-of-line
-# Alt+j clear screen
-#bindkey "l" clear-screen
-# Ctrl+L Forward
-#bindkey "" forward-char
-# Ctrl+H Backward
-#bindkey "" backward-char
-# Ctrl+k for up history
-#bindkey "" up-line-or-history
-# Ctrl+j for down history
-#bindkey "^J" down-line-or-history
+# DO NOT SHARE HISTORY!
+unsetopt share_history
