@@ -6,7 +6,7 @@
 # small dota
 #'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota2/loading_screens_2048_1024' 
 # archlinux
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
+ 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
 # other
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
 # other2
@@ -18,4 +18,4 @@
 # earthbound
 #'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/earthbound' 
 # pillars of eternity
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 

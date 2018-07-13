@@ -8,6 +8,9 @@ Xft.antialias: true
 !!URxvt.keysym.KP_Home: \033[1~
 !!URxvt.keysym.KP_End:  \033[4~
 
+! disable Ctrl+l to clear the screen
+!URxvt.keysym.C-l: 
+
 !! scrolling
 URxvt.scrollBar:         false
 ! do not scroll with output
