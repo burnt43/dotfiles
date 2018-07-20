@@ -1,14 +1,19 @@
+# aliases
+set $terminal exec urxvt
+set $feh exec --no-startup-id feh --bg-center --no-fehbg
+set $Locker i3lock && sleep 1
+
 # use windows key
 set $mod Mod4
 
 # font
-font pango:Inconsolata 12
+font pango:mononoki-Regular 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -53,10 +58,6 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-
-# aliases
-set $feh exec --no-startup-id feh --bg-center --no-fehbg
-set $Locker i3lock && sleep 1
 
 # workspace names
 set $workspace1  "1:mtt_crm"
@@ -133,30 +134,30 @@ mode "$mode_system" {
 bindsym $mod+Pause mode "$mode_system"
 
 # color themes
-set $active_border     #dddddd
+set $active_border     #1144dd
 set $active_foreground #ffffff
 set $active_background #000000
 
-set $inactive_border     #888888
+set $inactive_border     #444444
 set $inactive_foreground #555555
 set $inactive_background #000000
 
-set $indicator_color $active_border
-
-# set a thin border
+# window style
 # no title
-new_window pixel 3
+new_window pixel 5
 # with title
-#new_window normal 1
+# new_window normal 1
 
-client.focused   $active_border   $active_background   $active_foreground   $indicator_color $active_border
-client.unfocused $inactive_border $inactive_background $inactive_foreground $indicator_color $inactive_border
+# window colors
+#                       border           background           text                 indicator        child_border
+client.focused          $active_border   $active_background   $active_foreground   $active_border   $active_border
+client.focused_inactive $inactive_border $inactive_background $inactive_foreground $inactive_border $inactive_border
+client.unfocused        $inactive_border $inactive_background $inactive_foreground $inactive_border $inactive_border
 
-# disable gaps
+# gaps
 smart_gaps on
 gaps outer 4
 gaps inner 8
-
 smart_borders on
 
 # mouse settings
@@ -173,8 +174,7 @@ assign [class="Google-chrome"] $workspace2
 assign [class="Pidgin"] $workspace3
 assign [class="libreoffice-writer"] $workspace4
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# bar
 bar {
   status_command i3status
   colors {
@@ -184,16 +184,8 @@ bar {
 }
 
 # load programs on startup
+# compton for 'real' transparency
 exec --no-startup-id compton -b
-exec --no-startup-id urxvt
 exec --no-startup-id urxvt -T "quick_terminal"
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id pidgin
-
-# start urxvt on $workspace10. needs to be like this. important that the exec uxrvt does not have the --no-start-id option
-exec --no-startup-id i3-msg 'workspace $workspace5; exec urxvt'
-exec --no-startup-id i3-msg 'workspace $workspace6; exec urxvt'
-exec --no-startup-id i3-msg 'workspace $workspace7; exec urxvt'
-exec --no-startup-id i3-msg 'workspace $workspace8; exec urxvt'
-exec --no-startup-id i3-msg 'workspace $workspace9; exec urxvt'
-exec --no-startup-id i3-msg 'workspace $workspace10; exec urxvt; workspace $workspace1'

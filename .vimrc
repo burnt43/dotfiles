@@ -1,19 +1,22 @@
+" set mapleader for ranger.vim
 let mapleader='\'
+
+" setup vundle
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-ruby/vim-ruby'
-"Plugin 'burnt43/vim-haml'
 Plugin 'rafaqz/ranger.vim'
+"Plugin 'vim-utils/vim-ruby-fold'
 call vundle#end()
-" do not turn on indent!
-filetype plugin on
+filetype plugin on " leaving indent off
 
-let ruby_fold=1
-let ruby_foldable_groups="class module def"
+" vim-ruby variables
+" let ruby_fold=0
+" let ruby_foldable_groups="class module def"
 
+" my basic vim options
 set ts=2 sw=2 ai
 set expandtab
 set nowrap

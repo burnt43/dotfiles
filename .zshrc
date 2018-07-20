@@ -115,7 +115,7 @@ alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 
 alias grep="grep --color=auto"
 alias dotgit="git --git-dir=$HOME/.gitdotfiles --work-tree=$HOME"
 alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
-alias crm_git_add_all="git add app/models app/controllers app/views app/helpers app/assets/javascripts config lib test"
+alias crm_git_add_all="git add app/models app/controllers app/mailers app/views app/helpers app/assets/javascripts config lib test"
 # mysql-5.7.21 aliases
 alias standard_mysql="/usr/local/mysql/mysql-5.7.21/bin/mysql --defaults-file=/etc/my.cnf.standard_mysql"
 
@@ -129,3 +129,6 @@ source $ZSH/oh-my-zsh.sh
 
 # DO NOT SHARE HISTORY!
 unsetopt share_history
+
+# use neofetch as a welcome message
+neofetch

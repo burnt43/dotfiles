@@ -25,15 +25,21 @@ URxvt*iso14755: false
 URxvt*iso14755_52: false
 
 !! extensions
-URxvt.perl-ext-common: keyboard-select
+URxvt.perl-ext-common: keyboard-select,resize-font
 URxvt.keysym.M-j:      perl:keyboard-select:activate
 URxvt.keysym.M-s:      perl:keyboard-select:search
 
 !! theming
-URxvt.font:          xft:Fira Mono:pixelsize=16,style=regular
+!! see /usr/share/fonts/TTF
+!!URxvt.font:          xft:Fira Mono:pixelsize=14,style=regular
+URxvt.font:          xft:mononoki-Regular:pixelsize=16,style=regular
 URxvt.depth:         32
 URxvt.background:    [85]#000000
 URxvt.foreground:    #ffffff
+
+!! font size change
+URxvt.keysym.C-Down:  resize-font:smaller
+URxvt.keysym.C-Up:    resize-font:bigger
 
 !! 'fake transparency'
 ! URxvt.inheritPixmap: true
