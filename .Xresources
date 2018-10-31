@@ -34,7 +34,7 @@ URxvt.keysym.M-s:      perl:keyboard-select:search
 !!URxvt.font:          xft:Fira Mono:pixelsize=14,style=regular
 URxvt.font:          xft:mononoki-Regular:pixelsize=16,style=regular
 URxvt.depth:         32
-URxvt.background:    [85]#000000
+URxvt.background:    [90]#000000
 URxvt.foreground:    #ffffff
 
 !! font size change

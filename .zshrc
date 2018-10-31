@@ -59,9 +59,9 @@ ZSH_CUSTOM=~/.oh-my-zsh/custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  colored-man-pages
+  #colored-man-pages
   #zsh-syntax-highlighting
-  #vi-mode
+  vi-mode
 )
 
 # User configuration
@@ -95,10 +95,23 @@ plugins=(
 
 # -------------------------------------------
 # jcarson stuff
+
+# vi-mode fixes
+# unbind ALL keys in viins mode and only bind jj to command mode
+bindkey -rM viins ""
+bindkey -M viins 'jj' vi-cmd-mode
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export PATH=$PATH:/usr/local/ruby/ruby-2.3.3/bin:~/scripts/scripts_in_path
 export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
+# JRE 8
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/:/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/server
+# JRE 10
+# export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 
 # aliases
 alias hpbxgui_dev="cd ~/git_clones/hosted-burnt43/hpbxgui"
@@ -109,7 +122,7 @@ alias cti_run="cti_dev && CTI_ENV=development ruby -I ./lib/ server.rb"
 alias hop_dev="cd ~/git_clones/hosted-burnt43/hop"
 alias hop_run="hop_dev && HOP_ENV=development ruby ./hop.rb"
 alias ami_dev="cd ~/git_clones/hosted-burnt43/ami_fw_proxy"
-alias ami_run="ami_dev &&  ruby -I /home/jcarson/git_clones/hosted-burnt43/ami_fw_proxy/ ./secure_multiplexer_proxy.rb"
+alias ami_run="ami_dev && RAILS_ENV=development ruby -I /home/jcarson/git_clones/hosted-burnt43/ami_fw_proxy/ ./secure_multiplexer_proxy.rb"
 alias mtt_crm_dev="cd ~/git_clones/mtt_crm-burnt43/"
 alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
 alias grep="grep --color=auto"
@@ -118,6 +131,7 @@ alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
 alias crm_git_add_all="git add app/models app/controllers app/mailers app/views app/helpers app/assets/javascripts config lib test"
 # mysql-5.7.21 aliases
 alias standard_mysql="/usr/local/mysql/mysql-5.7.21/bin/mysql --defaults-file=/etc/my.cnf.standard_mysql"
+alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
 
 # source it!
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
