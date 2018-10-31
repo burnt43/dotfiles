@@ -98,7 +98,7 @@ plugins=(
 
 # vi-mode fixes
 # unbind ALL keys in viins mode and only bind jj to command mode
-bindkey -rM viins ""
+bindkey -rM viins "^["
 bindkey -M viins 'jj' vi-cmd-mode
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
