@@ -1,9 +1,0 @@
-export EDITOR=vim
-export PS1="\u@\[\e[0;32m\]\h\[\e[0m\] \W> "
-export PATH=$PATH:/usr/local/ruby/ruby-2.3.3/bin:~/scripts
-
-alias hpbxgui_dev="cd ~/git_clones/hosted-burnt43/hpbxgui"
-alias cti_dev="cd ~/git_clones/hosted-burnt43/crm_cti"
-alias cti_run="cti_dev && CTI_ENV=development ruby -I ./lib/ server.rb"
-alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
-alias grep="grep --color=auto"
