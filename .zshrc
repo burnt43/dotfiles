@@ -71,8 +71,10 @@ plugins=(
 # unbind ALL keys in viins mode and only bind jj to command mode
 bindkey -rM viins "^["
 bindkey -M viins 'jj' vi-cmd-mode
-bindkey "${terminfo[khome]}" beginning-of-line
-bindkey "${terminfo[kend]}" end-of-line
+
+# don't use these bindings. get used to ctrl+a and ctrl+e
+bindkey -r "${terminfo[khome]}" #beginning-of-line
+bindkey -r "${terminfo[kend]}" #end-of-line
 
 export LANG=en_US.UTF-8
 export EDITOR='vim'
