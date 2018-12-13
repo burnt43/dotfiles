@@ -31,7 +31,17 @@ URxvt.keysym.M-s:      perl:keyboard-select:search
 
 !! theming
 !! see /usr/share/fonts/TTF
-URxvt.font:          xft:RobotoMono-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:RobotoMono-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:NotoSansMono-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:Inconsolata-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:FiraMono-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:Go-Regular:pixelsize=16,style=regular
+URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:SpaceMono-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:mononoki-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:SourceCodePro-Regular:pixelsize=16,style=regular
+!!URxvt.font:          xft:Cantarell-Regular:pixelsize=16,style=regular
+
 URxvt.depth:         32
 URxvt.background:    [85]#000000
 URxvt.foreground:    #ffffff
