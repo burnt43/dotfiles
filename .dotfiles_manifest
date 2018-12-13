@@ -1,0 +1,12 @@
+.asoundrc
+.asoundrc.asoundconf
+.config/i3
+.config/neofetch
+.config/ranger
+.dotfiles_manifest
+.fehbg
+.oh-my-zsh/custom
+.vimrc
+.xinitrc
+.Xresources
+.zshrc
