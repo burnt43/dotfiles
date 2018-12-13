@@ -7,7 +7,7 @@ set $Locker i3lock && sleep 1
 set $mod Mod4
 
 # font
-font pango:mononoki-Regular 12
+font pango:Hack-Regular 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
