@@ -24,12 +24,24 @@ syn on
 hi Search cterm=NONE ctermfg=black ctermbg=red
 hi Folded cterm=NONE ctermfg=white ctermbg=black
 
+" show statusline
+set laststatus=2
+set statusline=%f       " filename
+set statusline+=\ %m    " modified flag
+set statusline+=%=      " move to right side
+set statusline+=%y      " filetype
+set statusline+=\ %4l  " current line
+set statusline+=\/%-4L  " total lines
+set statusline+=\ %3p%% " percentage
+set statusline+=\ %3c    " column number
+
 "
 " KEY MAPPINGS
 "
 
 " set leader
-let mapleader='\'
+let mapleader="\\"
+let maplocalleader="\\"
 
 " .vimrc
 nnoremap <leader>ev :split $MYVIMRC<cr>
@@ -40,7 +52,7 @@ noremap <S-tab> :tabprevious<cr>
 noremap <tab> :tabnext<cr>
 
 " etc
-inoremap jj <esc>
+inoremap jk <esc>
 
 " ranger
 noremap <leader>rr :RangerEdit<cr>
@@ -51,7 +63,7 @@ noremap <leader>rt :RangerTab<cr>
 "noremap <leader>ra :RangerAppend<cr>
 "noremap <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
 
-" disable 'noobie' keys
+" disable keys i want to stop using
 noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
@@ -62,12 +74,19 @@ noremap <Insert> <nop>
 noremap <Delete> <nop>
 noremap <PageDown> <nop>
 noremap <PageUp> <nop>
+inoremap <esc> <nop>
 
 " autocmd
 "   ruby
 augroup filetype_ruby
   autocmd!
   autocmd FileType ruby nnoremap <buffer> <localleader>c ^i# <esc>
+  " change method name
+  autocmd FileType ruby onoremap <buffer> <localleader>mn :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\r^wve"<cr>
+  " change class name
+  autocmd FileType ruby onoremap <buffer> <localleader>cn :<c-u>execute "normal! ?^\\s*class\\s\\+\r:nohlsearch\r^wve"<cr>
+  " change method arguments
+  autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
 augroup END
 
 "  javascript
