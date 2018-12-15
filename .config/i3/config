@@ -185,7 +185,7 @@ bar {
 
 # load programs on startup
 # compton for 'real' transparency
-exec --no-startup-id compton -b
+# exec --no-startup-id compton -b
 exec --no-startup-id urxvt -T "quick_terminal"
 exec --no-startup-id google-chrome-stable
 #exec --no-startup-id pidgin

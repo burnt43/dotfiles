@@ -1,6 +1,4 @@
-"
-" VUNDLE
-"
+" vundle {{{
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -10,21 +8,24 @@ Plugin 'rafaqz/ranger.vim'
 Plugin 'chrisbra/unicode.vim'
 call vundle#end()
 filetype plugin on
+" }}}
 
-"
-" SETTINGS
-"
+" basic settings {{{
 set ts=2 sw=2 ai
 set expandtab
 set nowrap
 set number relativenumber
 set hlsearch
+" }}}
+
+" colors {{{
 colorscheme badwolf
 syn on
 hi Search cterm=NONE ctermfg=black ctermbg=red
 hi Folded cterm=NONE ctermfg=white ctermbg=black
+" }}}
 
-" show statusline
+" statusline {{{
 set laststatus=2
 set statusline=%f       " filename
 set statusline+=\ %m    " modified flag
@@ -34,11 +35,9 @@ set statusline+=\ %4l  " current line
 set statusline+=\/%-4L  " total lines
 set statusline+=\ %3p%% " percentage
 set statusline+=\ %3c    " column number
+" }}}
 
-"
-" KEY MAPPINGS
-"
-
+" key mappings {{{
 " set leader
 let mapleader="\\"
 let maplocalleader="\\"
@@ -75,9 +74,24 @@ noremap <Delete> <nop>
 noremap <PageDown> <nop>
 noremap <PageUp> <nop>
 inoremap <esc> <nop>
+" }}}
 
-" autocmd
-"   ruby
+" augroup {{{
+" vim {{{
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+" xdefaults {{{
+augroup filetype_xdefaults
+  autocmd!
+  autocmd FileType xdefaults setlocal foldmethod=marker
+augroup END
+" }}}
+
+" ruby {{{
 augroup filetype_ruby
   autocmd!
   autocmd FileType ruby nnoremap <buffer> <localleader>c ^i# <esc>
@@ -88,9 +102,12 @@ augroup filetype_ruby
   " change method arguments
   autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
 augroup END
+" }}}
 
-"  javascript
+" javascript {{{
 augroup filetype_javascript
   autocmd!
   autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
 augroup END
+" }}}
+" }}}

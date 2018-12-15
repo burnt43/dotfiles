@@ -11,7 +11,7 @@ Xft.antialias: true
 ! disable Ctrl+l to clear the screen
 !URxvt.keysym.C-l: 
 
-!! scrolling
+!! scrolling {{{
 URxvt.scrollBar:         false
 ! do not scroll with output
 URxvt*scrollTtyOutput:   false
@@ -19,6 +19,7 @@ URxvt*scrollTtyOutput:   false
 URxvt*scrollWithBuffer:  true
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
+! }}}
 
 ! disable ctrl+shift iso mode
 URxvt*iso14755: false
@@ -29,45 +30,96 @@ URxvt.perl-ext-common: keyboard-select,resize-font
 URxvt.keysym.M-j:      perl:keyboard-select:activate
 URxvt.keysym.M-s:      perl:keyboard-select:search
 
-!! theming
-!! see /usr/share/fonts/TTF
+!! font size change
+URxvt.keysym.C-Down:  resize-font:smaller
+URxvt.keysym.C-Up:    resize-font:bigger
+
+!! fonts {{{
+URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:RobotoMono-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:NotoSansMono-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:Inconsolata-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:FiraMono-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:Go-Regular:pixelsize=16,style=regular
-URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:SpaceMono-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:mononoki-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:SourceCodePro-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:Cantarell-Regular:pixelsize=16,style=regular
+! }}}
 
+!! badwolf(vim) color definitions {{{
+#define badwolf_plain #f8f6f2
+#define badwolf_snow #ffffff
+#define badwolf_coal #000000
+#define badwolf_brightgravel   #d9cec3
+#define badwolf_lightgravel    #998f84
+#define badwolf_gravel         #857f78
+#define badwolf_mediumgravel   #666462
+#define badwolf_deepgravel     #45413b
+#define badwolf_deepergravel   #35322d
+#define badwolf_darkgravel     #242321
+#define badwolf_blackgravel    #1c1b1a
+#define badwolf_blackestgravel #141413
+#define badwolf_dalespale #fade3e
+#define badwolf_dirtyblonde #f4cf86
+#define badwolf_taffy #ff2c4b
+#define badwolf_saltwatertaffy #8cffba
+#define badwolf_tardis #0a9dff
+#define badwolf_orange #ffa724
+#define badwolf_lime #aeee00
+#define badwolf_dress #ff9eb8
+#define badwolf_toffee #b88853
+#define badwolf_coffee    #c7915b
+#define badwolf_darkroast #88633f
+! }}}
+
+!! standard xterm-ish scheme {{{
+! URxvt.color0: #353535
+! URxvt.color1: #E64569
+! URxvt.color2: #89D287
+! URxvt.color3: #DAB752
+! URxvt.color4: #439ECF
+! URxvt.color5: #D961DC
+! URxvt.color6: #64AAAF
+! URxvt.color7: #B3B3B3
+! URxvt.color8: #535353
+! URxvt.color9: #E4859A
+! URxvt.color10: #A2CCA1
+! URxvt.color11: #E1E387
+! URxvt.color12: #6FBBE2
+! URxvt.color13: #E586E7
+! URxvt.color14: #96DCDA
+! URxvt.color15: #DEDEDE
+
+! URxvt.depth:         32
+! URxvt.background:    [85]#000000
+! URxvt.foreground:    #ffffff
+! }}}
+
+!! badwolf scheme {{{
+URxvt.color0: badwolf_deepgravel
+URxvt.color1: badwolf_taffy
+URxvt.color2: badwolf_lime
+URxvt.color3: badwolf_orange
+URxvt.color4: badwolf_tardis
+URxvt.color5: badwolf_dress
+URxvt.color6: badwolf_toffee
+URxvt.color7: badwolf_brightgravel
+URxvt.color8: badwolf_deepgravel
+URxvt.color9: badwolf_taffy
+URxvt.color10: badwolf_lime
+URxvt.color11: badwolf_orange
+URxvt.color12: badwolf_tardis
+URxvt.color13: badwolf_dress
+URxvt.color14: badwolf_toffee
+URxvt.color15: badwolf_brightgravel
 URxvt.depth:         32
-URxvt.background:    [85]#000000
-URxvt.foreground:    #ffffff
+URxvt.background:    badwolf_blackestgravel
+URxvt.foreground:    badwolf_plain
+! }}}
 
-!! font size change
-URxvt.keysym.C-Down:  resize-font:smaller
-URxvt.keysym.C-Up:    resize-font:bigger
-
-!! 'fake transparency'
+!! 'fake transparency' {{{
 ! URxvt.inheritPixmap: true
 ! URxvt.transparent:   true
 ! URxvt.shading:       15
-
-URxvt.color0: #353535
-URxvt.color1: #E64569
-URxvt.color2: #89D287
-URxvt.color3: #DAB752
-URxvt.color4: #439ECF
-URxvt.color5: #D961DC
-URxvt.color6: #64AAAF
-URxvt.color7: #B3B3B3
-URxvt.color8: #535353
-URxvt.color9: #E4859A
-URxvt.color10: #A2CCA1
-URxvt.color11: #E1E387
-URxvt.color12: #6FBBE2
-URxvt.color13: #E586E7
-URxvt.color14: #96DCDA
-URxvt.color15: #DEDEDE
+! }}}
