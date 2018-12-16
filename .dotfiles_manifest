@@ -3,6 +3,7 @@
 .config/i3
 .config/neofetch
 .config/ranger
+.config/compton.conf
 .dotfiles_manifest
 .fehbg
 .oh-my-zsh/custom
