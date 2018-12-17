@@ -21,8 +21,8 @@ set hlsearch
 " colors {{{
 colorscheme badwolf
 syn on
-hi Search cterm=NONE ctermfg=black ctermbg=red
-hi Folded cterm=NONE ctermfg=white ctermbg=black
+" hi Search cterm=NONE ctermfg=black ctermbg=red
+" hi Folded cterm=NONE ctermfg=white ctermbg=black
 " }}}
 
 " statusline {{{
@@ -88,6 +88,13 @@ augroup END
 augroup filetype_xdefaults
   autocmd!
   autocmd FileType xdefaults setlocal foldmethod=marker
+augroup END
+" }}}
+
+" conf {{{
+augroup filetype_conf
+  autocmd!
+  autocmd FileType conf setlocal foldmethod=marker
 augroup END
 " }}}
 

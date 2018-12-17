@@ -79,6 +79,7 @@ bindkey -r "${terminfo[kend]}" #end-of-line
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export PATH=$PATH:/usr/local/ruby/ruby-2.5.3/bin:~/scripts/scripts_in_path
+export XDG_CONFIG_HOME=/home/jcarson/.config
 
 alias msu1tracks_dev="cd /home/jcarson/git_clones/msu1tracks"
 

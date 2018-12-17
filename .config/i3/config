@@ -1,7 +1,8 @@
-# aliases
+# aliases {{{
 set $terminal exec urxvt
 set $feh exec --no-startup-id feh --bg-center --no-fehbg
 set $Locker i3lock && sleep 1
+# }}}
 
 # use windows key
 set $mod Mod4
@@ -174,18 +175,23 @@ assign [class="Google-chrome"] $workspace2
 #assign [class="Pidgin"] $workspace3
 #assign [class="libreoffice-writer"] $workspace4
 
-# bar
+# bar config {{{
 bar {
   status_command i3status
+  mode hide
+  font pango:RobotoMono-Regular 14
+  workspace_buttons yes
+  strip_workspace_numbers yes
   colors {
     focused_workspace  $active_border   $active_background   $active_foreground
     inactive_workspace $inactive_border $inactive_background $inactive_foreground
   }
 }
+# }}}
 
-# load programs on startup
-# compton for 'real' transparency
+# load programs on startup {{{
 exec --no-startup-id compton -b
 exec --no-startup-id urxvt -T "quick_terminal"
 exec --no-startup-id google-chrome-stable
 #exec --no-startup-id pidgin
+# }}}
