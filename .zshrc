@@ -70,7 +70,7 @@ plugins=(
 # vi-mode fixes
 # unbind ALL keys in viins mode and only bind jj to command mode
 bindkey -rM viins "^["
-bindkey -M viins 'jj' vi-cmd-mode
+bindkey -M viins 'jk' vi-cmd-mode
 
 # don't use these bindings. get used to ctrl+a and ctrl+e
 bindkey -r "${terminfo[khome]}" #beginning-of-line

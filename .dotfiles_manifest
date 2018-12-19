@@ -1,6 +1,7 @@
 .asoundrc
 .asoundrc.asoundconf
 .config/i3
+.config/i3status/config
 .config/neofetch
 .config/ranger
 .config/compton.conf

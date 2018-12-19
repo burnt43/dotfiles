@@ -179,6 +179,7 @@ assign [class="Google-chrome"] $workspace2
 bar {
   status_command i3status
   mode hide
+  modifier Mod1
   font pango:RobotoMono-Regular 14
   workspace_buttons yes
   strip_workspace_numbers yes
