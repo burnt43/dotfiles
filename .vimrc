@@ -62,6 +62,13 @@ noremap <leader>rt :RangerTab<cr>
 "noremap <leader>ra :RangerAppend<cr>
 "noremap <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
 
+" automatically append \v when searching
+nnoremap / /\v
+nnoremap ? ?\v
+
+nnoremap <leader>w :match Error /\v\s+$/<cr>
+nnoremap <leader>W :match none<cr>
+
 " disable keys i want to stop using
 noremap <up> <nop>
 noremap <down> <nop>
@@ -74,6 +81,10 @@ noremap <Delete> <nop>
 noremap <PageDown> <nop>
 noremap <PageUp> <nop>
 inoremap <esc> <nop>
+" }}}
+
+" abbreviations {{{
+
 " }}}
 
 " augroup {{{
