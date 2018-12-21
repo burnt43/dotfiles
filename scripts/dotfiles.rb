@@ -1,8 +1,55 @@
 require 'pathname'
 require 'fileutils'
+require 'optparse'
+require 'ostruct'
+
+class ArgumentParser
+  VALID_OPERATIONS = %w(copy_to_system copy_to_repo)
+
+  def initialize
+    @options           = OpenStruct.new
+    @options.operation = nil
+
+    @option_parser = OptionParser.new {|opts|
+      opts.on("-o", "--operation=OPERATION", "(#{VALID_OPERATIONS.join(', ')})") {|operation|
+        @options.operation = operation
+      }
+
+      opts.on_tail("-h", "--help", "show this message") do
+        puts opts
+        exit
+      end
+    }
+  end
+
+  def parse(args)
+    @option_parser.parse!(args)
+
+    validate
+    @options
+  end
+
+  private
+
+  def validate
+    if @options.operation.nil?
+      log_error("no operation has been chosen. please set with --operation.")
+      puts @option_parser.help
+      exit 1
+    elsif !VALID_OPERATIONS.include?(@options.operation)
+      log_error("'#{@options.operation}' is not a valid operation")
+      puts @option_parser.help
+      exit 1
+    end 
+  end
+
+  def log_error(msg)
+    puts "[\033[0;31mERROR\033[0;0m] - #{msg}"
+  end
+end
 
 class DotFilesHelper
-  def initialize(options={})
+  def initialize(options)
     @options        = options
     @home_directory = Pathname.new("/home/#{`whoami`}".strip)
 
@@ -21,6 +68,12 @@ class DotFilesHelper
   end
 
   def run
+    send(@options.operation)
+  end
+
+  private
+
+  def copy_to_repo
     File.open(@home_directory.join('.dotfiles_manifest')) {|f|
       f.each_line {|line|
         pathname                = Pathname.new(line.strip)
@@ -49,9 +102,13 @@ class DotFilesHelper
     }
   end
 
+  def copy_to_system
+  end
+
   def log_info(msg)
     puts "[\033[0;32mINFO\033[0;0m] - #{msg}"
   end
 end
 
-DotFilesHelper.new.run
+options = ArgumentParser.new.parse(ARGV)
+DotFilesHelper.new(options).run
