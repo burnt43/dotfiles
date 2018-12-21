@@ -119,6 +119,13 @@ augroup filetype_conf
 augroup END
 " }}}
 
+" zsh {{{
+augroup filetype_zsh
+  autocmd!
+  autocmd FileType zsh setlocal foldmethod=marker
+augroup END
+" }}}
+
 " ruby {{{
 augroup filetype_ruby
   autocmd!

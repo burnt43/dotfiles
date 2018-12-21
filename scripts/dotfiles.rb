@@ -33,6 +33,7 @@ class DotFilesHelper
 
           unless dir_to_ensure_existence.exist?
             self.log_info("creating directory #{dir_to_ensure_existence}")
+            FileUtils.mkdir_p(dir_to_ensure_existence)
           end
         end
 

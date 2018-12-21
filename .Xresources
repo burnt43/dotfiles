@@ -114,7 +114,7 @@ URxvt.color13: badwolf_dress
 URxvt.color14: badwolf_toffee
 URxvt.color15: badwolf_brightgravel
 URxvt.depth:         32
-URxvt.background:    [95]badwolf_blackestgravel
+URxvt.background:    [90]badwolf_coal
 URxvt.foreground:    badwolf_plain
 ! }}}
 

@@ -1,0 +1,69 @@
+set mbox_type=Maildir
+set folder="~/mail"
+set spoolfile=+/
+set header_cache=~/.cache/mutt
+
+set sort=reverse-date-sent
+
+mailboxes =.
+mailboxes =./audits
+mailboxes =./audits/orphans
+mailboxes =./cron
+mailboxes =./cron/app0
+mailboxes =./cron/app1
+mailboxes =./cron/app2
+mailboxes =./cron/gs4
+mailboxes =./cron/hpbx0
+mailboxes =./cron/hpbx1
+mailboxes =./cron/hpbx2
+mailboxes =./cron/hpbx3
+mailboxes =./cron/hpbx4
+mailboxes =./cron/mtt3
+mailboxes =./cron/mtt4
+mailboxes =./cron/pbx
+mailboxes =./cron/recorder0
+mailboxes =./cron/recorder1
+mailboxes =./equipment
+mailboxes =./equipment/plex0
+mailboxes =./equipment/tellabs
+mailboxes =./hpbx_support
+mailboxes =./number_operations
+mailboxes =./number_operations/forwards
+mailboxes =./number_operations/unsuspend
+
+# sidebar options
+set sidebar_visible = yes 
+set sidebar_width = 40
+set sidebar_short_path = yes 
+#set sidebar_component_depth = 1
+set sidebar_delim_chars = '/'
+set sidebar_folder_indent = yes 
+set sidebar_indent_string = '  '
+set sidebar_new_mail_only = no
+#sidebar_whitelist '/home/user/mailbox1'
+#sidebar_whitelist '/home/user/mailbox2'
+#set sidebar_next_new_wrap = no
+#set sidebar_on_right = no
+#set sidebar_divider_char = '|'
+set sidebar_format = '%B%> (%N/%S)'
+#set sidebar_sort_method = 'unsorted'
+
+set mail_check_stats
+set date_format = '%a %Y-%m-%d %H:%M'
+set index_format = '%4C %Z %d %-15.15L (%?l?%4l&%4c?) %s'
+
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cj sidebar-next
+bind index,pager \Co sidebar-open
+#bind index,pager <F3> sidebar-page-up
+#bind index,pager <F4> sidebar-page-down
+#bind index,pager <F5> sidebar-prev-new
+#bind index,pager <F6> sidebar-next-new
+#bind index,pager B sidebar-toggle-visible
+#
+color indicator cyan black
+color sidebar_highlight black color8
+color sidebar_divider color8 black
+color sidebar_flagged red black
+color sidebar_new green black
+color sidebar_ordinary color245 default

@@ -1,18 +1,86 @@
 # aliases {{{
+# workspace names
+set $workspace1  "1"
+set $workspace2  "2:browser"
+set $workspace3  "3"
+set $workspace4  "4"
+set $workspace5  "5"
+set $workspace6  "6"
+set $workspace7  "7"
+set $workspace8  "8"
+set $workspace9  "9"
+set $workspace10 "10"
+
 set $terminal exec urxvt
 set $feh exec --no-startup-id feh --bg-center --no-fehbg
 set $Locker i3lock && sleep 1
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+
+set $badwolf_plain #f8f6f2
+set $badwolf_snow #ffffff
+set $badwolf_coal #000000
+set $badwolf_brightgravel #d9cec3
+set $badwolf_lightgravel #998f84
+set $badwolf_gravel #857f78
+set $badwolf_mediumgravel #666462
+set $badwolf_deepgravel #45413b
+set $badwolf_deepergravel #35322d
+set $badwolf_darkgravel #242321
+set $badwolf_blackgravel #1c1b1a
+set $badwolf_blackestgravel #141413
+set $badwolf_dalespale #fade3e
+set $badwolf_dirtyblonde #f4cf86
+set $badwolf_taffy #ff2c4b
+set $badwolf_saltwatertaffy #8cffba
+set $badwolf_tardis #0a9dff
+set $badwolf_orange #ffa724
+set $badwolf_lime #aeee00
+set $badwolf_dress #ff9eb8
+set $badwolf_toffee #b88853
+set $badwolf_coffee #c7915b
+set $badwolf_darkroast #88633f
 # }}}
 
+# basic config {{{
 # use windows key
 set $mod Mod4
-
-# font
-font pango:Hack-Regular 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# mouse settings
+focus_follows_mouse no
+# }}}
+
+# modes {{{
+# resize mode
+mode "resize" {
+  bindsym j resize shrink width 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize shrink height 10 px or 10 ppt
+  bindsym semicolon resize grow width 10 px or 10 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "$mode_system" {
+  bindsym l exec --no-startup-id $Locker, mode "default"
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+  bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+# }}}
+
+# keybinds {{{
 # start a terminal
 bindsym $mod+Return $terminal
 
@@ -60,18 +128,6 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# workspace names
-set $workspace1  "1"
-set $workspace2  "2:browser"
-set $workspace3  "3"
-set $workspace4  "4"
-set $workspace5  "5"
-set $workspace6  "6"
-set $workspace7  "7"
-set $workspace8  "8"
-set $workspace9  "9"
-set $workspace10 "10"
-
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
@@ -98,62 +154,30 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
 # scratchpad toggle
 bindsym $mod+u [title="quick_terminal"] scratchpad show; [title="quick_terminal"] move position center
 
-# resize mode
-mode "resize" {
-  bindsym j resize shrink width 10 px or 10 ppt
-  bindsym k resize grow height 10 px or 10 ppt
-  bindsym l resize shrink height 10 px or 10 ppt
-  bindsym semicolon resize grow width 10 px or 10 ppt
-
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
+# enter resize mode
 bindsym $mod+r mode "resize"
 
-# screen lock mode
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-  bindsym l exec --no-startup-id $Locker, mode "default"
-  bindsym e exec --no-startup-id i3-msg exit, mode "default"
-  bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-  bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-  bindsym r exec --no-startup-id systemctl reboot, mode "default"
-  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
-
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
+# enter system mode
 bindsym $mod+Pause mode "$mode_system"
+# }}}
 
-# color themes
-set $active_border     #ff8833
-set $active_foreground #ffffff
-set $active_background #000000
+# window style {{{
 
-set $inactive_border     #444444
-set $inactive_foreground #555555
-set $inactive_background #000000
-
-# window style
-# no title
+# no title, width 3 border
 new_window pixel 3
-# with title
-# new_window normal 1
 
-# window colors
-#                       border           background           text                 indicator        child_border
-client.focused          $active_border   $active_background   $active_foreground   $active_border   $active_border
-client.focused_inactive $inactive_border $inactive_background $inactive_foreground $inactive_border $inactive_border
-client.unfocused        $inactive_border $inactive_background $inactive_foreground $inactive_border $inactive_border
+# font
+font pango:Hack-Regular 12
 
 # gaps
 smart_gaps on
@@ -161,9 +185,14 @@ gaps outer 4
 gaps inner 8
 smart_borders on
 
-# mouse settings
-focus_follows_mouse no
+# window colors
+#                       border              background           text                 indicator           child_border
+client.focused          $badwolf_lime       $badwolf_coal        $badwolf_snow        $badwolf_lime       $badwolf_lime
+client.focused_inactive $badwolf_darkgravel $badwolf_coal        $badwolf_snow        $badwolf_darkgravel $badwolf_darkgravel
+client.unfocused        $badwolf_darkgravel $badwolf_coal        $badwolf_snow        $badwolf_darkgravel $badwolf_darkgravel
+# }}}
 
+# specific window/program {{{
 # scratchpad
 for_window [title="quick_terminal"] floating enable
 for_window [title="quick_terminal"] resize set 1300 800
@@ -172,20 +201,21 @@ for_window [title="quick_terminal"] border pixel 5
 
 # open programs in specific workspaces
 assign [class="Google-chrome"] $workspace2
-#assign [class="Pidgin"] $workspace3
-#assign [class="libreoffice-writer"] $workspace4
+assign [class="Pidgin"] $workspace3
+# assign [class="libreoffice-writer"] $workspace4
+# }}}
 
 # bar config {{{
 bar {
   status_command i3status
-  mode hide
   modifier Mod1
+  mode hide
   font pango:RobotoMono-Regular 14
   workspace_buttons yes
-  strip_workspace_numbers yes
+  strip_workspace_numbers no
   colors {
-    focused_workspace  $active_border   $active_background   $active_foreground
-    inactive_workspace $inactive_border $inactive_background $inactive_foreground
+    focused_workspace  $badwolf_lime       $badwolf_coal $badwolf_snow
+    inactive_workspace $badwolf_darkgravel $badwolf_coal $badwolf_gravel
   }
 }
 # }}}
@@ -194,5 +224,5 @@ bar {
 exec --no-startup-id compton -b
 exec --no-startup-id urxvt -T "quick_terminal"
 exec --no-startup-id google-chrome-stable
-#exec --no-startup-id pidgin
+exec --no-startup-id pidgin
 # }}}

@@ -10,7 +10,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN=" %{$reset_color%}%{$fg[green]%}●"
 # left prompt
 local exit_status="%(?.%{$fg[green]%}■.%{$fg[red]%}■)%{$reset_color%}"
 local user_name="%n"
-local host_name="%{$fg_bold[black]%}%m%{$reset_color%}"
+local host_name="%{$fg_bold[green]%}%m%{$reset_color%}"
 PROMPT='┌${exit_status} ${user_name}@${host_name} %c $(git_prompt_info)
 └%% '
 

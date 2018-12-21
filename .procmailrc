@@ -1,0 +1,4 @@
+MAILDIR=$HOME/mail
+DEFAULT=$HOME/mail/new
+LOGFILE=/dev/null
+SHELL=/usr/bin/zsh
