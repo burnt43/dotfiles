@@ -43,15 +43,31 @@ let mapleader="\\"
 let maplocalleader="\\"
 
 " .vimrc
-nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>ev :tabe $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" automatically append \v when searching
+nnoremap / /\v
+nnoremap ? ?\v
 
 " tab navigation
 noremap <S-tab> :tabprevious<cr>
 noremap <tab> :tabnext<cr>
 
+" navigation
+nnoremap H 0
+nnoremap L $
+
+" match
+nnoremap <leader>w :match Error /\v\s+$/<cr>
+nnoremap <leader>W :match none<cr>
+
+" surround in double quotes
+nnoremap <leader>s" mzviw<esc>a"<esc>bi"<esc>`z
+
 " etc
 inoremap jk <esc>
+inoremap <esc> <nop>
 
 " ranger
 noremap <leader>rr :RangerEdit<cr>
@@ -62,12 +78,7 @@ noremap <leader>rt :RangerTab<cr>
 "noremap <leader>ra :RangerAppend<cr>
 "noremap <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
 
-" automatically append \v when searching
-nnoremap / /\v
-nnoremap ? ?\v
-
-nnoremap <leader>w :match Error /\v\s+$/<cr>
-nnoremap <leader>W :match none<cr>
+"nnoremap <leader>g :execute "grep! -R " . shellescape(expand("<cword>")) . " ."<cr>:copen<cr>
 
 " disable keys i want to stop using
 noremap <up> <nop>
@@ -80,11 +91,10 @@ noremap <Insert> <nop>
 noremap <Delete> <nop>
 noremap <PageDown> <nop>
 noremap <PageUp> <nop>
-inoremap <esc> <nop>
 " }}}
 
 " abbreviations {{{
-
+cabbrev help tab help
 " }}}
 
 " augroup {{{
