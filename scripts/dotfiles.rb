@@ -68,41 +68,58 @@ class DotFilesHelper
   end
 
   def run
-    send(@options.operation)
+    sync_points = send("#{@options.operation}_sync_points")
+
+    sync_points.each {|_sync_points|
+      unless _sync_points.destination.dirname.exist?
+        log_info("creating directory #{_sync_points.destination.dirname}")
+        FileUtils.mkdir_p(_sync_points.destination.dirname)
+      end
+
+      rsync_string = (if _sync_points.source.directory? && _sync_points.destination.directory?
+        %Q(rsync -r '#{_sync_points.source.to_s}' '#{_sync_points.source.dirname.to_s}')
+      else
+        %Q(rsync '#{_sync_points.source.to_s}' '#{_sync_points.destination.to_s}')
+      end)
+      log_info(rsync_string)
+      system(rsync_string)
+    }
   end
 
   private
 
-  def copy_to_repo
+  SyncPoints = Struct.new(:source, :destination)
+
+  def copy_to_repo_sync_points
+    result = Array.new
+
     File.open(@home_directory.join('.dotfiles_manifest')) {|f|
       f.each_line {|line|
-        pathname                = Pathname.new(line.strip)
-        entry_to_copy           = @home_directory.join(pathname)
-        dir_to_ensure_existence = @repo_directory
+        entry_relative_pathname = Pathname.new(line.strip)
+        source_for_sync         = @home_directory.join(entry_relative_pathname)
+        destination_for_sync    = @repo_directory.join(entry_relative_pathname)
 
-
-        unless pathname.dirname.to_s == '.'
-          dir_to_ensure_existence = dir_to_ensure_existence.join(pathname.dirname)
-
-          unless dir_to_ensure_existence.exist?
-            self.log_info("creating directory #{dir_to_ensure_existence}")
-            FileUtils.mkdir_p(dir_to_ensure_existence)
-          end
-        end
-
-
-        if entry_to_copy.directory?
-          self.log_info("cp -R #{entry_to_copy} #{dir_to_ensure_existence}")
-          FileUtils.cp_r(entry_to_copy, dir_to_ensure_existence)
-        elsif entry_to_copy.file?
-          self.log_info("cp #{entry_to_copy} #{dir_to_ensure_existence}")
-          FileUtils.cp(entry_to_copy, dir_to_ensure_existence)
-        end
+        result.push(SyncPoints.new(source_for_sync, destination_for_sync))
       }
     }
+
+    result
   end
 
-  def copy_to_system
+  def copy_to_system_sync_points
+    result = Array.new
+
+    File.open(@repo_directory.join('.dotfiles_manifest')) {|f|
+      f.each_line {|line|
+        entry_relative_pathname = Pathname.new(line.strip)
+        source_for_sync         = @repo_directory.join(entry_relative_pathname)
+        destination_for_sync    = @home_directory.join(entry_relative_pathname)
+
+        result.push(SyncPoints.new(source_for_sync, destination_for_sync))
+      }
+    }
+
+    result
   end
 
   def log_info(msg)

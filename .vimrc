@@ -78,7 +78,6 @@ noremap <leader>rt :RangerTab<cr>
 "noremap <leader>ra :RangerAppend<cr>
 "noremap <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
 
-"nnoremap <leader>g :execute "grep! -R " . shellescape(expand("<cword>")) . " ."<cr>:copen<cr>
 
 " disable keys i want to stop using
 noremap <up> <nop>
@@ -129,13 +128,18 @@ augroup END
 " ruby {{{
 augroup filetype_ruby
   autocmd!
+  " add comment
   autocmd FileType ruby nnoremap <buffer> <localleader>c ^i# <esc>
+  " rails_grep_def
+  autocmd FileType ruby nnoremap <buffer> <localleader>rgd :execute "grep! -R -E " . shellescape('^\s*def\s+(\w+\.)?' . expand("<cword>") . '(\s*\()?\b') . " ./app ./lib"<cr>:copen<cr>:redraw!<cr>
+
   " change method name
   autocmd FileType ruby onoremap <buffer> <localleader>mn :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\r^wve"<cr>
   " change class name
   autocmd FileType ruby onoremap <buffer> <localleader>cn :<c-u>execute "normal! ?^\\s*class\\s\\+\r:nohlsearch\r^wve"<cr>
   " change method arguments
   autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
+
 augroup END
 " }}}
 
