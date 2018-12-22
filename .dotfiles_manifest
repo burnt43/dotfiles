@@ -11,6 +11,7 @@
 .oh-my-zsh/custom/themes
 .procmailrc
 .vim/colors
+.vim/plugin
 .vimrc
 .xinitrc
 .Xresources

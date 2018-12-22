@@ -79,7 +79,7 @@ noremap <leader>rt :RangerTab<cr>
 "noremap <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
 
 " greps
-nnoremap <leader>g :execute "grep! -R -E " . shellescape( expand("<cword>") ) . " ./app ./lib"<cr>:copen<cr>:redraw!<cr>
+" nnoremap <leader>g :execute "grep! -R -E " . shellescape( expand("<cword>") ) . " ./app ./lib"<cr>:copen<cr>:redraw!<cr>
 
 " disable keys i want to stop using
 noremap <up> <nop>
