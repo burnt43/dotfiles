@@ -71,9 +71,16 @@ class DotFilesHelper
     sync_points = send("#{@options.operation}_sync_points")
 
     sync_points.each {|_sync_points|
-      unless _sync_points.destination.dirname.exist?
-        log_info("creating directory #{_sync_points.destination.dirname}")
-        FileUtils.mkdir_p(_sync_points.destination.dirname)
+      if _sync_points.source.directory?
+        unless _sync_points.destination.exist?
+          log_info("creating directory #{_sync_points.destination}")
+          FileUtils.mkdir_p(_sync_points.destination)
+        end
+      else
+        unless _sync_points.destination.dirname.exist?
+          log_info("creating directory #{_sync_points.destination.dirname}")
+          FileUtils.mkdir_p(_sync_points.destination.dirname)
+        end
       end
 
       rsync_string = (if _sync_points.source.directory? && _sync_points.destination.directory?
