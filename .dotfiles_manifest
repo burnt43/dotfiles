@@ -15,5 +15,7 @@
 .xinitrc
 .Xresources
 .zshrc
+.zsh-burnt43-pre
+.zsh-jco1-pre
 .zsh-burnt43
 .zsh-jco1
