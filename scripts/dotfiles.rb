@@ -86,7 +86,7 @@ class DotFilesHelper
       end
 
       rsync_string = (if _sync_points.source.directory? && _sync_points.destination.directory?
-        %Q(rsync -r '#{_sync_points.source.to_s}' '#{_sync_points.destination.dirname.to_s}')
+        %Q(rsync -r #{self.send("#{@options.operation}_rsync_dir_options")} '#{_sync_points.source.to_s}' '#{_sync_points.destination.dirname.to_s}')
       else
         %Q(rsync '#{_sync_points.source.to_s}' '#{_sync_points.destination.to_s}')
       end)
@@ -99,6 +99,7 @@ class DotFilesHelper
 
   SyncPoints = Struct.new(:source, :destination)
 
+  # copy_to_repo
   def copy_to_repo_pre
   end
 
@@ -118,6 +119,11 @@ class DotFilesHelper
     result
   end
 
+  def copy_to_repo_rsync_dir_options
+    '--delete-excluded'
+  end
+
+  # copy_to_system
   def copy_to_system_pre
     log_warning("you are about to overwrite your system files. is this okay? (y/n): ", no_newline: true)
 
@@ -143,6 +149,10 @@ class DotFilesHelper
     }
 
     result
+  end
+
+  def copy_to_system_rsync_dir_options
+    String.new
   end
 
   def log_info(msg)

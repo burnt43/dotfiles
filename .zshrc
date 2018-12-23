@@ -3,7 +3,6 @@ if [[ -f $HOME/.zsh-$(hostname)-pre ]]; then
   source $HOME/.zsh-$(hostname)-pre 
 fi
 
-ZSH_THEME="jcarson"
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
