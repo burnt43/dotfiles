@@ -68,6 +68,8 @@ class DotFilesHelper
   end
 
   def run
+    self.send("#{@options.operation}_pre")
+
     sync_points = send("#{@options.operation}_sync_points")
 
     sync_points.each {|_sync_points|
@@ -97,6 +99,9 @@ class DotFilesHelper
 
   SyncPoints = Struct.new(:source, :destination)
 
+  def copy_to_repo_pre
+  end
+
   def copy_to_repo_sync_points
     result = Array.new
 
@@ -111,6 +116,17 @@ class DotFilesHelper
     }
 
     result
+  end
+
+  def copy_to_system_pre
+    log_warning("you are about to overwrite your system files. is this okay? (y/n): ", no_newline: true)
+
+    if %w(y Y).include?( (input = gets.chomp) )
+      log_info("continuing execution")
+    else
+      log_info("exiting program")
+      exit 1
+    end
   end
 
   def copy_to_system_sync_points
@@ -131,6 +147,15 @@ class DotFilesHelper
 
   def log_info(msg)
     puts "[\033[0;32mINFO\033[0;0m] - #{msg}"
+  end
+
+  def log_warning(msg, options={})
+    string = "[\033[0;33mWARNING\033[0;0m] - #{msg}"
+    if options[:no_newline]
+      print string
+    else
+      puts string
+    end
   end
 end
 
