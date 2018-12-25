@@ -4,7 +4,7 @@
 " \ \ / / | '_ ` _ \| '__/ __|
 "  \ V /| | | | | | | | | (__ 
 "   \_/ |_|_| |_| |_|_|  \___|
-
+"
 " vundle {{{
 set nocompatible
 filetype off
@@ -28,7 +28,56 @@ syn on
 " hi Search cterm=NONE ctermfg=black ctermbg=red
 " hi Folded cterm=NONE ctermfg=white ctermbg=black
 " }}}
-" key mappings {{{
+" variables {{{
+let g:filetype_to_comment_char = {'javascript': '//', 'ruby': '#', 'vim': '"', 'xdefaults': '!','zsh': '#'}
+" }}}
+" functions {{{
+function! s:SetStatusLine(type)
+  if a:type ==# 'normal'
+    " badwolf tardis
+    hi StatusLine ctermbg=39 ctermfg=16
+    set statusline=[NORMAL]
+  elseif a:type ==# 'insert'
+    " badwolf orange
+    hi StatusLine ctermbg=214 ctermfg=16
+    set statusline=[INSERT]
+  elseif a:type ==# 'command'
+    " badwolf lime
+    hi StatusLine ctermbg=154 ctermfg=16
+    set statusline=[COMMAND]
+  end
+
+  set statusline+=\ %f    " filename
+  set statusline+=\ %m    " modified flag
+  set statusline+=%=      " move to right side
+  set statusline+=%y      " filetype
+  set statusline+=\ %4l   " current line
+  set statusline+=\/%-4L  " total lines
+  set statusline+=\ %3p%% " percentage
+  set statusline+=\ %3c   " column number
+endfunction
+
+function! s:AddCommentOperator(type)
+  if has_key(g:filetype_to_comment_char, &filetype)
+    if a:type ==# 'V'
+      execute "normal! :'<,'>" . 's/^/'. g:filetype_to_comment_char[&filetype] . ' /g' . "\<cr>"
+    elseif a:type ==# 'line'
+      execute "normal! :'[,']" . 's/^/'. g:filetype_to_comment_char[&filetype] . ' /g' . "\<cr>"
+    endif
+  endif
+endfunction
+
+function! s:RemoveCommentOperator(type)
+  if has_key(g:filetype_to_comment_char, &filetype)
+    if a:type ==# 'V'
+      execute "normal! :'<,'>" . 's/^'. g:filetype_to_comment_char[&filetype] . ' //g' . "\<cr>"
+    elseif a:type ==# 'line'
+      execute "normal! :'[,']" . 's/^'. g:filetype_to_comment_char[&filetype] . ' //g' . "\<cr>"
+    endif
+  endif
+endfunction
+" }}}
+" global key mappings {{{
 " set leader
 let mapleader="\\"
 let maplocalleader="\\"
@@ -60,6 +109,12 @@ nnoremap <leader>s" mzviw<esc>a"<esc>bi"<esc>`z
 inoremap jk <esc>
 inoremap <esc> <nop>
 
+" commenting
+nnoremap <localleader>c :set operatorfunc=<SID>AddCommentOperator<cr>g@
+vnoremap <localleader>c :<c-u>call<SID>AddCommentOperator(visualmode())<cr>
+nnoremap <localleader>C :set operatorfunc=<SID>RemoveCommentOperator<cr>g@
+vnoremap <localleader>C :<c-u>call<SID>RemoveCommentOperator(visualmode())<cr>
+
 " ranger
 noremap <leader>rr :RangerEdit<cr>
 "noremap <leader>rv :RangerVSplit<cr>
@@ -84,35 +139,10 @@ noremap <Delete> <nop>
 noremap <PageDown> <nop>
 noremap <PageUp> <nop>
 " }}}
-" abbreviations {{{
+" globalabbreviations {{{
 cabbrev help tab help
 " }}}
 " statusline {{{
-function! s:SetStatusLine(type)
-  if a:type ==# 'normal'
-    " badwolf tardis
-    hi StatusLine ctermbg=39 ctermfg=16
-    set statusline=[NORMAL]
-  elseif a:type ==# 'insert'
-    " badwolf orange
-    hi StatusLine ctermbg=214 ctermfg=16
-    set statusline=[INSERT]
-  elseif a:type ==# 'command'
-    " badwolf lime
-    hi StatusLine ctermbg=154 ctermfg=16
-    set statusline=[COMMAND]
-  end
-
-  set statusline+=\ %f    " filename
-  set statusline+=\ %m    " modified flag
-  set statusline+=%=      " move to right side
-  set statusline+=%y      " filetype
-  set statusline+=\ %4l   " current line
-  set statusline+=\/%-4L  " total lines
-  set statusline+=\ %3p%% " percentage
-  set statusline+=\ %3c   " column number
-endfunction
-
 set laststatus=2
 call <SID>SetStatusLine('normal')
 " }}}
@@ -132,20 +162,12 @@ augroup END
 " ruby {{{
 augroup filetype_ruby
   autocmd!
-  " add comment
-  autocmd FileType ruby nnoremap <buffer> <localleader>c ^i# <esc>
-
   " change method name
   autocmd FileType ruby onoremap <buffer> <localleader>mn :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\r^wve"<cr>
   " change class name
   autocmd FileType ruby onoremap <buffer> <localleader>cn :<c-u>execute "normal! ?^\\s*class\\s\\+\r:nohlsearch\r^wve"<cr>
   " change method arguments
   autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
-
-  " comment all lines within selection
-  autocmd FileType ruby vnoremap <buffer> <localleader>c :s/^/# /g<cr>:nohlsearch<cr>
-  " uncomment all lines within selection
-  autocmd FileType ruby vnoremap <buffer> <localleader>uc :s/^# //g<cr>:nohlsearch<cr>
 augroup END
 " }}}
 " statusline {{{
@@ -160,34 +182,16 @@ augroup END
 augroup filetype_vim
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
-
-  " comment all lines within selection
-  autocmd FileType vim vnoremap <buffer> <localleader>c :s/^/" /g<cr>:nohlsearch<cr>
-  " uncomment all lines within selection
-  autocmd FileType vim vnoremap <buffer> <localleader>uc :s/^" //g<cr>:nohlsearch<cr>
-augroup END
 " }}}
 " xdefaults {{{
 augroup filetype_xdefaults
   autocmd!
   autocmd FileType xdefaults setlocal foldmethod=marker
-
-  " comment all lines within selection
-  autocmd FileType xdefaults vnoremap <buffer> <localleader>c :s/^/! /g<cr>:nohlsearch<cr>
-  " uncomment all lines within selection
-  autocmd FileType xdefaults vnoremap <buffer> <localleader>uc :s/^! //g<cr>:nohlsearch<cr>
-augroup END
 " }}}
 " zsh {{{
 augroup filetype_zsh
   autocmd!
   autocmd FileType zsh setlocal foldmethod=marker
-
-  " comment all lines within selection
-  autocmd FileType zsh vnoremap <buffer> <localleader>c :s/^/# /g<cr>:nohlsearch<cr>
-  " uncomment all lines within selection
-  autocmd FileType zsh vnoremap <buffer> <localleader>uc :s/^# //g<cr>:nohlsearch<cr>
-augroup END
 " }}}
 " }}}
 " test area {{{
@@ -265,7 +269,4 @@ augroup END
 "   call filter(new_list, '!' . string(a:fn) . '(v:val)')
 "   return new_list
 " endfunction
-" }}}
-" post load {{{
-set nohlsearch
 " }}}
