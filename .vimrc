@@ -1,3 +1,10 @@
+"        _                    
+"       (_)                   
+" __   ___ _ __ ___  _ __ ___ 
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__ 
+"   \_/ |_|_| |_| |_|_|  \___|
+
 " vundle {{{
 set nocompatible
 filetype off
@@ -5,11 +12,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rafaqz/ranger.vim'
-Plugin 'chrisbra/unicode.vim'
 call vundle#end()
 filetype plugin on
 " }}}
-
 " basic settings {{{
 set ts=2 sw=2 ai
 set expandtab
@@ -17,14 +22,12 @@ set nowrap
 set number relativenumber
 set hlsearch
 " }}}
-
 " colors {{{
 colorscheme badwolf
 syn on
 " hi Search cterm=NONE ctermfg=black ctermbg=red
 " hi Folded cterm=NONE ctermfg=white ctermbg=black
 " }}}
-
 " key mappings {{{
 " set leader
 let mapleader="\\"
@@ -81,11 +84,9 @@ noremap <Delete> <nop>
 noremap <PageDown> <nop>
 noremap <PageUp> <nop>
 " }}}
-
 " abbreviations {{{
 cabbrev help tab help
 " }}}
-
 " statusline {{{
 function! s:SetStatusLine(type)
   if a:type ==# 'normal'
@@ -115,45 +116,19 @@ endfunction
 set laststatus=2
 call <SID>SetStatusLine('normal')
 " }}}
-
-" augroup {{{
-" statusline {{{
-augroup statusline_events
-  autocmd!
-  autocmd InsertLeave * call <SID>SetStatusLine('normal')
-  autocmd InsertEnter * call <SID>SetStatusLine('insert')
-  autocmd CmdLineLeave * call <SID>SetStatusLine('normal')
-augroup END
-" }}}
-
-" vim {{{
-augroup filetype_vim
-  autocmd!
-  autocmd FileType vim setlocal foldmethod=marker
-augroup END
-" }}}
-
-" xdefaults {{{
-augroup filetype_xdefaults
-  autocmd!
-  autocmd FileType xdefaults setlocal foldmethod=marker
-augroup END
-" }}}
-
+" augroups {{{
 " conf {{{
 augroup filetype_conf
   autocmd!
   autocmd FileType conf setlocal foldmethod=marker
 augroup END
 " }}}
-
-" zsh {{{
-augroup filetype_zsh
+" javascript {{{
+augroup filetype_javascript
   autocmd!
-  autocmd FileType zsh setlocal foldmethod=marker
+  autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
 augroup END
 " }}}
-
 " ruby {{{
 augroup filetype_ruby
   autocmd!
@@ -166,13 +141,131 @@ augroup filetype_ruby
   autocmd FileType ruby onoremap <buffer> <localleader>cn :<c-u>execute "normal! ?^\\s*class\\s\\+\r:nohlsearch\r^wve"<cr>
   " change method arguments
   autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
-augroup END
-" }}}
 
-" javascript {{{
-augroup filetype_javascript
-  autocmd!
-  autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
+  " comment all lines within selection
+  autocmd FileType ruby vnoremap <buffer> <localleader>c :s/^/# /g<cr>:nohlsearch<cr>
+  " uncomment all lines within selection
+  autocmd FileType ruby vnoremap <buffer> <localleader>uc :s/^# //g<cr>:nohlsearch<cr>
 augroup END
 " }}}
+" statusline {{{
+augroup statusline_events
+  autocmd!
+  autocmd InsertLeave * call <SID>SetStatusLine('normal')
+  autocmd InsertEnter * call <SID>SetStatusLine('insert')
+  autocmd CmdLineLeave * call <SID>SetStatusLine('normal')
+augroup END
+" }}}
+" vim {{{
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+
+  " comment all lines within selection
+  autocmd FileType vim vnoremap <buffer> <localleader>c :s/^/" /g<cr>:nohlsearch<cr>
+  " uncomment all lines within selection
+  autocmd FileType vim vnoremap <buffer> <localleader>uc :s/^" //g<cr>:nohlsearch<cr>
+augroup END
+" }}}
+" xdefaults {{{
+augroup filetype_xdefaults
+  autocmd!
+  autocmd FileType xdefaults setlocal foldmethod=marker
+
+  " comment all lines within selection
+  autocmd FileType xdefaults vnoremap <buffer> <localleader>c :s/^/! /g<cr>:nohlsearch<cr>
+  " uncomment all lines within selection
+  autocmd FileType xdefaults vnoremap <buffer> <localleader>uc :s/^! //g<cr>:nohlsearch<cr>
+augroup END
+" }}}
+" zsh {{{
+augroup filetype_zsh
+  autocmd!
+  autocmd FileType zsh setlocal foldmethod=marker
+
+  " comment all lines within selection
+  autocmd FileType zsh vnoremap <buffer> <localleader>c :s/^/# /g<cr>:nohlsearch<cr>
+  " uncomment all lines within selection
+  autocmd FileType zsh vnoremap <buffer> <localleader>uc :s/^# //g<cr>:nohlsearch<cr>
+augroup END
+" }}}
+" }}}
+" test area {{{
+" }}}
+" learn vimscript the hard way area {{{
+" nnoremap <leader>f :call FoldColumnToggle()<cr>
+" 
+" function! FoldColumnToggle()
+"   if &foldcolumn
+"     setlocal foldcolumn=0
+"   else
+"     setlocal foldcolumn=4
+"   endif
+" endfunction
+" 
+" nnoremap <leader>q :call QuickfixToggle()<cr>
+" let g:quickfix_is_open = 0
+" 
+" function! QuickfixToggle()
+"   if g:quickfix_is_open
+"     cclose
+"     let g:quickfix_is_open = 0
+"     execute g:quickfix_return_to_window . "wincmd w"
+"   else
+"     let g:quickfix_return_to_window = winnr()
+"     copen
+"     let g:quickfix_is_open = 1
+"   endif
+" endfunction
+
+" function! Sorted(l)
+"   let new_list = deepcopy(a:l)
+"   call sort(new_list)
+"   return new_list
+" endfunction
+" 
+" function! Reversed(l)
+"   let new_list = deepcopy(a:l)
+"   call reverse(new_list)
+"   return new_list
+" endfunction
+" 
+" function! Append(l, val)
+"   let new_list = deepcopy(a:l)
+"   call add(new_list, a:val)
+"   return new_list
+" endfunction
+" 
+" function! Assoc(l, i, val)
+"   let new_list = deepcopy(a:l)
+"   let new_list[a:i] = a:val
+"   return new_list
+" endfunction
+" 
+" function! Pop(l, i)
+"   let new_list = deepcopy(a:l)
+"   call remove(new_list, a:i)
+"   return new_list
+" endfunction
+" 
+" function! Mapped(fn, l)
+"   let new_list = deepcopy(a:l)
+"   call map(new_list, string(a:fn) . '(v:val)')
+"   return new_list
+" endfunction
+" 
+" function! Filtered(fn, l)
+"   let new_list = deepcopy(a:l)
+"   call filter(new_list, string(a:fn) . '(v:val)')
+"   return new_list
+" endfunction
+" 
+" function! Removed(fn, l)
+"   let new_list = deepcopy(a:l)
+"   call filter(new_list, '!' . string(a:fn) . '(v:val)')
+"   return new_list
+" endfunction
+" }}}
+" post load {{{
+set nohlsearch
 " }}}

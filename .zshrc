@@ -1,3 +1,10 @@
+#          _              
+#         | |             
+#  _______| |__  _ __ ___ 
+# |_  / __| '_ \| '__/ __|
+#  / /\__ \ | | | | | (__ 
+# /___|___/_| |_|_|  \___|
+
 # zsh options {{{
 if [[ -f $HOME/.zsh-$(hostname)-pre ]]; then
   source $HOME/.zsh-$(hostname)-pre 
@@ -62,3 +69,5 @@ unsetopt share_history
 # use neofetch as a welcome message
 neofetch
 # }}}
+                        
+                        

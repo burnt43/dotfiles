@@ -1,3 +1,9 @@
+! __   __                                            
+! \ \ / /                                            
+!  \ V / _ __ ___  ___  ___  _   _ _ __ ___ ___  ___ 
+!   > < | '__/ _ \/ __|/ _ \| | | | '__/ __/ _ \/ __|
+!  / . \| | |  __/\__ \ (_) | |_| | | | (_|  __/\__ \
+! /_/ \_\_|  \___||___/\___/ \__,_|_|  \___\___||___/
 
 !! make fonts look smooth
 Xft.antialias: true
@@ -123,3 +129,5 @@ URxvt.foreground:    badwolf_plain
 ! URxvt.transparent:   true
 ! URxvt.shading:       15
 ! }}}
+                                                   
+                                                   
