@@ -3,6 +3,9 @@ vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 
 augroup grep_operator_filetype_ruby
   autocmd!
+  autocmd FileType ruby nnoremap <buffer> <localleader>rga :set operatorfunc=<SID>RailsGrepAll<cr>g@
+  autocmd FileType ruby vnoremap <buffer> <localleader>rga :<c-u>call <SID>RailsGrepAll(visualmode())<cr>
+
   autocmd FileType ruby nnoremap <buffer> <localleader>rgd :set operatorfunc=<SID>RailsGrepMethodDefOperator<cr>g@
   autocmd FileType ruby vnoremap <buffer> <localleader>rgd :<c-u>call <SID>RailsGrepMethodDefOperator(visualmode())<cr>
 
@@ -55,3 +58,17 @@ function! s:RailsGrepModuleInclude(type)
 
   let @@ = saved_unamed_register
 endfunction
+
+function! s:RailsGrepAll(type)
+  let saved_unamed_register = @@
+
+  if <SID>YankTextToGrep(a:type) ==# 0
+    silent execute "grep! -R -E " . shellescape( @@ ) . " ./app ./lib"
+    copen
+    redraw!
+  end
+
+  let @@ = saved_unamed_register
+endfunction
+
+
