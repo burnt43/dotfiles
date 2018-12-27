@@ -139,8 +139,12 @@ noremap <Delete> <nop>
 noremap <PageDown> <nop>
 noremap <PageUp> <nop>
 " }}}
-" globalabbreviations {{{
+" global abbreviations {{{
 cabbrev help tab help
+" }}}
+" global operators {{{
+onoremap a' :<c-u>execute "normal! F'vf'"<cr>
+onoremap a" :<c-u>execute "normal! F\"vf\""<cr>
 " }}}
 " statusline {{{
 set laststatus=2

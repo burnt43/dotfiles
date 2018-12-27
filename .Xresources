@@ -5,19 +5,7 @@
 !  / . \| | |  __/\__ \ (_) | |_| | | | (_|  __/\__ \
 ! /_/ \_\_|  \___||___/\___/ \__,_|_|  \___\___||___/
 !
-!! make fonts look smooth
-Xft.antialias: true
-
-!! fix for home/end (disable this if using zsh)
-!!URxvt.keysym.Home:    \033[1~
-!!URxvt.keysym.End:     \033[4~
-!!URxvt.keysym.KP_Home: \033[1~
-!!URxvt.keysym.KP_End:  \033[4~
-
-! disable Ctrl+l to clear the screen
-!URxvt.keysym.C-l: 
-
-!! scrolling {{{
+! scrolling {{{
 URxvt.scrollBar:         false
 ! do not scroll with output
 URxvt*scrollTtyOutput:   false
@@ -26,21 +14,21 @@ URxvt*scrollWithBuffer:  true
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
 ! }}}
-
-! disable ctrl+shift iso mode
+! iso modes {{{
 URxvt*iso14755: false
 URxvt*iso14755_52: false
-
-!! extensions
+! }}}
+! extensions {{{
 URxvt.perl-ext-common: keyboard-select,resize-font
+
 URxvt.keysym.M-j:      perl:keyboard-select:activate
 URxvt.keysym.M-s:      perl:keyboard-select:search
 
-!! font size change
 URxvt.keysym.C-Down:  resize-font:smaller
 URxvt.keysym.C-Up:    resize-font:bigger
-
-!! fonts {{{
+! }}}
+! fonts {{{
+Xft.antialias: true
 URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:RobotoMono-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:NotoSansMono-Regular:pixelsize=16,style=regular
@@ -52,8 +40,7 @@ URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:SourceCodePro-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:Cantarell-Regular:pixelsize=16,style=regular
 ! }}}
-
-!! badwolf(vim) color definitions {{{
+! badwolf(vim) color definitions {{{
 #define badwolf_plain #f8f6f2
 #define badwolf_snow #ffffff
 #define badwolf_coal #000000
@@ -78,8 +65,7 @@ URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 #define badwolf_coffee    #c7915b
 #define badwolf_darkroast #88633f
 ! }}}
-
-!! standard xterm-ish scheme {{{
+! standard xterm-ish scheme {{{
 ! URxvt.color0: #353535
 ! URxvt.color1: #E64569
 ! URxvt.color2: #89D287
@@ -101,8 +87,7 @@ URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 ! URxvt.background:    [85]#000000
 ! URxvt.foreground:    #ffffff
 ! }}}
-
-!! badwolf scheme {{{
+! badwolf scheme {{{
 URxvt.color0: badwolf_deepgravel
 URxvt.color1: badwolf_taffy
 URxvt.color2: badwolf_lime
@@ -123,11 +108,8 @@ URxvt.depth:         32
 URxvt.background:    [90]badwolf_coal
 URxvt.foreground:    badwolf_plain
 ! }}}
-
-!! 'fake transparency' {{{
+! 'fake transparency' {{{
 ! URxvt.inheritPixmap: true
 ! URxvt.transparent:   true
 ! URxvt.shading:       15
 ! }}}
-                                                   
-                                                   
