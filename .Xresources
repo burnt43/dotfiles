@@ -94,7 +94,7 @@ URxvt.color2: badwolf_lime
 URxvt.color3: badwolf_orange
 URxvt.color4: badwolf_tardis
 URxvt.color5: badwolf_dress
-URxvt.color6: badwolf_toffee
+URxvt.color6: badwolf_saltwatertaffy
 URxvt.color7: badwolf_brightgravel
 URxvt.color8: badwolf_deepgravel
 URxvt.color9: badwolf_taffy
@@ -102,7 +102,7 @@ URxvt.color10: badwolf_lime
 URxvt.color11: badwolf_orange
 URxvt.color12: badwolf_tardis
 URxvt.color13: badwolf_dress
-URxvt.color14: badwolf_toffee
+URxvt.color14: badwolf_saltwatertaffy
 URxvt.color15: badwolf_brightgravel
 URxvt.depth:         32
 URxvt.background:    [90]badwolf_coal
