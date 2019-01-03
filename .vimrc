@@ -103,8 +103,13 @@ nnoremap L $
 nnoremap <leader>w :match Error /\v\s+$/<cr>
 nnoremap <leader>W :match none<cr>
 
-" surround in double quotes
+" surrounds 
 nnoremap <leader>s" mzviw<esc>a"<esc>bi"<esc>`z
+nnoremap <leader>S" mzF"xf"x`z
+
+nnoremap <leader>s( mzviw<esc>a)<esc>bi(<esc>`z
+nnoremap <leader>S( mzF(xf)x`z
+vnoremap <leader>s( :<c-u>execute "normal! `<i(\<lt>esc>`>la)\<lt>esc>"<cr>
 
 " etc
 inoremap jk <esc>
