@@ -77,6 +77,41 @@ function! s:RemoveCommentOperator(type)
     endif
   endif
 endfunction
+
+function! s:SaveSurroundMark()
+  execute "normal! mz"
+endfunction
+
+function! s:RestoreSurroundMark()
+  execute "normal! `z"
+endfunction
+
+function! s:SetSurroundType(type)
+  let g:surround_type = a:type
+endfunction
+
+function! s:Surround(type)
+  let saved_unamed_register = @@
+
+  let left_char  = ''
+  let right_char = ''
+
+  if g:surround_type ==# '"'
+    let left_char  = '"'
+    let right_char = '"'
+  elseif g:surround_type ==# '('
+    let left_char  = '('
+    let right_char = ')'
+  endif
+
+  if a:type ==# 'v'
+    execute "normal! `<v`>di" . left_char . "\<esc>pa" . right_char . "\<esc>:call <SID>RestoreSurroundMark()\<cr>"
+  elseif a:type ==# 'char'
+    execute "normal! `[v`]di" . left_char . "\<esc>pa" . right_char . "\<esc>:call <SID>RestoreSurroundMark()\<cr>"
+  endif
+
+  let @@ = saved_unamed_register
+endfunction
 " }}}
 " global key mappings {{{
 " set leader
@@ -104,22 +139,31 @@ nnoremap <leader>w :match Error /\v\s+$/<cr>
 nnoremap <leader>W :match none<cr>
 
 " surrounds 
-nnoremap <leader>s" mzviw<esc>a"<esc>bi"<esc>`z
-nnoremap <leader>S" mzF"xf"x`z
-
-nnoremap <leader>s( mzviw<esc>a)<esc>bi(<esc>`z
-nnoremap <leader>S( mzF(xf)x`z
-vnoremap <leader>s( :<c-u>execute "normal! `<i(\<lt>esc>`>la)\<lt>esc>"<cr>
+" nnoremap <leader>s" mzviw<esc>a"<esc>bi"<esc>`z
+" 
+" nnoremap <leader>s( mzviw<esc>a)<esc>bi(<esc>`z
+" vnoremap <leader>s( :<c-u>execute "normal! `<i(\<lt>esc>`>la)\<lt>esc>"<cr>
 
 " etc
 inoremap jk <esc>
 inoremap <esc> <nop>
 
 " commenting
-nnoremap <localleader>c :set operatorfunc=<SID>AddCommentOperator<cr>g@
-vnoremap <localleader>c :<c-u>call<SID>AddCommentOperator(visualmode())<cr>
-nnoremap <localleader>C :set operatorfunc=<SID>RemoveCommentOperator<cr>g@
-vnoremap <localleader>C :<c-u>call<SID>RemoveCommentOperator(visualmode())<cr>
+nnoremap <leader>c :set operatorfunc=<SID>AddCommentOperator<cr>g@
+vnoremap <leader>c :<c-u>call <SID>AddCommentOperator(visualmode())<cr>
+nnoremap <leader>C :set operatorfunc=<SID>RemoveCommentOperator<cr>g@
+vnoremap <leader>C :<c-u>call <SID>RemoveCommentOperator(visualmode())<cr>
+
+" surrounds
+nnoremap <leader>s" :call <SID>SaveSurroundMark()<cr>:call <SID>SetSurroundType('"')<cr>:set operatorfunc=<SID>Surround<cr>g@
+vnoremap <leader>s" :<c-u>call <SID>SaveSurroundMark()<cr>:<c-u>call <SID>SetSurroundType('"')<cr>:<c-u>call <SID>Surround(visualmode())<cr>
+
+nnoremap <leader>s( :call <SID>SaveSurroundMark()<cr>:call <SID>SetSurroundType('(')<cr>:set operatorfunc=<SID>Surround<cr>g@
+vnoremap <leader>s( :<c-u>call <SID>SaveSurroundMark()<cr>:<c-u>call <SID>SetSurroundType('(')<cr>:<c-u>call <SID>Surround(visualmode())<cr>
+
+" un-surrounds
+nnoremap <leader>S" mzF"xf"x`z
+nnoremap <leader>S( mzF(xf)x`z
 
 " ranger
 noremap <leader>rr :RangerEdit<cr>
@@ -192,16 +236,19 @@ augroup END
 augroup filetype_vim
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
+augroup END
 " }}}
 " xdefaults {{{
 augroup filetype_xdefaults
   autocmd!
   autocmd FileType xdefaults setlocal foldmethod=marker
+augroup END
 " }}}
 " zsh {{{
 augroup filetype_zsh
   autocmd!
   autocmd FileType zsh setlocal foldmethod=marker
+augroup END
 " }}}
 " }}}
 " test area {{{
