@@ -122,6 +122,9 @@ let maplocalleader="\\"
 nnoremap <leader>ev :tabe $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+" vundle
+nnoremap <leader>pu :PluginUpdate<cr>:qall<cr>
+
 " automatically append \v when searching
 nnoremap / /\v
 nnoremap ? ?\v
@@ -138,12 +141,6 @@ nnoremap L $
 nnoremap <leader>w :match Error /\v\s+$/<cr>
 nnoremap <leader>W :match none<cr>
 
-" surrounds 
-" nnoremap <leader>s" mzviw<esc>a"<esc>bi"<esc>`z
-" 
-" nnoremap <leader>s( mzviw<esc>a)<esc>bi(<esc>`z
-" vnoremap <leader>s( :<c-u>execute "normal! `<i(\<lt>esc>`>la)\<lt>esc>"<cr>
-
 " etc
 inoremap jk <esc>
 inoremap <esc> <nop>
@@ -155,11 +152,23 @@ nnoremap <leader>C :set operatorfunc=<SID>RemoveCommentOperator<cr>g@
 vnoremap <leader>C :<c-u>call <SID>RemoveCommentOperator(visualmode())<cr>
 
 " surrounds
-nnoremap <leader>s" :call <SID>SaveSurroundMark()<cr>:call <SID>SetSurroundType('"')<cr>:set operatorfunc=<SID>Surround<cr>g@
-vnoremap <leader>s" :<c-u>call <SID>SaveSurroundMark()<cr>:<c-u>call <SID>SetSurroundType('"')<cr>:<c-u>call <SID>Surround(visualmode())<cr>
+nnoremap <leader>s" 
+  \ :call <SID>SaveSurroundMark()<cr>
+  \ :call <SID>SetSurroundType('"')<cr>
+  \ :set operatorfunc=<SID>Surround<cr>g@
+vnoremap <leader>s"
+  \ :<c-u>call <SID>SaveSurroundMark()<cr>
+  \ :<c-u>call <SID>SetSurroundType('"')<cr>
+  \ :<c-u>call <SID>Surround(visualmode())<cr>
 
-nnoremap <leader>s( :call <SID>SaveSurroundMark()<cr>:call <SID>SetSurroundType('(')<cr>:set operatorfunc=<SID>Surround<cr>g@
-vnoremap <leader>s( :<c-u>call <SID>SaveSurroundMark()<cr>:<c-u>call <SID>SetSurroundType('(')<cr>:<c-u>call <SID>Surround(visualmode())<cr>
+nnoremap <leader>s(
+  \ :call <SID>SaveSurroundMark()<cr>
+  \ :call <SID>SetSurroundType('(')<cr>
+  \ :set operatorfunc=<SID>Surround<cr>g@
+vnoremap <leader>s(
+  \ :<c-u>call <SID>SaveSurroundMark()<cr>
+  \ :<c-u>call <SID>SetSurroundType('(')<cr>
+  \ :<c-u>call <SID>Surround(visualmode())<cr>
 
 " un-surrounds
 nnoremap <leader>S" mzF"xf"x`z
