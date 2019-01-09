@@ -13,6 +13,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rafaqz/ranger.vim'
 Plugin 'burnt43/test_plugin.vim'
+Plugin 'burnt43/git.vim'
 call vundle#end()
 filetype plugin on
 " }}}
@@ -164,53 +165,6 @@ function! s:AlignChar(type, char)
   end
 endfunction
 
-function! s:FindGitRepo()
-  let current_directory = fnamemodify(bufname("%"), ":p:h")
-  
-  while current_directory !=# '/'
-    if !empty(glob(current_directory . '/' . '.git'))
-      return current_directory
-    else
-      let current_directory = fnamemodify(current_directory, ":h")
-    endif
-  endwhile
-
-  return -1
-endfunction
-
-function! s:GitDiff()
-  write
-
-  let current_directory          = fnamemodify(bufname("%"), ":p:h")
-  let closest_git_repo_directory = <SID>FindGitRepo()
-
-  if closest_git_repo_directory !=# -1
-    let git_diff_result = system("cd " . closest_git_repo_directory . "&& git diff " . bufname("%"))
-
-    if git_diff_result =~ '\v^Not a git repository'
-      echoerr "not a git repo"
-    else
-      let git_diff_buffer = bufwinnr('__Git_Diff__')
-
-      if git_diff_buffer >= 0
-        execute git_diff_buffer . "wincmd w"
-      else
-        split __Git_Diff__
-      endif
-
-      normal! ggdG
-      setlocal filetype=gitdiff
-      setlocal buftype=nofile
-
-      call append(0, split(git_diff_result, '\v\n'))
-    end
-
-    execute "silent !cd " . current_directory
-    redraw!
-  else
-    echoerr "not a git repo"
-  end
-endfunction
 " }}}
 " global key mappings {{{
 " set leader
@@ -239,9 +193,6 @@ nnoremap L $
 " match
 nnoremap <leader>w :match Error /\v\s+$/<cr>
 nnoremap <leader>W :match none<cr>
-
-" git
-nnoremap <leader>gd :call <SID>GitDiff()<cr>
 
 " etc
 inoremap jk <esc>
