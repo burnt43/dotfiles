@@ -230,14 +230,13 @@ vnoremap <leader>s(
 nnoremap <leader>S" mzF"xf"x`z
 nnoremap <leader>S( mzF(xf)x`z
 
-" ranger
+" Plugin 'burnt43/git.vim'
+nnoremap <leader>gd :call git#GitDiff()<cr>
+nnoremap <leader>gr :call git#GitRefresh()<cr>
+
+" Plugin 'rafaqz/ranger.vim'
 noremap <leader>rr :RangerEdit<cr>
-"noremap <leader>rv :RangerVSplit<cr>
-"noremap <leader>rs :RangerSplit<cr>
 noremap <leader>rt :RangerTab<cr>
-"noremap <leader>ri :RangerInsert<cr>
-"noremap <leader>ra :RangerAppend<cr>
-"noremap <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
 
 " remap : to set the status line, because the CmdLineEnter is whack.
 nnoremap : :call <SID>SetStatusLine("command")<cr>:
