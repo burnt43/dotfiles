@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'rafaqz/ranger.vim'
 Plugin 'burnt43/test_plugin.vim'
 Plugin 'burnt43/git.vim'
+Plugin 'burnt43/statusline.vim'
 call vundle#end()
 filetype plugin on
 " }}}
@@ -34,31 +35,6 @@ syn on
 let g:filetype_to_comment_char = {'javascript': '//', 'ruby': '#', 'vim': '"', 'xdefaults': '!','zsh': '#'}
 " }}}
 " functions {{{
-function! s:SetStatusLine(type)
-  if a:type ==# 'normal'
-    " badwolf tardis
-    hi StatusLine ctermbg=39 ctermfg=16
-    set statusline=[NORMAL]
-  elseif a:type ==# 'insert'
-    " badwolf orange
-    hi StatusLine ctermbg=214 ctermfg=16
-    set statusline=[INSERT]
-  elseif a:type ==# 'command'
-    " badwolf lime
-    hi StatusLine ctermbg=154 ctermfg=16
-    set statusline=[COMMAND]
-  end
-
-  set statusline+=\ %f    " filename
-  set statusline+=\ %m    " modified flag
-  set statusline+=%=      " move to right side
-  set statusline+=%y      " filetype
-  set statusline+=\ %4l   " current line
-  set statusline+=\/%-4L  " total lines
-  set statusline+=\ %3p%% " percentage
-  set statusline+=\ %3c   " column number
-endfunction
-
 function! s:AddCommentOperator(type)
   if has_key(g:filetype_to_comment_char, &filetype)
     if a:type ==# 'V'
@@ -238,9 +214,6 @@ nnoremap <leader>gr :call git#GitRefresh()<cr>
 noremap <leader>rr :RangerEdit<cr>
 noremap <leader>rt :RangerTab<cr>
 
-" remap : to set the status line, because the CmdLineEnter is whack.
-nnoremap : :call <SID>SetStatusLine("command")<cr>:
-
 " disable keys i want to stop using
 noremap <up> <nop>
 noremap <down> <nop>
@@ -259,10 +232,6 @@ cabbrev help tab help
 " global operators {{{
 onoremap a' :<c-u>execute "normal! F'vf'"<cr>
 onoremap a" :<c-u>execute "normal! F\"vf\""<cr>
-" }}}
-" statusline {{{
-set laststatus=2
-call <SID>SetStatusLine('normal')
 " }}}
 " augroups {{{
 " conf {{{
@@ -286,14 +255,6 @@ augroup filetype_ruby
   autocmd FileType ruby onoremap <buffer> <localleader>cn :<c-u>execute "normal! ?^\\s*class\\s\\+\r:nohlsearch\r^wve"<cr>
   " change method arguments
   autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
-augroup END
-" }}}
-" statusline {{{
-augroup statusline_events
-  autocmd!
-  autocmd InsertLeave * call <SID>SetStatusLine('normal')
-  autocmd InsertEnter * call <SID>SetStatusLine('insert')
-  autocmd CmdLineLeave * call <SID>SetStatusLine('normal')
 augroup END
 " }}}
 " vim {{{
