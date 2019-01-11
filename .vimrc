@@ -158,6 +158,7 @@ nnoremap <leader>S( mzF(xf)x`z
 " Plugin 'burnt43/git.vim'
 nnoremap <leader>gd :call git#GitDiff()<cr>
 nnoremap <leader>gr :call git#GitRefresh()<cr>
+nnoremap <leader>gc :call git#GitCommit()<cr>
 
 " Plugin 'rafaqz/ranger.vim'
 noremap <leader>rr :RangerEdit<cr>
