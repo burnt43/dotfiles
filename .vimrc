@@ -155,6 +155,9 @@ vnoremap <leader>s(
 nnoremap <leader>S" mzF"xf"x`z
 nnoremap <leader>S( mzF(xf)x`z
 
+" insert buffer name
+nnoremap <leader>ibn :execute "normal! i" . fnamemodify(bufname("%"), ':t:r')<cr>
+
 " Plugin 'burnt43/git.vim'
 nnoremap <leader>gd :call git#GitDiff()<cr>
 nnoremap <leader>gr :call git#GitRefresh()<cr>
