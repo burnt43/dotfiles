@@ -16,6 +16,8 @@ Plugin 'burnt43/test_plugin.vim'
 Plugin 'burnt43/git.vim'
 Plugin 'burnt43/statusline.vim'
 Plugin 'burnt43/align.vim'
+Plugin 'burnt43/asterisk.vim'
+Plugin 'burnt43/haskell.vim'
 call vundle#end()
 filetype plugin on
 " }}}
@@ -156,9 +158,12 @@ nnoremap <leader>S" mzF"xf"x`z
 nnoremap <leader>S( mzF(xf)x`z
 
 " Plugin 'burnt43/git.vim'
-nnoremap <leader>gd :call git#GitDiff()<cr>
 nnoremap <leader>gr :call git#GitRefresh()<cr>
-nnoremap <leader>gc :call git#GitCommit()<cr>
+nnoremap <leader>gs :call git#GitStatus()<cr>
+nnoremap <leader>gdf :call git#GitDiff('file')<cr>
+nnoremap <leader>gcf :call git#GitCommit('file')<cr>
+nnoremap <leader>gda :call git#GitDiff('all')<cr>
+nnoremap <leader>gca :call git#GitCommit('all')<cr>
 
 " Plugin 'rafaqz/ranger.vim'
 noremap <leader>rr :RangerEdit<cr>
@@ -194,6 +199,18 @@ augroup END
 augroup filetype_javascript
   autocmd!
   autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
+augroup END
+" }}}
+" astdpcap {{{
+augroup filetype_astdpcap
+  autocmd!
+  autocmd FileType astdpcap nnoremap <buffer> <localleader>cu :call asterisk#dialplan#capture#CleanUp()<cr>
+augroup END
+" }}}
+" haskell {{{
+augroup filetype_haskell
+  autocmd!
+  autocmd FileType haskell nnoremap <buffer> <localleader>rp :call haskell#CompileAndRun()<cr>
 augroup END
 " }}}
 " ruby {{{
