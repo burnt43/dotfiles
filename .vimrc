@@ -18,6 +18,7 @@ Plugin 'burnt43/statusline.vim'
 Plugin 'burnt43/align.vim'
 Plugin 'burnt43/asterisk.vim'
 Plugin 'burnt43/haskell.vim'
+Plugin 'burnt43/comments.vim'
 call vundle#end()
 filetype plugin on
 " }}}
@@ -34,30 +35,7 @@ syn on
 " hi Search cterm=NONE ctermfg=black ctermbg=red
 " hi Folded cterm=NONE ctermfg=white ctermbg=black
 " }}}
-" variables {{{
-let g:filetype_to_comment_char = {'javascript': '//', 'ruby': '#', 'vim': '"', 'xdefaults': '!','zsh': '#'}
-" }}}
 " functions {{{
-function! s:AddCommentOperator(type)
-  if has_key(g:filetype_to_comment_char, &filetype)
-    if a:type ==# 'V'
-      execute "normal! :'<,'>" . 's/^/'. g:filetype_to_comment_char[&filetype] . ' /g' . "\<cr>"
-    elseif a:type ==# 'line'
-      execute "normal! :'[,']" . 's/^/'. g:filetype_to_comment_char[&filetype] . ' /g' . "\<cr>"
-    endif
-  endif
-endfunction
-
-function! s:RemoveCommentOperator(type)
-  if has_key(g:filetype_to_comment_char, &filetype)
-    if a:type ==# 'V'
-      execute "normal! :'<,'>" . 's/^'. g:filetype_to_comment_char[&filetype] . ' //g' . "\<cr>"
-    elseif a:type ==# 'line'
-      execute "normal! :'[,']" . 's/^'. g:filetype_to_comment_char[&filetype] . ' //g' . "\<cr>"
-    endif
-  endif
-endfunction
-
 function! s:SaveSurroundMark()
   execute "normal! mz"
 endfunction
@@ -125,15 +103,6 @@ nnoremap <leader>W :match none<cr>
 inoremap jk <esc>
 inoremap <esc> <nop>
 
-" commenting
-nnoremap <leader>c :set operatorfunc=<SID>AddCommentOperator<cr>g@
-vnoremap <leader>c :<c-u>call <SID>AddCommentOperator(visualmode())<cr>
-nnoremap <leader>C :set operatorfunc=<SID>RemoveCommentOperator<cr>g@
-vnoremap <leader>C :<c-u>call <SID>RemoveCommentOperator(visualmode())<cr>
-
-" aligning
-vnoremap <leader>al= :<c-u>call align#AlignChar(visualmode(), '=')<cr>
-
 " surrounds
 nnoremap <leader>s" 
   \ :call <SID>SaveSurroundMark()<cr>
@@ -157,8 +126,14 @@ vnoremap <leader>s(
 nnoremap <leader>S" mzF"xf"x`z
 nnoremap <leader>S( mzF(xf)x`z
 
-" insert buffer name
-nnoremap <leader>ibn :execute "normal! i" . fnamemodify(bufname("%"), ':t:r')<cr>
+" Plugin burnt43/align.vim
+vnoremap <leader>al= :<c-u>call align#AlignChar(visualmode(), '=')<cr>
+
+" Plugin burnt43/comments.vim
+nnoremap <leader>c :set operatorfunc=comments#AddCommentOperator<cr>g@
+vnoremap <leader>c :<c-u>call comments#AddCommentOperator(visualmode())<cr>
+nnoremap <leader>C :set operatorfunc=comments#RemoveCommentOperator<cr>g@
+vnoremap <leader>C :<c-u>call comments#RemoveCommentOperator(visualmode())<cr>
 
 " Plugin 'burnt43/git.vim'
 nnoremap <leader>gr :call git#GitRefresh()<cr>
@@ -187,33 +162,29 @@ noremap <PageUp> <nop>
 " global abbreviations {{{
 cabbrev help tab help
 " }}}
-" global operators {{{
-onoremap a' :<c-u>execute "normal! F'vf'"<cr>
-onoremap a" :<c-u>execute "normal! F\"vf\""<cr>
-" }}}
 " augroups {{{
-" conf {{{
-augroup filetype_conf
-  autocmd!
-  autocmd FileType conf setlocal foldmethod=marker
-augroup END
-" }}}
-" javascript {{{
-augroup filetype_javascript
-  autocmd!
-  autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
-augroup END
-" }}}
 " astdpcap {{{
 augroup filetype_astdpcap
   autocmd!
   autocmd FileType astdpcap nnoremap <buffer> <localleader>cu :call asterisk#dialplan#capture#CleanUp()<cr>
 augroup END
 " }}}
+" conf {{{
+augroup filetype_conf
+  autocmd!
+  autocmd FileType conf setlocal foldmethod=marker
+augroup END
+" }}}
 " haskell {{{
 augroup filetype_haskell
   autocmd!
   autocmd FileType haskell nnoremap <buffer> <localleader>rp :call haskell#CompileAndRun()<cr>
+augroup END
+" }}}
+" javascript {{{
+augroup filetype_javascript
+  autocmd!
+  autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
 augroup END
 " }}}
 " ruby {{{
@@ -245,80 +216,4 @@ augroup filetype_zsh
   autocmd FileType zsh setlocal foldmethod=marker
 augroup END
 " }}}
-" }}}
-" test area {{{
-" }}}
-" learn vimscript the hard way area {{{
-" nnoremap <leader>f :call FoldColumnToggle()<cr>
-" 
-" function! FoldColumnToggle()
-"   if &foldcolumn
-"     setlocal foldcolumn=0
-"   else
-"     setlocal foldcolumn=4
-"   endif
-" endfunction
-" 
-" nnoremap <leader>q :call QuickfixToggle()<cr>
-" let g:quickfix_is_open = 0
-" 
-" function! QuickfixToggle()
-"   if g:quickfix_is_open
-"     cclose
-"     let g:quickfix_is_open = 0
-"     execute g:quickfix_return_to_window . "wincmd w"
-"   else
-"     let g:quickfix_return_to_window = winnr()
-"     copen
-"     let g:quickfix_is_open = 1
-"   endif
-" endfunction
-
-" function! Sorted(l)
-"   let new_list = deepcopy(a:l)
-"   call sort(new_list)
-"   return new_list
-" endfunction
-" 
-" function! Reversed(l)
-"   let new_list = deepcopy(a:l)
-"   call reverse(new_list)
-"   return new_list
-" endfunction
-" 
-" function! Append(l, val)
-"   let new_list = deepcopy(a:l)
-"   call add(new_list, a:val)
-"   return new_list
-" endfunction
-" 
-" function! Assoc(l, i, val)
-"   let new_list = deepcopy(a:l)
-"   let new_list[a:i] = a:val
-"   return new_list
-" endfunction
-" 
-" function! Pop(l, i)
-"   let new_list = deepcopy(a:l)
-"   call remove(new_list, a:i)
-"   return new_list
-" endfunction
-" 
-" function! Mapped(fn, l)
-"   let new_list = deepcopy(a:l)
-"   call map(new_list, string(a:fn) . '(v:val)')
-"   return new_list
-" endfunction
-" 
-" function! Filtered(fn, l)
-"   let new_list = deepcopy(a:l)
-"   call filter(new_list, string(a:fn) . '(v:val)')
-"   return new_list
-" endfunction
-" 
-" function! Removed(fn, l)
-"   let new_list = deepcopy(a:l)
-"   call filter(new_list, '!' . string(a:fn) . '(v:val)')
-"   return new_list
-" endfunction
 " }}}
