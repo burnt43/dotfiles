@@ -32,8 +32,7 @@ set hlsearch
 " colors {{{
 colorscheme badwolf
 syn on
-" hi Search cterm=NONE ctermfg=black ctermbg=red
-" hi Folded cterm=NONE ctermfg=white ctermbg=black
+hi Search cterm=NONE ctermfg=16 ctermbg=39
 " }}}
 " functions {{{
 function! s:SaveSurroundMark()
@@ -125,6 +124,11 @@ vnoremap <leader>s(
 " un-surrounds
 nnoremap <leader>S" mzF"xf"x`z
 nnoremap <leader>S( mzF(xf)x`z
+
+" clipboard
+nnoremap <leader>cbc :let @x=@@<cr>
+nnoremap <leader>cbp "xp
+nnoremap <leader>cbP "xP
 
 " Plugin burnt43/align.vim
 vnoremap <leader>al= :<c-u>call align#AlignChar(visualmode(), '=')<cr>
