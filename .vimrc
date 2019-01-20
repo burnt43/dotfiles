@@ -131,7 +131,12 @@ nnoremap <leader>cbp "xp
 nnoremap <leader>cbP "xP
 
 " Plugin burnt43/align.vim
-vnoremap <leader>al= :<c-u>call align#AlignChar(visualmode(), '=')<cr>
+nnoremap <leader>al=
+  \ :call align#SetAlignChar('=')<cr>
+  \ :set operatorfunc=align#AlignChar<cr>g@
+vnoremap <leader>al=
+  \ :<c-u>call align#SetAlignChar('=')<cr>
+  \ :<c-u>call align#AlignChar(visualmode())<cr>
 
 " Plugin burnt43/comments.vim
 nnoremap <leader>c :set operatorfunc=comments#AddCommentOperator<cr>g@
