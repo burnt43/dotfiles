@@ -19,6 +19,7 @@ Plugin 'burnt43/align.vim'
 Plugin 'burnt43/asterisk.vim'
 Plugin 'burnt43/haskell.vim'
 Plugin 'burnt43/comments.vim'
+Plugin 'burnt43/rails.vim'
 call vundle#end()
 filetype plugin on
 " }}}
@@ -132,10 +133,17 @@ nnoremap <leader>cbP "xP
 
 " Plugin burnt43/align.vim
 nnoremap <leader>al=
-  \ :call align#SetAlignChar('=')<cr>
+  \ :call align#SetAlignPattern('\v\s\zs\=\ze\s')<cr>
   \ :set operatorfunc=align#AlignChar<cr>g@
 vnoremap <leader>al=
-  \ :<c-u>call align#SetAlignChar('=')<cr>
+  \ :<c-u>call align#SetAlignPattern('\v\s\zs\=\ze\s')<cr>
+  \ :<c-u>call align#AlignChar(visualmode())<cr>
+
+nnoremap <leader>ala:
+  \ :call align#SetAlignPattern('\v\w:\s*\zs\w\ze')<cr>
+  \ :set operatorfunc=align#AlignChar<cr>g@
+vnoremap <leader>ala:
+  \ :<c-u>call align#SetAlignPattern('\v\w:\s*\zs\w\ze')<cr>
   \ :<c-u>call align#AlignChar(visualmode())<cr>
 
 " Plugin burnt43/comments.vim
@@ -195,6 +203,19 @@ augroup filetype_javascript
   autocmd!
   autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
 augroup END
+" }}}
+" rails {{{
+augroup file_in_rails
+  autocmd!
+  autocmd User RailsLoaded nnoremap <buffer> <localleader>rga :set operatorfunc=rails#GrepAll<cr>g@
+  autocmd User RailsLoaded vnoremap <buffer> <localleader>rga :<c-u>call rails#GrepAll(visualmode())<cr>
+
+  autocmd User RailsLoaded nnoremap <buffer> <localleader>rgd :set operatorfunc=rails#GrepMethodDefOperator<cr>g@
+  autocmd User RailsLoaded vnoremap <buffer> <localleader>rgd :<c-u>call rails#GrepMethodDefOperator(visualmode())<cr>
+
+  autocmd User RailsLoaded nnoremap <buffer> <localleader>rgi :set operatorfunc=rails#GrepModuleInclude<cr>g@
+  autocmd User RailsLoaded vnoremap <buffer> <localleader>rgi :<c-u>call rails#GrepModuleInclude(visualmode())<cr>
+augroup end
 " }}}
 " ruby {{{
 augroup filetype_ruby
