@@ -29,6 +29,7 @@ set expandtab
 set nowrap
 set number relativenumber
 set hlsearch
+set switchbuf+=usetab,newtab
 " }}}
 " colors {{{
 colorscheme badwolf
