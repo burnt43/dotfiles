@@ -34,7 +34,7 @@ set switchbuf+=usetab,newtab
 " colors {{{
 colorscheme badwolf
 syn on
-hi Search cterm=NONE ctermfg=16 ctermbg=39
+hi Search cterm=NONE ctermfg=232 ctermbg=252
 " }}}
 " functions {{{
 function! s:SaveSurroundMark()
