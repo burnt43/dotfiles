@@ -34,7 +34,7 @@ set switchbuf+=usetab,newtab
 " colors {{{
 colorscheme badwolf
 syn on
-hi Search cterm=NONE ctermfg=232 ctermbg=252
+hi Search cterm=NONE ctermfg=232 ctermbg=245
 " }}}
 " functions {{{
 function! s:SaveSurroundMark()
@@ -131,6 +131,12 @@ nnoremap <leader>S( mzF(xf)x`z
 nnoremap <leader>cbc :let @x=@@<cr>
 nnoremap <leader>cbp "xp
 nnoremap <leader>cbP "xP
+
+" quickfix
+nnoremap <leader>qc :cclose<cr>
+
+" highlight
+nnoremap <leader>H :nohl<cr>
 
 " Plugin burnt43/align.vim
 nnoremap <leader>al=
