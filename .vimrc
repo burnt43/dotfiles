@@ -236,12 +236,26 @@ augroup filetype_ruby
   autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
 
   " ruby.vim
+
+  " rubo.cop.analyze
+  "   analyze visually selected lines
   autocmd FileType ruby vnoremap <buffer> <leader>rca :<c-u>call ruby#rubocop#AnalyzeLines(visualmode())<cr>
 
+  " rubo.cop.buffer
+  "   analyze the buffer 
   autocmd FileType ruby nnoremap <buffer> <leader>rcb :<c-u>call ruby#rubocop#AnalyzeBuffer()<cr>
 
+  " ruby.insert.thousand_separators
+  "   changes 1000000 to 1_000_000
   autocmd FileType ruby vnoremap <buffer> <leader>rit :<c-u>call ruby#InsertThousandSeparators(visualmode())<cr>
   autocmd FileType ruby nnoremap <buffer> <leader>rit :set operatorfunc=ruby#InsertThousandSeparators<cr>g@
+
+  " ruby.modify."
+  "   changes " to '
+  autocmd FileType ruby vnoremap <buffer> <leader>rm"
+    \ :<c-u>call ruby#ChangeDoubleQuoteToSingleQuote(visualmode())<cr>
+  autocmd FileType ruby nnoremap <buffer> <leader>rm"
+    \ :set operatorfunc=ruby#ChangeDoubleQuoteToSingleQuote<cr>g@
 augroup END
 " }}}
 " vim {{{
