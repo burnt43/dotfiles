@@ -20,6 +20,7 @@ Plugin 'burnt43/asterisk.vim'
 Plugin 'burnt43/haskell.vim'
 Plugin 'burnt43/comments.vim'
 Plugin 'burnt43/rails.vim'
+Plugin 'burnt43/ruby.vim'
 call vundle#end()
 filetype plugin on
 " }}}
@@ -233,6 +234,14 @@ augroup filetype_ruby
   autocmd FileType ruby onoremap <buffer> <localleader>cn :<c-u>execute "normal! ?^\\s*class\\s\\+\r:nohlsearch\r^wve"<cr>
   " change method arguments
   autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
+
+  " ruby.vim
+  autocmd FileType ruby vnoremap <buffer> <leader>rca :<c-u>call ruby#rubocop#AnalyzeLines(visualmode())<cr>
+
+  autocmd FileType ruby nnoremap <buffer> <leader>rcb :<c-u>call ruby#rubocop#AnalyzeBuffer()<cr>
+
+  autocmd FileType ruby vnoremap <buffer> <leader>rit :<c-u>call ruby#InsertThousandSeparators(visualmode())<cr>
+  autocmd FileType ruby nnoremap <buffer> <leader>rit :set operatorfunc=ruby#InsertThousandSeparators<cr>g@
 augroup END
 " }}}
 " vim {{{
