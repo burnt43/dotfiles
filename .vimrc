@@ -76,7 +76,6 @@ endfunction
 " global key mappings {{{
 " set leader
 let mapleader="\\"
-let maplocalleader="\\"
 
 " .vimrc
 nnoremap <leader>ev :tabe $MYVIMRC<cr>
@@ -104,6 +103,10 @@ nnoremap <leader>W :match none<cr>
 " etc
 inoremap jk <esc>
 inoremap <esc> <nop>
+
+" fold
+nnoremap <leader>f :set foldcolumn=4<cr>
+nnoremap <leader>F :set foldcolumn=0<cr>
 
 " surrounds
 nnoremap <leader>s" 
@@ -177,12 +180,6 @@ noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
 noremap <right> <nop>
-noremap <Home> <nop>
-noremap <End> <nop>
-noremap <Insert> <nop>
-noremap <Delete> <nop>
-noremap <PageDown> <nop>
-noremap <PageUp> <nop>
 " }}}
 " global abbreviations {{{
 cabbrev help tab help
@@ -191,7 +188,7 @@ cabbrev help tab help
 " astdpcap {{{
 augroup filetype_astdpcap
   autocmd!
-  autocmd FileType astdpcap nnoremap <buffer> <localleader>cu :call asterisk#dialplan#capture#CleanUp()<cr>
+  autocmd FileType astdpcap nnoremap <buffer> <leader>cu :call asterisk#dialplan#capture#CleanUp()<cr>
 augroup END
 " }}}
 " conf {{{
@@ -203,6 +200,9 @@ augroup END
 " haskell {{{
 augroup filetype_haskell
   autocmd!
+  autocmd FileType haskell let maplocalleader="\\h"
+
+  " (r)un.(p)rogram
   autocmd FileType haskell nnoremap <buffer> <localleader>rp :call haskell#CompileAndRun()<cr>
 augroup END
 " }}}
@@ -215,19 +215,21 @@ augroup END
 " rails {{{
 augroup file_in_rails
   autocmd!
-  autocmd User RailsLoaded nnoremap <buffer> <localleader>rga :set operatorfunc=rails#GrepAll<cr>g@
-  autocmd User RailsLoaded vnoremap <buffer> <localleader>rga :<c-u>call rails#GrepAll(visualmode())<cr>
+  autocmd User RailsLoaded nnoremap <buffer> <leader>rga :set operatorfunc=rails#GrepAll<cr>g@
+  autocmd User RailsLoaded vnoremap <buffer> <leader>rga :<c-u>call rails#GrepAll(visualmode())<cr>
 
-  autocmd User RailsLoaded nnoremap <buffer> <localleader>rgd :set operatorfunc=rails#GrepMethodDefOperator<cr>g@
-  autocmd User RailsLoaded vnoremap <buffer> <localleader>rgd :<c-u>call rails#GrepMethodDefOperator(visualmode())<cr>
+  autocmd User RailsLoaded nnoremap <buffer> <leader>rgd :set operatorfunc=rails#GrepMethodDefOperator<cr>g@
+  autocmd User RailsLoaded vnoremap <buffer> <leader>rgd :<c-u>call rails#GrepMethodDefOperator(visualmode())<cr>
 
-  autocmd User RailsLoaded nnoremap <buffer> <localleader>rgi :set operatorfunc=rails#GrepModuleInclude<cr>g@
-  autocmd User RailsLoaded vnoremap <buffer> <localleader>rgi :<c-u>call rails#GrepModuleInclude(visualmode())<cr>
+  autocmd User RailsLoaded nnoremap <buffer> <leader>rgi :set operatorfunc=rails#GrepModuleInclude<cr>g@
+  autocmd User RailsLoaded vnoremap <buffer> <leader>rgi :<c-u>call rails#GrepModuleInclude(visualmode())<cr>
 augroup end
 " }}}
 " ruby {{{
 augroup filetype_ruby
   autocmd!
+  autocmd FileType ruby let maplocalleader="\\r"
+
   " change method name
   autocmd FileType ruby onoremap <buffer> <localleader>mn :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\r^wve"<cr>
   " change class name
@@ -237,24 +239,24 @@ augroup filetype_ruby
 
   " ruby.vim
 
-  " rubo.cop.analyze
+  " rubo(c)op.(l)ines
   "   analyze visually selected lines
-  autocmd FileType ruby vnoremap <buffer> <leader>rca :<c-u>call ruby#rubocop#AnalyzeLines(visualmode())<cr>
+  autocmd FileType ruby vnoremap <buffer> <localleader>cl :<c-u>call ruby#rubocop#AnalyzeLines(visualmode())<cr>
 
-  " rubo.cop.buffer
+  " rubo(c)op.(b)uffer
   "   analyze the buffer 
-  autocmd FileType ruby nnoremap <buffer> <leader>rcb :<c-u>call ruby#rubocop#AnalyzeBuffer()<cr>
+  autocmd FileType ruby nnoremap <buffer> <localleader>cb :<c-u>call ruby#rubocop#AnalyzeBuffer()<cr>
 
-  " ruby.insert.thousand_separators
+  " (i)nsert.(t)housand_separators
   "   changes 1000000 to 1_000_000
-  autocmd FileType ruby vnoremap <buffer> <leader>rit :<c-u>call ruby#InsertThousandSeparators(visualmode())<cr>
-  autocmd FileType ruby nnoremap <buffer> <leader>rit :set operatorfunc=ruby#InsertThousandSeparators<cr>g@
+  autocmd FileType ruby vnoremap <buffer> <localleader>it :<c-u>call ruby#InsertThousandSeparators(visualmode())<cr>
+  autocmd FileType ruby nnoremap <buffer> <localleader>it :set operatorfunc=ruby#InsertThousandSeparators<cr>g@
 
-  " ruby.modify."
+  " e(x)change.(")double_quote
   "   changes " to '
-  autocmd FileType ruby vnoremap <buffer> <leader>rm"
+  autocmd FileType ruby vnoremap <buffer> <localleader>x"
     \ :<c-u>call ruby#ChangeDoubleQuoteToSingleQuote(visualmode())<cr>
-  autocmd FileType ruby nnoremap <buffer> <leader>rm"
+  autocmd FileType ruby nnoremap <buffer> <localleader>x"
     \ :set operatorfunc=ruby#ChangeDoubleQuoteToSingleQuote<cr>g@
 augroup END
 " }}}
