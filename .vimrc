@@ -35,7 +35,7 @@ set switchbuf+=usetab,newtab
 " colors {{{
 colorscheme badwolf
 syn on
-hi Search cterm=NONE ctermfg=232 ctermbg=245
+hi Search cterm=NONE ctermfg=16 ctermbg=121
 " }}}
 " functions {{{
 function! s:SaveSurroundMark()
@@ -137,7 +137,7 @@ nnoremap <leader>cbp "xp
 nnoremap <leader>cbP "xP
 
 " quickfix
-nnoremap <leader>qc :cclose<cr>
+nnoremap <leader>Q :cclose<cr>
 
 " highlight
 nnoremap <leader>H :nohl<cr>
@@ -236,6 +236,10 @@ augroup filetype_ruby
   autocmd FileType ruby onoremap <buffer> <localleader>cn :<c-u>execute "normal! ?^\\s*class\\s\\+\r:nohlsearch\r^wve"<cr>
   " change method arguments
   autocmd FileType ruby onoremap <buffer> <localleader>ma :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\rf(lvi("<cr>
+
+  " match
+  autocmd FileType ruby nnoremap <buffer> <localleader>w :match Error /\v.{80}\zs.+\ze/<cr>
+  autocmd FileType ruby nnoremap <buffer> <localleader>W :match none<cr>
 
   " ruby.vim
 
