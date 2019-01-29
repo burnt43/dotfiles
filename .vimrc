@@ -28,14 +28,27 @@ filetype plugin on
 set ts=2 sw=2 ai
 set expandtab
 set nowrap
-set number relativenumber
+
+if exists("+relativenumber")
+  set number relativenumber
+else
+  set number
+endif
+
 set hlsearch
-set switchbuf+=usetab,newtab
+
+" I don't know who to write a conditional to see if newtab is a valid option
+if v:version >= 800
+  set switchbuf+=usetab,newtab
+else
+  set switchbuf+=usetab
+endif
 " }}}
 " colors {{{
 colorscheme badwolf
 syn on
-hi Search cterm=NONE ctermfg=16 ctermbg=121
+highlight Search cterm=NONE ctermfg=16 ctermbg=173
+highlight Folded cterm=NONE ctermfg=245 ctermbg=233
 " }}}
 " functions {{{
 function! s:SaveSurroundMark()
@@ -224,6 +237,12 @@ augroup file_in_rails
   autocmd User RailsLoaded nnoremap <buffer> <leader>rgi :set operatorfunc=rails#GrepModuleInclude<cr>g@
   autocmd User RailsLoaded vnoremap <buffer> <leader>rgi :<c-u>call rails#GrepModuleInclude(visualmode())<cr>
 augroup end
+" }}}
+" rubocopoutput {{{
+augroup filetype_rubocopoutput
+  autocmd!
+  autocmd FileType rubocopoutput setlocal wrap
+augroup END
 " }}}
 " ruby {{{
 augroup filetype_ruby

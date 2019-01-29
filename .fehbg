@@ -9,7 +9,7 @@
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
 
 # other_3
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other_3' 
+'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other_3' 
 
 # tessalation 
 #'feh' '--bg-tile' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/tessalations' 
@@ -51,4 +51,7 @@
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other4' 
 
 # assorted
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
+
+# minimal
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/minimal' 
