@@ -118,8 +118,10 @@ inoremap jk <esc>
 inoremap <esc> <nop>
 
 " fold
-nnoremap <leader>f :set foldcolumn=4<cr>
-nnoremap <leader>F :set foldcolumn=0<cr>
+nnoremap <leader>zf :set foldcolumn=4<cr>
+nnoremap <leader>zF :set foldcolumn=0<cr>
+" fold(z).(o)nly.(c)urrent
+nnoremap <leader>zoc zMzv
 
 " surrounds
 nnoremap <leader>s" 
