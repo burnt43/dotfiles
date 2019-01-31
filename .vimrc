@@ -8,20 +8,24 @@
 " vundle {{{
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'rafaqz/ranger.vim'
-Plugin 'burnt43/test_plugin.vim'
-Plugin 'burnt43/git.vim'
-Plugin 'burnt43/statusline.vim'
-Plugin 'burnt43/align.vim'
-Plugin 'burnt43/asterisk.vim'
-Plugin 'burnt43/haskell.vim'
-Plugin 'burnt43/comments.vim'
-Plugin 'burnt43/rails.vim'
-Plugin 'burnt43/ruby.vim'
-call vundle#end()
+
+if $USER ==# 'jcarson'
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+  Plugin 'VundleVim/Vundle.vim'
+  Plugin 'rafaqz/ranger.vim'
+  Plugin 'burnt43/test_plugin.vim'
+  Plugin 'burnt43/git.vim'
+  Plugin 'burnt43/statusline.vim'
+  Plugin 'burnt43/align.vim'
+  Plugin 'burnt43/asterisk.vim'
+  Plugin 'burnt43/haskell.vim'
+  Plugin 'burnt43/comments.vim'
+  Plugin 'burnt43/rails.vim'
+  Plugin 'burnt43/ruby.vim'
+  call vundle#end()
+end
+
 filetype plugin on
 " }}}
 " basic settings {{{
