@@ -9,7 +9,7 @@
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
 
 # other_3
-'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other_3' 
+# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other_3' 
 
 # tessalation 
 #'feh' '--bg-tile' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/tessalations' 
@@ -18,7 +18,7 @@
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/earthbound' 
 
 # pillars of eternity
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
+'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
 
 # spiral_staircases
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
@@ -55,3 +55,6 @@
 
 # minimal
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/minimal' 
+
+# shadowrun
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/shadowrun' 

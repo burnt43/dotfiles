@@ -151,6 +151,9 @@ nnoremap <leader>S" mzF"xf"x`z
 nnoremap <leader>S( mzF(xf)x`z
 
 " clipboard
+nnoremap <leader>v :set paste<cr>
+nnoremap <leader>V :set nopaste<cr>
+
 nnoremap <leader>cbc :let @x=@@<cr>
 nnoremap <leader>cbp "xp
 nnoremap <leader>cbP "xP
@@ -183,11 +186,17 @@ nnoremap <leader>C :set operatorfunc=comments#RemoveCommentOperator<cr>g@
 vnoremap <leader>C :<c-u>call comments#RemoveCommentOperator(visualmode())<cr>
 
 " Plugin 'burnt43/git.vim'
+" (g)it (r)refresh
 nnoremap <leader>gr :call git#GitRefresh()<cr>
+" (g)it (s)tatus
 nnoremap <leader>gs :call git#GitStatus()<cr>
-nnoremap <leader>gdf :call git#GitDiff('file')<cr>
-nnoremap <leader>gcf :call git#GitCommit('file')<cr>
+" (g)it (d)iff (b)uffer
+nnoremap <leader>gdb :call git#GitDiff('file')<cr>
+" (g)it (c)ommit (b)uffer
+nnoremap <leader>gcb :call git#GitCommit('file')<cr>
+" (g)it (d)iff (a)ll
 nnoremap <leader>gda :call git#GitDiff('all')<cr>
+" (g)it (c)ommit (a)ll
 nnoremap <leader>gca :call git#GitCommit('all')<cr>
 
 " Plugin 'rafaqz/ranger.vim'

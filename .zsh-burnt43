@@ -17,7 +17,7 @@ alias ami_run="ami_dev && RAILS_ENV=development ruby -I /home/jcarson/git_clones
 alias hpbxgui_dev="cd ~/git_clones/hosted-burnt43/hpbxgui"
 alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:run"
 
-alias cti_dev="cd ~/git_clones/hosted-burnt43/crm_cti"
+alias cti_dev="cd ~/git_clones/cti-burnt43"
 alias cti_hpbxgui_run="cti_dev && CTI_ENV=development_hpbxgui ruby -I ./lib/ server.rb"
 alias cti_mtt_crm_run="cti_dev && CTI_ENV=development_mtt_crm ruby -I ./lib/ server.rb"
 
