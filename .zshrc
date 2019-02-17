@@ -56,16 +56,16 @@ bindkey -M viins 'jk' vi-cmd-mode
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
 
-bindkey "^W" forward-word
-bindkey "^D^W" kill-word
-bindkey "^B" backward-word
-bindkey "^D^B" backward-kill-word
+bindkey "^[w" forward-word
+bindkey "^[d^[w" kill-word
+bindkey "^[b" backward-word
+bindkey "^[d^[b" backward-kill-word
 
-bindkey "^D^D" kill-whole-line
-bindkey "^H" beginning-of-line
-bindkey "^L" end-of-line
+bindkey "^[d^[d" kill-whole-line
+bindkey "^[h" beginning-of-line
+bindkey "^[l" end-of-line
 
-bindkey "^[l" clear-screen
+bindkey "^L" clear-screen
 # }}}
 # print on shell start {{{
 # use neofetch as a welcome message

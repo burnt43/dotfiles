@@ -1,9 +1,9 @@
 #!/bin/sh
 # archlinux
-#'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
 
 # other
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
+'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
 
 # other2
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
@@ -18,7 +18,7 @@
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/earthbound' 
 
 # pillars of eternity
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
 
 # spiral_staircases
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
@@ -42,7 +42,10 @@
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/alttp' 
 
 # ff6
-# feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/ff6' 
+# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/ff6' 
+
+# ff6
+# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/ff7' 
 
 # oot
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/oot' 

@@ -154,8 +154,11 @@ nnoremap <leader>S( mzF(xf)x`z
 nnoremap <leader>v :set paste<cr>
 nnoremap <leader>V :set nopaste<cr>
 
+" (c)lip(b)oard (c)opy
 nnoremap <leader>cbc :let @x=@@<cr>
+" (c)lip(b)oard (p)aste
 nnoremap <leader>cbp "xp
+" (c)lip(b)oard (P)aste
 nnoremap <leader>cbP "xP
 
 " quickfix
@@ -163,18 +166,29 @@ nnoremap <leader>Q :cclose<cr>
 
 " highlight
 nnoremap <leader>H :nohl<cr>
+nnoremap <leader>s :syn on<cr>
+nnoremap <leader>S :syn off<cr>
+
+" misc
+" (i)nsert (b)uffer (n)ame
+nnoremap <leader>ibn :execute "normal! i" . fnamemodify(bufname("%"), ':t:r')<cr>
 
 " Plugin burnt43/align.vim
+
+" (al)ign (=)equals
 nnoremap <leader>al=
   \ :call align#SetAlignPattern('\v\s\zs\=\ze\s')<cr>
   \ :set operatorfunc=align#AlignChar<cr>g@
+" (al)ign (=)equals
 vnoremap <leader>al=
   \ :<c-u>call align#SetAlignPattern('\v\s\zs\=\ze\s')<cr>
   \ :<c-u>call align#AlignChar(visualmode())<cr>
 
+" (al)ign (a)fter (:)colon
 nnoremap <leader>ala:
   \ :call align#SetAlignPattern('\v\w:\s*\zs\w\ze')<cr>
   \ :set operatorfunc=align#AlignChar<cr>g@
+" (al)ign (a)fter (:)colon
 vnoremap <leader>ala:
   \ :<c-u>call align#SetAlignPattern('\v\w:\s*\zs\w\ze')<cr>
   \ :<c-u>call align#AlignChar(visualmode())<cr>
