@@ -1,5 +1,5 @@
 # exports {{{
-export PATH=$PATH:/usr/local/ruby/ruby-2.3.3/bin:~/scripts/scripts_in_path
+export PATH=$PATH:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/scripts/scripts_in_path
 export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
 
 # JRE 8
@@ -30,6 +30,9 @@ alias mtt_crm_test_run="hpbxgui_dev && RAILS_ENV=mtt_crm_test bundle exec rake c
 alias crm_git_add_all="git add app/models app/controllers app/mailers app/views app/helpers app/assets/javascripts config lib test"
 
 # mysql-5.7.21 aliases
-alias standard_mysql="/usr/local/mysql/mysql-5.7.21/bin/mysql --defaults-file=/etc/my.cnf.standard_mysql"
+alias mysql="/usr/local/mysql/mysql-5.7.21/bin/mysql --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf"
+alias stop_mysql="kill -9 $(ps aux | grep 'mysqld.*daemonize' | grep -v 'grep' | awk '{print $2}')"
+alias start_mysql="/usr/local/mysql/mysql-5.7.21/bin/mysqld --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf --daemonize --pid-file=/usr/local/mysql/mysql-5.7.21/user/mysqld.pid"
+alias mysql_socket="sudo mkdir -p /run/mysqld && [ ! -e /run/mysqld/mysqld.sock ] && sudo ln -s /usr/local/mysql/mysql-5.7.21/user/mysqld.sock /run/mysqld/mysqld.sock"
 alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
 # }}}

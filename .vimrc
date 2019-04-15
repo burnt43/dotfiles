@@ -49,7 +49,7 @@ else
 endif
 " }}}
 " colors {{{
-colorscheme badwolf
+colorscheme molokai
 syn on
 highlight Search cterm=NONE ctermfg=16 ctermbg=173
 highlight Folded cterm=NONE ctermfg=245 ctermbg=233

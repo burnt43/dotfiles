@@ -3,7 +3,7 @@
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
 
 # other
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
 
 # other2
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
@@ -54,7 +54,7 @@
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other4' 
 
 # assorted
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
+'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
 
 # minimal
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/minimal' 
