@@ -49,6 +49,7 @@ else
 endif
 " }}}
 " colors {{{
+" colorscheme badwolf
 colorscheme molokai
 syn on
 highlight Search cterm=NONE ctermfg=16 ctermbg=173
@@ -169,6 +170,10 @@ nnoremap <leader>H :nohl<cr>
 nnoremap <leader>s :syn on<cr>
 nnoremap <leader>S :syn off<cr>
 
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 " misc
 " (i)nsert (b)uffer (n)ame
 nnoremap <leader>ibn :execute "normal! i" . fnamemodify(bufname("%"), ':t:r')<cr>
@@ -277,6 +282,8 @@ augroup END
 augroup filetype_ruby
   autocmd!
   autocmd FileType ruby let maplocalleader="\\r"
+  autocmd FileType ruby setlocal foldmethod=manual
+  autocmd FileType ruby syn keyword rubyTodo REFACTOR
 
   " change method name
   autocmd FileType ruby onoremap <buffer> <localleader>mn :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\r^wve"<cr>

@@ -65,6 +65,15 @@ URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 #define badwolf_coffee    #c7915b
 #define badwolf_darkroast #88633f
 ! }}}
+! molokai(vim) color definitions {{{
+#define molokai_red #F92672
+#define molokai_orange #FD971F
+#define molokai_green #A6E22E
+#define molokai_dullgreen #E6DB74
+#define molokai_blue #66D9EF
+#define molokai_fuschia #F92672
+#define molokai_purple #AE81FF
+! }}}
 ! standard xterm-ish scheme {{{
 ! URxvt.color0: #353535
 ! URxvt.color1: #E64569
@@ -88,28 +97,49 @@ URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 ! URxvt.foreground:    #ffffff
 ! }}}
 ! badwolf scheme {{{
+! URxvt.color0: badwolf_deepgravel
+! URxvt.color1: badwolf_taffy
+! URxvt.color2: badwolf_lime
+! URxvt.color3: badwolf_orange
+! URxvt.color4: badwolf_tardis
+! URxvt.color5: badwolf_dress
+! URxvt.color6: badwolf_saltwatertaffy
+! URxvt.color7: badwolf_brightgravel
+! URxvt.color8: badwolf_deepgravel
+! URxvt.color9: badwolf_taffy
+! URxvt.color10: badwolf_lime
+! URxvt.color11: badwolf_orange
+! URxvt.color12: badwolf_tardis
+! URxvt.color13: badwolf_dress
+! URxvt.color14: badwolf_saltwatertaffy
+! URxvt.color15: badwolf_brightgravel
+! URxvt.depth:         32
+! URxvt.background:    badwolf_coal
+! URxvt.foreground:    badwolf_plain
+! }}}
+! molokai scheme {{{
 URxvt.color0: badwolf_deepgravel
-URxvt.color1: badwolf_taffy
-URxvt.color2: badwolf_lime
-URxvt.color3: badwolf_orange
-URxvt.color4: badwolf_tardis
-URxvt.color5: badwolf_dress
-URxvt.color6: badwolf_saltwatertaffy
+URxvt.color1: molokai_red
+URxvt.color2: molokai_green
+URxvt.color3: molokai_orange
+URxvt.color4: molokai_purple
+URxvt.color5: molokai_fuschia
+URxvt.color6: molokai_blue
 URxvt.color7: badwolf_brightgravel
 URxvt.color8: badwolf_deepgravel
-URxvt.color9: badwolf_taffy
-URxvt.color10: badwolf_lime
-URxvt.color11: badwolf_orange
-URxvt.color12: badwolf_tardis
-URxvt.color13: badwolf_dress
-URxvt.color14: badwolf_saltwatertaffy
+URxvt.color9: molokai_red
+URxvt.color10: molokai_green
+URxvt.color11: molokai_orange
+URxvt.color12: molokai_purple
+URxvt.color13: molokai_fuschia
+URxvt.color14: molokai_blue
 URxvt.color15: badwolf_brightgravel
 URxvt.depth:         32
-URxvt.background:    [90]badwolf_coal
+URxvt.background:    badwolf_coal
 URxvt.foreground:    badwolf_plain
 ! }}}
 ! 'fake transparency' {{{
-! URxvt.inheritPixmap: true
-! URxvt.transparent:   true
-! URxvt.shading:       15
+URxvt.inheritPixmap: true
+URxvt.transparent:   true
+URxvt.shading:       10
 ! }}}

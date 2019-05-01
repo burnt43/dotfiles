@@ -40,6 +40,10 @@ set $badwolf_dress #ff9eb8
 set $badwolf_toffee #b88853
 set $badwolf_coffee #c7915b
 set $badwolf_darkroast #88633f
+
+set $molokai_fuschia #F92672
+set $molokai_orange #FD971F
+set $molokai_purple #AE81FF
 # }}}
 
 # basic config {{{
@@ -187,7 +191,7 @@ smart_borders on
 
 # window colors
 #                       border              background           text                 indicator           child_border
-client.focused          $badwolf_tardis     $badwolf_coal        $badwolf_snow        $badwolf_tardis     $badwolf_tardis
+client.focused          $molokai_purple     $badwolf_coal        $badwolf_snow        $molokai_purple     $molokai_purple
 client.focused_inactive $badwolf_darkgravel $badwolf_coal        $badwolf_snow        $badwolf_darkgravel $badwolf_darkgravel
 client.unfocused        $badwolf_darkgravel $badwolf_coal        $badwolf_snow        $badwolf_darkgravel $badwolf_darkgravel
 # }}}
@@ -221,7 +225,7 @@ assign [class="Pidgin"] $workspace3
 # }}}
 
 # load programs on startup {{{
-exec --no-startup-id compton -b
+# exec --no-startup-id compton -b
 exec --no-startup-id urxvt -T "quick_terminal"
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id pidgin
