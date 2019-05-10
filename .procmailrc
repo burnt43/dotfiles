@@ -2,3 +2,19 @@ MAILDIR=$HOME/mail
 DEFAULT=$HOME/mail/new
 LOGFILE=/dev/null
 SHELL=/usr/bin/zsh
+
+# confirmed working? yes
+:0
+* ^From:.*MAILER-DAEMON@smtp.monmouth.com
+$MAILDIR/junk/mailer_daemon/new
+
+# confirmed working? NO
+:0
+* ^From:.*root@monmouth.com
+* ^Subject.*Plexus SNMP Trap - plex1sp[ab].mtt.monmouth.com
+$MAILDIR/eqpt/plex1/new
+
+# confirmed working? NO
+:0
+* ^From:.*Cron Daemon.*app0.monmouth.com
+$MAILDIR/cron/app0/new

@@ -54,7 +54,7 @@
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other4' 
 
 # assorted
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
 
 # minimal
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/minimal' 
@@ -64,3 +64,6 @@
 
 # river
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/river' 
+
+# purple
+'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/purple' 

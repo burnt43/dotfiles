@@ -6,30 +6,12 @@ set header_cache=~/.cache/mutt
 set sort=reverse-date-sent
 
 mailboxes =.
-mailboxes =./audits
-mailboxes =./audits/orphans
+mailboxes =./eqpt
+mailboxes =./eqpt/plex1
 mailboxes =./cron
 mailboxes =./cron/app0
-mailboxes =./cron/app1
-mailboxes =./cron/app2
-mailboxes =./cron/gs4
-mailboxes =./cron/hpbx0
-mailboxes =./cron/hpbx1
-mailboxes =./cron/hpbx2
-mailboxes =./cron/hpbx3
-mailboxes =./cron/hpbx4
-mailboxes =./cron/mtt3
-mailboxes =./cron/mtt4
-mailboxes =./cron/pbx
-mailboxes =./cron/recorder0
-mailboxes =./cron/recorder1
-mailboxes =./equipment
-mailboxes =./equipment/plex0
-mailboxes =./equipment/tellabs
-mailboxes =./hpbx_support
-mailboxes =./number_operations
-mailboxes =./number_operations/forwards
-mailboxes =./number_operations/unsuspend
+mailboxes =./junk
+mailboxes =./junk/mailer_daemon
 
 # sidebar options
 set sidebar_visible = yes 
@@ -52,18 +34,58 @@ set mail_check_stats
 set date_format = '%a %Y-%m-%d %H:%M'
 set index_format = '%4C %Z %d %-15.15L (%?l?%4l&%4c?) %s'
 
-bind index,pager \Ck sidebar-prev
-bind index,pager \Cj sidebar-next
-bind index,pager \Co sidebar-open
 #bind index,pager <F3> sidebar-page-up
 #bind index,pager <F4> sidebar-page-down
 #bind index,pager <F5> sidebar-prev-new
 #bind index,pager <F6> sidebar-next-new
 #bind index,pager B sidebar-toggle-visible
-#
-color indicator cyan black
-color sidebar_highlight black color8
-color sidebar_divider color8 black
+
+# unbinding keys
+bind index g noop
+bind index G noop
+bind index \Cb noop
+bind index \Cf noop
+bind index \Cu noop
+bind index \Cd noop
+bind index l noop
+bind index <Enter> noop
+bind index <Return> noop
+
+bind pager h noop
+bind pager j noop
+bind pager k noop
+bind pager q noop
+bind pager <Enter> noop
+bind pager <Return> noop
+
+# movement
+bind generic k previous-entry
+bind generic j next-entry
+
+bind pager k previous-line
+bind pager j next-line
+
+bind generic,index gg first-entry
+bind generic,index G last-entry
+
+bind generic,index \Cf previous-page
+bind generic,index \Cb next-page
+
+bind generic,index \Cu half-up
+bind generic,index \Cd half-down
+
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cj sidebar-next
+bind index,pager \Co sidebar-open
+
+# actions
+bind index l display-message
+
+bind pager h exit
+
+color indicator green black
+color sidebar_highlight black green
+color sidebar_divider white black
 color sidebar_flagged red black
-color sidebar_new green black
-color sidebar_ordinary color245 default
+color sidebar_new red black
+color sidebar_ordinary white default
