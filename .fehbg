@@ -21,7 +21,7 @@
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
 
 # spiral_staircases
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
+'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
 
 # vim
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/vim_cheat_sheet' 
@@ -66,4 +66,4 @@
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/river' 
 
 # purple
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/purple' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/purple' 

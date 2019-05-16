@@ -259,6 +259,18 @@ augroup filetype_javascript
   autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
 augroup END
 " }}}
+" muttrc {{{
+augroup filetype_muttrc
+  autocmd!
+  autocmd FileType muttrc setlocal foldmethod=marker
+augroup END
+" }}}
+" procmail {{{
+augroup filetype_procmail
+  autocmd!
+  autocmd FileType procmail setlocal foldmethod=marker
+augroup END
+" }}}
 " rails {{{
 augroup file_in_rails
   autocmd!
