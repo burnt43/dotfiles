@@ -15,6 +15,14 @@ SHELL=/usr/bin/zsh
 # }}}
 # filters {{{
 # autonomous {{{
+# audit {{{
+# orphans {{{
+:0
+* ^From:.*mt-fraud@monmouth\.com
+* ^Subject:.*Orphan Calls (Fraudwatch)
+$MAILDIR/autonomous/audit/orphans/new
+# }}}
+# }}}
 # cron {{{
 # app0 {{{
 :0
@@ -44,7 +52,7 @@ $MAILDIR/autonomous/cron/recorder0/new
 # }}}
 # recorder1 {{{
 :0
-* ^From:.*@krecorder1\.monmouth\.com.*Cron Daemon
+* ^From:.*@recorder1\.monmouth\.com.*Cron Daemon
 $MAILDIR/autonomous/cron/recorder1/new
 # }}}
 # }}}
@@ -59,11 +67,23 @@ $MAILDIR autonomous/eqpt/tellabs/new
 * ^From:.*hspm-down@monmouth.com
 $MAILDIR autonomous/eqpt/tellabs/new
 # }}}
+# plex0 {{{
+:0
+* ^From:.*root@monmouth.com
+* ^Subject.*Plexus SNMP Trap - plex0sp[ab].mtt.monmouth.com
+$MAILDIR/autonomous/eqpt/plex0/new
+# }}}
 # plex1 {{{
 :0
 * ^From:.*root@monmouth.com
 * ^Subject.*Plexus SNMP Trap - plex1sp[ab].mtt.monmouth.com
 $MAILDIR/autonomous/eqpt/plex1/new
+# }}}
+# plex2 {{{
+:0
+* ^From:.*root@monmouth.com
+* ^Subject.*Plexus SNMP Trap - plex2sp[ab].mtt.monmouth.com
+$MAILDIR/autonomous/eqpt/plex2/new
 # }}}
 # }}}
 # exceptions {{{
@@ -79,10 +99,39 @@ $MAILDIR/autonomous/exceptions/hpbxgui/new
 * ^From:.*Fail2Ban 
 $MAILDIR/autonomous/fail2ban/new
 # }}}
+# ivad_app {{{
+:0
+* ^From:.*eng@monmouth\.com
+* ^Subject:.*IVAD Forward
+$MAILDIR/autonomous/ivad_app/new
+
+:0
+* ^From:.*eng@monmouth\.com
+* ^Subject:.*Forward Deactivation
+$MAILDIR/autonomous/ivad_app/new
+
+:0
+* ^From:.*eng@monmouth\.com
+* ^Subject: Forward Activation
+$MAILDIR/autonomous/ivad_app/new
+
+:0
+* ^From:.*eng@monmouth\.com
+* ^Subject:.*IVAD NumberProcessing
+$MAILDIR/autonomous/ivad_app/new
+# }}}
 # }}}
 # junk {{{
+# mailer daemon {{{
 :0
 * ^From:.*MAILER-DAEMON@smtp.monmouth.com
 $MAILDIR/junk/mailer_daemon/new
+# }}}
+# mtt_crm_dev_exceptions {{{
+:0
+* ^From:.*Exception Notifier
+* ^Subject:.*\[MTT CRM Development Exception\]
+$MAILDIR/junk/mtt_crm_dev_exceptions/new
+# }}}
 # }}}
 # }}}

@@ -16,11 +16,15 @@ mailboxes =.
 mailboxes =./autonomous
 mailboxes =./autonomous/eqpt
 mailboxes =./autonomous/eqpt/tellabs
+mailboxes =./autonomous/eqpt/plex0
 mailboxes =./autonomous/eqpt/plex1
+mailboxes =./autonomous/eqpt/plex2
 mailboxes =./autonomous/exceptions
 mailboxes =./autonomous/exceptions/hpbxgui
 mailboxes =./autonomous/exceptions/mtt_crm
-mailboxes =./autonomous/fail2ban
+
+mailboxes =./autonomous/audit
+mailboxes =./autonomous/audit/orphans
 mailboxes =./autonomous/cron
 mailboxes =./autonomous/cron/app0
 mailboxes =./autonomous/cron/gs3
@@ -28,7 +32,11 @@ mailboxes =./autonomous/cron/gs4
 mailboxes =./autonomous/cron/mtt3
 mailboxes =./autonomous/cron/recorder0
 mailboxes =./autonomous/cron/recorder1
+mailboxes =./autonomous/fail2ban
+mailboxes =./autonomous/ivad_app
+
 mailboxes =./junk
+mailboxes =./junk/mtt_crm_dev_exceptions
 mailboxes =./junk/mailer_daemon
 
 # sidebar options

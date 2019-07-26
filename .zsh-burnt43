@@ -2,12 +2,14 @@
 export PATH=$PATH:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/scripts/scripts_in_path
 export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
 
+# golang
+export GOPATH=$HOME/go
+
 # JRE 8
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/:/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/server
 
-# JRE 10
-# export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
+# JRE 10 # export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 # }}}
 
 # aliases {{{
@@ -21,16 +23,23 @@ alias cti_dev="cd ~/git_clones/cti-burnt43"
 alias cti_hpbxgui_run="cti_dev && CTI_ENV=development_hpbxgui ruby -I ./lib/ server.rb"
 alias cti_mtt_crm_run="cti_dev && CTI_ENV=development_mtt_crm ruby -I ./lib/ server.rb"
 
+alias asterisk_cdr_dev="cd ~/git_clones/asterisk-cdr-burnt43"
+alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./asterisk_cdr_syncer.rb"
+alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./asterisk_cdr_finder.rb"
+alias asterisk_cdr_data_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./asterisk_cdr_data_processor.rb"
+alias asterisk_cdr_test_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=test bundle exec rake asterisk_cdr:test:run"
+
 alias hop_dev="cd ~/git_clones/hosted-burnt43/hop"
 alias hop_run="hop_dev && HOP_ENV=development ruby ./hop.rb"
 
 alias mtt_crm_dev="cd ~/git_clones/mtt_crm-burnt43/"
-alias mtt_crm_test_run="hpbxgui_dev && RAILS_ENV=mtt_crm_test bundle exec rake crm:test:run"
+alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=mtt_crm_test bundle exec rake crm:test:run"
 
 alias crm_git_add_all="git add app/models app/controllers app/mailers app/views app/helpers app/assets/javascripts config lib test"
 
 # mysql-5.7.21 aliases
 alias mysql="/usr/local/mysql/mysql-5.7.21/bin/mysql --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf"
+alias mysqldump="/usr/local/mysql/mysql-5.7.21/bin/mysqldump --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf"
 alias stop_mysql="kill -9 $(ps aux | grep 'mysqld.*daemonize' | grep -v 'grep' | awk '{print $2}')"
 alias start_mysql="/usr/local/mysql/mysql-5.7.21/bin/mysqld --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf --daemonize --pid-file=/usr/local/mysql/mysql-5.7.21/user/mysqld.pid"
 alias mysql_socket="sudo mkdir -p /run/mysqld && [ ! -e /run/mysqld/mysqld.sock ] && sudo ln -s /usr/local/mysql/mysql-5.7.21/user/mysqld.sock /run/mysqld/mysqld.sock"
