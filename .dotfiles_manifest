@@ -15,6 +15,7 @@
 .vimrc
 .xinitrc
 .Xresources
+.Xmodmap
 .zshrc
 .zsh-burnt43-pre
 .zsh-jco1-pre
