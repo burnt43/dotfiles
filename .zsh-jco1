@@ -1,7 +1,6 @@
 # exports {{{
 export PATH=$PATH:/usr/local/ruby/ruby-2.5.3/bin:~/scripts/scripts_in_path
 # }}}
-
 # aliases {{{
 alias msu1tracks_dev="cd /home/jcarson/git_clones/msu1tracks"
 

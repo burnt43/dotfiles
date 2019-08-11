@@ -1,6 +1,6 @@
 #!/bin/sh
 # archlinux
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
 
 # other
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
@@ -21,7 +21,7 @@
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
 
 # spiral_staircases
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
+'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
 
 # vim
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/vim_cheat_sheet' 
@@ -44,7 +44,7 @@
 # ff6
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/ff6' 
 
-# ff6
+# ff7
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/ff7' 
 
 # oot

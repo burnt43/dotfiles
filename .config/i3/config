@@ -191,7 +191,7 @@ smart_borders on
 
 # window colors
 #                       border              background           text                 indicator           child_border
-client.focused          $molokai_purple     $badwolf_coal        $badwolf_snow        $molokai_purple     $molokai_purple
+client.focused          $badwolf_brightgravel  $badwolf_coal        $badwolf_snow        $badwolf_brightgravel  $badwolf_brightgravel
 client.focused_inactive $badwolf_darkgravel $badwolf_coal        $badwolf_snow        $badwolf_darkgravel $badwolf_darkgravel
 client.unfocused        $badwolf_darkgravel $badwolf_coal        $badwolf_snow        $badwolf_darkgravel $badwolf_darkgravel
 # }}}

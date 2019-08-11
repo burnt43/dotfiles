@@ -1,5 +1,5 @@
 # exports {{{
-export PATH=$PATH:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/scripts/scripts_in_path
+export PATH=$PATH:~/sources/solr-8.2.0/solr/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/scripts/scripts_in_path
 export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
 
 # golang
@@ -11,7 +11,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-8-openjdk/jre/lib/amd6
 
 # JRE 10 # export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 # }}}
-
 # aliases {{{
 alias ami_dev="cd ~/git_clones/hosted-burnt43/ami_fw_proxy"
 alias ami_run="ami_dev && RAILS_ENV=development ruby -I /home/jcarson/git_clones/hosted-burnt43/ami_fw_proxy/ ./secure_multiplexer_proxy.rb"
@@ -28,6 +27,10 @@ alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development 
 alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./asterisk_cdr_finder.rb"
 alias asterisk_cdr_data_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./asterisk_cdr_data_processor.rb"
 alias asterisk_cdr_test_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=test bundle exec rake asterisk_cdr:test:run"
+
+alias solr_mon_dev="cd ~/git_clones/solr-file-monitor-burnt43"
+alias solr_mon_run="solr_mon_dev && SOLR_FILE_MONITOR_ENV=development ruby -I/home/jcarson/git_clones/solr-file-monitor-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./file_monitor_daemon.rb"
+alias solr_mon_test="solr_mon_dev && SOLR_FILE_MONITOR_ENV=test bundle exec rake solr_file_monitor:test:run"
 
 alias hop_dev="cd ~/git_clones/hosted-burnt43/hop"
 alias hop_run="hop_dev && HOP_ENV=development ruby ./hop.rb"
