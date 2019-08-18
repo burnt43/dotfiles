@@ -1,3 +1,9 @@
+#          _           _                      _   _  _  ____  
+#         | |         | |                    | | | || ||___ \ 
+#  _______| |__ ______| |__  _   _ _ __ _ __ | |_| || |_ __) |
+# |_  / __| '_ \______| '_ \| | | | '__| '_ \| __|__   _|__ < 
+#  / /\__ \ | | |     | |_) | |_| | |  | | | | |_   | | ___) |
+# /___|___/_| |_|     |_.__/ \__,_|_|  |_| |_|\__|  |_||____/ 
 # exports {{{
 export PATH=$PATH:~/sources/solr-8.2.0/solr/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/scripts/scripts_in_path
 export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs

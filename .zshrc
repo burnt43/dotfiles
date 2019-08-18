@@ -35,6 +35,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 alias grep="grep --color=auto"
 alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
 alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
+alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
 # }}}
 # cache and source {{{
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh

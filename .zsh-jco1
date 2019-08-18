@@ -1,5 +1,14 @@
+#          _           _          __ 
+#         | |         (_)        /_ |
+#  _______| |__ ______ _  ___ ___ | |
+# |_  / __| '_ \______| |/ __/ _ \| |
+#  / /\__ \ | | |     | | (_| (_) | |
+# /___|___/_| |_|     | |\___\___/|_|
+#                    _/ |            
+#                   |__/             
 # exports {{{
 export PATH=$PATH:/usr/local/ruby/ruby-2.5.3/bin:~/scripts/scripts_in_path
+export GPG_TTY=$(tty)
 # }}}
 # aliases {{{
 alias msu1tracks_dev="cd /home/jcarson/git_clones/msu1tracks"
