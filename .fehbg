@@ -9,6 +9,9 @@
 #                       __/ |
 #                      |___/ 
 
+# dota
+# 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota' 
+
 # archlinux
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
 
@@ -31,7 +34,7 @@
 # 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
 
 # spiral_staircases
-'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
+# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
 
 # vim
 # 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/vim_cheat_sheet' 
