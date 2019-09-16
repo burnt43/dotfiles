@@ -141,5 +141,5 @@ URxvt.foreground:    badwolf_plain
 ! 'fake transparency' {{{
 URxvt.inheritPixmap: true
 URxvt.transparent:   true
-URxvt.shading:       10
+URxvt.shading:       20
 ! }}}

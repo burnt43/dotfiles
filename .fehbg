@@ -9,74 +9,13 @@
 #                       __/ |
 #                      |___/ 
 
-# dota
-# 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota' 
+HOST=$(hostname)
 
-# archlinux
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/archlinux' 
-
-# other
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
-
-# other2
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
-
-# other_3
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other_3' 
-
-# tessalation 
-#'feh' '--bg-tile' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/tessalations' 
-
-# earthbound
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/earthbound' 
-
-# pillars of eternity
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/pillars_of_eternity' 
-
-# spiral_staircases
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/spiral_staircase' 
-
-# vim
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/vim_cheat_sheet' 
-
-# forests
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/forests' 
-
-# mountains
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/mountains' 
-
-# virtual
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/virtual' 
-
-# my_neighbor_totoro
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/my_neighbor_totoro' 
-
-# lttp
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/alttp' 
-
-# ff6
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/ff6' 
-
-# ff7
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/ff7' 
-
-# oot
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/videogames/oot' 
-
-# other4
-# 'feh' '--bg-scale' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other4' 
-
-# assorted
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
-
-# minimal
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/minimal' 
-
-# shadowrun
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/shadowrun' 
-
-# river
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/river' 
-
-# purple
-# 'feh' '--bg-center' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/purple' 
+case $HOST in
+jco1)
+  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/.liked_wallpapers' 
+  ;;
+burnt43)
+  # put my wallman script here
+  ;;
+esac
