@@ -16,6 +16,6 @@ jco1)
   'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/.liked_wallpapers' 
   ;;
 burnt43)
-  # put my wallman script here
+  ~/scripts/scripts_in_path/wallman.sh set_liked
   ;;
 esac
