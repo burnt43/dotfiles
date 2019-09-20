@@ -32,6 +32,7 @@ filetype plugin on
 set ts=2 sw=2 ai
 set expandtab
 set nowrap
+set visualbell
 
 if exists("+relativenumber")
   set number relativenumber
@@ -50,7 +51,7 @@ endif
 " }}}
 " colors {{{
 " colorscheme badwolf
-colorscheme molokai
+colorscheme badwolf
 syn on
 highlight Search cterm=NONE ctermfg=16 ctermbg=173
 highlight Folded cterm=NONE ctermfg=245 ctermbg=233
