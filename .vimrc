@@ -275,12 +275,15 @@ augroup END
 " rails {{{
 augroup file_in_rails
   autocmd!
+  " (r)ails (g)rep (a)ll
   autocmd User RailsLoaded nnoremap <buffer> <leader>rga :set operatorfunc=rails#GrepAll<cr>g@
   autocmd User RailsLoaded vnoremap <buffer> <leader>rga :<c-u>call rails#GrepAll(visualmode())<cr>
 
+  " (r)ails (g)rep (d)ef
   autocmd User RailsLoaded nnoremap <buffer> <leader>rgd :set operatorfunc=rails#GrepMethodDefOperator<cr>g@
   autocmd User RailsLoaded vnoremap <buffer> <leader>rgd :<c-u>call rails#GrepMethodDefOperator(visualmode())<cr>
 
+  " (r)ails (g)rep (i)nclude
   autocmd User RailsLoaded nnoremap <buffer> <leader>rgi :set operatorfunc=rails#GrepModuleInclude<cr>g@
   autocmd User RailsLoaded vnoremap <buffer> <leader>rgi :<c-u>call rails#GrepModuleInclude(visualmode())<cr>
 augroup end
@@ -297,6 +300,7 @@ augroup filetype_ruby
   autocmd FileType ruby let maplocalleader="\\r"
   autocmd FileType ruby setlocal foldmethod=manual
   autocmd FileType ruby syn keyword rubyTodo REFACTOR
+  autocmd FileType ruby syn keyword rubyTodo DEPRECATED
 
   " change method name
   autocmd FileType ruby onoremap <buffer> <localleader>mn :<c-u>execute "normal! ?^\\s*def\\s\\+\r:nohlsearch\r^wve"<cr>

@@ -54,7 +54,7 @@ alias umount_rwolflaw="sudo umount /mnt/rwolflaw && sudo rm -R /mnt/rwolflaw"
 # mysql-5.7.21 aliases
 alias mysql="/usr/local/mysql/mysql-5.7.21/bin/mysql --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf"
 alias mysqldump="/usr/local/mysql/mysql-5.7.21/bin/mysqldump --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf"
-alias stop_mysql="kill -9 $(ps aux | grep 'mysqld.*daemonize' | grep -v 'grep' | awk '{print $2}')"
+alias stop_mysql="[ -e /usr/local/mysql/mysql-5.7.21/user/mysqld.pid ] && pkill --signal 9 --pidfile /usr/local/mysql/mysql-5.7.21/user/mysqld.pid"
 alias start_mysql="/usr/local/mysql/mysql-5.7.21/bin/mysqld --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf --daemonize --pid-file=/usr/local/mysql/mysql-5.7.21/user/mysqld.pid"
 alias mysql_socket="sudo mkdir -p /run/mysqld && [ ! -e /run/mysqld/mysqld.sock ] && sudo ln -s /usr/local/mysql/mysql-5.7.21/user/mysqld.sock /run/mysqld/mysqld.sock"
 alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
