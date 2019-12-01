@@ -129,6 +129,10 @@ nnoremap <leader>zF :set foldcolumn=0<cr>
 " fold(z).(o)nly.(c)urrent
 nnoremap <leader>zoc zMzv
 
+" marks
+" (m)ark (c)lear
+nnoremap <leader>mc :delmarks!<cr>
+
 " surrounds
 nnoremap <leader>s" 
   \ :call <SID>SaveSurroundMark()<cr>
