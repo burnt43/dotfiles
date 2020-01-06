@@ -18,7 +18,11 @@ jco1)
 burnt43)
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/mountains' 
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/purple' 
-  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/virtual' 
+  # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/virtual' 
+  # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/minimal' 
+  # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/vim_cheat_sheet' 
+  # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
+  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
   # ~/scripts/scripts_in_path/wallman.sh set_liked
   ;;
 esac
