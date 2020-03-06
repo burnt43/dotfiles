@@ -44,10 +44,12 @@ alias hop_dev="cd ~/git_clones/hosted-burnt43/hop"
 alias hop_run="hop_dev && HOP_ENV=development ruby ./hop.rb"
 
 alias web_socket_monitor_dev="cd ~/git_clones/web_socket_monitor-burnt43"
-alias web_socket_monitor_run="web_socket_dev && WEB_SOCKET_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/web_socket_monitor-burnt43/lib ./web_socket_monitor.rb"
+alias web_socket_monitor_app_run="web_socket_monitor_dev && WEB_SOCKET_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/web_socket_monitor-burnt43/lib ./web_socket_monitor.rb"
+alias web_socket_monitor_crm_run="web_socket_monitor_dev && WEB_SOCKET_MONITOR_ENV=development_crm ruby -I/home/jcarson/git_clones/web_socket_monitor-burnt43/lib ./web_socket_monitor.rb"
 
 alias mtt_crm_dev="cd ~/git_clones/mtt_crm-burnt43/"
 alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=mtt_crm_test bundle exec rake crm:test:run"
+alias mtt_crm_clean_branches="~/gist_clones/git_branch_cleaner/git_branch_cleaner.sh ~/git_clones/mtt_crm-burnt43 mtt"
 
 alias crm_git_add_all="git add app/models app/controllers app/mailers app/views app/helpers app/assets/javascripts config lib test"
 
