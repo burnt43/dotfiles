@@ -40,6 +40,8 @@ alias solr_mon_test="solr_mon_dev && SOLR_FILE_MONITOR_ENV=test bundle exec rake
 alias solr_mon_start_daemon="solr_mon_dev && ./safe-solr-file-monitor"
 alias solr_mon_stop_daemon="ps aux | grep 'safe-solr-file-monitor' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid && ps aux | grep 'file_monitor_daemon\.rb' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid"
 
+alias solr_start="solr start"
+
 alias hop_dev="cd ~/git_clones/hosted-burnt43/hop"
 alias hop_run="hop_dev && HOP_ENV=development ruby ./hop.rb"
 
