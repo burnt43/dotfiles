@@ -22,8 +22,8 @@ burnt43)
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/minimal' 
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/vim_cheat_sheet' 
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other' 
-  # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
-  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other_3' 
+  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
+  # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other_3' 
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/assorted' 
   # ~/scripts/scripts_in_path/wallman.sh set_liked
   ;;
