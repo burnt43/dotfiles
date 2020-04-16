@@ -160,12 +160,21 @@ nnoremap <leader>S( mzF(xf)x`z
 nnoremap <leader>v :set paste<cr>
 nnoremap <leader>V :set nopaste<cr>
 
-" (c)lip(b)oard (c)opy
-nnoremap <leader>cbc :let @x=@@<cr>
+" (c)lip(b)oard c(o)py
+nnoremap <leader>cbqo :let @q=@@<cr>
+nnoremap <leader>cbwo :let @w=@@<cr>
+nnoremap <leader>cbeo :let @e=@@<cr>
+nnoremap <leader>cbro :let @r=@@<cr>
 " (c)lip(b)oard (p)aste
-nnoremap <leader>cbp "xp
+nnoremap <leader>cbqp "qp
+nnoremap <leader>cbwp "wp
+nnoremap <leader>cbep "ep
+nnoremap <leader>cbrp "rp
 " (c)lip(b)oard (P)aste
-nnoremap <leader>cbP "xP
+nnoremap <leader>cbqP "qP
+nnoremap <leader>cbwP "wP
+nnoremap <leader>cbeP "eP
+nnoremap <leader>cbrP "rP
 
 " quickfix
 nnoremap <leader>Q :cclose<cr>

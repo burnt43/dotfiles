@@ -58,6 +58,8 @@ alias crm_git_add_all="git add app/models app/controllers app/mailers app/views 
 alias mount_rwolflaw="sudo mkdir -p /mnt/rwolflaw && sudo mount -t cifs //gs5.monmouth.com/rwolflaw /mnt/rwolflaw -o 'username=rwolflaw,password=$(cat ~/.rwolflaw_samba_pass),vers=1.0'"
 alias umount_rwolflaw="sudo umount /mnt/rwolflaw && sudo rm -R /mnt/rwolflaw"
 
+alias ssh_mtt3="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 mtt3"
+
 # mysql-5.7.21 aliases
 alias mysql="/usr/local/mysql/mysql-5.7.21/bin/mysql --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf"
 alias mysqldump="/usr/local/mysql/mysql-5.7.21/bin/mysqldump --defaults-file=/usr/local/mysql/mysql-5.7.21/user/my.cnf"
