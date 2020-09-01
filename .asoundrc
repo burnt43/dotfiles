@@ -1,6 +1,49 @@
-# ALSA library configuration file
+# set the defaults to digital out of the
+# soundblaster card.
+pcm.!default {
+  type plug
+  slave.pcm "dmixer"
+}
 
-# Include settings that are under the control of asoundconf(1).
-# (To disable these settings, comment out this line.)
-</home/jcarson/.asoundrc.asoundconf>
+pcm.dmixer {
+  type dmix
+  ipc_key 1024
+  slave {
+    pcm "sb_digital"
+    period_time 0
+    period_size 1024
+    buffer_size 4096
+    rate 44100
+  }
+  bindings {
+    0 0
+    1 1
+  }
+}
+ctl.dmixer {
+  type hw
+  card 1
+  device 1
+}
 
+# digital soundblaster
+pcm.sb_digital {
+  type hw
+  card 1
+  device 1
+}
+
+# analog soundblaster
+pcm.sb_analog {
+  type hw
+  card 1
+  device 0
+  subdevice -1
+}
+
+# analog onboard
+pcm.ob_analog {
+  type hw
+  card 0
+  device 0
+}
