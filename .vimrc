@@ -191,6 +191,8 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " misc
 " (i)nsert (b)uffer (n)ame
 nnoremap <leader>ibn :execute "normal! i" . fnamemodify(bufname("%"), ':t:r')<cr>
+" (i)nsert (f)ile (p)ath
+nnoremap <leader>ifp :execute "normal! i" . bufname("%")<cr>
 
 " Plugin burnt43/align.vim
 
