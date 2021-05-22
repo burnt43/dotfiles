@@ -29,7 +29,8 @@ URxvt.keysym.C-Up:    resize-font:bigger
 ! }}}
 ! fonts {{{
 Xft.antialias: true
-URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
+URxvt.font:          xft:Hack:style=Regular
+!!URxvt.font:          xft:Hack-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:RobotoMono-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:NotoSansMono-Regular:pixelsize=16,style=regular
 !!URxvt.font:          xft:Inconsolata-Regular:pixelsize=16,style=regular

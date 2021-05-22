@@ -34,7 +34,12 @@ export XDG_CONFIG_HOME=$HOME/.config
 # aliases {{{
 alias grep="grep --color=auto"
 alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
-alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
+
+which gem > /dev/null
+if [[ $? == 0 ]]; then
+  alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
+fi
+
 alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
 # }}}
 # cache and source {{{
@@ -70,5 +75,5 @@ bindkey "^L" clear-screen
 # }}}
 # print on shell start {{{
 # use neofetch as a welcome message
-neofetch
+which neofetch > /dev/null && neofetch
 # }}}

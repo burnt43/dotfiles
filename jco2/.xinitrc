@@ -14,4 +14,4 @@ xmodmap ~/.Xmodmap
 # load my X options
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 # start i3 window manager
-exec i3
+exec dbus-launch --exit-with-session i3
