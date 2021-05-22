@@ -160,21 +160,12 @@ nnoremap <leader>S( mzF(xf)x`z
 nnoremap <leader>v :set paste<cr>
 nnoremap <leader>V :set nopaste<cr>
 
-" (c)lip(b)oard c(o)py
-nnoremap <leader>cbqo :let @q=@@<cr>
-nnoremap <leader>cbwo :let @w=@@<cr>
-nnoremap <leader>cbeo :let @e=@@<cr>
-nnoremap <leader>cbro :let @r=@@<cr>
+" (c)lip(b)oard (c)opy
+nnoremap <leader>cbc :let @x=@@<cr>
 " (c)lip(b)oard (p)aste
-nnoremap <leader>cbqp "qp
-nnoremap <leader>cbwp "wp
-nnoremap <leader>cbep "ep
-nnoremap <leader>cbrp "rp
+nnoremap <leader>cbp "xp
 " (c)lip(b)oard (P)aste
-nnoremap <leader>cbqP "qP
-nnoremap <leader>cbwP "wP
-nnoremap <leader>cbeP "eP
-nnoremap <leader>cbrP "rP
+nnoremap <leader>cbP "xP
 
 " quickfix
 nnoremap <leader>Q :cclose<cr>
@@ -191,8 +182,6 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " misc
 " (i)nsert (b)uffer (n)ame
 nnoremap <leader>ibn :execute "normal! i" . fnamemodify(bufname("%"), ':t:r')<cr>
-" (i)nsert (f)ile (p)ath
-nnoremap <leader>ifp :execute "normal! i" . bufname("%")<cr>
 
 " Plugin burnt43/align.vim
 

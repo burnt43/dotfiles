@@ -12,10 +12,10 @@
 HOST=$(hostname)
 
 case $HOST in
-jco1)
-  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/.liked_wallpapers' 
-  ;;
-burnt43)
+# jco2)
+#   'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/.liked_wallpapers' 
+#   ;;
+*)
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/mountains' 
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/purple' 
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/virtual' 

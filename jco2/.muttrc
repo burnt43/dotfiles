@@ -5,10 +5,6 @@
 # | | | | | | |_| | |_| |_| | | (__ 
 # |_| |_| |_|\__,_|\__|\__|_|  \___|
 #
-set realname="James Carson"
-set from="jcarson@monmouth.com"
-set use_from=yes
-
 set mbox_type=Maildir
 set folder="~/mail"
 set spoolfile=+/

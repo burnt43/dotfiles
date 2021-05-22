@@ -163,7 +163,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec i3-msg exit
 
 # scratchpad toggle
 bindsym $mod+u [title="quick_terminal"] scratchpad show; [title="quick_terminal"] move position center
@@ -184,10 +184,10 @@ new_window pixel 3
 font pango:Hack-Regular 12
 
 # gaps
-smart_gaps on
-gaps outer 4
-gaps inner 8
-smart_borders on
+# smart_gaps on
+# gaps outer 4
+# gaps inner 8
+# smart_borders on
 
 # window colors
 #                       border              background           text                 indicator           child_border
@@ -204,8 +204,8 @@ for_window [title="quick_terminal"] move scratchpad
 for_window [title="quick_terminal"] border pixel 5 
 
 # open programs in specific workspaces
-assign [class="Google-chrome"] $workspace2
-assign [class="Pidgin"] $workspace3
+# assign [class="Google-chrome"] $workspace2
+# assign [class="Pidgin"] $workspace3
 # assign [class="libreoffice-writer"] $workspace4
 # }}}
 
@@ -226,7 +226,7 @@ assign [class="Pidgin"] $workspace3
 
 # load programs on startup {{{
 # exec --no-startup-id compton -b
-exec --no-startup-id urxvt -T "quick_terminal"
-exec --no-startup-id google-chrome-stable
-exec --no-startup-id pidgin
+# exec --no-startup-id urxvt -T "quick_terminal"
+# exec --no-startup-id google-chrome-stable
+# exec --no-startup-id pidgin
 # }}}
