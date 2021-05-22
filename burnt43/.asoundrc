@@ -1,0 +1,71 @@
+pcm.!default {
+  type plug
+  slave {
+    pcm "asymed"
+  }
+}
+
+# Full-Duplex
+pcm.asymed {
+  type asym
+  playback {
+    pcm "mixed_output"
+  }
+  capture {
+    pcm "mixed_input"
+  }
+}
+
+# Output
+pcm.mixed_output {
+  type dmix
+  ipc_key 1024
+  slave {
+    pcm "front_headphones"
+    period_time 0
+    period_size 1024
+    buffer_size 4096
+    format S16_LE
+    channels 2
+    rate 44100
+  }
+  bindings {
+    0 0
+    1 1
+  }
+}
+ctl.mixed_output {
+  type hw
+  card 0
+  device 0
+}
+
+pcm.front_headphones {
+  type hw
+  card 0
+  device 0
+}
+
+# Input
+pcm.mixed_input {
+  type dsnoop
+  ipc_key 1025
+  slave {
+    pcm "front_microphone"
+    channels 2
+    period_time 0
+    period_size 1024
+    buffer_size 4096
+    format S16_LE
+    rate 44100
+  }
+  bindings {
+    0 0
+    0 1
+  }
+}
+pcm.front_microphone {
+  type hw
+  card 0
+  device 0
+}

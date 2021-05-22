@@ -1,0 +1,222 @@
+# aliases {{{
+# workspace names
+set $workspace1  "1"
+set $workspace2  "2:browser"
+set $workspace3  "3"
+set $workspace4  "4"
+set $workspace5  "5"
+set $workspace6  "6"
+set $workspace7  "7"
+set $workspace8  "8"
+set $workspace9  "9"
+set $workspace10 "10"
+
+set $terminal exec urxvt
+set $feh exec --no-startup-id feh --bg-center --no-fehbg
+set $Locker i3lock && sleep 1
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+
+set $badwolf_plain #f8f6f2
+set $badwolf_snow #ffffff
+set $badwolf_coal #000000
+set $badwolf_brightgravel #d9cec3
+set $badwolf_lightgravel #998f84
+set $badwolf_gravel #857f78
+set $badwolf_mediumgravel #666462
+set $badwolf_deepgravel #45413b
+set $badwolf_deepergravel #35322d
+set $badwolf_darkgravel #242321
+set $badwolf_blackgravel #1c1b1a
+set $badwolf_blackestgravel #141413
+set $badwolf_dalespale #fade3e
+set $badwolf_dirtyblonde #f4cf86
+set $badwolf_taffy #ff2c4b
+set $badwolf_saltwatertaffy #8cffba
+set $badwolf_tardis #0a9dff
+set $badwolf_orange #ffa724
+set $badwolf_lime #aeee00
+set $badwolf_dress #ff9eb8
+set $badwolf_toffee #b88853
+set $badwolf_coffee #c7915b
+set $badwolf_darkroast #88633f
+
+set $molokai_fuschia #F92672
+set $molokai_orange #FD971F
+set $molokai_purple #AE81FF
+# }}}
+# basic config {{{
+# use windows key
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# mouse settings
+focus_follows_mouse no
+# }}}
+# modes {{{
+# resize mode
+mode "resize" {
+  bindsym j resize shrink width 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize shrink height 10 px or 10 ppt
+  bindsym semicolon resize grow width 10 px or 10 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "$mode_system" {
+  bindsym l exec --no-startup-id $Locker, mode "default"
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+  bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+# }}}
+# keybinds {{{
+# start a terminal
+bindsym $mod+Return $terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split in horizontal orientation
+bindsym $mod+g split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# scratchpad toggle
+bindsym $mod+u [title="quick_terminal"] scratchpad show; [title="quick_terminal"] move position center
+
+# enter resize mode
+bindsym $mod+r mode "resize"
+
+# enter system mode
+bindsym $mod+Pause mode "$mode_system"
+# }}}
+# window style {{{
+
+# no title, width 3 border
+new_window pixel 3
+
+# font
+font pango:Hack-Regular 12
+
+# gaps
+smart_gaps on
+gaps outer 4
+gaps inner 8
+smart_borders on
+
+# window colors
+#                       border                background           text                 indicator              child_border
+client.focused          $badwolf_brightgravel $badwolf_coal        $badwolf_snow        $badwolf_brightgravel  $badwolf_brightgravel
+client.focused_inactive $badwolf_darkgravel   $badwolf_coal        $badwolf_snow        $badwolf_darkgravel    $badwolf_darkgravel
+client.unfocused        $badwolf_darkgravel   $badwolf_coal        $badwolf_snow        $badwolf_darkgravel    $badwolf_darkgravel
+# }}}
+# specific window/program {{{
+# scratchpad
+for_window [title="quick_terminal"] floating enable
+for_window [title="quick_terminal"] resize set 1920 1080
+for_window [title="quick_terminal"] move scratchpad
+for_window [title="quick_terminal"] border pixel 5 
+
+# open programs in specific workspaces
+assign [class="Pidgin"] $workspace3
+# }}}
+# bar config {{{
+# bar {
+#   status_command i3status
+#   modifier mod1
+#   mode hide
+#   font pango:RobotoMono-Regular 14
+#   workspace_buttons yes
+#   strip_workspace_numbers no
+#   colors {
+#     focused_workspace  $badwolf_lime       $badwolf_coal $badwolf_snow
+#     inactive_workspace $badwolf_darkgravel $badwolf_coal $badwolf_gravel
+#   }
+# }
+# }}}
+# load programs on startup {{{
+# exec --no-startup-id compton -b
+exec --no-startup-id urxvt -T "quick_terminal"
+exec --no-startup-id pidgin
+# }}}

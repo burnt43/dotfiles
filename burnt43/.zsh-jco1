@@ -1,0 +1,29 @@
+#          _           _          __ 
+#         | |         (_)        /_ |
+#  _______| |__ ______ _  ___ ___ | |
+# |_  / __| '_ \______| |/ __/ _ \| |
+#  / /\__ \ | | |     | | (_| (_) | |
+# /___|___/_| |_|     | |\___\___/|_|
+#                    _/ |            
+#                   |__/             
+# exports {{{
+export PATH=$PATH:/usr/local/ruby/ruby-2.5.3/bin:~/scripts/scripts_in_path
+export GPG_TTY=$(tty)
+# }}}
+# aliases {{{
+alias msu1tracks_dev="cd /home/jcarson/git_clones/msu1tracks"
+
+alias vpn="sudo openvpn --config /home/jcarson/vpn/vpn2-UDP4-1200-jcarson-config.ovpn"
+alias work_machine="ssh 200.255.100.116"
+
+alias mount_sd="udisksctl mount -b /dev/sdc1"
+alias umount_sd="udisksctl unmount -b /dev/sdc1"
+
+alias alttpr_cd="cd /run/media/jcarson/3765-3634/roms/0006_added_by_jim/randomizers/a_link_to_the_past"
+alias alttpr_clean="alttpr_cd && find ./ -name 'alttp_msu.sfc' -exec rm {} \;"
+alias alttpr_mv_download_to_on_deck="alttpr_cd && mv /home/jcarson/Downloads/*.sfc ./on_deck_seeds"
+alias alttpr_mv_on_deck_to_wip='alttpr_cd && [ "$(ls ./wip_seeds | wc -l)" -eq "0" ] && mv "$(ls -t ./on_deck_seeds/* | head -1)" ./wip_seeds'
+alias alttpr_mv_wip_to_completed='alttpr_cd && [ "$(ls ./wip_seeds | wc -l)" -eq "1" ] && mv "$(ls -t ./wip_seeds/* | head -1)" ./completed_seeds'
+
+alias keyboard_rate="xset -display :0 r rate 350 50"
+# }}}
