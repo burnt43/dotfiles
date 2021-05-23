@@ -1,7 +1,7 @@
 # aliases {{{
 # workspace names
 set $workspace1  "1"
-set $workspace2  "2:browser"
+set $workspace2  "2"
 set $workspace3  "3"
 set $workspace4  "4"
 set $workspace5  "5"
@@ -166,7 +166,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec i3-msg exit
 
 # scratchpad toggle
-bindsym $mod+u [title="quick_terminal"] scratchpad show; [title="quick_terminal"] move position center
+# bindsym $mod+u [title="quick_terminal"] scratchpad show; [title="quick_terminal"] move position center
 
 # enter resize mode
 bindsym $mod+r mode "resize"
@@ -190,18 +190,18 @@ font pango:Hack-Regular 12
 # smart_borders on
 
 # window colors
-#                       border              background           text                 indicator           child_border
-client.focused          $badwolf_brightgravel  $badwolf_coal        $badwolf_snow        $badwolf_brightgravel  $badwolf_brightgravel
-client.focused_inactive $badwolf_darkgravel $badwolf_coal        $badwolf_snow        $badwolf_darkgravel $badwolf_darkgravel
-client.unfocused        $badwolf_darkgravel $badwolf_coal        $badwolf_snow        $badwolf_darkgravel $badwolf_darkgravel
+#                       border                background    text          indicator             child_border
+client.focused          $badwolf_brightgravel $badwolf_coal $badwolf_snow $badwolf_brightgravel $badwolf_brightgravel
+client.focused_inactive $badwolf_darkgravel   $badwolf_coal $badwolf_snow $badwolf_darkgravel   $badwolf_darkgravel
+client.unfocused        $badwolf_darkgravel   $badwolf_coal $badwolf_snow $badwolf_darkgravel   $badwolf_darkgravel
 # }}}
 
 # specific window/program {{{
 # scratchpad
-for_window [title="quick_terminal"] floating enable
-for_window [title="quick_terminal"] resize set 1920 1080
-for_window [title="quick_terminal"] move scratchpad
-for_window [title="quick_terminal"] border pixel 5 
+# for_window [title="quick_terminal"] floating enable
+# for_window [title="quick_terminal"] resize set 1920 1080
+# for_window [title="quick_terminal"] move scratchpad
+# for_window [title="quick_terminal"] border pixel 5 
 
 # open programs in specific workspaces
 # assign [class="Google-chrome"] $workspace2
