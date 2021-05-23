@@ -2,6 +2,7 @@
 
 hostname=$(hostname)
 user=$(whoami)
+home_dir="/home/$user"
 
 overwrite_msg="Do you want to overwrite? (Y/n): "
 
@@ -26,10 +27,10 @@ function cp_to_local {
 # Go through the directory for this host and the shared directory.
 for filename in $(find "./$hostname" "./shared" -mindepth 1 -type f); do
   # Get the filename without the hostname/shared prefix.
-  filename_rel_to_home=$(echo "$filename" | sed -r "s/^(\.\/$hostname\/|\.\/shared\/)//")
+  filename_rel_to_home=$(echo "$filename" | sed -r "s/^\.\/($hostname|shared)\///")
 
   # The full filename on this system (in home dir)
-  filename_local="/home/$user/$filename_rel_to_home"
+  filename_local="$home_dir/$filename_rel_to_home"
 
   if [ -e "$filename_local" ]; then
     # A local file already exists so we need to do a diff to see if is
