@@ -3,6 +3,7 @@
 hostname=$(hostname)
 user=$(whoami)
 home_dir="/home/$user"
+ignore_file=".ignore-$hostname"
 
 overwrite_msg="Do you want to overwrite? (Y/n): "
 
@@ -28,6 +29,16 @@ function cp_to_local {
 for filename in $(find "./$hostname" "./shared" -mindepth 1 -type f); do
   # Get the filename without the hostname/shared prefix.
   filename_rel_to_home=$(echo "$filename" | sed -r "s/^\.\/($hostname|shared)\///")
+
+  # Check the ignore file for what files we don't want to copy to
+  # local system.
+  grep --silent --fixed-strings "$filename_rel_to_home" $ignore_file
+  ret="$?"
+
+  if [ "$ret" = 0 ]; then
+    echo_msg "ignoring $filename_rel_to_home"
+    continue
+  fi
 
   # The full filename on this system (in home dir)
   filename_local="$home_dir/$filename_rel_to_home"
