@@ -9,25 +9,25 @@ function echo_err {
   echo -e "[\033[0;31mERROR\033[0;0m] - $1"
 }
 
-function foo {
-  parent_dir="$1"
+function recursive_file_diff {
+  local parent_dir="$1"
 
   for filename in $(ls -a "$parent_dir"); do
     if [ "$filename" = '.' -o "$filename" = '..' ]; then
       continue
     fi
 
-    fullname="$parent_dir/$filename"
+    local fullname="$parent_dir/$filename"
     
     if [ -f "$fullname" ]; then
-      other_fullname=$(echo "$fullname" | sed "s/^$dir_a/$dir_b/")
+      local other_fullname=$(echo "$fullname" | sed "s/^$dir_a/$dir_b/")
 
       if [ -e "$other_fullname" ]; then
-        echo "-------------------$filename-------------------"
+        echo "-------------------$fullname-------------------"
         diff --color=auto "$fullname" "$other_fullname"
       fi
     elif [ -d "$fullname" ]; then
-      foo "$fullname"
+      recursive_file_diff "$fullname"
     fi
   done
 }
@@ -42,4 +42,4 @@ if [ -z "$dir_b" ]; then
   exit 1
 fi
 
-foo "$dir_a"
+recursive_file_diff "$dir_a"
