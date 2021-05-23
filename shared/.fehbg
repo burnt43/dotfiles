@@ -1,0 +1,18 @@
+#!/bin/sh
+
+#   __     _     _           
+#  / _|   | |   | |          
+# | |_ ___| |__ | |__   __ _ 
+# |  _/ _ \ '_ \| '_ \ / _` |
+# | ||  __/ | | | |_) | (_| |
+# |_| \___|_| |_|_.__/ \__, |
+#                       __/ |
+#                      |___/ 
+
+HOST=$(hostname)
+
+case $HOST in
+*)
+  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
+  ;;
+esac
