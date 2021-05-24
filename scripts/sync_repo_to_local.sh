@@ -32,12 +32,14 @@ for filename in $(find "./$hostname" "./shared" -mindepth 1 -type f); do
 
   # Check the ignore file for what files we don't want to copy to
   # local system.
-  grep --silent --fixed-strings "$filename_rel_to_home" $ignore_file
-  ret="$?"
+  if [ -e "$ignore_file" ]; then
+    grep --silent --fixed-strings "$filename_rel_to_home" $ignore_file
+    ret="$?"
 
-  if [ "$ret" = 0 ]; then
-    echo_msg "ignoring $filename_rel_to_home"
-    continue
+    if [ "$ret" = 0 ]; then
+      echo_msg "ignoring $filename_rel_to_home"
+      continue
+    fi
   fi
 
   # The full filename on this system (in home dir)
