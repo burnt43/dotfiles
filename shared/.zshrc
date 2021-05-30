@@ -6,7 +6,7 @@
 # /___|___/_| |_|_|  \___|
 #
 
-# zsh options {{{
+# machine-specific zsh options {{{
 case "$(hostname)" in
 # {{{ jco2
 jco2)
@@ -35,7 +35,10 @@ plugins=(
 )
 # }}}
 
-# source local config {{{
+# machine-specific shell stuff {{{
+JCRSN_GIT_CLONE_DIR=~/git_clones
+DISTRO=$(uname -r | awk -F '-' '{print $2}')
+
 case "$(hostname)" in
 # {{{ jco2
 jco2)
@@ -55,6 +58,43 @@ jco2)
 
   alias dmti_dev="cd /home/jcarson/git_clones/dmti"
   alias dmti_run="dmti_dev && bundle exec ruby -I/home/jcarson/git_clones/dmti/lib dmti.rb"
+
+  case "$DISTRO" in
+  gentoo)
+    function yes_no_prompt {
+      echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
+      read yes_no_choice
+
+      if [[ "$yes_no_choice" == "Y" ]]; then
+        return 0
+      else
+        return 1
+      fi
+    }
+    function gentoo_pkg_install {
+      local pkg_name="$1"
+      sudo emerge --ask $pkg_name
+    }
+    function gentoo_pkg_list {
+      local pkg_name="$1"
+      qlist -IRv $pkg_name
+    }
+    function gentoo_pkg_remove {
+      local pkg_name="$1"
+      sudo emerge --deselect $pkg_name
+      sudo emerge --depclean -vp
+
+      yes_no_prompt "continue with emerge --depclean -v?" 
+      local rval="$?"
+      if [[ "$rval" == "0" ]]; then
+        sudo emerge --depclean -v
+      fi
+    }
+    alias pkg-install="gentoo_pkg_install"
+    alias pkg-list="gentoo_pkg_list"
+    alias pkg-remove="gentoo_pkg_remove"
+    ;;
+  esac
   # }}}
   ;;
 # }}}
