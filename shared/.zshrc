@@ -36,14 +36,14 @@ plugins=(
 # }}}
 
 # machine-specific shell stuff {{{
-JCRSN_GIT_CLONE_DIR=~/git_clones
-DISTRO=$(uname -r | awk -F '-' '{print $2}')
+JCRSN_GIT_CLONE_DIR=/home/jcarson/git_clones
+JCRSN_DISTRO=$(uname -r | awk -F '-' '{print $2}')
 
 case "$(hostname)" in
 # {{{ jco2
 jco2)
   # exports {{{
-  export PATH=$PATH:/home/jcarson/.gem/ruby/2.5.0/bin:/home/jcarson/git_clones/work-scripts/mtt/development
+  export PATH=$PATH:/home/jcarson/.gem/ruby/2.5.0/bin
   export GPG_TTY=$(tty)
   # }}}
 
@@ -59,7 +59,7 @@ jco2)
   alias dmti_dev="cd /home/jcarson/git_clones/dmti"
   alias dmti_run="dmti_dev && bundle exec ruby -I/home/jcarson/git_clones/dmti/lib dmti.rb"
 
-  case "$DISTRO" in
+  case "$JCRSN_DISTRO" in
   gentoo)
     function yes_no_prompt {
       echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
@@ -101,7 +101,7 @@ jco2)
 # {{{ burnt43
 burnt43)
   # exports {{{
-  export PATH=$PATH:~/sources/solr-8.2.0/solr/bin:/home/jcarson/.gems/mtt-crm/ruby/2.6.0/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/git_clones/git-filter-repo:~/bin:~/git_clones/personal-scripts:~/git_clones/work-scripts-burnt43/mtt/development
+  export PATH=$PATH:~/sources/solr-8.2.0/solr/bin:/home/jcarson/.gems/mtt-crm/ruby/2.6.0/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/git_clones/git-filter-repo:~/bin:~/git_clones/personal-scripts
   export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
 
   # golang
@@ -209,8 +209,10 @@ burnt43)
   ;;
 # }}}
 esac
-if [[ -f $HOME/.zsh-$(hostname) ]]; then
-  source $HOME/.zsh-$(hostname)
+
+# add my script repo to the path
+if [[ ! -z "$JCRSN_GIT_CLONE_DIR" ]]; then
+  export PATH=$PATH:$JCRSN_GIT_CLONE_DIR/work-scripts/personal:$JCRSN_GIT_CLONE_DIR/work-scripts/mtt/development
 fi
 # }}}
 
