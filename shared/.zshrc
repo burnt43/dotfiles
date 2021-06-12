@@ -8,17 +8,22 @@
 
 # machine-specific zsh options {{{
 case "$(hostname)" in
+# {{{ burnt43
+burnt43)
+  ZSH=/usr/share/oh-my-zsh/
+  ZSH_THEME="jcarson-work"
+  ;;
+# }}}
 # {{{ jco2
 jco2)
   ZSH=$HOME/.oh-my-zsh
   ZSH_THEME="jcarson-home"
   ;;
 # }}}
-# {{{ burnt43
-burnt43)
-  ZSH=/usr/share/oh-my-zsh/
-  ZSH_THEME="jcarson-work"
-  ;;
+# {{{
+jcrsn01)
+  ZSH=$HOME/.oh-my-zsh
+  ZSH_THEME="jcarson-virtual"
 # }}}
 esac
 
@@ -40,64 +45,6 @@ JCRSN_GIT_CLONE_DIR=/home/jcarson/git_clones
 JCRSN_DISTRO=$(uname -r | awk -F '-' '{print $2}')
 
 case "$(hostname)" in
-# {{{ jco2
-jco2)
-  # exports {{{
-  export PATH=$PATH:/home/jcarson/.gem/ruby/2.5.0/bin
-  export GPG_TTY=$(tty)
-  # }}}
-
-  # aliases {{{
-  alias vpn="sudo openvpn --config /home/jcarson/vpn/vpn2-UDP4-1200-jcarson-config.ovpn"
-  alias work_machine="ssh 200.255.100.116"
-
-  alias mount_sd="udisksctl mount -b /dev/sdc1"
-  alias umount_sd="udisksctl unmount -b /dev/sdc1"
-
-  alias keyboard_rate="xset -display :0 r rate 350 50"
-
-  alias dmti_dev="cd /home/jcarson/git_clones/dmti"
-  alias dmti_run="dmti_dev && bundle exec ruby -I/home/jcarson/git_clones/dmti/lib dmti.rb"
-
-  case "$JCRSN_DISTRO" in
-  gentoo)
-    function yes_no_prompt {
-      echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
-      read yes_no_choice
-
-      if [[ "$yes_no_choice" == "Y" ]]; then
-        return 0
-      else
-        return 1
-      fi
-    }
-    function gentoo_pkg_install {
-      local pkg_name="$1"
-      sudo emerge --ask $pkg_name
-    }
-    function gentoo_pkg_list {
-      local pkg_name="$1"
-      qlist -IRv $pkg_name
-    }
-    function gentoo_pkg_remove {
-      local pkg_name="$1"
-      sudo emerge --deselect $pkg_name
-      sudo emerge --depclean -vp
-
-      yes_no_prompt "continue with emerge --depclean -v?" 
-      local rval="$?"
-      if [[ "$rval" == "0" ]]; then
-        sudo emerge --depclean -v
-      fi
-    }
-    alias pkg-install="gentoo_pkg_install"
-    alias pkg-list="gentoo_pkg_list"
-    alias pkg-remove="gentoo_pkg_remove"
-    ;;
-  esac
-  # }}}
-  ;;
-# }}}
 # {{{ burnt43
 burnt43)
   # exports {{{
@@ -208,6 +155,72 @@ burnt43)
   # }}}
   ;;
 # }}}
+# {{{ jco2
+jco2)
+  # exports {{{
+  export PATH=$PATH:/home/jcarson/.gem/ruby/2.5.0/bin
+  export GPG_TTY=$(tty)
+  # }}}
+
+  # aliases {{{
+  alias vpn="sudo openvpn --config /home/jcarson/vpn/vpn2-UDP4-1200-jcarson-config.ovpn"
+  alias work_machine="ssh 200.255.100.116"
+
+  alias mount_sd="udisksctl mount -b /dev/sdc1"
+  alias umount_sd="udisksctl unmount -b /dev/sdc1"
+
+  alias keyboard_rate="xset -display :0 r rate 350 50"
+
+  alias dmti_dev="cd /home/jcarson/git_clones/dmti"
+  alias dmti_run="dmti_dev && bundle exec ruby -I/home/jcarson/git_clones/dmti/lib dmti.rb"
+
+  case "$JCRSN_DISTRO" in
+  gentoo)
+    function yes_no_prompt {
+      echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
+      read yes_no_choice
+
+      if [[ "$yes_no_choice" == "Y" ]]; then
+        return 0
+      else
+        return 1
+      fi
+    }
+    function gentoo_pkg_install {
+      local pkg_name="$1"
+      sudo emerge --ask $pkg_name
+    }
+    function gentoo_pkg_list {
+      local pkg_name="$1"
+      qlist -IRv $pkg_name
+    }
+    function gentoo_pkg_remove {
+      local pkg_name="$1"
+      sudo emerge --deselect $pkg_name
+      sudo emerge --depclean -vp
+
+      yes_no_prompt "continue with emerge --depclean -v?" 
+      local rval="$?"
+      if [[ "$rval" == "0" ]]; then
+        sudo emerge --depclean -v
+      fi
+    }
+    alias pkg-install="gentoo_pkg_install"
+    alias pkg-list="gentoo_pkg_list"
+    alias pkg-remove="gentoo_pkg_remove"
+    ;;
+  esac
+  # }}}
+  ;;
+# }}}
+# {{{ jcrsn01
+jcrsn01)
+  # {{{ exports
+  export PATH=$PATH:/usr/local/ruby/3.0.1/bin
+  # }}}
+  # {{{ aliases
+  # }}}
+# }}}
 esac
 
 # add my script repo to the path
@@ -226,7 +239,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 alias grep="grep --color=auto"
 alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
 
-which gem > /dev/null
+which gem 2>/dev/null
 if [[ $? == 0 ]]; then
   alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
 fi
@@ -270,6 +283,9 @@ bindkey "^L" clear-screen
 
 # print on shell start {{{
 # use neofetch as a welcome message
-which neofetch > /dev/null && neofetch
+which neofetch 2>/dev/null && neofetch
 # }}}
 
+# use : to have the last command return 0 so when I source this file I can
+# get a successful return code.
+:
