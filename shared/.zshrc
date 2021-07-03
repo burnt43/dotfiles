@@ -20,34 +20,103 @@ jco2)
   ZSH_THEME="jcarson-home"
   ;;
 # }}}
-# {{{
+# {{{ jcrsn01
 jcrsn01)
   ZSH=$HOME/.oh-my-zsh
   ZSH_THEME="jcarson-virtual"
 # }}}
 esac
+# }}}
 
+# {{{ global zsh options
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 ZSH_CUSTOM=~/.oh-my-zsh/custom
 # }}}
 
-# plugins {{{
+# global plugins {{{
 plugins=(
   git
   vi-mode
 )
 # }}}
 
+# {{{ distro-specific stuff
+case "$(hostname)" in
+  jcrsn01)
+    # Manually override, because uname -r doesn't give me the info I want.
+    JCRSN_DISTRO="centos"
+    ;;
+  *)
+    JCRSN_DISTRO=$(uname -r | awk -F '-' '{print $2}')
+    ;;
+esac
+
+case "$JCRSN_DISTRO" in
+centos)
+  function centos_pkg_install {
+    local pkg_name="$1"
+    sudo dnf install $pkg_name
+  }
+  function centos_pkg_list {
+    local pkg_name="$1"
+    dnf list installed $pkg_name
+  }
+  function centos_pkg_remove {
+    local pkg_name="$1"
+    sudo dnf remove $pkg_name
+  }
+
+  alias pkg-install="centos_pkg_install"
+  alias pkg-list="centos_pkg_list"
+  alias pkg-remove="centos_pkg_remove"
+  ;;
+gentoo)
+  function yes_no_prompt {
+    echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
+    read yes_no_choice
+
+    if [[ "$yes_no_choice" == "Y" ]]; then
+      return 0
+    else
+      return 1
+    fi
+  }
+
+  function gentoo_pkg_install {
+    local pkg_name="$1"
+    sudo emerge --ask $pkg_name
+  }
+  function gentoo_pkg_list {
+    local pkg_name="$1"
+    qlist -IRv $pkg_name
+  }
+  function gentoo_pkg_remove {
+    local pkg_name="$1"
+    sudo emerge --deselect $pkg_name
+    sudo emerge --depclean -vp
+
+    yes_no_prompt "continue with emerge --depclean -v?" 
+    local rval="$?"
+    if [[ "$rval" == "0" ]]; then
+      sudo emerge --depclean -v
+    fi
+  }
+
+  alias pkg-install="gentoo_pkg_install"
+  alias pkg-list="gentoo_pkg_list"
+  alias pkg-remove="gentoo_pkg_remove"
+  ;;
+esac
+# }}}
+
 # machine-specific shell stuff {{{
 JCRSN_GIT_CLONE_DIR=/home/jcarson/git_clones
-JCRSN_DISTRO=$(uname -r | awk -F '-' '{print $2}')
 
 case "$(hostname)" in
 # {{{ burnt43
 burnt43)
-  # exports {{{
   export PATH=$PATH:~/sources/solr-8.2.0/solr/bin:/home/jcarson/.gems/mtt-crm/ruby/2.6.0/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/git_clones/git-filter-repo:~/bin:~/git_clones/personal-scripts
   export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
 
@@ -59,9 +128,7 @@ burnt43)
   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/:/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/server
 
   # JRE 10 # export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
-  # }}}
 
-  # aliases {{{
   alias ami_dev="cd ~/git_clones/hosted-burnt43/ami_fw_proxy"
   alias ami_run="ami_dev && RAILS_ENV=development JDEV=1 ruby -I /home/jcarson/git_clones/hosted-burnt43/ami_fw_proxy/ ./secure_multiplexer_proxy.rb"
 
@@ -152,17 +219,13 @@ burnt43)
   alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
   alias mount_spectra2="sudo mkdir -p /mnt/spectra2 && sudo mount -t cifs //200.255.100.185/spectra2 /mnt/spectra2 -o 'username=Administrator,password=$(cat ~/.spectra2_pass),vers=1.0'"
   alias umount_spectra2="sudo umount /mnt/spectra2 && sudo rm -R /mnt/spectra2"
-  # }}}
   ;;
 # }}}
 # {{{ jco2
 jco2)
-  # exports {{{
   export PATH=$PATH:/home/jcarson/.gem/ruby/2.5.0/bin
   export GPG_TTY=$(tty)
-  # }}}
 
-  # aliases {{{
   alias vpn="sudo openvpn --config /home/jcarson/vpn/vpn2-UDP4-1200-jcarson-config.ovpn"
   alias work_machine="ssh 200.255.100.116"
 
@@ -174,52 +237,11 @@ jco2)
   alias dmti_dev="cd /home/jcarson/git_clones/dmti"
   alias dmti_run="dmti_dev && bundle exec ruby -I/home/jcarson/git_clones/dmti/lib dmti.rb"
 
-  case "$JCRSN_DISTRO" in
-  gentoo)
-    function yes_no_prompt {
-      echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
-      read yes_no_choice
-
-      if [[ "$yes_no_choice" == "Y" ]]; then
-        return 0
-      else
-        return 1
-      fi
-    }
-    function gentoo_pkg_install {
-      local pkg_name="$1"
-      sudo emerge --ask $pkg_name
-    }
-    function gentoo_pkg_list {
-      local pkg_name="$1"
-      qlist -IRv $pkg_name
-    }
-    function gentoo_pkg_remove {
-      local pkg_name="$1"
-      sudo emerge --deselect $pkg_name
-      sudo emerge --depclean -vp
-
-      yes_no_prompt "continue with emerge --depclean -v?" 
-      local rval="$?"
-      if [[ "$rval" == "0" ]]; then
-        sudo emerge --depclean -v
-      fi
-    }
-    alias pkg-install="gentoo_pkg_install"
-    alias pkg-list="gentoo_pkg_list"
-    alias pkg-remove="gentoo_pkg_remove"
-    ;;
-  esac
-  # }}}
   ;;
 # }}}
 # {{{ jcrsn01
 jcrsn01)
-  # {{{ exports
   export PATH=$PATH:/usr/local/ruby/3.0.1/bin
-  # }}}
-  # {{{ aliases
-  # }}}
 # }}}
 esac
 
@@ -229,17 +251,17 @@ if [[ ! -z "$JCRSN_GIT_CLONE_DIR" ]]; then
 fi
 # }}}
 
-# exports {{{
+# global exports {{{
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export XDG_CONFIG_HOME=$HOME/.config
 # }}}
 
-# aliases {{{
+# global aliases {{{
 alias grep="grep --color=auto"
 alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
 
-which gem 2>/dev/null
+which gem 1>/dev/null 2>/dev/null
 if [[ $? == 0 ]]; then
   alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
 fi
@@ -256,11 +278,11 @@ fi
 source $ZSH/oh-my-zsh.sh
 # }}}
 
-# unsets {{{
+# global unsets {{{
 unsetopt share_history
 # }}}
 
-# keybinds {{{
+# global keybinds {{{
 # vi-mode fixes
 # unbind ALL keys in viins mode and only bind jk to command mode
 bindkey -rM viins "^["
