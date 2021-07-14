@@ -206,6 +206,35 @@ burnt43)
   alias hop_client_dev="cd ~/git_clones/hop_js_client"
   alias hop_client_run="__hop_client__"
 
+  function __ensure_mttpbx_virtual_server_exists__ {
+    # +----+--------+--------------+------------------+------------------+-----------------+
+    # | id | name   | ip           | hostname         | asterisk_version | type            |
+    # +----+--------+--------------+------------------+------------------+-----------------+
+    # | 13 | mttpbx | 209.191.9.13 | pbx.monmouth.com | 13               | HostedPBXServer |
+    # +----+--------+--------------+------------------+------------------+-----------------+
+
+    local db_name="$1"
+
+    if [[ -z "$db_name" ]]; then
+      db_name="hpbx_indie_crm"
+    fi
+
+    local virtual_server_table=$(mysql $db_name --batch --skip-column-names -e "SHOW TABLES LIKE '%virtual_servers%';")
+
+    if [[ -z "$virtual_server_table" ]]; then
+      return 1
+    fi
+
+    local pbx_count=$(mysql $db_name --batch --skip-column-names -e "SELECT COUNT(*) FROM virtual_servers WHERE name='mttpbx' AND ip='209.191.9.13' AND hostname='pbx.monmouth.com' AND asterisk_version='13' AND type='HostedPBXServer'";)
+
+    if [[ "$pbx_count" == "0" ]]; then
+      mysql $db_name -e "INSERT INTO virtual_servers SET name='mttpbx', ip='209.191.9.13', hostname='pbx.monmouth.com', asterisk_version='13', type='HostedPBXServer';"
+    else
+      return 0
+    fi
+  }
+  alias ensure_mttpbx_virtual_server_exists="__ensure_mttpbx_virtual_server_exists__"
+
   alias ruby_daemon_monitor_dev="cd ~/git_clones/ruby-daemon-monitor-burnt43"
   alias ruby_daemon_monitor_app_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
   alias ruby_daemon_monitor_crm_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_crm ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
