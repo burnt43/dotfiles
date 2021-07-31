@@ -173,6 +173,7 @@ burnt43)
 
   alias hop_dev="cd ~/git_clones/operator-panel-burnt43"
   alias hop_run="hop_dev && HOP_ENV=development bundle exec ruby ./hop.rb"
+  alias hop_run_ruby_3="hop_dev && HOP_ENV=development /usr/local/ruby/ruby-3.0.2/bin/bundle exec /usr/local/ruby/ruby-3.0.2/bin/ruby ./hop.rb"
 
   function __hop_client__ {
     local username="$1"
@@ -200,7 +201,7 @@ burnt43)
     fi
 
     # Connect to the hop server using the session_id we found/generated.
-    hop_client_dev
+    cd ~/git_clones/hop_js_client
     node ./hop_js_client.js wss://jcarson-hop.monmouth.com:11081 $session_id 2>/dev/null
   }
   alias hop_client_dev="cd ~/git_clones/hop_js_client"
@@ -308,7 +309,7 @@ esac
 
 # add my script repo to the path
 if [[ ! -z "$JCRSN_GIT_CLONE_DIR" ]]; then
-  export PATH=$PATH:$JCRSN_GIT_CLONE_DIR/work-scripts/personal:$JCRSN_GIT_CLONE_DIR/work-scripts/mtt/development
+  export PATH=$PATH:$JCRSN_GIT_CLONE_DIR/work-scripts-burnt43/personal:$JCRSN_GIT_CLONE_DIR/work-scripts-burnt43/mtt/development
 fi
 # }}}
 
@@ -328,6 +329,7 @@ if [[ $? == 0 ]]; then
 fi
 
 alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
+alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
 # }}}
 
 # cache and source {{{
