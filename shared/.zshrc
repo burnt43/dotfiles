@@ -134,6 +134,7 @@ burnt43)
 
   alias hpbxgui_dev="cd ~/git_clones/hosted-burnt43/hpbxgui"
   alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:run"
+  alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=development bundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:db:reset"
 
   alias cti_dev="cd ~/git_clones/cti-burnt43"
   alias cti_hpbxgui_run="cti_dev && CTI_ENV=development_hpbxgui ruby -I ./lib/ server.rb"
@@ -152,6 +153,8 @@ burnt43)
   alias asterisk_cdr_cli_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=devprod ASTERISK_CDR_EDITOR=/usr/bin/vim bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_cli.rb"
   alias asterisk_cdr_fraud_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_fraud.rb"
   alias asterisk_cdr_test_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=test bundle exec rake asterisk_cdr:test:run"
+
+  alias asterisk_cdr_bundler="GEM_HOME=~/.gems/asterisk-cdr-delete-me/bundle/ruby/2.6.0 GEM_PATH="" ~/.gems/asterisk-cdr-delete-me/bundle/ruby/2.6.0/bin/bundle"
 
   alias asterisk_config_dev="cd ~/git_clones/asterisk-config"
   alias asterisk_config_sample_run="asterisk_config_dev && bundle exec ruby -I./lib ./sanity_checker.rb"
@@ -246,8 +249,9 @@ burnt43)
   alias mtt_crm_meta_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:meta:run"
   alias mtt_crm_clean_branches="~/gist_clones/git_branch_cleaner/git_branch_cleaner.sh ~/git_clones/mtt_crm-burnt43 mtt"
 
-  alias call_blaster_dev="cd ~/git_clones/hosted-burnt43/call_blaster"
+  alias call_blaster_dev="cd ~/git_clones/call_blaster-burnt43"
   alias call_blaster_run="call_blaster_dev && bundle exec ruby ./call_blaster_server.rb"
+  alias call_blaster_test_run="call_blaster_dev && CALL_BLASTER_ENV=test bundle exec rake call_blaster:test:run"
 
   alias softphone_dev="cd ~/git_clones/mtt-softphone-burnt43"
   alias softphone_run="softphone_dev && npm start"
@@ -281,6 +285,74 @@ burnt43)
   alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
   alias mount_spectra2="sudo mkdir -p /mnt/spectra2 && sudo mount -t cifs //200.255.100.185/spectra2 /mnt/spectra2 -o 'username=Administrator,password=$(cat ~/.spectra2_pass),vers=1.0'"
   alias umount_spectra2="sudo umount /mnt/spectra2 && sudo rm -R /mnt/spectra2"
+
+  alias xymon_start="/home/jcarson/xymon/server/bin/xymon.sh start"
+
+  alias auto_dialer_dev="cd ~/git_clones/hosted-burnt43/auto_dialer"
+  alias auto_dialer_run="auto_dialer_dev && AUTO_DIALER_ENV=development bundle exec ruby ./auto_dialer_server.rb"
+
+  alias engoncall_dev="cd ~/git_clones/engoncall-burnt43"
+  alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
+
+  alias asterisk_queue_ctl_dev="cd /home/jcarson/git_clones/asterisk-queue-ctl-burnt43"
+  alias asterisk_queue_ctl_test_run="asterisk_queue_ctl_dev && ASTERISK_QUEUE_CTL_ENV=test bundle exec rake asterisk_queue_ctl:test:run"
+
+  function __text2speech__ {
+    # Possible Voices
+    # en-US_AllisonVoice,
+    # en-US_AllisonV3Voice,
+    # en-US_EmilyV3Voice,
+    # en-US_HenryV3Voice,
+    # en-US_KevinV3Voice,
+    # en-US_LisaVoice,
+    # en-US_LisaV3Voice,
+    # en-US_MichaelVoice,
+    # en-US_MichaelV3Voice,
+    # en-US_OliviaV3Voice
+
+    local msg="$1"
+    local voice="$2"
+
+    case "$voice" in
+      allison) text2speech_voice="en-US_AllisonV3Voice" ;;
+      emily) text2speech_voice="en-US_EmilyV3Voice" ;;
+      lisa) text2speech_voice="en-US_LisaV3Voice" ;;
+      olivia) text2speech_voice="en-US_OliviaV3Voice" ;;
+      *)
+        voice=lisa
+        text2speech_voice="en-US_LisaV3Voice"
+        ;;
+    esac
+
+    local text2speech_output=$(echo "$msg" | sed 's/ /-/g')
+    local text2speech_text=$(echo "$msg" | sed 's/ /%20/g')
+    local test2speech_accept="audio%2Fwav"
+    local text2speech_api_url="https://api.us-east.text-to-speech.watson.cloud.ibm.com/instances/afbf1900-fd96-4d18-beec-8fca13a6cf51/v1/synthesize"
+    local text2speech_api_key=$(cat ~/.text2speech-api-key)
+
+    text2speech_output="${voice}-${text2speech_output}.wav"
+
+    # echo "curl -X GET -u \"apikey:${text2speech_api_key}\" --output ${text2speech_output} \"${text2speech_api_url}?accept=${test2speech_accept}&text=${text2speech_text}&voice=${text2speech_voice}\""
+    curl -X GET -u "apikey:${text2speech_api_key}" --output ${text2speech_output} "${text2speech_api_url}?accept=${test2speech_accept}&text=${text2speech_text}&voice=${text2speech_voice}"
+  }
+  alias text2speech="__text2speech__"
+
+  function __convert_to_ulaw__ {
+    local input_file="$1"
+    local ffmpeg_bin="$(which ffmpeg)"
+    local ulaw_file=$(echo "$input_file" | sed -r 's/^(.*)\.(.*)$/\1.ulaw/g')
+
+    ${ffmpeg_bin} -y -i ${input_file} -ar 8000 -ac 1 -ab 64 -f mulaw ${ulaw_file} -map 0:0 1>/dev/null 2>/dev/null
+  }
+  alias convert_to_ulaw="__convert_to_ulaw__"
+
+  alias thingspace_dev="cd /home/jcarson/git_clones/thingspace-api-ruby-burnt43"
+  alias thingspace_test_run="thingspace_dev && THINGSPACE_API_RUBY_ENV=test bundle exec rake thingspace_api_ruby:test:run"
+  alias thingspace_sanity_check_run="thingspace_dev && script/console -c 'Thingspace::SanityCheck.run!'"
+
+  alias data_monitor_dev="cd /home/jcarson/git_clones/data-monitor-burnt43"
+  alias data_monitor_test_run="data_monitor_dev && DATA_MONITOR_ENV=test THINGSPACE_API_RUBY_ENV=test bundle exec rake data_monitor:test:run"
+  alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/client/bin/xymon DATA_MONITOR_ENV=development bundle exec ruby -I ./lib ./data_monitor.rb"
   ;;
 # }}}
 # {{{ jco2
