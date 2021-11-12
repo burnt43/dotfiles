@@ -1,0 +1,63 @@
+case "$JCRSN_DISTRO" in
+centos)
+  function centos_pkg_install {
+    local pkg_name="$1"
+    sudo dnf install $pkg_name
+  }
+  function centos_pkg_list {
+    local pkg_name="$1"
+    dnf list installed $pkg_name
+  }
+  function centos_pkg_remove {
+    local pkg_name="$1"
+    sudo dnf remove $pkg_name
+  }
+
+  alias pkg-install="centos_pkg_install"
+  alias pkg-list="centos_pkg_list"
+  alias pkg-remove="centos_pkg_remove"
+  ;;
+gentoo)
+  function yes_no_prompt {
+    echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
+    read yes_no_choice
+
+    if [[ "$yes_no_choice" == "Y" ]]; then
+      return 0
+    else
+      return 1
+    fi
+  }
+
+  function gentoo_pkg_install {
+    local pkg_name="$1"
+    sudo emerge --ask $pkg_name
+  }
+  function gentoo_pkg_list {
+    local pkg_name="$1"
+    qlist -IRv $pkg_name
+  }
+  function gentoo_pkg_remove {
+    local pkg_name="$1"
+    sudo emerge --deselect $pkg_name
+    sudo emerge --depclean -vp
+
+    yes_no_prompt "continue with emerge --depclean -v?" 
+    local rval="$?"
+    if [[ "$rval" == "0" ]]; then
+      sudo emerge --depclean -v
+    fi
+  }
+
+  alias pkg-install="gentoo_pkg_install"
+  alias pkg-list="gentoo_pkg_list"
+  alias pkg-remove="gentoo_pkg_remove"
+  ;;
+arch*)
+  # TODO: Define these aliases
+
+  alias pkg-install="echo 'not defined'"
+  alias pkg-list="echo 'not defined'"
+  alias pkg-remove="echo 'not defined'"
+  ;;
+esac

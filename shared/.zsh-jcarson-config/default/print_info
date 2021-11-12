@@ -1,0 +1,2 @@
+# use neofetch as a welcome message
+which neofetch 2>/dev/null && neofetch

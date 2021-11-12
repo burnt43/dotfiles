@@ -1,0 +1,10 @@
+alias grep="grep --color=auto"
+alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
+
+which gem 1>/dev/null 2>/dev/null
+if [[ $? == 0 ]]; then
+  alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
+fi
+
+alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
+alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"

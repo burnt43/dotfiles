@@ -1,0 +1,11 @@
+export PATH=$PATH:~/sources/solr-8.2.0/solr/bin:/home/jcarson/.gems/mtt-crm/ruby/2.6.0/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/git_clones/git-filter-repo:~/bin:~/git_clones/personal-scripts
+export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
+
+# golang
+export GOPATH=$HOME/go
+
+# JRE 8
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/:/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/server
+
+# JRE 10 # export JAVA_HOME=/usr/lib/jvm/java-10-openjdk

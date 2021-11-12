@@ -1,0 +1,18 @@
+# vi-mode fixes
+# unbind ALL keys in viins mode and only bind jk to command mode
+bindkey -rM viins "^["
+bindkey -M viins 'jk' vi-cmd-mode
+
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+
+bindkey "^[w" forward-word
+bindkey "^[d^[w" kill-word
+bindkey "^[b" backward-word
+bindkey "^[d^[b" backward-kill-word
+
+bindkey "^[d^[d" kill-whole-line
+bindkey "^[h" beginning-of-line
+bindkey "^[l" end-of-line
+
+bindkey "^L" clear-screen

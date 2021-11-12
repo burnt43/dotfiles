@@ -1,0 +1,10 @@
+alias vpn="sudo openvpn --config /home/jcarson/vpn/vpn2-UDP4-1200-jcarson-config.ovpn"
+alias work_machine="ssh 200.255.100.116"
+
+alias mount_sd="udisksctl mount -b /dev/sdc1"
+alias umount_sd="udisksctl unmount -b /dev/sdc1"
+
+alias keyboard_rate="xset -display :0 r rate 350 50"
+
+alias dmti_dev="cd /home/jcarson/git_clones/dmti"
+alias dmti_run="dmti_dev && bundle exec ruby -I/home/jcarson/git_clones/dmti/lib dmti.rb"
