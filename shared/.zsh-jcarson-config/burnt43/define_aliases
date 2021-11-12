@@ -222,3 +222,21 @@ alias thingspace_sanity_check_run="thingspace_dev && script/console -c 'Thingspa
 alias data_monitor_dev="cd /home/jcarson/git_clones/data-monitor-burnt43"
 alias data_monitor_test_run="data_monitor_dev && DATA_MONITOR_ENV=test THINGSPACE_API_RUBY_ENV=test bundle exec rake data_monitor:test:run"
 alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/client/bin/xymon DATA_MONITOR_ENV=development bundle exec ruby -I ./lib ./data_monitor.rb"
+
+function __compile_mcl__ {
+  # Find where the possibly upgraded perl libperl.so is.
+  local installed_libperl=$(find /usr/lib/perl5 -type f -name 'libperl.so' | head -1)
+  [[ -z "$installed_libperl" ]] && return 0
+
+  # Where the system thinks libperl.so is.
+  local system_libperl=/usr/lib/libperl.so
+
+  # Link the system libperl to the new libperl
+  sudo rm $system_libperl && sudo ln -s $installed_libperl $system_libperl
+
+  local mcl_source_dir=/home/jcarson/sources/mcl_64bit/mcl-0.53.00
+
+  cd $mcl_source_dir && make distclean && ./configure --disable-python && make && sudo make install
+}
+
+alias compile_mcl="__compile_mcl__"
