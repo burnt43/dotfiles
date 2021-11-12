@@ -1,2 +1,16 @@
 # use neofetch as a welcome message
-which neofetch 2>/dev/null && neofetch
+which neofetch 1>/dev/null 2>/dev/null && neofetch
+
+# check how long it has been since the last system upgrade
+which pkg-last-system-upgrade 1>/dev/null 2>/dev/null
+if [[ "$?" == "0" ]]; then
+  last_upgrade_date=$(pkg-last-system-upgrade)
+
+  if [[ ! -z "$last_upgrade_date" ]]; then
+    current_date_in_seconds=$(date +%s)
+    last_upgrade_date_in_seconds=$(date +%s -d $last_upgrade_date)
+    difference_in_days=$((($current_date_in_seconds - $last_upgrade_date_in_seconds)/86400))
+
+    [[ "$difference_in_days" -gt 30 ]] && echo -e "[\033[0;33mWARNING\033[0;0m] - It has been over 30 days since a system upgrade"
+  fi
+fi
