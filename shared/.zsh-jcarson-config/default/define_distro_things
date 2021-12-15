@@ -1,24 +1,24 @@
 case "$JCRSN_DISTRO" in
 centos)
-  function centos_pkg_install {
+  function __centos_pkg_install__ {
     local pkg_name="$1"
     sudo dnf install $pkg_name
   }
-  function centos_pkg_list {
+  function __centos_pkg_list__ {
     local pkg_name="$1"
     dnf list installed $pkg_name
   }
-  function centos_pkg_remove {
+  function __centos_pkg_remove__ {
     local pkg_name="$1"
     sudo dnf remove $pkg_name
   }
 
-  alias pkg-install="centos_pkg_install"
-  alias pkg-list="centos_pkg_list"
-  alias pkg-remove="centos_pkg_remove"
+  alias pkg-install="__centos_pkg_install__"
+  alias pkg-list="__centos_pkg_list__"
+  alias pkg-remove="__centos_pkg_remove__"
   ;;
 gentoo)
-  function yes_no_prompt {
+  function __gentoo_yes_no_prompt__ {
     echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
     read yes_no_choice
 
@@ -29,32 +29,32 @@ gentoo)
     fi
   }
 
-  function gentoo_pkg_install {
+  function __gentoo_pkg_install__ {
     local pkg_name="$1"
     sudo emerge --ask $pkg_name
   }
-  function gentoo_pkg_list {
+  function __gentoo_pkg_list__ {
     local pkg_name="$1"
     qlist -IRv $pkg_name
   }
-  function gentoo_pkg_remove {
+  function __gentoo_pkg_remove__ {
     local pkg_name="$1"
     sudo emerge --deselect $pkg_name
     sudo emerge --depclean -vp
 
-    yes_no_prompt "continue with emerge --depclean -v?" 
+    __gentoo_yes_no_prompt__ "continue with emerge --depclean -v?" 
     local rval="$?"
     if [[ "$rval" == "0" ]]; then
       sudo emerge --depclean -v
     fi
   }
 
-  alias pkg-install="gentoo_pkg_install"
-  alias pkg-list="gentoo_pkg_list"
-  alias pkg-remove="gentoo_pkg_remove"
+  alias pkg-install="__gentoo_pkg_install__"
+  alias pkg-list="__gentoo_pkg_list__"
+  alias pkg-remove="__gentoo_pkg_remove__"
   ;;
 arch*)
-  function arch_pkg_last_system_upgrade {
+  function __arch_pkg_last_system_upgrade__ {
     local threshold="$1"
 
     [[ -z "$threshold" ]] && threshold=10
@@ -113,11 +113,24 @@ arch*)
     }"
   }
 
+  function __arch_pkg_search__ {
+    local package_name="$1"
+
+    pacman -Ss $package_name
+  }
+
+  function __arch_pkg_install__ {
+    local package_name="$1"
+
+    sudo pacman -S $package_name
+  }
+
   # TODO: Define these aliases
 
-  alias pkg-install="echo 'not defined'"
+  alias pkg-search="__arch_pkg_search__"
+  alias pkg-install="__arch_pkg_install__"
   alias pkg-list="echo 'not defined'"
   alias pkg-remove="echo 'not defined'"
-  alias pkg-last-system-upgrade="arch_pkg_last_system_upgrade 10"
+  alias pkg-last-system-upgrade="__arch_pkg_last_system_upgrade__ 10"
   ;;
 esac

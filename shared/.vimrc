@@ -35,7 +35,13 @@ set nowrap
 set visualbell
 
 if exists("+relativenumber")
-  set number relativenumber
+  " NOTE: relativenumber slows things down, because Vim has to keep updating the
+  " sidebar everytime you change lines. On slower systems, this is not good.
+  " Also I don't even take advantage of this feature at all so its not worth
+  " it to even have it.
+  " set number relativenumber
+
+  set number
 else
   set number
 endif

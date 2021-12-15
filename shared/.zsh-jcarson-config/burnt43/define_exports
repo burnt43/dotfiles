@@ -1,4 +1,4 @@
-export PATH=$PATH:~/sources/solr-8.2.0/solr/bin:/home/jcarson/.gems/mtt-crm/ruby/2.6.0/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/git_clones/git-filter-repo:~/bin:~/git_clones/personal-scripts
+export PATH=/usr/local/openssh/openssh-8.6p1/bin:$PATH:~/sources/solr-8.2.0/solr/bin:/home/jcarson/.gems/mtt-crm/ruby/2.6.0/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/git_clones/git-filter-repo:~/bin:~/git_clones/personal-scripts
 export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
 
 # golang
