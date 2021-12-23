@@ -238,4 +238,30 @@ alias xymon_ctl="XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/client/bin/xymon
 alias minicom="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 minicom@mtt3"
 
 alias t38router="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss -c 3des-cbc 64.19.145.26"
+
+function __imagemagick_pkgconfig__ {
+  local version="$1"
+  local imagemagick6_dir=/usr/lib/imagemagick6/pkgconfig
+  local imagemagick7_dir=/usr/lib/imagemagick7/pkgconfig
+  local pkgconfig_dir=/usr/lib/pkgconfig
+
+  echo -n "moving existing imagemagick pc files out of $pkgconfig_dir..."
+  sudo find $pkgconfig_dir -maxdepth 1 -type f -name '*Magick*.pc' -exec mv {} /home/jcarson/.tmp \;
+  sudo find $pkgconfig_dir -maxdepth 1 -type f -name '*Wand*.pc' -exec mv {} /home/jcarson/.tmp \;
+  ([[ "$?" != "0" ]] && echo -e "\033[0;31mFAIL\033[0;0m" && return 1) || echo -e "\033[0;32mOK\033[0;0m"
+
+  case "$version" in
+    6)
+      echo -n "moving pc files in $imagemagick6_dir to $pkgconfig_dir..."
+      sudo cp ${imagemagick6_dir}/*.pc $pkgconfig_dir
+      ([[ "$?" != "0" ]] && echo -e "\033[0;31mFAIL\033[0;0m" && return 1) || echo -e "\033[0;32mOK\033[0;0m"
+      ;;
+    7)
+      echo -n "moving pc files in $imagemagick7_dir to $pkgconfig_dir..."
+      sudo cp ${imagemagick7_dir}/*.pc $pkgconfig_dir
+      ([[ "$?" != "0" ]] && echo -e "\033[0;31mFAIL\033[0;0m" && return 1) || echo -e "\033[0;32mOK\033[0;0m"
+      ;;
+  esac
+}
+alias imagemagick_pkfconfig="__imagemagick_pkgconfig__"
 # }}}
