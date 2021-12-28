@@ -241,7 +241,7 @@ alias t38router="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgori
 
 function __imagemagick_pkgconfig__ {
   local version="$1"
-  local imagemagick6_dir=/usr/lib/imagemagick6/pkgconfig
+  local imagemagick6_dir=/usr/local/ImageMagick/6.9.12-34/lib/pkgconfig
   local imagemagick7_dir=/usr/lib/imagemagick7/pkgconfig
   local pkgconfig_dir=/usr/lib/pkgconfig
 
