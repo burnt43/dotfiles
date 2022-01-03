@@ -125,12 +125,22 @@ arch*)
     sudo pacman -S $package_name
   }
 
+  function __arch_pkg_search__ {
+    pacman -Q
+  }
+
+  function __arch_pkg_remove__ {
+    local package_name="$1"
+
+    sudo pacman -Rs $package_name
+  }
+
   # TODO: Define these aliases
 
   alias pkg-search="__arch_pkg_search__"
   alias pkg-install="__arch_pkg_install__"
-  alias pkg-list="echo 'not defined'"
-  alias pkg-remove="echo 'not defined'"
+  alias pkg-list="__arch_pkg_search__"
+  alias pkg-remove="__arch_pkg_remove__"
   alias pkg-last-system-upgrade="__arch_pkg_last_system_upgrade__ 10"
   ;;
 esac

@@ -8,7 +8,7 @@ alias ami_client_test_run="ami_client_dev && bundle exec rake ami_client:test:ru
 
 alias ami_message_capture_run="cd ~/git_clones/ami-message-capture && bundle exec ruby ./ami-message-capture.rb"
 
-alias asterisk_cdr_dev="cd ~/git_clones/asterisk-cdr-burnt43"
+alias asterisk_cdr_dev="cd ~/git_clones/asterisk-cdr"
 alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_syncer.rb"
 alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_finder.rb"
 alias asterisk_cdr_data_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_data_processor.rb"
@@ -22,32 +22,34 @@ alias asterisk_config_sample_run="asterisk_config_dev && bundle exec ruby -I./li
 alias asterisk_database_dev="cd ~/git_clones/asterisk-database"
 alias asterisk_database_sample_run="asterisk_database_dev && bundle exec ruby -I./lib ./sanity_checker.rb"
 
-alias asterisk_queue_ctl_dev="cd /home/jcarson/git_clones/asterisk-queue-ctl-burnt43"
+alias asterisk_queue_ctl_dev="cd /home/jcarson/git_clones/asterisk-queue-ctl"
 alias asterisk_queue_ctl_test_run="asterisk_queue_ctl_dev && ASTERISK_QUEUE_CTL_ENV=test bundle exec rake asterisk_queue_ctl:test:run"
 
 alias auto_dialer_dev="cd ~/git_clones/hosted-burnt43/auto_dialer"
 alias auto_dialer_run="auto_dialer_dev && AUTO_DIALER_ENV=development bundle exec ruby ./auto_dialer_server.rb"
 
-alias call_blaster_dev="cd ~/git_clones/call_blaster-burnt43"
+alias call_blaster_dev="cd ~/git_clones/call_blaster"
 alias call_blaster_run="call_blaster_dev && bundle exec ruby ./call_blaster_server.rb"
 alias call_blaster_test_run="call_blaster_dev && CALL_BLASTER_ENV=test bundle exec rake call_blaster:test:run"
+
+alias call_recording_dev="cd ~/git_clones/call_recorder"
 
 alias cli_builder_dev="cd ~/git_clones/cli-builder"
 alias cli_builder_sample_run="cli_builder_dev && ruby -I/home/jcarson/git_clones/cli-builder/lib ./sanity_check_example.rb"
 alias cli_builder_test_run="cli_builder_dev && bundle exec rake cli_builder:test:run"
 
-alias cti_dev="cd ~/git_clones/cti-burnt43"
+alias cti_dev="cd ~/git_clones/cti"
 alias cti_hpbxgui_run="cti_dev && CTI_ENV=development_hpbxgui ruby -I ./lib/ server.rb"
 alias cti_mtt_crm_run="cti_dev && CTI_ENV=development_mtt_crm ruby -I ./lib/ server.rb"
 
-alias data_monitor_dev="cd /home/jcarson/git_clones/data-monitor-burnt43"
+alias data_monitor_dev="cd /home/jcarson/git_clones/data-monitor"
 alias data_monitor_test_run="data_monitor_dev && DATA_MONITOR_ENV=test THINGSPACE_API_RUBY_ENV=test bundle exec rake data_monitor:test:run"
 alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/client/bin/xymon DATA_MONITOR_ENV=development bundle exec ruby -I ./lib ./data_monitor.rb"
 
 alias engoncall_dev="cd ~/git_clones/engoncall-burnt43"
 alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
 
-alias hop_dev="cd ~/git_clones/operator-panel-burnt43"
+alias hop_dev="cd ~/git_clones/operator-panel"
 alias hop_run="hop_dev && HOP_ENV=development bundle exec ruby ./hop.rb"
 alias hop_run_ruby_3="hop_dev && HOP_ENV=development /usr/local/ruby/ruby-3.0.2/bin/bundle exec /usr/local/ruby/ruby-3.0.2/bin/ruby ./hop.rb"
 
@@ -89,26 +91,29 @@ alias hpbxgui_dev="cd ~/git_clones/hosted-burnt43/hpbxgui"
 alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:run"
 alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=development bundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:db:reset"
 
-alias mtt_crm_dev="cd ~/git_clones/mtt_crm-burnt43/"
+alias influxdb_dev="cd ~/git_clones/influxdb-client"
+alias influxdb_test_run="influxdb_dev && bundle exec rake influxdb_client:test:run"
+
+alias mtt_crm_dev="cd ~/git_clones/mtt_crm"
 alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:run"
 alias mtt_crm_meta_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:meta:run"
 alias mtt_crm_clean_branches="~/gist_clones/git_branch_cleaner/git_branch_cleaner.sh ~/git_clones/mtt_crm-burnt43 mtt"
 
-alias ruby_daemon_monitor_dev="cd ~/git_clones/ruby-daemon-monitor-burnt43"
+alias ruby_daemon_monitor_dev="cd ~/git_clones/ruby-daemon-monitor"
 alias ruby_daemon_monitor_app_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
 alias ruby_daemon_monitor_crm_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_crm ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
 alias ruby_daemon_monitor_release="cd ~/git_clones/ruby-daemon-monitor-monmouthtelecom && git checkout master && git pull && git checkout stable && git pull && git merge --no-ff master && git push && sudo su asterisk -c 'cd /home/jcarson/git_clones/ruby-daemon-monitor-monmouthtelecom && bundle exec cap production deploy'"
 
-alias softphone_dev="cd ~/git_clones/mtt-softphone-burnt43"
+alias softphone_dev="cd ~/git_clones/mtt-softphone"
 alias softphone_run="softphone_dev && npm start"
 
-alias solr_mon_dev="cd ~/git_clones/solr-file-monitor-burnt43"
+alias solr_mon_dev="cd ~/git_clones/solr-file-monitor"
 alias solr_mon_run="solr_mon_dev && SOLR_FILE_MONITOR_ENV=development ruby -I/home/jcarson/git_clones/solr-file-monitor-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./file_monitor_daemon.rb"
 alias solr_mon_test="solr_mon_dev && SOLR_FILE_MONITOR_ENV=test bundle exec rake solr_file_monitor:test:run"
 alias solr_mon_start_daemon="solr_mon_dev && ./safe-solr-file-monitor"
 alias solr_mon_stop_daemon="ps aux | grep 'safe-solr-file-monitor' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid && ps aux | grep 'file_monitor_daemon\.rb' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid"
 
-alias thingspace_dev="cd /home/jcarson/git_clones/thingspace-api-ruby-burnt43"
+alias thingspace_dev="cd /home/jcarson/git_clones/thingspace-api-ruby"
 alias thingspace_test_run="thingspace_dev && THINGSPACE_API_RUBY_ENV=test bundle exec rake thingspace_api_ruby:test:run"
 alias thingspace_sanity_check_run="thingspace_dev && script/console -c 'Thingspace::SanityCheck.run!'"
 # }}}
