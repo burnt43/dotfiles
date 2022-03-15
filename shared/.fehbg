@@ -13,6 +13,6 @@ HOST=$(hostname)
 
 case $HOST in
 *)
-  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/other2' 
+  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota' 
   ;;
 esac

@@ -8,12 +8,16 @@ alias ami_client_test_run="ami_client_dev && bundle exec rake ami_client:test:ru
 
 alias ami_message_capture_run="cd ~/git_clones/ami-message-capture && bundle exec ruby ./ami-message-capture.rb"
 
+alias ami_socket_dev="cd ~/git_clones/ami-socket"
+alias ami_socket_test_run="ami_socket_dev && bundle exec rake ami_socket:test:run"
+alias ami_socket_console="ami_socket_dev && ./script/console"
+
 alias asterisk_cdr_dev="cd ~/git_clones/asterisk-cdr"
-alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_syncer.rb"
-alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_finder.rb"
-alias asterisk_cdr_data_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_data_processor.rb"
-alias asterisk_cdr_cli_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=devprod ASTERISK_CDR_EDITOR=/usr/bin/vim bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_cli.rb"
-alias asterisk_cdr_fraud_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr-burnt43/lib ./asterisk_cdr_fraud.rb"
+alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_syncer.rb"
+alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_finder.rb"
+alias asterisk_cdr_data_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_data_processor.rb"
+alias asterisk_cdr_cli_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=devprod ASTERISK_CDR_EDITOR=/usr/bin/vim bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_cli.rb"
+alias asterisk_cdr_fraud_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_fraud.rb"
 alias asterisk_cdr_test_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=test bundle exec rake asterisk_cdr:test:run"
 
 alias asterisk_config_dev="cd ~/git_clones/asterisk-config"
@@ -48,6 +52,16 @@ alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jca
 
 alias engoncall_dev="cd ~/git_clones/engoncall-burnt43"
 alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
+
+alias eqpt_gui_dev="cd /home/jcarson/git_clones/eqpt-gui"
+# Add to the PATH
+#   1. /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin
+#   2. /usr/local/ruby/ruby-3.1.1/bin
+alias eqpt_gui_set_path="echo \$PATH | grep -q -v '\/3.1.0\/bin:.*\/ruby-3.1.1\/bin:' && export PATH=\"/home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin:/usr/local/ruby/ruby-3.1.1/bin:\$PATH\""
+# Remove from the PATH
+#   1. /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin
+#   2. /usr/local/ruby/ruby-3.1.1/bin
+alias eqpt_gui_unset_path="echo \$PATH | grep -q '\/3.1.0\/bin:.*\/ruby-3.1.1\/bin:' && foo=\$(echo \$PATH | sed 's/^\/home\/jcarson\/.gems\/eqpt-gui\/ruby\/3.1.0\/bin:\/usr\/local\/ruby\/ruby-3.1.1\/bin://g') && export PATH=\$foo"
 
 alias hop_dev="cd ~/git_clones/operator-panel"
 alias hop_run="hop_dev && HOP_ENV=development bundle exec ruby ./hop.rb"
@@ -94,10 +108,16 @@ alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=development bundle exec ra
 alias influxdb_dev="cd ~/git_clones/influxdb-client"
 alias influxdb_test_run="influxdb_dev && bundle exec rake influxdb_client:test:run"
 
+alias lite_orm_dev="cd ~/git_clones/lite-orm"
+alias lite_orm_test_run="lite_orm_dev && bundle exec rake lite_orm:test:run"
+
 alias mtt_crm_dev="cd ~/git_clones/mtt_crm"
 alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:run"
 alias mtt_crm_meta_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:meta:run"
 alias mtt_crm_clean_branches="~/gist_clones/git_branch_cleaner/git_branch_cleaner.sh ~/git_clones/mtt_crm-burnt43 mtt"
+
+alias rec_mon_dev="cd ~/git_clones/rec-mon"
+alias rec_mon_test_run="rec_mon_dev && bundle exec rake rec_mon:test:run"
 
 alias ruby_daemon_monitor_dev="cd ~/git_clones/ruby-daemon-monitor"
 alias ruby_daemon_monitor_app_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
