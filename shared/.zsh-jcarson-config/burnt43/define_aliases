@@ -53,15 +53,16 @@ alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jca
 alias engoncall_dev="cd ~/git_clones/engoncall-burnt43"
 alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
 
-alias eqpt_gui_dev="cd /home/jcarson/git_clones/eqpt-gui"
+alias eqpt_gui_dev="cd /home/jcarson/git_clones/eqpt-gui && eqpt_gui_set_path"
 # Add to the PATH
 #   1. /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin
 #   2. /usr/local/ruby/ruby-3.1.1/bin
-alias eqpt_gui_set_path="echo \$PATH | grep -q -v '\/3.1.0\/bin:.*\/ruby-3.1.1\/bin:' && export PATH=\"/home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin:/usr/local/ruby/ruby-3.1.1/bin:\$PATH\""
+alias eqpt_gui_set_path="export RAILS_ENV=jcarson_dev && export GEM_HOME=/home/jcarson/.gems/eqpt-gui/ruby/3.1.0 && export GEM_PATH="" && echo \$PATH | grep -q -v '\/3.1.0\/bin:.*\/ruby-3.1.1\/bin:' && export PATH=\"/home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin:/usr/local/ruby/ruby-3.1.1/bin:\$PATH\""
 # Remove from the PATH
 #   1. /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin
 #   2. /usr/local/ruby/ruby-3.1.1/bin
-alias eqpt_gui_unset_path="echo \$PATH | grep -q '\/3.1.0\/bin:.*\/ruby-3.1.1\/bin:' && foo=\$(echo \$PATH | sed 's/^\/home\/jcarson\/.gems\/eqpt-gui\/ruby\/3.1.0\/bin:\/usr\/local\/ruby\/ruby-3.1.1\/bin://g') && export PATH=\$foo"
+alias eqpt_gui_unset_path="unset RAILS_ENV && unset GEM_HOME && unset GEM_PATH && echo \$PATH | grep -q '\/3.1.0\/bin:.*\/ruby-3.1.1\/bin:' && foo=\$(echo \$PATH | sed 's/^\/home\/jcarson\/.gems\/eqpt-gui\/ruby\/3.1.0\/bin:\/usr\/local\/ruby\/ruby-3.1.1\/bin://g') && export PATH=\$foo"
+alias eqpt_gui_test_run="RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
 
 alias hop_dev="cd ~/git_clones/operator-panel"
 alias hop_run="hop_dev && HOP_ENV=development bundle exec ruby ./hop.rb"
