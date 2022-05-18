@@ -1,4 +1,36 @@
-export PATH=/home/jcarson/.npm-packages/bin:/usr/local/openssh/openssh-8.6p1/bin:$PATH:~/sources/solr-8.2.0/solr/bin:/home/jcarson/.gems/mtt-crm/ruby/2.6.0/bin:/usr/local/ruby/ruby-2.6.1/bin:/usr/local/mysql/mysql-5.7.21/bin:~/git_clones/git-filter-repo:~/bin:~/git_clones/personal-scripts
+# Clear out the PATH
+export PATH=""
+
+# List of directories to add to the path in ascending order of priority.
+my_paths=(
+/usr/bin/core_perl
+/usr/bin/vendor_perl
+/usr/bin/site_perl
+/usr/lib/jvm/default/bin
+/usr/bin
+/usr/local/bin
+/usr/local/sbin
+/usr/local/openssh/openssh-8.6p1/bin
+/home/jcarson/sources/solr-8.2.0/solr/bin
+/home/jcarson/git_clones/git-filter-repo
+/home/jcarson/.npm-packages/bin
+/home/jcarson/bin
+/home/jcarson/git_clones/work-scripts/mtt/development
+/home/jcarson/git_clones/work-scripts/personal
+/usr/local/mysql/mysql-5.7.21/bin
+)
+
+# Iterate and add to the PATH.
+for p in "${my_paths[@]}"; do
+  [[ ! -e "$p" ]] && continue 
+
+  if [[ -z "$(echo $PATH)" ]]; then
+    export PATH="$p"
+  else
+    export PATH="${p}:$PATH"
+  fi
+done
+
 export CVSROOT=:pserver:anonymous@cvs:/var/lib/cvs
 
 # golang

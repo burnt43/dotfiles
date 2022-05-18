@@ -1,4 +1,7 @@
 # {{{ Development Software Run/Test Helpers
+alias ruby2='source $(rubyv -v 2.6.10)'
+alias ruby3='source $(rubyv -v 3.1.1)'
+
 alias ami_dev="cd ~/git_clones/hosted-burnt43/ami_fw_proxy"
 alias ami_run="ami_dev && RAILS_ENV=development JDEV=1 ruby -I /home/jcarson/git_clones/hosted-burnt43/ami_fw_proxy/ ./secure_multiplexer_proxy.rb"
 
@@ -32,6 +35,9 @@ alias asterisk_queue_ctl_test_run="asterisk_queue_ctl_dev && ASTERISK_QUEUE_CTL_
 alias auto_dialer_dev="cd ~/git_clones/hosted-burnt43/auto_dialer"
 alias auto_dialer_run="auto_dialer_dev && AUTO_DIALER_ENV=development bundle exec ruby ./auto_dialer_server.rb"
 
+alias bootstrap_helper_dev="cd ~/git_clones/bootstrap-helper-rails"
+alias bootstrap_helper_test_run="bootstrap_helper_dev && bundle exec rake bootstrap_helper_rails:test:run"
+
 alias call_blaster_dev="cd ~/git_clones/call_blaster"
 alias call_blaster_run="call_blaster_dev && bundle exec ruby ./call_blaster_server.rb"
 alias call_blaster_test_run="call_blaster_dev && CALL_BLASTER_ENV=test bundle exec rake call_blaster:test:run"
@@ -53,16 +59,8 @@ alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jca
 alias engoncall_dev="cd ~/git_clones/engoncall-burnt43"
 alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
 
-alias eqpt_gui_dev="cd /home/jcarson/git_clones/eqpt-gui && eqpt_gui_set_path"
-# Add to the PATH
-#   1. /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin
-#   2. /usr/local/ruby/ruby-3.1.1/bin
-alias eqpt_gui_set_path="export RAILS_ENV=jcarson_dev && export GEM_HOME=/home/jcarson/.gems/eqpt-gui/ruby/3.1.0 && export GEM_PATH="" && echo \$PATH | grep -q -v '\/3.1.0\/bin:.*\/ruby-3.1.1\/bin:' && export PATH=\"/home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin:/usr/local/ruby/ruby-3.1.1/bin:\$PATH\""
-# Remove from the PATH
-#   1. /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/bin
-#   2. /usr/local/ruby/ruby-3.1.1/bin
-alias eqpt_gui_unset_path="unset RAILS_ENV && unset GEM_HOME && unset GEM_PATH && echo \$PATH | grep -q '\/3.1.0\/bin:.*\/ruby-3.1.1\/bin:' && foo=\$(echo \$PATH | sed 's/^\/home\/jcarson\/.gems\/eqpt-gui\/ruby\/3.1.0\/bin:\/usr\/local\/ruby\/ruby-3.1.1\/bin://g') && export PATH=\$foo"
-alias eqpt_gui_test_run="RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
+alias eqpt_gui_dev="cd /home/jcarson/git_clones/eqpt-gui"
+alias eqpt_gui_test_run="eqpt_gui_dev && RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
 
 alias hop_dev="cd ~/git_clones/operator-panel"
 alias hop_run="hop_dev && HOP_ENV=development bundle exec ruby ./hop.rb"
@@ -231,25 +229,6 @@ function __convert_to_ulaw__ {
 # }}}
 alias convert_to_ulaw="__convert_to_ulaw__"
 
-# {{{ function __compile_mcl__ 
-function __compile_mcl__ {
-  # Find where the possibly upgraded perl libperl.so is.
-  local installed_libperl=$(find /usr/lib/perl5 -type f -name 'libperl.so' | head -1)
-  [[ -z "$installed_libperl" ]] && return 0
-
-  # Where the system thinks libperl.so is.
-  local system_libperl=/usr/lib/libperl.so
-
-  # Link the system libperl to the new libperl
-  sudo rm $system_libperl && sudo ln -s $installed_libperl $system_libperl
-
-  local mcl_source_dir=/home/jcarson/sources/mcl_64bit/mcl-0.53.00
-
-  cd $mcl_source_dir && make distclean && ./configure --disable-python && make && sudo make install
-}
-# }}}
-alias compile_mcl="__compile_mcl__"
-
 # {{{ function __mk_mail_dir__ 
 function __mk_mail_dir__ {
   local dirname="$1"
@@ -290,4 +269,27 @@ function __imagemagick_pkgconfig__ {
   esac
 }
 alias imagemagick_pkfconfig="__imagemagick_pkgconfig__"
+# }}}
+
+# {{{ Recompile Aliases (After pacman -Syu)
+# {{{ function __compile_mcl__ 
+function __compile_mcl__ {
+  # Find where the possibly upgraded perl libperl.so is.
+  local installed_libperl=$(find /usr/lib/perl5 -type f -name 'libperl.so' | head -1)
+  [[ -z "$installed_libperl" ]] && return 0
+
+  # Where the system thinks libperl.so is.
+  local system_libperl=/usr/lib/libperl.so
+
+  # Link the system libperl to the new libperl
+  sudo rm $system_libperl && sudo ln -s $installed_libperl $system_libperl
+
+  local mcl_source_dir=/home/jcarson/sources/mcl_64bit/mcl-0.53.00
+
+  cd $mcl_source_dir && make distclean && ./configure --disable-python && make && sudo make install
+}
+# }}}
+alias compile_mcl="__compile_mcl__"
+
+alias compile_mysql_5="cd ~/sources/mysql-5.7.21 && cmake --install-prefix=/usr/local/mysql/mysql-5.7.21 -DWITH_BOOST=~/sources/boost_1_59_0.tar.gz ./ && make"
 # }}}

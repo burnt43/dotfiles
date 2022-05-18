@@ -9,7 +9,7 @@
 set nocompatible
 filetype off
 
-if $USER ==# 'jcarson'
+if isdirectory(expand("~/.vim/bundle/Vundle.vim")) && $USER ==# 'jcarson'
   set rtp+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
@@ -58,8 +58,9 @@ endif
 set maxmempattern=10000
 " }}}
 " colors {{{
-" colorscheme badwolf
-colorscheme badwolf
+if filereadable(expand("~/.vim/colors/badwolf.vim"))
+  colorscheme badwolf
+end
 syn on
 highlight Search cterm=NONE ctermfg=16 ctermbg=173
 highlight Folded cterm=NONE ctermfg=245 ctermbg=233

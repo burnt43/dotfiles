@@ -18,9 +18,11 @@ config_files=(set_zsh_vars zsh_options zsh_plugins define_personal_variables set
 for config_filename in "${config_files[@]}"; do
   if [[ -e "${local_config_dir}/${config_filename}" ]]; then
     # A local version of this config exists so use it.
+    # echo -e "including \033[0;32m${local_config_dir}/${config_filename}\033[0;0m"
     . ${local_config_dir}/${config_filename}
   else
     # There is no local config, fallback to the default.
+    # echo -e "including \033[0;32m${default_config_dir}/${config_filename}\033[0;0m"
     . ${default_config_dir}/${config_filename}
   fi
 done
