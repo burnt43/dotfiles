@@ -13,7 +13,7 @@ HOST=$(hostname)
 
 case $HOST in
 fakebiz0)
-  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/nature' 
+  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/git_clones/wallpapers/nature' 
   ;;
 *)
   'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/wallpapers/dota' 
