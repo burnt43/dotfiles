@@ -19,10 +19,13 @@ xmodmap ~/.Xmodmap
 
 # start i3 window manager
 case "$(hostname)" in
-  jco2)
-    exec dbus-launch --exit-with-session i3
-    ;;
   burnt43)
     exec i3
+    ;;
+  fakebiz0)
+    exec dbus-launch --exit-with-session i3
+    ;;
+  jco2)
+    exec dbus-launch --exit-with-session i3
     ;;
 esac

@@ -9,7 +9,7 @@ function echo_msg {
 }
 
 # Go through the directory for this host and the shared directory.
-for repo_filename in $(find ./$hostname ./shared -mindepth 1 -type f); do
+for repo_filename in $(find ./$hostname ./shared -mindepth 1 -type f 2>/dev/null); do
   # Convert the repo_filename to the filename where this file resides
   # on this system.
   system_filename=$(echo "$repo_filename" | sed -r "s/^\.\/($hostname|shared)\//$home_dir_for_sed/")
