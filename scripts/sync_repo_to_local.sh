@@ -46,6 +46,7 @@ function check_config_to_binary {
   local filename="$1"
   local lookup="${config_to_binary[$filename]}"
   local binary=""
+  local result=""
 
   if [[ -z "$lookup" ]]; then
     # We could not find a binary simply. We have to go through our map
@@ -79,6 +80,14 @@ function check_config_to_binary {
   else
     # Return the result of 'which' to see if we have the binary.
     which "$binary" 1>/dev/null 2>/dev/null
+    result="$?" 
+
+    if [[ "$result" == "0" ]]; then
+      return 0
+    else
+      echo_warning "skipping '$filename'. binary '$binary' not found on system."
+      return 1
+    fi
   fi
 }
 
