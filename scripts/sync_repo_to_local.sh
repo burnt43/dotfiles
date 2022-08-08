@@ -1,6 +1,7 @@
 #!/bin/bash
 
 declare -A config_to_binary
+config_to_binary[.bashrc]=bash
 config_to_binary[.config/compton.conf]=compton
 config_to_binary[.config/i3/*]=i3
 config_to_binary[.config/i3status/*]=i3status
