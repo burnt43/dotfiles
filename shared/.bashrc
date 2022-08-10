@@ -1,5 +1,19 @@
 # {{{ Shell Prefix
-PS1='[\u@\033[1;32m\h\033[0;0m \033[0;34m\W\033[0;0m]\$ '
+
+function __git_plugin__ {
+  [[ ! -e "./.git" ]] && return
+
+  local branch=$(git branch | grep '^*' | cut -d' ' -f2)
+  local changes_present=$(git status . | egrep "(^Changes|^Untracked)" | wc -l)
+
+  if [[ "$changes_present" == "0" ]]; then
+    echo -n "($branch .)"
+  else
+    echo -n "($branch X)"
+  fi
+}
+
+PS1='[\u@\h \W]$(__git_plugin__)\$ '
 # }}}
 
 # {{{ Distro
@@ -155,6 +169,7 @@ esac
 
 # {{{ Aliases
 case "$(hostname)" in
+  # {{{ Aliases.burnt43
   burnt43)
     # {{{ Development Software Run/Test Helpers
     alias ruby2='source $(rubyv -v 2.6.10)'
@@ -427,6 +442,19 @@ case "$(hostname)" in
       esac
     }
     alias imagemagick_pkfconfig="__imagemagick_pkgconfig__"
+
+    # {{{ function __sync_ssh_config__
+    function __sync_ssh_config__ {
+      local f="/home/jcarson/.ssh/config"
+      local users=(asterisk orderapp)
+
+      for u in "${users[@]}"; do
+        sudo cp $f /home/$u/.ssh/config
+        sudo chown $u:$u /home/$u/.ssh/config
+      done
+    }
+    # }}}
+    alias sync_ssh_config="__sync_ssh_config__"
     # }}}
 
     # {{{ Recompile Aliases (After pacman -Syu)
@@ -452,9 +480,12 @@ case "$(hostname)" in
     alias compile_mysql_5="cd ~/sources/mysql-5.7.21 && cmake --install-prefix=/usr/local/mysql/mysql-5.7.21 -DWITH_BOOST=~/sources/boost_1_59_0.tar.gz ./ && make"
     # }}}
     ;;
+    # }}}
 esac
 
+# {{{ Aliases.Global
 alias grep="grep --color=auto"
+alias ls="ls --color=auto"
 alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
 
 which gem 1>/dev/null 2>/dev/null
@@ -464,6 +495,8 @@ fi
 
 alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
 alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
+# }}}
+
 # }}}
 
 # {{{ Exports
@@ -481,6 +514,11 @@ case "$(hostname)" in
       /usr/local/bin
       /usr/local/sbin
       /usr/local/ruby/ruby-3.1.1/bin
+      /usr/local/mysql/mysql-5.7.21/bin/
+      /home/jcarson/.npm-packages/bin
+      /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/gems/passenger-6.0.12/bin
+      /home/jcarson/git_clones/work-scripts/personal
+      /home/jcarson/git_clones/work-scripts/mtt/development
     )
 
     # Iterate and add to the PATH.
