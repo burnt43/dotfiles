@@ -1,20 +1,58 @@
 # {{{ Shell Prefix
 
-function __git_plugin__ {
+function __shell_last_command__ {
+  if [[ "$?" == "0" ]]; then
+    echo -ne "\033[0;32m■\033[0;0m"
+  else
+    echo -ne "\033[0;31m■\033[0;0m"
+  fi
+}
+
+function __shell_basic_info__ {
+  if [[ "$(pwd)" == "/home/$(whoami)" ]]; then
+    effective_dir="~"
+  else
+    effective_dir="$(basename $(pwd))"
+  fi
+
+  echo -ne "$(whoami)@\033[1;32m$(hostname)\033[0;0m \033[0;34m$effective_dir\033[0;0m"
+}
+
+function __shell_git_plugin__ {
   [[ ! -e "./.git" ]] && return
 
   local branch=$(git branch | grep '^*' | cut -d' ' -f2)
   local changes_present=$(git status . | egrep "(^Changes|^Untracked)" | wc -l)
 
   if [[ "$changes_present" == "0" ]]; then
-    echo -n "($branch .)"
+    echo -ne "(\033[0;36m$branch\033[0;0m)"
   else
-    echo -n "($branch X)"
+    echo -ne "(\033[0;31m$branch\033[0;0m)"
   fi
 }
 
-PS1='[\u@\h \W]$(__git_plugin__)\$ '
+PS1='┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n└% '
 # }}}
+
+# {{{ Shell Input
+
+# remove default 'accept-line' binding
+bind -r "\C-j"
+
+# use vi mode
+set -o vi
+
+# remove default vi-movement-mode binding
+bind -r "\e"
+
+# set ctrl+j to vi-movement-mode
+bind "\C-j":vi-movement-mode
+
+# set ctrl+a to beginning-of-line
+bind "\C-a":beginning-of-line
+# set ctrl+e to end-of-line
+bind "\C-e":end-of-line
+#}}}
 
 # {{{ Distro
 distro_name=$(uname -r | awk -F '-' '{print $2}')
