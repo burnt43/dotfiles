@@ -103,7 +103,7 @@ function cp_to_local {
   mkdir -p $parent_dir
 
   # Copy the file from the repo to local filesystem.
-  # cp $src_file $dst_file
+  cp $src_file $dst_file
 }
 
 # Go through the directory for this host and the shared directory.

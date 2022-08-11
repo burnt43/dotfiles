@@ -360,6 +360,10 @@ augroup filetype_ruby
     \ :set operatorfunc=ruby#ChangeDoubleQuoteToSingleQuote<cr>g@
 augroup END
 " }}}
+augroup filetype_sh
+  autocmd!
+  autocmd FileType sh setlocal foldmethod=marker
+augroup END
 " vim {{{
 augroup filetype_vim
   autocmd!
