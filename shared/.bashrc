@@ -31,7 +31,8 @@ function __shell_git_plugin__ {
   fi
 }
 
-PS1='┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n└% '
+# PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n└% '
+PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n┴% '
 # }}}
 
 # {{{ Shell Input
@@ -52,6 +53,8 @@ bind "\C-j":vi-movement-mode
 bind "\C-a":beginning-of-line
 # set ctrl+e to end-of-line
 bind "\C-e":end-of-line
+
+bind "\C-l":clear-screen
 #}}}
 
 # {{{ Distro
