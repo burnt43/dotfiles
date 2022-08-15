@@ -1,5 +1,13 @@
-# {{{ Shell Prefix
+#  _               _              
+# | |             | |             
+# | |__   __ _ ___| |__  _ __ ___ 
+# | '_ \ / _` / __| '_ \| '__/ __|
+# | |_) | (_| \__ \ | | | | | (__ 
+# |_.__/ \__,_|___/_| |_|_|  \___|
+#
 
+# {{{ Shell Prefix
+# {{{ function __shell_last_command__ 
 function __shell_last_command__ {
   if [[ "$?" == "0" ]]; then
     echo -ne "\033[0;32m■\033[0;0m"
@@ -7,7 +15,8 @@ function __shell_last_command__ {
     echo -ne "\033[0;31m■\033[0;0m"
   fi
 }
-
+# }}}
+# {{{ function __shell_basic_info__ 
 function __shell_basic_info__ {
   if [[ "$(pwd)" == "/home/$(whoami)" ]]; then
     effective_dir="~"
@@ -17,7 +26,8 @@ function __shell_basic_info__ {
 
   echo -ne "$(whoami)@\033[1;32m$(hostname)\033[0;0m \033[0;34m$effective_dir\033[0;0m"
 }
-
+# }}}
+# {{{ function __shell_git_plugin__ 
 function __shell_git_plugin__ {
   [[ ! -e "./.git" ]] && return
 
@@ -30,11 +40,9 @@ function __shell_git_plugin__ {
     echo -ne "(\033[0;31m$branch\033[0;0m)"
   fi
 }
-
-# PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n└% '
+# }}}
 PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n┴% '
 # }}}
-
 # {{{ Shell Input
 
 # remove default 'accept-line' binding
@@ -56,11 +64,11 @@ bind "\C-e":end-of-line
 
 bind "\C-l":clear-screen
 #}}}
-
 # {{{ Distro
 distro_name=$(uname -r | awk -F '-' '{print $2}')
 
 case "$distro_name" in
+# {{{ Distro.Centos
 centos)
   function __centos_pkg_install__ {
     local pkg_name="$1"
@@ -79,6 +87,8 @@ centos)
   alias pkg-list="__centos_pkg_list__"
   alias pkg-remove="__centos_pkg_remove__"
   ;;
+# }}}
+# {{{ Distro.Gentoo
 gentoo)
   function __gentoo_yes_no_prompt__ {
     echo -en "[\033[0;31mINPUT REQUIRED\033[0;0m] - $1 (Y/n): "
@@ -115,6 +125,8 @@ gentoo)
   alias pkg-list="__gentoo_pkg_list__"
   alias pkg-remove="__gentoo_pkg_remove__"
   ;;
+# }}}
+# {{{ Distro.Arch
 arch*)
   function __arch_pkg_last_system_upgrade__ {
     local threshold="$1"
@@ -205,9 +217,9 @@ arch*)
   alias pkg-remove="__arch_pkg_remove__"
   alias pkg-last-system-upgrade="__arch_pkg_last_system_upgrade__ 10"
   ;;
+# }}}
 esac
 # }}}
-
 # {{{ Aliases
 case "$(hostname)" in
   # {{{ Aliases.burnt43
@@ -523,7 +535,6 @@ case "$(hostname)" in
     ;;
     # }}}
 esac
-
 # {{{ Aliases.Global
 alias grep="grep --color=auto"
 alias ls="ls --color=auto"
@@ -537,11 +548,10 @@ fi
 alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
 alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
 # }}}
-
 # }}}
-
 # {{{ Exports
 case "$(hostname)" in
+  # {{{ Exports.burnt43
   burnt43)
     # Clear out the PATH
     export PATH=""
@@ -584,13 +594,38 @@ case "$(hostname)" in
 
     # JRE 10 # export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
     ;;
+  # }}}
 esac
-
+# {{{ Exports.Global
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export XDG_CONFIG_HOME=$HOME/.config
 # }}}
-
+# }}}
 # {{{ Shell Welcome Text
-which neofetch 1>/dev/null 2>/dev/null && neofetch
+# {{{ function __print_md__ 
+function __print_md__ {
+  which mdadm 1>/dev/null 2>/dev/null
+  if [[ "$?" == "0" ]]; then
+    for md_device in $(cat /proc/mdstat | grep '^md' | awk '{print $1}'); do
+      # NOTE: mdadm needs to run as super-user. For each md device, you will
+      #   need to put that in sudoers or sudoers.d to have these commands
+      #   be run without a password.
+      local state="$(sudo /usr/bin/mdadm --detail -v /dev/$md_device | egrep '^\s+State' | awk '{print $3}')"
+
+      if [[ "$state" != "clean" && "$state" != "active" ]]; then
+        echo -e "[\033[0;31mNOTICE\033[0;0m] - $md_device state: $state"
+      fi
+    done
+  fi
+}
+# }}}
+# {{{ function __print_fetch__ 
+function __print_fetch__ {
+  which neofetch 1>/dev/null 2>/dev/null && neofetch
+}
+# }}}
+
+__print_fetch__
+__print_md__
 # }}}
