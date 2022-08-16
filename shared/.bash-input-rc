@@ -1,0 +1,21 @@
+#  _               _           _                   _                   
+# | |             | |         (_)                 | |                  
+# | |__   __ _ ___| |__ ______ _ _ __  _ __  _   _| |_ ______ _ __ ___ 
+# | '_ \ / _` / __| '_ \______| | '_ \| '_ \| | | | __|______| '__/ __|
+# | |_) | (_| \__ \ | | |     | | | | | |_) | |_| | |_       | | | (__ 
+# |_.__/ \__,_|___/_| |_|     |_|_| |_| .__/ \__,_|\__|      |_|  \___|
+#                                     | |                              
+#                                     |_|                             
+# This handles key binds. This is designed for remote servers that may
+# not have all the features of bash because they are old versions.
+# To use this, in your ~/.bashrc file add the following:
+# [[ -e ~/.bash-input-rc ]] && . ~/.bash-input-rc
+
+bind -r "\C-j"
+
+set -o vi
+bind -r "\e"
+bind "\C-j":vi-movement-mode
+bind "\C-a":beginning-of-line
+bind "\C-e":end-of-line
+bind "\C-l":clear-screen

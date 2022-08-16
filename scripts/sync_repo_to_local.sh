@@ -2,13 +2,18 @@
 
 declare -A config_to_binary
 config_to_binary[.bashrc]=bash
+config_to_binary[.bash-input-rc]=bash
+config_to_binary[.bash-prompt-rc]=bash
 config_to_binary[.config/compton.conf]=compton
 config_to_binary[.config/i3/*]=i3
 config_to_binary[.config/i3status/*]=i3status
 config_to_binary[.config/neofetch/*]=neofetch
 config_to_binary[.config/ranger/*]=ranger
+config_to_binary[.fdm.conf]=fdm
 config_to_binary[.fehbg]=feh
+config_to_binary[.inputrc]=bash
 config_to_binary[.irbrc]=irb
+config_to_binary[.muttrc]=neomutt
 config_to_binary[.npmrc]=npm
 config_to_binary[.oh-my-zsh*]=zsh
 config_to_binary[.vim/*]=vim
