@@ -32,7 +32,7 @@ function __shell_git_plugin__ {
   [[ ! -e "./.git" ]] && return
 
   local branch=$(git branch | grep '^*' | cut -d' ' -f2)
-  local changes_present=$(git status . | egrep "(^Changes|^Untracked)" | wc -l)
+  local changes_present=$(git status . | grep -E "(^Changes|^Untracked)" | wc -l)
 
   if [[ "$changes_present" == "0" ]]; then
     echo -ne "(\033[0;36m$branch\033[0;0m)"
@@ -44,6 +44,7 @@ function __shell_git_plugin__ {
 PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n┴% '
 # }}}
 # {{{ Shell Input
+# Use bind -P to list everything that is and isn't bound.
 
 # remove default 'accept-line' binding
 bind -r "\C-j"
@@ -62,7 +63,7 @@ bind "\C-a":beginning-of-line
 # set ctrl+e to end-of-line
 bind "\C-e":end-of-line
 
-bind "\C-l":clear-screen
+bind "\C-l":clear-display
 #}}}
 # {{{ Distro
 distro_name=$(uname -r | awk -F '-' '{print $2}')
@@ -287,6 +288,9 @@ case "$(hostname)" in
 
     alias eqpt_gui_dev="cd /home/jcarson/git_clones/eqpt-gui"
     alias eqpt_gui_test_run="eqpt_gui_dev && RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
+    alias eqpt_gui_reconcile="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:config:missing_equipment_category_permissions_for_users eqpt_gui:config:unconfigured_controller_actions eqpt_gui:config:unconfigured_authorization_aliases"
+    alias eqpt_gui_seed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:seed:seed_development_from_production"
+    alias eqpt_gui_rma_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake rma:sync:insert_and_assign"
 
     alias hop_dev="cd ~/git_clones/operator-panel"
     alias hop_run="hop_dev && HOP_ENV=development bundle exec ruby ./hop.rb"
@@ -395,12 +399,16 @@ case "$(hostname)" in
     # }}}
     alias ensure_mttpbx_virtual_server_exists="__ensure_mttpbx_virtual_server_exists__"
 
-    alias mount_rwolflaw="sudo mkdir -p /mnt/rwolflaw && sudo mount -t cifs //gs5.monmouth.com/rwolflaw /mnt/rwolflaw -o 'username=rwolflaw,password=$(cat ~/.rwolflaw_samba_pass),vers=1.0'"
-    alias umount_rwolflaw="sudo umount /mnt/rwolflaw && sudo rm -R /mnt/rwolflaw"
+    if [[ -f ~/.rwolflaw_samba_pass ]]; then
+      alias mount_rwolflaw="sudo mkdir -p /mnt/rwolflaw && sudo mount -t cifs //gs5.monmouth.com/rwolflaw /mnt/rwolflaw -o 'username=rwolflaw,password=$(cat ~/.rwolflaw_samba_pass),vers=1.0'"
+      alias umount_rwolflaw="sudo umount /mnt/rwolflaw && sudo rm -R /mnt/rwolflaw"
+    fi
 
-    alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
-    alias mount_spectra2="sudo mkdir -p /mnt/spectra2 && sudo mount -t cifs //200.255.100.185/spectra2 /mnt/spectra2 -o 'username=Administrator,password=$(cat ~/.spectra2_pass),vers=1.0'"
-    alias umount_spectra2="sudo umount /mnt/spectra2 && sudo rm -R /mnt/spectra2"
+    if [[ -f ~/.spectra2_pass ]]; then
+      alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
+      alias mount_spectra2="sudo mkdir -p /mnt/spectra2 && sudo mount -t cifs //200.255.100.185/spectra2 /mnt/spectra2 -o 'username=Administrator,password=$(cat ~/.spectra2_pass),vers=1.0'"
+      alias umount_spectra2="sudo umount /mnt/spectra2 && sudo rm -R /mnt/spectra2"
+    fi
 
     # {{{ function __text2speech__ 
     function __text2speech__ {
@@ -566,6 +574,7 @@ case "$(hostname)" in
       /usr/local/sbin
       /usr/local/ruby/ruby-3.1.1/bin
       /usr/local/mysql/mysql-5.7.21/bin/
+      /usr/local/openssh/openssh-8.1p1/bin/
       /home/jcarson/.npm-packages/bin
       /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/gems/passenger-6.0.12/bin
       /home/jcarson/git_clones/work-scripts/personal
@@ -611,7 +620,7 @@ function __print_md__ {
       # NOTE: mdadm needs to run as super-user. For each md device, you will
       #   need to put that in sudoers or sudoers.d to have these commands
       #   be run without a password.
-      local state="$(sudo /usr/bin/mdadm --detail -v /dev/$md_device | egrep '^\s+State' | awk '{print $3}')"
+      local state="$(sudo /usr/bin/mdadm --detail -v /dev/$md_device | grep -E '^\s+State' | awk '{print $3}')"
 
       if [[ "$state" != "clean" && "$state" != "active" ]]; then
         echo -e "[\033[0;31mNOTICE\033[0;0m] - $md_device state: $state"

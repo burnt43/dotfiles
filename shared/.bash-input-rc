@@ -11,11 +11,15 @@
 # To use this, in your ~/.bashrc file add the following:
 # [[ -e ~/.bash-input-rc ]] && . ~/.bash-input-rc
 
-bind -r "\C-j"
+# Don't do any key binding stuff if we don't have a real shell. This
+# is like if why are SSHing from a Ruby script for example.
+if [[ "$TERM" != "dumb" ]]; then
+  bind -r "\C-j"
 
-set -o vi
-bind -r "\e"
-bind "\C-j":vi-movement-mode
-bind "\C-a":beginning-of-line
-bind "\C-e":end-of-line
-bind "\C-l":clear-screen
+  set -o vi
+  bind -r "\e"
+  bind "\C-j":vi-movement-mode
+  bind "\C-a":beginning-of-line
+  bind "\C-e":end-of-line
+  bind "\C-l":clear-screen
+fi
