@@ -542,6 +542,11 @@ case "$(hostname)" in
     # }}}
     ;;
     # }}}
+  # {{{ Aliases.fakebiz0
+  fakebiz0)
+    alias vpn="sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn"
+    ;;
+  # }}}
 esac
 # {{{ Aliases.Global
 alias grep="grep --color=auto"
