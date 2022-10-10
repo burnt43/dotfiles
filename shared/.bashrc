@@ -283,14 +283,18 @@ case "$(hostname)" in
     alias data_monitor_test_run="data_monitor_dev && DATA_MONITOR_ENV=test THINGSPACE_API_RUBY_ENV=test bundle exec rake data_monitor:test:run"
     alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/client/bin/xymon DATA_MONITOR_ENV=development bundle exec ruby -I ./lib ./data_monitor.rb"
 
-    alias engoncall_dev="cd ~/git_clones/engoncall-burnt43"
+    alias engoncall_dev="cd ~/git_clones/engoncall"
     alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
 
-    alias eqpt_gui_dev="cd /home/jcarson/git_clones/eqpt-gui"
-    alias eqpt_gui_test_run="eqpt_gui_dev && RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
+    alias eqpt_gui_billing_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake billing:sync:addresses"
+    alias eqpt_gui_console="eqpt_gui_dev && bundle exec rails console -e jcarson_dev"
+    alias eqpt_gui_dev="ruby3 && cd /home/jcarson/git_clones/eqpt-gui"
     alias eqpt_gui_reconcile="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:config:missing_equipment_category_permissions_for_users eqpt_gui:config:unconfigured_controller_actions eqpt_gui:config:unconfigured_authorization_aliases"
-    alias eqpt_gui_seed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:seed:seed_development_from_production"
     alias eqpt_gui_rma_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake rma:sync:insert_and_assign"
+    alias eqpt_gui_seed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:seed:seed_development_from_production"
+    alias eqpt_gui_test_run="eqpt_gui_dev && RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
+    alias eqpt_gui_test_schema_dump="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:test:dump_aux_db_schemas"
+    alias eqpt_gui_travis_run="eqpt_gui_dev && RAILS_ENV=travis bundle exec rake eqpt_gui:test:run"
 
     alias hop_dev="cd ~/git_clones/operator-panel"
     alias hop_run="hop_dev && HOP_ENV=development bundle exec ruby ./hop.rb"
@@ -330,9 +334,32 @@ case "$(hostname)" in
     alias hop_client_dev="cd ~/git_clones/hop_js_client"
     alias hop_client_run="__hop_client__"
 
-    alias hpbxgui_dev="cd ~/git_clones/hosted-burnt43/hpbxgui"
+    alias hpbxgui_bundle="LD_LIBRARY_PATH=\"/usr/local/ImageMagick/6.9.12-34/lib\" bundle"
+    alias hpbxgui_console="hpbxgui_dev && hpbxgui_bundle exec rails console -e jcarson_dev"
+    alias hpbxgui_dev="ruby2 && cd ~/git_clones/hosted/hpbxgui"
+    alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_hundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:db:reset"
     alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:run"
-    alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=development bundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:db:reset"
+
+    alias httpd_ruby="__httpd_ruby__"
+
+    # {{{ function __httpd_ruby__
+    function __httpd_ruby__ {
+      local httpd_service_file=/usr/lib/systemd/system/httpd.service
+      local ruby_major_version="$1"
+      local systemctl_bin=/usr/bin/systemctl
+      local sed_bin=/usr/bin/sed
+      local httpd_service_name=httpd.service
+
+      case "$ruby_major_version" in
+        2)
+          sudo $systemctl_bin stop $httpd_service_name && sudo $sed_bin -i 's/-DRuby3/-DRuby2/g' $httpd_service_file && sudo sed -i 's/^# Environment/Environment/g' $httpd_service_file && sudo $systemctl_bin daemon-reload && sudo $systemctl_bin start $httpd_service_name
+          ;;
+        3)
+          sudo $systemctl_bin stop $httpd_service_name && sudo $sed_bin -i 's/-DRuby2/-DRuby3/g' $httpd_service_file && sudo sed -i 's/^Environment/# Environment/g' $httpd_service_file && sudo $systemctl_bin daemon-reload && sudo $systemctl_bin start $httpd_service_name
+          ;;
+      esac
+    }
+    # }}}
 
     alias influxdb_dev="cd ~/git_clones/influxdb-client"
     alias influxdb_test_run="influxdb_dev && bundle exec rake influxdb_client:test:run"
@@ -340,10 +367,11 @@ case "$(hostname)" in
     alias lite_orm_dev="cd ~/git_clones/lite-orm"
     alias lite_orm_test_run="lite_orm_dev && bundle exec rake lite_orm:test:run"
 
-    alias mtt_crm_dev="cd ~/git_clones/mtt_crm"
+    alias mtt_crm_dev="ruby2 && cd ~/git_clones/mtt_crm"
     alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:run"
     alias mtt_crm_meta_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:meta:run"
     alias mtt_crm_clean_branches="~/gist_clones/git_branch_cleaner/git_branch_cleaner.sh ~/git_clones/mtt_crm-burnt43 mtt"
+    alias mtt_crm_console="mtt_crm_dev && bundle exec rails console -e jcarson_dev"
 
     alias rec_mon_dev="cd ~/git_clones/rec-mon"
     alias rec_mon_test_run="rec_mon_dev && bundle exec rake rec_mon:test:run"
@@ -379,7 +407,7 @@ case "$(hostname)" in
       local db_name="$1"
 
       if [[ -z "$db_name" ]]; then
-        db_name="hpbx_indie_crm"
+        db_name="hpbxgui_jcarson_dev"
       fi
 
       local virtual_server_table=$(mysql $db_name --batch --skip-column-names -e "SHOW TABLES LIKE '%virtual_servers%';")
@@ -542,11 +570,6 @@ case "$(hostname)" in
     # }}}
     ;;
     # }}}
-  # {{{ Aliases.fakebiz0
-  fakebiz0)
-    alias vpn="sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn"
-    ;;
-  # }}}
 esac
 # {{{ Aliases.Global
 alias grep="grep --color=auto"
