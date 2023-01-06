@@ -15,7 +15,7 @@ set $terminal exec urxvt
 set $feh exec --no-startup-id feh --bg-center --no-fehbg
 set $Locker i3lock && sleep 1
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+# set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
 set $badwolf_plain #f8f6f2
 set $badwolf_snow #ffffff
@@ -51,7 +51,7 @@ set $molokai_purple #AE81FF
 set $mod Mod4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# floating_modifier $mod
 
 # mouse settings
 focus_follows_mouse no
@@ -60,28 +60,28 @@ focus_follows_mouse no
 # modes {{{
 # resize mode
 mode "resize" {
-  bindsym j resize shrink width 10 px or 10 ppt
+  bindsym j resize shrink height 10 px or 10 ppt
   bindsym k resize grow height 10 px or 10 ppt
-  bindsym l resize shrink height 10 px or 10 ppt
-  bindsym semicolon resize grow width 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+  bindsym h resize shrink width 10 px or 10 ppt
 
   # back to normal: Enter or Escape
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
 
-mode "$mode_system" {
-  bindsym l exec --no-startup-id $Locker, mode "default"
-  bindsym e exec --no-startup-id i3-msg exit, mode "default"
-  bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-  bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-  bindsym r exec --no-startup-id systemctl reboot, mode "default"
-  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+# mode "$mode_system" {
+#   bindsym l exec --no-startup-id $Locker, mode "default"
+#   bindsym e exec --no-startup-id i3-msg exit, mode "default"
+#   bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+#   bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+#   bindsym r exec --no-startup-id systemctl reboot, mode "default"
+#   bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
+#   # back to normal: Enter or Escape
+#   bindsym Return mode "default"
+#   bindsym Escape mode "default"
+# }
 # }}}
 
 # keybinds {{{
@@ -117,17 +117,17 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+# bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+# bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -165,6 +165,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec i3-msg exit
 
+# lock
+bindsym $mod+Shift+p exec --no-startup-id $Locker
+
 # scratchpad toggle
 # bindsym $mod+u [title="quick_terminal"] scratchpad show; [title="quick_terminal"] move position center
 
@@ -172,7 +175,7 @@ bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+r mode "resize"
 
 # enter system mode
-bindsym $mod+Pause mode "$mode_system"
+# bindsym $mod+Pause mode "$mode_system"
 # }}}
 
 # window style {{{
@@ -184,16 +187,16 @@ new_window pixel 3
 font pango:Hack-Regular 12
 
 # gaps
-# smart_gaps on
-# gaps outer 4
-# gaps inner 8
-# smart_borders on
+smart_gaps on
+gaps outer 4
+gaps inner 8
+smart_borders on
 
 # window colors
-#                       border                background    text          indicator             child_border
-client.focused          $badwolf_brightgravel $badwolf_coal $badwolf_snow $badwolf_brightgravel $badwolf_brightgravel
-client.focused_inactive $badwolf_darkgravel   $badwolf_coal $badwolf_snow $badwolf_darkgravel   $badwolf_darkgravel
-client.unfocused        $badwolf_darkgravel   $badwolf_coal $badwolf_snow $badwolf_darkgravel   $badwolf_darkgravel
+#                       border                  background    text          indicator               child_border
+client.focused          $badwolf_saltwatertaffy $badwolf_coal $badwolf_snow $badwolf_saltwatertaffy $badwolf_saltwatertaffy
+client.focused_inactive $badwolf_darkroast      $badwolf_coal $badwolf_snow $badwolf_darkroast      $badwolf_darkroast
+client.unfocused        $badwolf_darkroast      $badwolf_coal $badwolf_snow $badwolf_darkroast      $badwolf_darkroast
 # }}}
 
 # specific window/program {{{
@@ -213,7 +216,7 @@ client.unfocused        $badwolf_darkgravel   $badwolf_coal $badwolf_snow $badwo
 # bar {
 #   status_command i3status
 #   modifier mod1
-#   mode hide
+#   mode show
 #   font pango:RobotoMono-Regular 14
 #   workspace_buttons yes
 #   strip_workspace_numbers no

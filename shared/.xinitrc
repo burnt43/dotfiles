@@ -9,7 +9,7 @@
 ~/.fehbg
 
 # set keyboard repeat
-xset r rate 350 50
+xset r rate 350 55
 
 # keyboard maps
 xmodmap ~/.Xmodmap
