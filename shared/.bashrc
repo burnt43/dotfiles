@@ -29,10 +29,17 @@ function __shell_basic_info__ {
 # }}}
 # {{{ function __shell_git_plugin__ 
 function __shell_git_plugin__ {
-  [[ ! -e "./.git" ]] && return
+  local git_status_output=$(git status --short --porcelain 2>/dev/null)
 
-  local branch=$(git branch | grep '^*' | cut -d' ' -f2)
-  local changes_present=$(git status . | grep -E "(^Changes|^Untracked)" | wc -l)
+  [[ "$?" != "0" ]] && return
+
+  if [[ "${git_status_output}" == "" ]]; then
+    local changes_present="0"
+  else
+    local changes_present="1"
+  fi
+
+  local branch=$(git branch --show-current)
 
   if [[ "$changes_present" == "0" ]]; then
     echo -ne "(\033[0;36m$branch\033[0;0m)"
