@@ -29,11 +29,18 @@ function __shell_basic_info__ {
 # }}}
 # {{{ function __shell_git_plugin__ 
 function __shell_git_plugin__ {
-  local git_status_output=$(git status --short --porcelain 2>/dev/null)
+  local my_dir=$(pwd)
+  local in_git_repo=0
 
-  [[ "$?" != "0" ]] && return
+  while [[ "$my_dir" != "/" ]]; do
+    [[ -e "$my_dir/.git" ]] && in_git_repo=1 && break
 
-  if [[ "${git_status_output}" == "" ]]; then
+    my_dir="$(dirname $my_dir)"
+  done
+
+  [[ "$in_git_repo" == "0" ]] && return
+
+  if [[ "$(git status --porcelain | grep -P "^( M|\?)" | wc -l)" == "0" ]]; then
     local changes_present="0"
   else
     local changes_present="1"
@@ -636,6 +643,7 @@ which gem 1>/dev/null 2>/dev/null
 if [[ $? == 0 ]]; then
   alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
 fi
+alias gits="git status --short"
 alias git_first_push="which git 1>/dev/null 2>/dev/null && git push --set-upstream origin \$(git branch | grep '^\*' | awk '{print \$2}')"
 
 alias grep="grep --color=auto"
@@ -724,6 +732,6 @@ function __print_fetch__ {
 }
 # }}}
 
-__print_fetch__
+# __print_fetch__
 __print_md__
 # }}}
