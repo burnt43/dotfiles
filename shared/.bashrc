@@ -235,6 +235,13 @@ arch*)
 # }}}
 esac
 # }}}
+# {{{ Functions
+function __echo_error__ {
+  local msg="$1"
+
+  echo -e "[\033[0;31mERROR\033[0;0m] - $msg"
+}
+# }}}
 # {{{ Aliases
 case "$(hostname)" in
   # {{{ Aliases.burnt43
@@ -628,7 +635,59 @@ case "$(hostname)" in
     # }}}
     alias compile_mcl="__compile_mcl__"
 
-    alias compile_mysql_5="cd ~/sources/mysql-5.7.21 && cmake --install-prefix=/usr/local/mysql/mysql-5.7.21 -DWITH_BOOST=~/sources/boost_1_59_0.tar.gz ./ && make"
+    alias recompile_mysql_5="cd ~/sources/mysql-5.7.21 && cmake --install-prefix=/usr/local/mysql/mysql-5.7.21 -DWITH_BOOST=~/sources/boost_1_59_0.tar.gz ./ && make"
+
+    # {{{ function __recompile_passenger__ 
+    function __recompile_passenger__ {
+      # Find the bundle path, because this is where the gems are installed.
+      # We're looking for the passenger gem for this project.
+      local bundle_path_output=$(bundle config get path | tail -1)
+
+      # See if the output is configured or not. If not configured, then bail
+      # out.
+      echo "$bundle_path_output" | grep -q "^You have not configured"
+      [[ "$?" == "0" ]] && __echo_error__ "no bundle path configured" && return
+
+      # If the path was configured, then extract it out. If nothing found,
+      # then bail out.
+      local bundle_path=$(echo "$bundle_path_output" | cut -d: -f2 | sed 's/^..//' | sed 's/.$//')
+      [[ -z "$bundle_path" ]] && __echo_error__ "no bundle path configured" && return
+
+      # Find the passenger gem path. Sort and get the last result, this should
+      # theoretically be the latest version of passenger. If no result, then
+      # bail out.
+      local passenger_path=$(find $bundle_path/ruby/*/gems -name 'passenger-*' -type d | sort | tail -1)
+      [[ -z "$passenger_path" ]] && __echo_error__ "no passenger path found" && return
+
+      # Look for the apache install script. If it does not exist, then bail out.
+      local passenger_install_script="$passenger_path/bin/passenger-install-apache2-module" 
+      [[ ! -e "$passenger_install_script" ]] && __echo_error__ "could not find install script" && return
+
+      # From the passenger gem path, bubble up to get the gem_home. We need
+      # this so when we run the install script it can find the gems from
+      # our project.
+      local gem_home=$(dirname $(dirname "$passenger_path"))
+
+      # Run the install script, which will compile the passenger module for apache.
+      GEM_HOME="$gem_home" GEM_PATH="" $passenger_path/bin/passenger-install-apache2-module
+    }
+    # }}}
+    alias recompile_passenger="__recompile_passenger__"
+
+    # {{{ function __recompile_ruby__ 
+    function __recompile_ruby__ {
+      local ruby_version="$1"
+
+      [[ -z "$ruby_version" ]] && ruby_version=$(ruby -v | awk '{print $2}' | cut -dp -f1)
+
+      local ruby_source_dir="/home/jcarson/sources/ruby-$ruby_version"
+
+      [[ ! -e $ruby_source_dir ]] && __echo_error__ "could not find ruby_source_dir '$ruby_source_dir'" && return
+
+      cd $ruby_source_dir && make clean && make && sudo make install
+    }
+    # }}}
+    alias recompile_ruby="__recompile_ruby__"
     # }}}
     ;;
     # }}}
