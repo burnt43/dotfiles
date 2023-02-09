@@ -9,21 +9,27 @@
 set nocompatible
 filetype off
 
-if isdirectory(expand("~/.vim/bundle/Vundle.vim")) && $USER ==# 'jcarson'
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-  Plugin 'VundleVim/Vundle.vim'
-  Plugin 'rafaqz/ranger.vim'
-  Plugin 'burnt43/test_plugin.vim'
-  Plugin 'burnt43/git.vim'
-  Plugin 'burnt43/statusline.vim'
-  Plugin 'burnt43/align.vim'
-  Plugin 'burnt43/asterisk.vim'
-  Plugin 'burnt43/haskell.vim'
-  Plugin 'burnt43/comments.vim'
-  Plugin 'burnt43/rails.vim'
-  Plugin 'burnt43/ruby.vim'
-  call vundle#end()
+if $USER ==# 'jcarson'
+  if isdirectory(expand("~/.vim/bundle/Vundle.vim"))
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    Plugin 'VundleVim/Vundle.vim'
+    Plugin 'rafaqz/ranger.vim'
+    Plugin 'burnt43/test_plugin.vim'
+    Plugin 'burnt43/git.vim'
+    Plugin 'burnt43/statusline.vim'
+    Plugin 'burnt43/align.vim'
+    Plugin 'burnt43/asterisk.vim'
+    Plugin 'burnt43/haskell.vim'
+    Plugin 'burnt43/comments.vim'
+    Plugin 'burnt43/rails.vim'
+    Plugin 'burnt43/ruby.vim'
+    call vundle#end()
+  end
+else
+  if isdirectory(expand("/usr/share/jcarson/vim"))
+    set rtp+=/usr/share/jcarson/vim
+  end
 end
 
 filetype plugin on
@@ -58,9 +64,7 @@ endif
 set maxmempattern=10000
 " }}}
 " colors {{{
-if filereadable(expand("~/.vim/colors/badwolf.vim"))
-  colorscheme badwolf
-end
+colorscheme badwolf
 syn on
 highlight Search cterm=NONE ctermfg=16 ctermbg=173
 highlight Folded cterm=NONE ctermfg=245 ctermbg=233

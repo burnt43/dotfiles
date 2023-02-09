@@ -11,11 +11,9 @@ set $workspace8  "8"
 set $workspace9  "9"
 set $workspace10 "10"
 
-set $terminal exec urxvt
+set $terminal exec urxvt -title Foo
 set $feh exec --no-startup-id feh --bg-center --no-fehbg
 set $Locker i3lock && sleep 1
-
-# set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
 set $badwolf_plain #f8f6f2
 set $badwolf_snow #ffffff
@@ -50,9 +48,6 @@ set $molokai_purple #AE81FF
 # use windows key
 set $mod Mod4
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-# floating_modifier $mod
-
 # mouse settings
 focus_follows_mouse no
 # }}}
@@ -69,20 +64,6 @@ mode "resize" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-
-# mode "$mode_system" {
-#   bindsym l exec --no-startup-id $Locker, mode "default"
-#   bindsym e exec --no-startup-id i3-msg exit, mode "default"
-#   bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-#   bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-#   bindsym r exec --no-startup-id systemctl reboot, mode "default"
-#   bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
-
-#   # back to normal: Enter or Escape
-#   bindsym Return mode "default"
-#   bindsym Escape mode "default"
-# }
-# }}}
 
 # keybinds {{{
 # start a terminal
@@ -117,7 +98,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-# bindsym $mod+w layout tabbed
+bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -127,7 +108,7 @@ bindsym $mod+e layout toggle split
 # bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-#bindsym $mod+a focus parent
+bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -168,15 +149,8 @@ bindsym $mod+Shift+e exec i3-msg exit
 # lock
 bindsym $mod+Shift+p exec --no-startup-id $Locker
 
-# scratchpad toggle
-# bindsym $mod+u [title="quick_terminal"] scratchpad show; [title="quick_terminal"] move position center
-
 # enter resize mode
 bindsym $mod+r mode "resize"
-
-# enter system mode
-# bindsym $mod+Pause mode "$mode_system"
-# }}}
 
 # window style {{{
 
@@ -194,42 +168,7 @@ smart_borders on
 
 # window colors
 #                       border                  background    text          indicator               child_border
-client.focused          $badwolf_saltwatertaffy $badwolf_coal $badwolf_snow $badwolf_saltwatertaffy $badwolf_saltwatertaffy
-client.focused_inactive $badwolf_darkroast      $badwolf_coal $badwolf_snow $badwolf_darkroast      $badwolf_darkroast
-client.unfocused        $badwolf_darkroast      $badwolf_coal $badwolf_snow $badwolf_darkroast      $badwolf_darkroast
-# }}}
-
-# specific window/program {{{
-# scratchpad
-# for_window [title="quick_terminal"] floating enable
-# for_window [title="quick_terminal"] resize set 1920 1080
-# for_window [title="quick_terminal"] move scratchpad
-# for_window [title="quick_terminal"] border pixel 5 
-
-# open programs in specific workspaces
-# assign [class="Google-chrome"] $workspace2
-# assign [class="Pidgin"] $workspace3
-# assign [class="libreoffice-writer"] $workspace4
-# }}}
-
-# bar config {{{
-# bar {
-#   status_command i3status
-#   modifier mod1
-#   mode show
-#   font pango:RobotoMono-Regular 14
-#   workspace_buttons yes
-#   strip_workspace_numbers no
-#   colors {
-#     focused_workspace  $badwolf_lime       $badwolf_coal $badwolf_snow
-#     inactive_workspace $badwolf_darkgravel $badwolf_coal $badwolf_gravel
-#   }
-# }
-# }}}
-
-# load programs on startup {{{
-# exec --no-startup-id compton -b
-# exec --no-startup-id urxvt -T "quick_terminal"
-# exec --no-startup-id google-chrome-stable
-# exec --no-startup-id pidgin
+client.focused          $molokai_purple         $badwolf_coal $badwolf_snow $molokai_purple         $molokai_purple
+client.focused_inactive $badwolf_blackestgravel $badwolf_coal $badwolf_snow $badwolf_blackestgravel $badwolf_blackestgravel
+client.unfocused        $badwolf_blackestgravel $badwolf_coal $badwolf_snow $badwolf_blackestgravel $badwolf_blackestgravel
 # }}}

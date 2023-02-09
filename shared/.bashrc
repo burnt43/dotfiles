@@ -247,25 +247,32 @@ case "$(hostname)" in
   # {{{ Aliases.burnt43
   burnt43)
     # {{{ Development Software Run/Test Helpers
+    # {{{ ruby
     alias ruby2='source $(rubyv -v 2.6.10)'
     alias ruby3='source $(rubyv -v 3.1.1)'
-
+    # }}}
+    # {{{ agi_server
     alias agi_server_dev="ruby2 && cd ~/git_clones/agi-server"
     alias agi_server_test_run="agi_server_dev && bundle exec rake agi_server:test:run"
-
+    # }}}
+    # {{{ ami
     alias ami_dev="cd ~/git_clones/hosted-burnt43/ami_fw_proxy"
     alias ami_run="ami_dev && RAILS_ENV=development JDEV=1 ruby -I /home/jcarson/git_clones/hosted-burnt43/ami_fw_proxy/ ./secure_multiplexer_proxy.rb"
-
+    # }}}
+    # {{{ ami_client
     alias ami_client_dev="cd ~/git_clones/asterisk-manager-interface-client"
     alias ami_client_sample_run="ami_client_dev && bundle exec ruby -I~/git_clones/asterisk-manager-interface-client/lib ./sanity_checker.rb"
     alias ami_client_test_run="ami_client_dev && bundle exec rake ami_client:test:run"
-
+    # }}}
+    # {{{ ami_message_capture
     alias ami_message_capture_run="cd ~/git_clones/ami-message-capture && bundle exec ruby ./ami-message-capture.rb"
-
+    # }}}
+    # {{{ ami_socket
     alias ami_socket_dev="cd ~/git_clones/ami-socket"
     alias ami_socket_test_run="ami_socket_dev && bundle exec rake ami_socket:test:run"
     alias ami_socket_console="ami_socket_dev && ./script/console"
-
+    # }}}
+    # {{{ asterisk_cdr
     alias asterisk_cdr_dev="ruby2 && cd ~/git_clones/asterisk-cdr"
     alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_syncer.rb"
     alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_finder.rb"
@@ -273,58 +280,77 @@ case "$(hostname)" in
     alias asterisk_cdr_cli_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=devprod ASTERISK_CDR_EDITOR=/usr/bin/vim bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_cli.rb"
     alias asterisk_cdr_fraud_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_fraud.rb"
     alias asterisk_cdr_test_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=test bundle exec rake asterisk_cdr:test:run"
-
+    # }}}
+    # {{{ asterisk_config
     alias asterisk_config_dev="ruby2 && cd ~/git_clones/asterisk-config"
     alias asterisk_config_sample_run="asterisk_config_dev && bundle exec ruby -I./lib ./sanity_checker.rb"
     alias asterisk_config_test_run="asterisk_config_dev && bundle exec rake asterisk_config:test:run"
-
+    # }}}
+    # {{{ asterisk_database
     alias asterisk_database_dev="cd ~/git_clones/asterisk-database"
     alias asterisk_database_sample_run="asterisk_database_dev && bundle exec ruby -I./lib ./sanity_checker.rb"
-
+    # }}}
+    # {{{ asterisk_queue_ctl
     alias asterisk_queue_ctl_dev="cd /home/jcarson/git_clones/asterisk-queue-ctl"
     alias asterisk_queue_ctl_test_run="asterisk_queue_ctl_dev && ASTERISK_QUEUE_CTL_ENV=test bundle exec rake asterisk_queue_ctl:test:run"
-
+    # }}}
+    # {{{ auto_dialer
     alias auto_dialer_dev="cd ~/git_clones/hosted-burnt43/auto_dialer"
     alias auto_dialer_run="auto_dialer_dev && AUTO_DIALER_ENV=development bundle exec ruby ./auto_dialer_server.rb"
-
+    # }}}
+    # {{{ bootstrap_helper
     alias bootstrap_helper_dev="cd ~/git_clones/bootstrap-helper-rails"
     alias bootstrap_helper_test_run="bootstrap_helper_dev && bundle exec rake bootstrap_helper_rails:test:run"
-
+    # }}}
+    # {{{ call_blaster
     alias call_blaster_dev="cd ~/git_clones/call_blaster"
     alias call_blaster_run="call_blaster_dev && bundle exec ruby ./call_blaster_server.rb"
     alias call_blaster_test_run="call_blaster_dev && CALL_BLASTER_ENV=test bundle exec rake call_blaster:test:run"
-
+    # }}}
+    # {{{ call_recording
     alias call_recording_dev="cd ~/git_clones/call_recorder"
-
+    # }}}
+    # {{{ cli_builder
     alias cli_builder_dev="cd ~/git_clones/cli-builder"
     alias cli_builder_sample_run="cli_builder_dev && ruby -I/home/jcarson/git_clones/cli-builder/lib ./sanity_check_example.rb"
     alias cli_builder_test_run="cli_builder_dev && bundle exec rake cli_builder:test:run"
-
+    # }}}
+    # {{{ cti
     alias cti_dev="cd ~/git_clones/cti"
     alias cti_hpbxgui_run="cti_dev && CTI_ENV=development_hpbxgui ruby -I ./lib/ server.rb"
     alias cti_mtt_crm_run="cti_dev && CTI_ENV=development_mtt_crm ruby -I ./lib/ server.rb"
-
+    # }}}
+    # {{{ data_monitor
     alias data_monitor_dev="cd /home/jcarson/git_clones/data-monitor"
     alias data_monitor_test_run="data_monitor_dev && DATA_MONITOR_ENV=test THINGSPACE_API_RUBY_ENV=test bundle exec rake data_monitor:test:run"
     alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/bin/xymon DATA_MONITOR_ENV=development bundle exec ruby -I ./lib ./data_monitor.rb"
-
+    # }}}
+    # {{{ engoncall
     alias engoncall_dev="ruby2 && cd ~/git_clones/engoncall"
     alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
-
+    # }}}
+    # {{{ eqpt_gui
     alias eqpt_gui_billing_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake billing:sync:addresses"
-    alias eqpt_gui_console="eqpt_gui_dev && bundle exec rails console -e jcarson_dev"
+    alias eqpt_gui_console="eqpt_gui_dev && ctt 'EqptGui Rails Console' && bundle exec rails console -e jcarson_dev"
+    alias eqpt_gui_delayed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bin/delayed_job run"
     alias eqpt_gui_dev="ruby3 && cd /home/jcarson/git_clones/eqpt-gui"
+    alias eqpt_gui_db="eqpt_gui_dev && ctt 'EqptGui DB' && mysql eqpt_gui_jcarson_dev"
+    alias eqpt_gui_log="eqpt_gui_dev && ctt 'EqptGui Rails Log' && tail -f ./log/jcarson_dev.log"
     alias eqpt_gui_reconcile="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:config:missing_equipment_category_permissions_for_users eqpt_gui:config:unconfigured_controller_actions eqpt_gui:config:unconfigured_authorization_aliases"
+    alias eqpt_gui_restart="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake restart"
     alias eqpt_gui_rma_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake rma:sync:insert_and_assign"
     alias eqpt_gui_seed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:seed:seed_development_from_production"
     alias eqpt_gui_test_run="eqpt_gui_dev && RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
     alias eqpt_gui_test_schema_dump="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:test:dump_aux_db_schemas"
     alias eqpt_gui_travis_run="eqpt_gui_dev && RAILS_ENV=travis bundle exec rake eqpt_gui:test:run"
-
+    alias eqpt_gui_view_delayed="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev --batch --skip-column-names -e \"SELECT handler FROM delayed_jobs;\" | /home/jcarson/git_clones/work-scripts/mtt/development/format_delayed_job.rb"
+    # }}}
+    # {{{ hop
     alias hop_dev="ruby2 && cd ~/git_clones/operator-panel"
     alias hop_run="hop_dev && HOP_ENV=jcarson_dev bundle exec ruby ./hop.rb"
     alias hop_run_ruby_3="hop_dev && HOP_ENV=development /usr/local/ruby/ruby-3.0.2/bin/bundle exec /usr/local/ruby/ruby-3.0.2/bin/ruby ./hop.rb"
-
+    # }}}
+    # {{{ hop_client
     # {{{ function __hop_client__ 
     function __hop_client__ {
       local username="$1"
@@ -358,16 +384,16 @@ case "$(hostname)" in
     # }}}
     alias hop_client_dev="cd ~/git_clones/hop_js_client"
     alias hop_client_run="__hop_client__"
-
+    # }}}
+    # {{{ hpbxgui
     alias hpbxgui_bundle="LD_LIBRARY_PATH=\"/usr/local/ImageMagick/6.9.12-34/lib\" bundle"
     alias hpbxgui_console="hpbxgui_dev && hpbxgui_bundle exec rails console -e jcarson_dev"
     alias hpbxgui_dev="ruby2 && cd ~/git_clones/hosted/hpbxgui"
     alias hpbxgui_runner="hpbxgui_dev && hpbxgui_bundle exec rails runner -e jcarson_dev"
     alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_hundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:db:reset"
     alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:run"
-
-    alias httpd_ruby="__httpd_ruby__"
-
+    # }}}
+    # {{{ httpd
     # {{{ function __httpd_ruby__
     function __httpd_ruby__ {
       local httpd_service_file=/usr/lib/systemd/system/httpd.service
@@ -386,58 +412,72 @@ case "$(hostname)" in
       esac
     }
     # }}}
-
+    alias httpd_ruby="__httpd_ruby__"
+    # }}}
+    # {{{ influxdb
     alias influxdb_dev="cd ~/git_clones/influxdb-client"
     alias influxdb_test_run="influxdb_dev && bundle exec rake influxdb_client:test:run"
-
+    # }}}
+    # {{{ lite_orm
     alias lite_orm_dev="cd ~/git_clones/lite-orm"
     alias lite_orm_test_run="lite_orm_dev && bundle exec rake lite_orm:test:run"
-
+    # }}}
+    # {{{ msteams
     alias msteams_mon_dev="ruby2 && cd ~/git_clones/msteams-mon"
     alias msteams_mon_run="msteams_mon_dev && ./script/msteams-mon"
-
+    # }}}
+    # {{{ mtt_crm
     alias mtt_crm_clean_branches="~/gist_clones/git_branch_cleaner/git_branch_cleaner.sh ~/git_clones/mtt_crm-burnt43 mtt"
     alias mtt_crm_console="mtt_crm_dev && MTT_CRM_AUTO_LOAD_TENANT_ID=270 bundle exec rails console -e jcarson_dev"
     alias mtt_crm_dev="ruby2 && cd ~/git_clones/mtt_crm"
     alias mtt_crm_meta_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:meta:run"
     alias mtt_crm_runner="mtt_crm_dev && MTT_CRM_AUTO_LOAD_TENANT_ID=270 bundle exec rails runner -e jcarson_dev"
     alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:run"
-
+    # }}}
+    # {{{ rec_mon
     alias rec_mon_dev="cd ~/git_clones/rec-mon"
     alias rec_mon_test_run="rec_mon_dev && bundle exec rake rec_mon:test:run"
-
+    # }}}
+    # {{{ rma
     alias rma_dev="ruby2 && cd ~/git_clones/rma"
     alias rma_bundle="GEM_HOME=/home/jcarson/.gems/rma/ruby/2.6.0 GEM_PATH="" /home/jcarson/.gems/rma/ruby/2.6.0/bin/bundle"
     alias rma_git_ignore="rma_dev && git update-index --assume-unchanged Gemfile Gemfile.lock"
-
+    # }}}
+    # {{{ ruby_daemon_monitor
     alias ruby_daemon_monitor_dev="cd ~/git_clones/ruby-daemon-monitor"
     alias ruby_daemon_monitor_app_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
     alias ruby_daemon_monitor_crm_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_crm ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
     alias ruby_daemon_monitor_release="cd ~/git_clones/ruby-daemon-monitor-monmouthtelecom && git checkout master && git pull && git checkout stable && git pull && git merge --no-ff master && git push && sudo su asterisk -c 'cd /home/jcarson/git_clones/ruby-daemon-monitor-monmouthtelecom && bundle exec cap production deploy'"
-
+    # }}}
+    # {{{ sip_utils
     alias sip_utils_dev="ruby2 && cd ~/git_clones/sip-utils"
     alias sip_utils_test_run="sip_utils_dev && bundle exec rake sip_utils:test:run"
-
+    # }}}
+    # {{{ softphone
     alias softphone_dev="cd ~/git_clones/mtt-softphone"
     alias softphone_run="softphone_dev && npm start"
-
+    # }}}
+    # {{{ solr_mon
     alias solr_mon_dev="cd ~/git_clones/solr-file-monitor"
     alias solr_mon_run="solr_mon_dev && SOLR_FILE_MONITOR_ENV=development ruby -I/home/jcarson/git_clones/solr-file-monitor-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./file_monitor_daemon.rb"
     alias solr_mon_test="solr_mon_dev && SOLR_FILE_MONITOR_ENV=test bundle exec rake solr_file_monitor:test:run"
     alias solr_mon_start_daemon="solr_mon_dev && ./safe-solr-file-monitor"
     alias solr_mon_stop_daemon="ps aux | grep 'safe-solr-file-monitor' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid && ps aux | grep 'file_monitor_daemon\.rb' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid"
-
+    # }}}
+    # {{{ stir-shaken-server
     alias sss_dev="ruby2 && cd ~/git_clones/stir-shaken-server"
     alias sss_run="sss_dev && SSS_ENV=jcarson_dev bundle exec ruby -I./lib ./stir_shaken_server.rb"
     alias sss_test_run="sss_dev && SSS_ENV=test bundle exec rake sss:test:run"
-
+    # }}}
+    # {{{ thingspace
     alias thingspace_dev="cd /home/jcarson/git_clones/thingspace-api-ruby"
     alias thingspace_test_run="thingspace_dev && THINGSPACE_API_RUBY_ENV=test bundle exec rake thingspace_api_ruby:test:run"
     alias thingspace_sanity_check_run="thingspace_dev && script/console -c 'Thingspace::SanityCheck.run!'"
-
+    # }}}
+    # {{{ xymon_reporter
     alias xymon_reporter_dev="ruby2 && cd ~/git_clones/xymon-reporter"
     # }}}
-
+    # }}}
     # {{{ Useful Helpers
     # {{{ function __ensure_mttpbx_virtual_server_exists__ 
     function __ensure_mttpbx_virtual_server_exists__ {
@@ -614,7 +654,6 @@ case "$(hostname)" in
     }
     alias listen_to_latest_dev_recording="__listen_to_latest_dev_recording__"
     # }}}
-
     # {{{ Recompile Aliases (After pacman -Syu)
     # {{{ function __compile_mcl__ 
     function __compile_mcl__ {
@@ -704,12 +743,25 @@ if [[ $? == 0 ]]; then
 fi
 alias gits="git status --short"
 alias git_first_push="which git 1>/dev/null 2>/dev/null && git push --set-upstream origin \$(git branch | grep '^\*' | awk '{print \$2}')"
+alias git_sync_master="git checkout master && git fetch mtt && git merge --no-ff mtt/master && git push"
 
 alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
 alias systemd_top="top -p  \$(ps aux | grep 'systemd' | grep -v "grep" | awk '{print \$2}' | paste -sd,)"
+alias sbrc="source ~/.bashrc"
 
+function __genpass__ {
+  local len="$1"
+  cat /dev/urandom | tr -d -c 'A-Za-z0-9%*&' | fold -w $len | head -1
+}
+alias genpass="__genpass__"
+
+function __change_terminal_title__ {
+  local name="$1"
+  xdotool search --name jcarson set_window --name "$name"
+}
+alias ctt="__change_terminal_title__"
 
 # }}}
 # }}}
@@ -790,7 +842,5 @@ function __print_fetch__ {
   which neofetch 1>/dev/null 2>/dev/null && neofetch
 }
 # }}}
-
-# __print_fetch__
 __print_md__
 # }}}
