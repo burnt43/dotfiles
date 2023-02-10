@@ -330,12 +330,14 @@ case "$(hostname)" in
     alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
     # }}}
     # {{{ eqpt_gui
+    alias eqpt_gui_assets="eqpt_gui_dev && RAILS_ENV=jcarson_dev ./bin/dev"
     alias eqpt_gui_billing_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake billing:sync:addresses"
-    alias eqpt_gui_console="eqpt_gui_dev && ctt 'EqptGui Rails Console' && bundle exec rails console -e jcarson_dev"
+    alias eqpt_gui_console="eqpt_gui_dev && bundle exec rails console -e jcarson_dev"
     alias eqpt_gui_delayed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bin/delayed_job run"
     alias eqpt_gui_dev="ruby3 && cd /home/jcarson/git_clones/eqpt-gui"
-    alias eqpt_gui_db="eqpt_gui_dev && ctt 'EqptGui DB' && mysql eqpt_gui_jcarson_dev"
-    alias eqpt_gui_log="eqpt_gui_dev && ctt 'EqptGui Rails Log' && tail -f ./log/jcarson_dev.log"
+    alias eqpt_gui_db="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev"
+    alias eqpt_gui_log="eqpt_gui_dev && tail -f ./log/jcarson_dev.log"
+    alias eqpt_gui_log_req="eqpt_gui_dev && tail -f log/jcarson_dev.log | grep -B 1 -A 1 'Processing by'"
     alias eqpt_gui_reconcile="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:config:missing_equipment_category_permissions_for_users eqpt_gui:config:unconfigured_controller_actions eqpt_gui:config:unconfigured_authorization_aliases"
     alias eqpt_gui_restart="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake restart"
     alias eqpt_gui_rma_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake rma:sync:insert_and_assign"

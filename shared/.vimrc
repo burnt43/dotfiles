@@ -104,14 +104,68 @@ function! s:Surround(type)
 
   let @@ = saved_unamed_register
 endfunction
+
+" this.hasFoobarTarget
+" this.foobarTarget
+" this.foobarValue
+" foobarValueChanged()
+" this.hasFoobarTargets
+function! s:StimulusFind()
+  " yank the word we're on.
+  execute "normal! yiw"
+
+  " store that word in a variable.
+  let loc_string = @@
+
+  " try and remove leading has, if it exists.
+  if loc_string[0:2] ==#  'has'
+    let loc_string = loc_string[3:-1]
+  endif
+
+  " try and remove the trailing Target, if it exists.
+  if loc_string[-6:-1] ==# 'Target'
+    let loc_string = loc_string[0:-7]
+  endif
+
+  if loc_string[-7:-1] ==# 'Targets'
+    let loc_string = loc_string[0:-8]
+  endif
+
+  if loc_string[-5:-1] ==# 'Value'
+    let loc_string = loc_string[0:-6]
+  endif
+
+  if loc_string[-12:-1] ==# 'ValueChanged'
+    let loc_string = loc_string[0:-13]
+  endif
+
+  let first_char     = loc_string[0]
+  let rest_of_string = loc_string[1:-1]
+  let lower_case     = tolower(first_char)
+  let upper_case     = toupper(first_char)
+
+  let search_string = '\v' . '<(has)?' . '(' . lower_case . '|' . upper_case . ')' . rest_of_string . '((Target|Targets|Value|ValueChanged))?>'
+
+  execute 'normal! /' . search_string . "\<cr>"
+  let @/ = search_string
+endfunction
+
 " }}}
 " global key mappings {{{
 " set leader
 let mapleader="\\"
 
+" NOTE: This maybe should go in the javascript section, because this is
+"       only valid then.
+" (s)timulus (f)ind
+nnoremap <leader>sf :call <SID>StimulusFind()<cr>
+
 " .vimrc
 nnoremap <leader>ev :tabe $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" .bashrc
+nnoremap <leader>eb :tabe /home/jcarson/.bashrc<cr>
 
 " vundle
 nnoremap <leader>pu :PluginUpdate<cr>:qall<cr>
@@ -285,6 +339,7 @@ augroup END
 " javascript {{{
 augroup filetype_javascript
   autocmd!
+  autocmd FileType javascript setlocal foldmethod=marker
   autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
 augroup END
 " }}}
@@ -364,10 +419,18 @@ augroup filetype_ruby
     \ :set operatorfunc=ruby#ChangeDoubleQuoteToSingleQuote<cr>g@
 augroup END
 " }}}
+" {{{ scss
+augroup filetype_scss
+  autocmd!
+  autocmd FileType scss setlocal foldmethod=marker
+augroup END
+" }}}
+" {{{ sh
 augroup filetype_sh
   autocmd!
   autocmd FileType sh setlocal foldmethod=marker
 augroup END
+" }}}
 " vim {{{
 augroup filetype_vim
   autocmd!
