@@ -40,7 +40,7 @@ function __shell_git_plugin__ {
 
   [[ "$in_git_repo" == "0" ]] && return
 
-  if [[ "$(git status --porcelain | grep -P "^( M|\?)" | wc -l)" == "0" ]]; then
+  if [[ "$(git status --porcelain | grep -P "^( M|\?)" | wc -l | sed -E 's/^[[:space:]]+//g')" == "0" ]]; then
     local changes_present="0"
   else
     local changes_present="1"
@@ -236,11 +236,75 @@ arch*)
 esac
 # }}}
 # {{{ Functions
+# {{{ __echo_error__
 function __echo_error__ {
   local msg="$1"
 
   echo -e "[\033[0;31mERROR\033[0;0m] - $msg"
 }
+# }}}
+# {{{ __echo_proc_step__
+function __echo_proc_step__ {
+  local msg="$1"
+
+  echo -n "$msg..."
+}
+# }}}
+# {{{ __echo_fail__
+function __echo_fail__ {
+  echo -e "\033[0;31mFAIL\033[0;0m"
+}
+# }}}
+# {{{ __echo_ok__
+function __echo_ok__ {
+  echo -e "\033[0;32mOK\033[0;0m"
+}
+# }}}
+# {{{ __cap_deploy__
+function __cap_deploy__ {
+  local release_user="$1"
+  shift
+  local release_dir="$1"
+  shift
+  local my_env="$1"
+  shift
+
+  [[ $(sudo su asterisk -c "cd $release_dir && git branch --list stable" | wc -l) == 1 ]] && has_stable_branch=1
+
+  # get master up to date.
+  __echo_proc_step__ "ensuring master is up to date"
+  sudo su $release_user -c "cd $release_dir && git checkout master --quiet && git pull --quiet"
+  ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+  if [[ "$has_stable_branch" == "1" ]]; then
+    # get stable up to date.
+    __echo_proc_step__ "ensuring stable is up to date"
+    sudo su $release_user -c "cd $release_dir && git checkout stable --quiet && git pull --quiet"
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+    # merge master into stable.
+    merge_result=$(sudo su $release_user -c "cd $release_dir && git merge --no-ff master")
+
+    if [[ "$merge_result" == "Already up to date." ]]; then
+      # already up to date. nothing to do.
+      :
+    else
+      # commit the merge and push.
+      __echo_proc_step__ "merge master into stable"
+      sudo su $release_user -c "cd $release_dir && git commit -m 'merge master into stable' && git push --quiet"
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+    fi
+  fi
+
+  # make sure we have the latest gems or else running bundle exec ... will complain.
+  __echo_proc_step__ "install gems"
+  sudo su $release_user -c "cd $release_dir && bundle install --quiet 2>/dev/null"
+  ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+  # do the deploy!
+  sudo su $release_user -c "cd $release_dir && bundle exec cap $my_env deploy $@"
+}
+# }}}
 # }}}
 # {{{ Aliases
 case "$(hostname)" in
@@ -273,6 +337,7 @@ case "$(hostname)" in
     alias ami_socket_console="ami_socket_dev && ./script/console"
     # }}}
     # {{{ asterisk_cdr
+    alias asterisk_cdr_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/asterisk-cdr"
     alias asterisk_cdr_dev="ruby2 && cd ~/git_clones/asterisk-cdr"
     alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_syncer.rb"
     alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_finder.rb"
@@ -307,8 +372,9 @@ case "$(hostname)" in
     alias call_blaster_run="call_blaster_dev && bundle exec ruby ./call_blaster_server.rb"
     alias call_blaster_test_run="call_blaster_dev && CALL_BLASTER_ENV=test bundle exec rake call_blaster:test:run"
     # }}}
-    # {{{ call_recording
-    alias call_recording_dev="cd ~/git_clones/call_recorder"
+    # {{{ call_recorder
+    alias call_recorder_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/call_recorder"
+    alias call_recorder_dev="cd ~/git_clones/call_recorder"
     # }}}
     # {{{ cli_builder
     alias cli_builder_dev="cd ~/git_clones/cli-builder"
@@ -326,6 +392,7 @@ case "$(hostname)" in
     alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/bin/xymon DATA_MONITOR_ENV=development bundle exec ruby -I ./lib ./data_monitor.rb"
     # }}}
     # {{{ engoncall
+    alias engoncall_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/engoncall"
     alias engoncall_dev="ruby2 && cd ~/git_clones/engoncall"
     alias engoncall_test_run="engoncall_dev && ENGONCALL_ENV=test bundle exec rake engoncall:test:run"
     # }}}
@@ -333,10 +400,13 @@ case "$(hostname)" in
     alias eqpt_gui_assets="eqpt_gui_dev && RAILS_ENV=jcarson_dev ./bin/dev"
     alias eqpt_gui_billing_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake billing:sync:addresses"
     alias eqpt_gui_console="eqpt_gui_dev && bundle exec rails console -e jcarson_dev"
+    alias eqpt_gui_deploy="ruby3 && __cap_deploy__ orderapp /home/orderapp/git_clones/eqpt-gui"
     alias eqpt_gui_delayed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bin/delayed_job run"
+    alias eqpt_gui_delayed_view="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev --batch --skip-column-names -e \"SELECT handler FROM delayed_jobs;\" | /home/jcarson/git_clones/work-scripts/mtt/development/format_delayed_job.rb"
     alias eqpt_gui_dev="ruby3 && cd /home/jcarson/git_clones/eqpt-gui"
     alias eqpt_gui_db="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev"
     alias eqpt_gui_log="eqpt_gui_dev && tail -f ./log/jcarson_dev.log"
+    alias eqpt_gui_log_jcarson="eqpt_gui_dev && tail -f log/jcarson_dev.log | grep 'JCARSON'"
     alias eqpt_gui_log_req="eqpt_gui_dev && tail -f log/jcarson_dev.log | grep -B 1 -A 1 'Processing by'"
     alias eqpt_gui_reconcile="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:config:missing_equipment_category_permissions_for_users eqpt_gui:config:unconfigured_controller_actions eqpt_gui:config:unconfigured_authorization_aliases"
     alias eqpt_gui_restart="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake restart"
@@ -345,9 +415,9 @@ case "$(hostname)" in
     alias eqpt_gui_test_run="eqpt_gui_dev && RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
     alias eqpt_gui_test_schema_dump="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:test:dump_aux_db_schemas"
     alias eqpt_gui_travis_run="eqpt_gui_dev && RAILS_ENV=travis bundle exec rake eqpt_gui:test:run"
-    alias eqpt_gui_view_delayed="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev --batch --skip-column-names -e \"SELECT handler FROM delayed_jobs;\" | /home/jcarson/git_clones/work-scripts/mtt/development/format_delayed_job.rb"
     # }}}
     # {{{ hop
+    alias hop_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/operator-panel"
     alias hop_dev="ruby2 && cd ~/git_clones/operator-panel"
     alias hop_run="hop_dev && HOP_ENV=jcarson_dev bundle exec ruby ./hop.rb"
     alias hop_run_ruby_3="hop_dev && HOP_ENV=development /usr/local/ruby/ruby-3.0.2/bin/bundle exec /usr/local/ruby/ruby-3.0.2/bin/ruby ./hop.rb"
@@ -388,6 +458,7 @@ case "$(hostname)" in
     alias hop_client_run="__hop_client__"
     # }}}
     # {{{ hpbxgui
+    alias hpbxgui_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/hosted/hpbxgui"
     alias hpbxgui_bundle="LD_LIBRARY_PATH=\"/usr/local/ImageMagick/6.9.12-34/lib\" bundle"
     alias hpbxgui_console="hpbxgui_dev && hpbxgui_bundle exec rails console -e jcarson_dev"
     alias hpbxgui_dev="ruby2 && cd ~/git_clones/hosted/hpbxgui"
@@ -424,7 +495,8 @@ case "$(hostname)" in
     alias lite_orm_dev="cd ~/git_clones/lite-orm"
     alias lite_orm_test_run="lite_orm_dev && bundle exec rake lite_orm:test:run"
     # }}}
-    # {{{ msteams
+    # {{{ msteams_mon
+    alias msteams_mon_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/msteams-mon"
     alias msteams_mon_dev="ruby2 && cd ~/git_clones/msteams-mon"
     alias msteams_mon_run="msteams_mon_dev && ./script/msteams-mon"
     # }}}
@@ -453,6 +525,7 @@ case "$(hostname)" in
     # }}}
     # {{{ sip_utils
     alias sip_utils_dev="ruby2 && cd ~/git_clones/sip-utils"
+    alias sip_utils_clearip_test="sip_utils_dev && bundle exec rake sip_utils:clearip:test"
     alias sip_utils_test_run="sip_utils_dev && bundle exec rake sip_utils:test:run"
     # }}}
     # {{{ softphone
@@ -467,6 +540,7 @@ case "$(hostname)" in
     alias solr_mon_stop_daemon="ps aux | grep 'safe-solr-file-monitor' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid && ps aux | grep 'file_monitor_daemon\.rb' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid"
     # }}}
     # {{{ stir-shaken-server
+    alias sss_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/stir-shaken-server"
     alias sss_dev="ruby2 && cd ~/git_clones/stir-shaken-server"
     alias sss_run="sss_dev && SSS_ENV=jcarson_dev bundle exec ruby -I./lib ./stir_shaken_server.rb"
     alias sss_test_run="sss_dev && SSS_ENV=test bundle exec rake sss:test:run"
@@ -477,6 +551,7 @@ case "$(hostname)" in
     alias thingspace_sanity_check_run="thingspace_dev && script/console -c 'Thingspace::SanityCheck.run!'"
     # }}}
     # {{{ xymon_reporter
+    alias xymon_reporter_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/xymon-reporter"
     alias xymon_reporter_dev="ruby2 && cd ~/git_clones/xymon-reporter"
     # }}}
     # }}}
