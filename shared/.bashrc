@@ -876,6 +876,8 @@ function __git_sync_master__ {
       __echo_proc_step__ "pushing"
       git push --quiet
       ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+    else
+      __echo_info__ "$local_target_branch already up to date with ${remote_git_remote}/${remote_target_branch}"
     fi
   else
     __echo_proc_step__ "pulling"
