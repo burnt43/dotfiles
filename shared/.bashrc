@@ -269,18 +269,18 @@ function __cap_deploy__ {
   local my_env="$1"
   shift
 
-  [[ $(sudo su asterisk -c "cd $release_dir && git branch --list stable" | wc -l) == 1 ]] && has_stable_branch=1
+  [[ $(sudo su $release_user -c "cd $release_dir && git branch --list stable" | wc -l) == 1 ]] && has_stable_branch=1
 
   # get master up to date.
   __echo_proc_step__ "ensuring master is up to date"
   sudo su $release_user -c "cd $release_dir && git checkout master --quiet && git pull --quiet"
-  ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+  ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
   if [[ "$has_stable_branch" == "1" ]]; then
     # get stable up to date.
     __echo_proc_step__ "ensuring stable is up to date"
     sudo su $release_user -c "cd $release_dir && git checkout stable --quiet && git pull --quiet"
-    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+    ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
     # merge master into stable.
     merge_result=$(sudo su $release_user -c "cd $release_dir && git merge --no-ff master")
@@ -292,14 +292,14 @@ function __cap_deploy__ {
       # commit the merge and push.
       __echo_proc_step__ "merge master into stable"
       sudo su $release_user -c "cd $release_dir && git commit -m 'merge master into stable' && git push --quiet"
-      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+      ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
     fi
   fi
 
   # make sure we have the latest gems or else running bundle exec ... will complain.
   __echo_proc_step__ "install gems"
   sudo su $release_user -c "cd $release_dir && bundle install --quiet 2>/dev/null"
-  ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+  ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
   # do the deploy!
   sudo su $release_user -c "cd $release_dir && bundle exec cap $my_env deploy $@"
@@ -400,8 +400,9 @@ case "$(hostname)" in
     alias eqpt_gui_assets="eqpt_gui_dev && RAILS_ENV=jcarson_dev ./bin/dev"
     alias eqpt_gui_billing_link="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake billing:sync:addresses"
     alias eqpt_gui_console="eqpt_gui_dev && bundle exec rails console -e jcarson_dev"
+    alias eqpt_gui_debug_server="eqpt_gui_dev && ./bin/rails server -e jcarson_dev -b 127.0.0.1 -u puma"
     alias eqpt_gui_deploy="ruby3 && __cap_deploy__ orderapp /home/orderapp/git_clones/eqpt-gui"
-    alias eqpt_gui_delayed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bin/delayed_job run"
+    alias eqpt_gui_delayed="eqpt_gui_dev && RAILS_ENV=jcarson_dev bin/delayed_job --exit-on-complete run"
     alias eqpt_gui_delayed_view="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev --batch --skip-column-names -e \"SELECT handler FROM delayed_jobs;\" | /home/jcarson/git_clones/work-scripts/mtt/development/format_delayed_job.rb"
     alias eqpt_gui_dev="ruby3 && cd /home/jcarson/git_clones/eqpt-gui"
     alias eqpt_gui_db="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev"
@@ -811,35 +812,72 @@ esac
 # {{{ Aliases.Global
 alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
 alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
-alias ruby_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/standard.flf"
 
-# If 'gem' binary exists
-which gem 1>/dev/null 2>/dev/null
-if [[ $? == 0 ]]; then
-  alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
-fi
-alias gits="git status --short"
-alias git_first_push="which git 1>/dev/null 2>/dev/null && git push --set-upstream origin \$(git branch | grep '^\*' | awk '{print \$2}')"
-alias git_sync_master="git checkout master && git fetch mtt && git merge --no-ff mtt/master && git push"
-
-alias grep="grep --color=auto"
-alias ls="ls --color=auto"
-alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
-alias systemd_top="top -p  \$(ps aux | grep 'systemd' | grep -v "grep" | awk '{print \$2}' | paste -sd,)"
-alias sbrc="source ~/.bashrc"
-
-function __genpass__ {
-  local len="$1"
-  cat /dev/urandom | tr -d -c 'A-Za-z0-9%*&' | fold -w $len | head -1
-}
-alias genpass="__genpass__"
-
+# {{{ function __change_terminal_title__ 
 function __change_terminal_title__ {
   local name="$1"
   xdotool search --name jcarson set_window --name "$name"
 }
+# }}}
 alias ctt="__change_terminal_title__"
 
+which gem 1>/dev/null 2>/dev/null && alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
+
+# {{{ function __genpass__ 
+function __genpass__ {
+  local len="$1"
+  cat /dev/urandom | tr -d -c 'A-Za-z0-9%*&' | fold -w $len | head -1
+}
+# }}}
+alias genpass="__genpass__"
+
+# {{{ function __git_first_push__ 
+function __git_first_push__ {
+  __echo_proc_step__ "pushing"
+  git push --set-upstream origin $(git branch --show-current) --quiet
+  ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+}
+# }}}
+alias git_first_push="__git_first_push__"
+
+# {{{ function __git_sync_master__ 
+function __git_sync_master__ {
+  local local_target_branch=master
+  local remote_target_branch=master
+  local remote_git_remote=mtt
+
+  __echo_proc_step__ "changing to $local_target_branch branch"
+  git checkout $local_target_branch --quiet
+  ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  __echo_proc_step__ "fetching $remote_git_remote remote"
+  git fetch $remote_git_remote --quiet
+  ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  __echo_proc_step__ "merging ${remote_git_remote}/${remote_target_branch} into $local_target_branch"
+  local merge_result=$(git merge --no-ff ${remote_git_remote}/${remote_target_branch})
+  ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  if [[ "$merge_result" != "Already up to date." ]]; then
+    __echo_proc_step__ "commiting"
+    git commit -m "merging ${remote_git_remote}/${remote_target_branch} into $local_target_branch"
+    ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+    __echo_proc_step__ "pushing"
+    git push --quiet
+    ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+  fi
+}
+# }}}
+alias git_sync_master="__git_sync_master__"
+
+alias gits="git status --short"
+alias grep="grep --color=auto"
+alias ls="ls --color=auto"
+alias ruby_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/standard.flf"
+alias sbrc="source ~/.bashrc"
+alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
+alias systemd_top="top -p  \$(ps aux | grep 'systemd' | grep -v "grep" | awk '{print \$2}' | paste -sd,)"
 # }}}
 # }}}
 # {{{ Exports
