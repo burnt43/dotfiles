@@ -260,6 +260,13 @@ function __echo_ok__ {
   echo -e "\033[0;32mOK\033[0;0m"
 }
 # }}}
+# {{{ function __echo_info__ 
+function __echo_info__ {
+  local msg="$1"
+
+  echo -e "[\033[0;34mINFO\033[0;0m] - $msg"
+}
+# }}}
 # {{{ __cap_deploy__
 function __cap_deploy__ {
   local release_user="$1"
@@ -269,30 +276,34 @@ function __cap_deploy__ {
   local my_env="$1"
   shift
 
-  [[ $(sudo su $release_user -c "cd $release_dir && git branch --list stable" | wc -l) == 1 ]] && has_stable_branch=1
+  local src_branch=master
+  local dst_branch=stable
+
+  [[ $(sudo su $release_user -c "cd $release_dir && git branch --list $dst_branch" | wc -l) == 1 ]] && has_dst_branch=1
 
   # get master up to date.
-  __echo_proc_step__ "ensuring master is up to date"
-  sudo su $release_user -c "cd $release_dir && git checkout master --quiet && git pull --quiet"
+  __echo_proc_step__ "ensuring $src_branch is up to date"
+  sudo su $release_user -c "cd $release_dir && git checkout $src_branch --quiet && git pull --quiet"
   ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
-  if [[ "$has_stable_branch" == "1" ]]; then
+  if [[ "$has_dst_branch" == "1" ]]; then
     # get stable up to date.
-    __echo_proc_step__ "ensuring stable is up to date"
-    sudo su $release_user -c "cd $release_dir && git checkout stable --quiet && git pull --quiet"
+    __echo_proc_step__ "ensuring $dst_branch is up to date"
+    sudo su $release_user -c "cd $release_dir && git checkout $dst_branch --quiet && git pull --quiet"
     ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
     # merge master into stable.
-    merge_result=$(sudo su $release_user -c "cd $release_dir && git merge --no-ff master")
+    __echo_proc_step__ "merge $src_branch into $dst_branch"
+    merge_result=$(sudo su $release_user -c "cd $release_dir && git merge --no-edit --no-ff $src_branch")
+    ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
-    if [[ "$merge_result" == "Already up to date." ]]; then
-      # already up to date. nothing to do.
-      :
-    else
+    if [[ "$merge_result" != "Already up to date." ]]; then
       # commit the merge and push.
-      __echo_proc_step__ "merge master into stable"
-      sudo su $release_user -c "cd $release_dir && git commit -m 'merge master into stable' && git push --quiet"
+      __echo_proc_step__ "pushing"
+      sudo su $release_user -c "cd $release_dir && git push --quiet"
       ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+    else
+      __echo_info__ "$dst_branch already up to date with $src_branch"
     fi
   fi
 
@@ -834,7 +845,7 @@ alias genpass="__genpass__"
 # {{{ function __git_first_push__ 
 function __git_first_push__ {
   __echo_proc_step__ "pushing"
-  git push --set-upstream origin $(git branch --show-current) --quiet
+  git push --quiet --set-upstream origin $(git branch --show-current)
   ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 }
 # }}}
@@ -846,25 +857,29 @@ function __git_sync_master__ {
   local remote_target_branch=master
   local remote_git_remote=mtt
 
+  git remote -v | grep -q "^${remote_git_remote}" && has_git_remote=1
+
   __echo_proc_step__ "changing to $local_target_branch branch"
   git checkout $local_target_branch --quiet
   ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
-  __echo_proc_step__ "fetching $remote_git_remote remote"
-  git fetch $remote_git_remote --quiet
-  ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
-
-  __echo_proc_step__ "merging ${remote_git_remote}/${remote_target_branch} into $local_target_branch"
-  local merge_result=$(git merge --no-ff ${remote_git_remote}/${remote_target_branch})
-  ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
-
-  if [[ "$merge_result" != "Already up to date." ]]; then
-    __echo_proc_step__ "commiting"
-    git commit -m "merging ${remote_git_remote}/${remote_target_branch} into $local_target_branch"
+  if [[ "$has_git_remote" == 1 ]]; then
+    __echo_proc_step__ "fetching $remote_git_remote remote"
+    git fetch $remote_git_remote --quiet
     ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
-    __echo_proc_step__ "pushing"
-    git push --quiet
+    __echo_proc_step__ "merging ${remote_git_remote}/${remote_target_branch} into $local_target_branch"
+    local merge_result=$(git merge --no-edit --no-ff ${remote_git_remote}/${remote_target_branch})
+    ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+    if [[ "$merge_result" != "Already up to date." ]]; then
+      __echo_proc_step__ "pushing"
+      git push --quiet
+      ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+    fi
+  else
+    __echo_proc_step__ "pulling"
+    git pull --quiet
     ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
   fi
 }
