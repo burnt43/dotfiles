@@ -313,7 +313,7 @@ function __cap_deploy__ {
   ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
   # do the deploy!
-  sudo su $release_user -c "cd $release_dir && bundle exec cap $my_env deploy $@"
+  sudo su $release_user -c "cd $release_dir && bundle exec cap $my_env deploy $*"
 }
 # }}}
 # }}}
@@ -348,13 +348,14 @@ case "$(hostname)" in
     alias ami_socket_console="ami_socket_dev && ./script/console"
     # }}}
     # {{{ asterisk_cdr
+    alias asterisk_cdr_console="asterisk_cdr_dev && ./script/console"
     alias asterisk_cdr_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/asterisk-cdr"
     alias asterisk_cdr_dev="ruby2 && cd ~/git_clones/asterisk-cdr"
-    alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_syncer.rb"
-    alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_finder.rb"
-    alias asterisk_cdr_data_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_data_processor.rb"
-    alias asterisk_cdr_cli_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=devprod ASTERISK_CDR_EDITOR=/usr/bin/vim bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_cli.rb"
-    alias asterisk_cdr_fraud_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=development bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_fraud.rb"
+    alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=jcarson_dev bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_syncer.rb"
+    alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=jcarson_dev bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_finder.rb"
+    alias asterisk_cdr_data_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=jcarson_dev bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_data_processor.rb"
+    alias asterisk_cdr_cli_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=jcarson_dev ASTERISK_CDR_EDITOR=/usr/bin/vim bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_cli.rb"
+    alias asterisk_cdr_fraud_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=jcarson_dev bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_fraud.rb"
     alias asterisk_cdr_test_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=test bundle exec rake asterisk_cdr:test:run"
     # }}}
     # {{{ asterisk_config
@@ -367,7 +368,8 @@ case "$(hostname)" in
     alias asterisk_database_sample_run="asterisk_database_dev && bundle exec ruby -I./lib ./sanity_checker.rb"
     # }}}
     # {{{ asterisk_queue_ctl
-    alias asterisk_queue_ctl_dev="cd /home/jcarson/git_clones/asterisk-queue-ctl"
+    alias asterisk_queue_ctl_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/asterisk-queue-ctl"
+    alias asterisk_queue_ctl_dev="ruby2 && cd /home/jcarson/git_clones/asterisk-queue-ctl"
     alias asterisk_queue_ctl_test_run="asterisk_queue_ctl_dev && ASTERISK_QUEUE_CTL_ENV=test bundle exec rake asterisk_queue_ctl:test:run"
     # }}}
     # {{{ auto_dialer
@@ -417,6 +419,17 @@ case "$(hostname)" in
     alias eqpt_gui_delayed_view="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev --batch --skip-column-names -e \"SELECT handler FROM delayed_jobs;\" | /home/jcarson/git_clones/work-scripts/mtt/development/format_delayed_job.rb"
     alias eqpt_gui_dev="ruby3 && cd /home/jcarson/git_clones/eqpt-gui"
     alias eqpt_gui_db="eqpt_gui_dev && mysql eqpt_gui_jcarson_dev"
+
+    # {{{ function __eqpt_gui_grep__ 
+    function __eqpt_gui_grep__ {
+      local search_term="$1"
+
+      grep -R "$search_term" ./config ./lib ./test $(find ./app -mindepth 1 -maxdepth 1 -type d \! -name javascript \! -name assets)
+    }
+    # }}}
+    # (e)qpt (g)ui (g)rep
+    alias egg="eqpt_gui_dev && __eqpt_gui_grep__"
+
     alias eqpt_gui_log="eqpt_gui_dev && tail -f ./log/jcarson_dev.log"
     alias eqpt_gui_log_jcarson="eqpt_gui_dev && tail -f log/jcarson_dev.log | grep 'JCARSON'"
     alias eqpt_gui_log_req="eqpt_gui_dev && tail -f log/jcarson_dev.log | grep -B 1 -A 1 'Processing by'"
@@ -821,7 +834,6 @@ case "$(hostname)" in
     # }}}
 esac
 # {{{ Aliases.Global
-alias awk_filenames_from_grep="awk -F ':' '{print $1}' | sort | uniq"
 alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
 
 # {{{ function __change_terminal_title__ 
@@ -830,7 +842,11 @@ function __change_terminal_title__ {
   xdotool search --name jcarson set_window --name "$name"
 }
 # }}}
+# (c)hange (t)erminal (t)itle
 alias ctt="__change_terminal_title__"
+
+# (e)xtract (f)ile(n)ames
+alias efn="awk -F ':' '{print \$1}' | sort | uniq"
 
 which gem 1>/dev/null 2>/dev/null && alias gem_dir="cd $(gem environment | grep -e '- INSTALLATION DIRECTORY:' | sed 's/^.*: //g')"
 
@@ -845,7 +861,7 @@ alias genpass="__genpass__"
 # {{{ function __git_first_push__ 
 function __git_first_push__ {
   __echo_proc_step__ "pushing"
-  git push --quiet --set-upstream origin $(git branch --show-current)
+  git push --quiet --set-upstream origin $(git branch --show-current) 1>/dev/null 2>/dev/null
   ([[ "$?" == "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 }
 # }}}
@@ -894,7 +910,7 @@ alias ls="ls --color=auto"
 alias ruby_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/standard.flf"
 alias sbrc="source ~/.bashrc"
 alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
-alias systemd_top="top -p  \$(ps aux | grep 'systemd' | grep -v "grep" | awk '{print \$2}' | paste -sd,)"
+alias systemd_top="top -p \$(ps aux | grep 'systemd' | grep -v "grep" | awk '{print \$2}' | paste -sd,)"
 # }}}
 # }}}
 # {{{ Exports

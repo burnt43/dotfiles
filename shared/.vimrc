@@ -196,6 +196,12 @@ nnoremap <leader>zF :set foldcolumn=0<cr>
 " fold(z).(o)nly.(c)urrent
 nnoremap <leader>zoc zMzv
 
+" NOTE: These should really be in the ruby group.
+" (w)ake (m)ark (m)ethod
+nnoremap <leader>mmm ^y2wO# {{{ <esc>p
+" (w)ake (m)ark (e)nd
+nnoremap <leader>mme o# }}}<esc>
+
 " marks
 " (m)ark (c)lear
 nnoremap <leader>mc :delmarks!<cr>
