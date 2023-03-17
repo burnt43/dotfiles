@@ -20,6 +20,35 @@ my_bash_version_minor=$(echo "$my_dot_formatted_bash_version" | cut -d. -f2)
 my_bash_version_patch=$(echo "$my_dot_formatted_bash_version" | cut -d. -f3)
 my_formatted_bash_version=$(printf "%02d%02d%02d" $my_bash_version_major $my_bash_version_minor $my_bash_version_patch)
 
+my_hostname=$(hostname | sed 's/\.monmouth\.com$//')
+
+case "$my_hostname" in
+  # Camden (Gray)
+  cm-*)
+    host_color_code=37
+    ;;
+  # New Brunswick (Cyan)
+  nb-*)
+    host_color_code=36
+    ;;
+  # Newark (Fuschia)
+  nk-*|mg5|mg6)
+    host_color_code=35
+    ;;
+  # Pleasantville (Blue)
+  pl-*)
+    host_color_code=34
+    ;;
+  # Red Bank (Red)
+  app0|app1|app2|appdev0|conf0|conf1|dadmin|fs0|fs1|fsdev|gs3|gs4|gs5|gs6|gs7|gs8|hpbx0|hpbx1|hpbx2|hpbx3|hpbx4|hpbx5|hpbxdev|mg3|mg4|mtt3|mtt4|pbx|prog-dev|recorder0|recorder1|vidconf0|vidconf1)
+    host_color_code=31
+    ;;
+  # VM (Black)
+  order)
+    host_color_code=30
+    ;;
+esac
+
 function __shell_last_command__ {
   if [[ "$?" == "0" ]]; then
     echo -ne "\033[0;32m■\033[0;0m"
@@ -50,7 +79,7 @@ function __shell_basic_info__ {
       ;;
   esac
 
-  echo -ne "$effective_user@\033[1;33m$(hostname | sed 's/\.monmouth\.com$//')\033[0;0m \033[0;34m$effective_dir\033[0;0m"
+  echo -ne "$effective_user@\033[1;${host_color_code}m$my_hostname\033[0;0m \033[0;34m$effective_dir\033[0;0m"
 }
 
 function __shell_git_plugin__ {
