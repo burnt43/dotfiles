@@ -13,6 +13,13 @@
 # To use this in a ~/.bashrc add:
 # [[ -e ~/.bash-prompt-rc ]] && . ~/.bash-prompt-rc
 
+# Format the bash version so it is string comparable.
+my_dot_formatted_bash_version=$(bash --version | head -1 | awk '{print $4}' | cut -d\( -f1)
+my_bash_version_major=$(echo "$my_dot_formatted_bash_version" | cut -d. -f1)
+my_bash_version_minor=$(echo "$my_dot_formatted_bash_version" | cut -d. -f2)
+my_bash_version_patch=$(echo "$my_dot_formatted_bash_version" | cut -d. -f3)
+my_formatted_bash_version=$(printf "%02d%02d%02d" $my_bash_version_major $my_bash_version_minor $my_bash_version_patch)
+
 function __shell_last_command__ {
   if [[ "$?" == "0" ]]; then
     echo -ne "\033[0;32m■\033[0;0m"
@@ -59,4 +66,12 @@ function __shell_git_plugin__ {
   fi
 }
 
-PS1='┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n└% '
+# Through educated guessing the vim mode activation/deactivation character was
+# introduced into bash in version 4.4.0. So if we have a bash version >= to
+# 4.4.0 then we have to slightly adjust the prompt so support that, otherwise
+# just use the default prompt style.
+if [[ "$my_formatted_bash_version" > "040400" ]]; then
+  PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n┴% '
+else
+  PS1='┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n└% '
+fi
