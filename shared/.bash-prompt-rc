@@ -40,7 +40,7 @@ case "$my_hostname" in
     host_color_code=34
     ;;
   # Red Bank (Red)
-  app0|app1|app2|appdev0|conf0|conf1|dadmin|fs0|fs1|fsdev|gs3|gs4|gs5|gs6|gs7|gs8|hpbx0|hpbx1|hpbx2|hpbx3|hpbx4|hpbx5|hpbxdev|mg3|mg4|mtt3|mtt4|pbx|prog-dev|recorder0|recorder1|vidconf0|vidconf1)
+  app0|app1|app2|appdev0|conf0|conf1|dadmin|fs0|fs1|fsdev|gs3|gs4|gs5|gs6|gs7|gs8|hpbx0|hpbx1|hpbx2|hpbx3|hpbx4|hpbx5|hpbxdev|mg0|mg3|mg4|mtt3|mtt4|pbx|prog-dev|recorder0|recorder1|vidconf0|vidconf1)
     host_color_code=31
     ;;
   # VM (Black)

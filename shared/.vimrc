@@ -197,10 +197,14 @@ nnoremap <leader>zF :set foldcolumn=0<cr>
 nnoremap <leader>zoc zMzv
 
 " NOTE: These should really be in the ruby group.
-" (w)ake (m)ark (m)ethod
-nnoremap <leader>mmm ^y2wO# {{{ <esc>p
-" (w)ake (m)ark (e)nd
+" (m)ake (m)ark (e)nd
 nnoremap <leader>mme o# }}}<esc>
+" (m)ake (m)ark (m)ethod
+nnoremap <leader>mmm ^y2wO# {{{ <esc>p
+" (m)ake (m)ark (s)cope
+nnoremap <leader>mms ^yt,O# {{{ <esc>p
+" (m)ake (m)ark (t)ask
+nnoremap <leader>mmt ^y2WO# {{{ <esc>p
 
 " marks
 " (m)ark (c)lear

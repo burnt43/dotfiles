@@ -483,13 +483,19 @@ case "$(hostname)" in
     alias hop_client_run="__hop_client__"
     # }}}
     # {{{ hpbxgui
+    __rmagick_lib_path__=/usr/local/ImageMagick/6.9.12-34/lib
+    __hpbxgui_test_db__=hpbxgui_test
+    __hpbxgui_test_user__=hpbxgui_tester
+    __hpbxgui_test_pass__=LfG*b95A8ehEQsr7
+    __hpbxgui_test_socket__=/usr/local/mysql/mysql-5.7.21/data/mysql.sock 
+
     alias hpbxgui_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/hosted/hpbxgui"
-    alias hpbxgui_bundle="LD_LIBRARY_PATH=\"/usr/local/ImageMagick/6.9.12-34/lib\" bundle"
+    alias hpbxgui_bundle="LD_LIBRARY_PATH=\"${__rmagick_lib_path__}\" bundle"
     alias hpbxgui_console="hpbxgui_dev && hpbxgui_bundle exec rails console -e jcarson_dev"
     alias hpbxgui_dev="ruby2 && cd ~/git_clones/hosted/hpbxgui"
     alias hpbxgui_runner="hpbxgui_dev && hpbxgui_bundle exec rails runner -e jcarson_dev"
-    alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_hundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:db:reset"
-    alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test bundle exec rake hpbxgui:test:run"
+    alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=jcarson_dev JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:db:reset"
+    alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:run"
     # }}}
     # {{{ httpd
     # {{{ function __httpd_ruby__
