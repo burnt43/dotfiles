@@ -528,6 +528,24 @@ case "$(hostname)" in
       esac
     }
     # }}}
+    # NOTE: If pacman overwrites the httpd systemd file. This is what is
+    #   should look like to support httpd_ruby alias.
+    # [Unit]
+    # Description=Apache Web Server
+    # After=network.target remote-fs.target nss-lookup.target
+
+    # [Service]
+    # Type=simple
+    # ExecStart=/usr/bin/httpd -k start -DFOREGROUND -DRuby3
+    # ExecStop=/usr/bin/httpd -k graceful-stop
+    # ExecReload=/usr/bin/httpd -k graceful
+    # PrivateTmp=true
+    # LimitNOFILE=infinity
+    # KillMode=mixed
+    # # Environment=LD_LIBRARY_PATH=/usr/local/ImageMagick/6.9.12-34/lib
+
+    # [Install]
+    # WantedBy=multi-user.target
     alias httpd_ruby="__httpd_ruby__"
     # }}}
     # {{{ influxdb (gem)
@@ -740,7 +758,7 @@ case "$(hostname)" in
           ;;
       esac
     }
-    alias imagemagick_pkfconfig="__imagemagick_pkgconfig__"
+    alias imagemagick_pkgconfig="__imagemagick_pkgconfig__"
 
     # {{{ function __sync_ssh_config__
     function __sync_ssh_config__ {
@@ -780,6 +798,82 @@ case "$(hostname)" in
       fi
     }
     alias listen_to_latest_dev_recording="__listen_to_latest_dev_recording__"
+
+    # {{{ function __sync_hpbxgui_session_id__ 
+    function __sync_hpbxgui_session_id__ {
+      local my_hpbxgui_user="$1"
+      [[ -z "$my_hpbxgui_user" ]] && my_hpbxgui_user=mttpbx-284
+
+      local mysql_bin=$(which mysql)
+      local ruby_bin=$(which ruby)
+
+      local p_db_user=$(cat ~/.lapaz/mysql-read-only-production-user)
+      local p_db_pass=$(cat ~/.lapaz/mysql-read-only-production-pass)
+      local p_db_host=hosted-db
+      local p_db_base=hpbx_production
+
+      local d_db_user=$(cat ~/.lapaz/mysql-local-dev-user)
+      local d_db_pass=$(cat ~/.lapaz/mysql-local-dev-pass)
+      local d_db_base=hpbxgui_jcarson_dev
+
+      local record_found=0
+      local first_iteration=1
+
+      IFS=$'\n'
+
+      # Look for session_id in production.
+      for row in $($mysql_bin -u $p_db_user -p${p_db_pass} -h $p_db_host $p_db_base --skip-column-names --batch -e "SELECT session_id, data FROM sessions WHERE created_at != updated_at ORDER BY updated_at DESC LIMIT 1000;"); do
+        [[ "$first_iteration" == "1" ]] && echo -n "looking for session in production database..."
+        first_iteration=0
+
+        local production_session_id=$(echo "$row" | awk '{print $1}')
+        local enc=$(echo "$row" | awk '{print $2}')
+
+        local possible_hpbxgui_user=$($ruby_bin -rbase64 -e "puts (Base64.decode64(\"${enc}\") =~ /${my_hpbxgui_user}/)")
+        [[ -z "$possible_hpbxgui_user" ]] && continue
+
+        record_found=1
+        echo -e "\033[0;32mOK\033[0;0m"
+        echo -e "[\033[0;34mINFO\033[0;0m] - found production_session_id: \033[0;32m${production_session_id}\033[0;0m"
+        break
+      done
+
+      first_iteration=1
+
+      if [[ "$record_found" == "1" ]]; then
+        record_found=0
+
+        # Look for session_id in development.
+        for row in $($mysql_bin -u $d_db_user -p${d_db_pass} $d_db_base --skip-column-names --batch -e "SELECT session_id, data FROM sessions WHERE created_at != updated_at ORDER BY updated_at DESC LIMIT 100;"); do
+          [[ "$first_iteration" == "1" ]] && echo -n "looking for session in development database..."
+          first_iteration=0
+
+          local development_session_id=$(echo "$row" | awk '{print $1}')
+          local enc=$(echo "$row" | awk '{print $2}')
+
+          local possible_hpbxgui_user=$($ruby_bin -rbase64 -e "puts (Base64.decode64(\"${enc}\") =~ /${my_hpbxgui_user}/)")
+          [[ -z "$possible_hpbxgui_user" ]] && continue
+
+          record_found=1
+          echo -e "\033[0;32mOK\033[0;0m"
+          echo -e "[\033[0;34mINFO\033[0;0m] - found development_session_id: \033[0;32m${development_session_id}\033[0;0m"
+          break
+        done
+
+        if [[ "$record_found" == "1" ]]; then
+          # Update the development session_id to be the same as production.
+          $mysql_bin -u $d_db_user -p${d_db_pass} $d_db_base -e "UPDATE sessions SET session_id='$production_session_id' WHERE session_id='$development_session_id';"
+          echo -e "[\033[0;34mINFO\033[0;0m] - Updated development session."
+          echo -e "[\033[0;34mINFO\033[0;0m] - Remember to set the browser's cookie to use session_id: \033[0;32m$production_session_id\033[0;0m"
+        else
+          echo -e "\033[0;31mFAIL\033[0;0m"
+        fi
+      else
+        echo -e "\033[0;31mFAIL\033[0;0m"
+      fi
+    }
+    # }}}
+    alias sync_hpbxgui_session_id="__sync_hpbxgui_session_id__"
     # }}}
     # {{{ Recompile Aliases (After pacman -Syu)
     # {{{ function __compile_mcl__ 
