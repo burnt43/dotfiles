@@ -329,6 +329,7 @@ case "$(hostname)" in
     # {{{ agi_server
     alias agi_server_dev="ruby2 && cd ~/git_clones/agi-server"
     alias agi_server_test_run="agi_server_dev && bundle exec rake agi_server:test:run"
+    alias agi_server_request="agi_server_dev && ruby ./script/agi_request.rb"
     # }}}
     # {{{ ami
     alias ami_dev="cd ~/git_clones/hosted-burnt43/ami_fw_proxy"
@@ -342,10 +343,15 @@ case "$(hostname)" in
     # {{{ ami_message_capture
     alias ami_message_capture_run="cd ~/git_clones/ami-message-capture && bundle exec ruby ./ami-message-capture.rb"
     # }}}
+    # {{{ ami-replication
+    alias ami_rep_dev="ruby2 && cd ~/git_clones/ami-replication"
+    alias ami_rep_run="ami_rep_dev && ./script/ami-replication.sh"
+    # }}}
     # {{{ ami_socket
-    alias ami_socket_dev="cd ~/git_clones/ami-socket"
-    alias ami_socket_test_run="ami_socket_dev && bundle exec rake ami_socket:test:run"
     alias ami_socket_console="ami_socket_dev && ./script/console"
+    alias ami_socket_dev="ruby2 && cd ~/git_clones/ami-socket"
+    alias ami_socket_test_run="ami_socket_dev && bundle exec rake ami_socket:test:run"
+    alias ami_socket_sanity_check="ami_socket_dev && ruby ./script/sanity_check.rb"
     # }}}
     # {{{ asterisk_cdr
     alias asterisk_cdr_console="asterisk_cdr_dev && ./script/console"
@@ -388,6 +394,7 @@ case "$(hostname)" in
     # {{{ call_recorder
     alias call_recorder_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/call_recorder"
     alias call_recorder_dev="cd ~/git_clones/call_recorder"
+    alias raudit_run="call_recorder_dev && RAUDIT_ENV=jcarson_dev ruby ./raudit/raudit.rb"
     # }}}
     # {{{ cli_builder
     alias cli_builder_dev="cd ~/git_clones/cli-builder"
@@ -403,6 +410,11 @@ case "$(hostname)" in
     alias data_monitor_dev="cd /home/jcarson/git_clones/data-monitor"
     alias data_monitor_test_run="data_monitor_dev && DATA_MONITOR_ENV=test THINGSPACE_API_RUBY_ENV=test bundle exec rake data_monitor:test:run"
     alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/bin/xymon DATA_MONITOR_ENV=development bundle exec ruby -I ./lib ./data_monitor.rb"
+    # }}}
+    # {{{ dns_record_changer
+    alias dns_dev="ruby2 && cd ~/git_clones/dns-record-changer/"
+    alias dns_test_run="dns_dev && DNS_ENV=test bundle exec rake dns_record_changer:test:run"
+    alias dns_dev_reset="ruby2 && bundle exec rake dns_record_changer:dev:assets:reset"
     # }}}
     # {{{ engoncall
     alias engoncall_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/engoncall"
@@ -482,7 +494,7 @@ case "$(hostname)" in
     alias hop_client_dev="cd ~/git_clones/hop_js_client"
     alias hop_client_run="__hop_client__"
     # }}}
-    # {{{ hpbxgui
+    # {{{ hpbxgui (app)
     __rmagick_lib_path__=/usr/local/ImageMagick/6.9.12-34/lib
     __hpbxgui_test_db__=hpbxgui_test
     __hpbxgui_test_user__=hpbxgui_tester
@@ -518,20 +530,20 @@ case "$(hostname)" in
     # }}}
     alias httpd_ruby="__httpd_ruby__"
     # }}}
-    # {{{ influxdb
+    # {{{ influxdb (gem)
     alias influxdb_dev="cd ~/git_clones/influxdb-client"
     alias influxdb_test_run="influxdb_dev && bundle exec rake influxdb_client:test:run"
     # }}}
-    # {{{ lite_orm
+    # {{{ lite_orm (gem)
     alias lite_orm_dev="cd ~/git_clones/lite-orm"
     alias lite_orm_test_run="lite_orm_dev && bundle exec rake lite_orm:test:run"
     # }}}
-    # {{{ msteams_mon
+    # {{{ msteams_mon (app)
     alias msteams_mon_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/msteams-mon"
     alias msteams_mon_dev="ruby2 && cd ~/git_clones/msteams-mon"
     alias msteams_mon_run="msteams_mon_dev && ./script/msteams-mon"
     # }}}
-    # {{{ mtt_crm
+    # {{{ mtt_crm (app)
     alias mtt_crm_clean_branches="~/gist_clones/git_branch_cleaner/git_branch_cleaner.sh ~/git_clones/mtt_crm-burnt43 mtt"
     alias mtt_crm_console="mtt_crm_dev && MTT_CRM_AUTO_LOAD_TENANT_ID=270 bundle exec rails console -e jcarson_dev"
     alias mtt_crm_dev="ruby2 && cd ~/git_clones/mtt_crm"
@@ -539,49 +551,56 @@ case "$(hostname)" in
     alias mtt_crm_runner="mtt_crm_dev && MTT_CRM_AUTO_LOAD_TENANT_ID=270 bundle exec rails runner -e jcarson_dev"
     alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:run"
     # }}}
-    # {{{ rec_mon
-    alias rec_mon_dev="cd ~/git_clones/rec-mon"
+    # {{{ rec_mon (app)
+    alias rec_mon_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/rec-mon"
+    alias rec_mon_dev="ruby2 && cd ~/git_clones/rec-mon"
     alias rec_mon_test_run="rec_mon_dev && bundle exec rake rec_mon:test:run"
     # }}}
-    # {{{ rma
+    # {{{ rma (app)
     alias rma_dev="ruby2 && cd ~/git_clones/rma"
     alias rma_bundle="GEM_HOME=/home/jcarson/.gems/rma/ruby/2.6.0 GEM_PATH="" /home/jcarson/.gems/rma/ruby/2.6.0/bin/bundle"
     alias rma_git_ignore="rma_dev && git update-index --assume-unchanged Gemfile Gemfile.lock"
     # }}}
-    # {{{ ruby_daemon_monitor
-    alias ruby_daemon_monitor_dev="cd ~/git_clones/ruby-daemon-monitor"
+    # {{{ ruby_daemon_monitor (app)
     alias ruby_daemon_monitor_app_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
     alias ruby_daemon_monitor_crm_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_crm ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
-    alias ruby_daemon_monitor_release="cd ~/git_clones/ruby-daemon-monitor-monmouthtelecom && git checkout master && git pull && git checkout stable && git pull && git merge --no-ff master && git push && sudo su asterisk -c 'cd /home/jcarson/git_clones/ruby-daemon-monitor-monmouthtelecom && bundle exec cap production deploy'"
+    alias ruby_daemon_monitor_dev="ruby2 && cd ~/git_clones/ruby-daemon-monitor"
+    alias ruby_daemon_monitor_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/ruby-daemon-monitor"
     # }}}
-    # {{{ sip_utils
+    # {{{ sip_utils (gem)
     alias sip_utils_dev="ruby2 && cd ~/git_clones/sip-utils"
     alias sip_utils_clearip_test="sip_utils_dev && bundle exec rake sip_utils:clearip:test"
     alias sip_utils_test_run="sip_utils_dev && bundle exec rake sip_utils:test:run"
     # }}}
-    # {{{ softphone
+    # {{{ softphone (app)
     alias softphone_dev="cd ~/git_clones/mtt-softphone"
-    alias softphone_run="softphone_dev && npm start"
+    alias softphone_run="softphone_dev && npm run dev-start"
+    alias softphone_test_run="softphone_dev && npm run test-clean && npm run test"
     # }}}
-    # {{{ solr_mon
-    alias solr_mon_dev="cd ~/git_clones/solr-file-monitor"
+    # {{{ solr_mon (app)
+    alias solr_mon_dev="ruby2 && cd ~/git_clones/solr-file-monitor"
     alias solr_mon_run="solr_mon_dev && SOLR_FILE_MONITOR_ENV=development ruby -I/home/jcarson/git_clones/solr-file-monitor-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./file_monitor_daemon.rb"
-    alias solr_mon_test="solr_mon_dev && SOLR_FILE_MONITOR_ENV=test bundle exec rake solr_file_monitor:test:run"
+    alias solr_mon_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/solr-file-monitor"
     alias solr_mon_start_daemon="solr_mon_dev && ./safe-solr-file-monitor"
     alias solr_mon_stop_daemon="ps aux | grep 'safe-solr-file-monitor' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid && ps aux | grep 'file_monitor_daemon\.rb' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid"
+    alias solr_mon_test_run="solr_mon_dev && SOLR_FILE_MONITOR_ENV=test bundle exec rake solr_file_monitor:test:run"
     # }}}
-    # {{{ stir-shaken-server
+    # {{{ stir-shaken-server (app)
     alias sss_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/stir-shaken-server"
     alias sss_dev="ruby2 && cd ~/git_clones/stir-shaken-server"
     alias sss_run="sss_dev && SSS_ENV=jcarson_dev bundle exec ruby -I./lib ./stir_shaken_server.rb"
     alias sss_test_run="sss_dev && SSS_ENV=test bundle exec rake sss:test:run"
     # }}}
-    # {{{ thingspace
-    alias thingspace_dev="cd /home/jcarson/git_clones/thingspace-api-ruby"
+    # {{{ thingspace (gem)
+    alias thingspace_dev="ruby2 && cd /home/jcarson/git_clones/thingspace-api-ruby"
     alias thingspace_test_run="thingspace_dev && THINGSPACE_API_RUBY_ENV=test bundle exec rake thingspace_api_ruby:test:run"
     alias thingspace_sanity_check_run="thingspace_dev && script/console -c 'Thingspace::SanityCheck.run!'"
     # }}}
-    # {{{ xymon_reporter
+    # {{{ xymon (gem)
+    alias xymon_dev="ruby2 && cd ~/git_clones/xymon"
+    alias xymon_test_run="xymon_dev && bundle exec rake xymon:test:run"
+    # }}}
+    # {{{ xymon_reporter (app)
     alias xymon_reporter_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/xymon-reporter"
     alias xymon_reporter_dev="ruby2 && cd ~/git_clones/xymon-reporter"
     # }}}
