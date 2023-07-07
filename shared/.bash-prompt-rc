@@ -32,7 +32,7 @@ case "$my_hostname" in
     host_color_code=36
     ;;
   # Newark (Fuschia)
-  nk-*|mg5|mg6)
+  hosted-db0|nk-*|mg5|mg6)
     host_color_code=35
     ;;
   # Pleasantville (Blue)

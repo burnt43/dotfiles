@@ -1,0 +1,5 @@
+alias svim="__svim__"
+alias avim="__uvim__ asterisk"
+alias gits="git status --short"
+alias findf="__findf__"
+alias pcap="__pcap__"

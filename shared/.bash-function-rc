@@ -1,0 +1,47 @@
+function __svim__ {
+  [[ -e  /usr/local/vim ]] && local vim_bin=$(find /usr/local/vim -type f -name vim | sort -r | head -1)
+  [[ -z "$vim_bin" ]] && vim_bin=$(which vim)
+
+  if [[ -f /home/jcarson/.vimrc ]]; then
+    sudo $vim_bin -u /home/jcarson/.vimrc $@
+  else
+    sudo $vim_bin $@
+  fi
+}
+
+function __uvim__ {
+  local user="$1"
+  shift
+
+  [[ -e  /usr/local/vim ]] && local vim_bin=$(find /usr/local/vim -type f -name vim | sort -r | head -1)
+  [[ -z "$vim_bin" ]] && vim_bin=$(which vim)
+
+  if [[ -f /usr/share/jcarson/.vimrc ]]; then
+    sudo su $user -c "$vim_bin -u /usr/share/jcarson/.vimrc $@"
+  else
+    sudo su $user -c "$vim_bin $@"
+  fi
+}
+
+function __findf__ {
+  local name="$1"
+  find ./ -type f -name "*${name}*"
+}
+
+function __pcap__ {
+  local tcpdump_bin=$(which tcpdump 2>/dev/null)
+  local ip_bin=$(which ip 2>/dev/null)
+
+  [[ -z "$tcpdump_bin" ]] && echo -e "[\033[0;31mERROR\033[0;0m] - no tcpdump found" && return 1
+  [[ -z "$ip_bin" ]] && echo -e "[\033[0;31mERROR\033[0;0m] - no ip binary found" && return 1
+
+  local bond0_interface_count=$($ip_bin link show | grep 'bond0:' | wc -l)
+
+  [[ "$bond0_interface_count" == 0 ]] && echo -e "[\033[0;31mERROR\033[0;0m] - bond0 not found" && return 1
+
+  mkdir -p /home/jcarson/pcaps
+  local capture_filename=/home/jcarson/pcaps/$(date +%Y%m%d-%H%M%S).pcap
+
+  sudo $tcpdump_bin -i bond0 "$@" -B 100000 -w $capture_filename -s0
+  sudo chown jcarson:jcarson $capture_filename
+}

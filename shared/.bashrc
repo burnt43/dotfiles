@@ -332,8 +332,9 @@ case "$(hostname)" in
     alias agi_server_request="agi_server_dev && ruby ./script/agi_request.rb"
     # }}}
     # {{{ ami
-    alias ami_dev="cd ~/git_clones/hosted-burnt43/ami_fw_proxy"
+    alias ami_dev="ruby2 && cd ~/git_clones/ami-fw-proxy"
     alias ami_run="ami_dev && RAILS_ENV=development JDEV=1 ruby -I /home/jcarson/git_clones/hosted-burnt43/ami_fw_proxy/ ./secure_multiplexer_proxy.rb"
+    alias ami_sanity_checker="ami_dev && bundle exec ruby ./script/ami_sanity_checker.rb"
     # }}}
     # {{{ ami_client
     alias ami_client_dev="cd ~/git_clones/asterisk-manager-interface-client"
@@ -379,7 +380,7 @@ case "$(hostname)" in
     alias asterisk_queue_ctl_test_run="asterisk_queue_ctl_dev && ASTERISK_QUEUE_CTL_ENV=test bundle exec rake asterisk_queue_ctl:test:run"
     # }}}
     # {{{ auto_dialer
-    alias auto_dialer_dev="cd ~/git_clones/hosted-burnt43/auto_dialer"
+    alias auto_dialer_dev="ruby2 && cd ~/git_clones/auto_dialer"
     alias auto_dialer_run="auto_dialer_dev && AUTO_DIALER_ENV=development bundle exec ruby ./auto_dialer_server.rb"
     # }}}
     # {{{ bootstrap_helper
@@ -387,7 +388,7 @@ case "$(hostname)" in
     alias bootstrap_helper_test_run="bootstrap_helper_dev && bundle exec rake bootstrap_helper_rails:test:run"
     # }}}
     # {{{ call_blaster
-    alias call_blaster_dev="cd ~/git_clones/call_blaster"
+    alias call_blaster_dev="ruby2 && cd ~/git_clones/call_blaster"
     alias call_blaster_run="call_blaster_dev && bundle exec ruby ./call_blaster_server.rb"
     alias call_blaster_test_run="call_blaster_dev && CALL_BLASTER_ENV=test bundle exec rake call_blaster:test:run"
     # }}}
@@ -402,7 +403,7 @@ case "$(hostname)" in
     alias cli_builder_test_run="cli_builder_dev && bundle exec rake cli_builder:test:run"
     # }}}
     # {{{ cti
-    alias cti_dev="cd ~/git_clones/cti"
+    alias cti_dev="ruby2 && cd ~/git_clones/cti"
     alias cti_hpbxgui_run="cti_dev && CTI_ENV=development_hpbxgui ruby -I ./lib/ server.rb"
     alias cti_mtt_crm_run="cti_dev && CTI_ENV=development_mtt_crm ruby -I ./lib/ server.rb"
     # }}}
@@ -410,6 +411,9 @@ case "$(hostname)" in
     alias data_monitor_dev="cd /home/jcarson/git_clones/data-monitor"
     alias data_monitor_test_run="data_monitor_dev && DATA_MONITOR_ENV=test THINGSPACE_API_RUBY_ENV=test bundle exec rake data_monitor:test:run"
     alias data_monitor_run="data_monitor_dev && XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/bin/xymon DATA_MONITOR_ENV=development bundle exec ruby -I ./lib ./data_monitor.rb"
+    # }}}
+    # {{{ delayed
+    alias delayed_dev="ruby2 && cd /home/jcarson/git_clones/delayed_job_scripts"
     # }}}
     # {{{ dns_record_changer
     alias dns_dev="ruby2 && cd ~/git_clones/dns-record-changer/"
@@ -452,6 +456,9 @@ case "$(hostname)" in
     alias eqpt_gui_test_run="eqpt_gui_dev && RAILS_ENV=test bundle exec rake eqpt_gui:test:run"
     alias eqpt_gui_test_schema_dump="eqpt_gui_dev && RAILS_ENV=jcarson_dev bundle exec rake eqpt_gui:test:dump_aux_db_schemas"
     alias eqpt_gui_travis_run="eqpt_gui_dev && RAILS_ENV=travis bundle exec rake eqpt_gui:test:run"
+    # }}}
+    # {{{ event_machine/faye
+    alias faye_dev="ruby2 && cd ~/git_clones/faye"
     # }}}
     # {{{ hop
     alias hop_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/operator-panel"
@@ -580,10 +587,10 @@ case "$(hostname)" in
     alias rma_git_ignore="rma_dev && git update-index --assume-unchanged Gemfile Gemfile.lock"
     # }}}
     # {{{ ruby_daemon_monitor (app)
-    alias ruby_daemon_monitor_app_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
-    alias ruby_daemon_monitor_crm_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_crm ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
-    alias ruby_daemon_monitor_dev="ruby2 && cd ~/git_clones/ruby-daemon-monitor"
-    alias ruby_daemon_monitor_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/ruby-daemon-monitor"
+    alias rdm_app_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_app ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
+    alias rdm_crm_run="ruby_daemon_monitor_dev && RUBY_DAEMON_MONITOR_ENV=development_crm ruby -I/home/jcarson/git_clones/ruby-daemon-monitor-burnt43/lib ./ruby_daemon_monitor.rb"
+    alias rdm_dev="ruby2 && cd ~/git_clones/ruby-daemon-monitor"
+    alias rdm_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/ruby-daemon-monitor"
     # }}}
     # {{{ sip_utils (gem)
     alias sip_utils_dev="ruby2 && cd ~/git_clones/sip-utils"
@@ -624,7 +631,7 @@ case "$(hostname)" in
     # }}}
     # }}}
     # {{{ Useful Helpers
-    # {{{ function __ensure_mttpbx_virtual_server_exists__ 
+    # {{{ alias ensure_mttpbx_virtual_server_exists
     function __ensure_mttpbx_virtual_server_exists__ {
       # +----+--------+--------------+------------------+------------------+-----------------+
       # | id | name   | ip           | hostname         | asterisk_version | type            |
@@ -652,63 +659,9 @@ case "$(hostname)" in
         return 0
       fi
     }
-    # }}}
     alias ensure_mttpbx_virtual_server_exists="__ensure_mttpbx_virtual_server_exists__"
-
-    if [[ -f ~/.rwolflaw_samba_pass ]]; then
-      alias mount_rwolflaw="sudo mkdir -p /mnt/rwolflaw && sudo mount -t cifs //gs5.monmouth.com/rwolflaw /mnt/rwolflaw -o 'username=rwolflaw,password=$(cat ~/.rwolflaw_samba_pass),vers=1.0'"
-      alias umount_rwolflaw="sudo umount /mnt/rwolflaw && sudo rm -R /mnt/rwolflaw"
-    fi
-
-    if [[ -f ~/.spectra2_pass ]]; then
-      alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
-      alias mount_spectra2="sudo mkdir -p /mnt/spectra2 && sudo mount -t cifs //200.255.100.185/spectra2 /mnt/spectra2 -o 'username=Administrator,password=$(cat ~/.spectra2_pass),vers=1.0'"
-      alias umount_spectra2="sudo umount /mnt/spectra2 && sudo rm -R /mnt/spectra2"
-    fi
-
-    # {{{ function __text2speech__ 
-    function __text2speech__ {
-      # Possible Voices
-      # en-US_AllisonVoice,
-      # en-US_AllisonV3Voice,
-      # en-US_EmilyV3Voice,
-      # en-US_HenryV3Voice,
-      # en-US_KevinV3Voice,
-      # en-US_LisaVoice,
-      # en-US_LisaV3Voice,
-      # en-US_MichaelVoice,
-      # en-US_MichaelV3Voice,
-      # en-US_OliviaV3Voice
-
-      local msg="$1"
-      local voice="$2"
-
-      case "$voice" in
-        allison) text2speech_voice="en-US_AllisonV3Voice" ;;
-        emily) text2speech_voice="en-US_EmilyV3Voice" ;;
-        lisa) text2speech_voice="en-US_LisaV3Voice" ;;
-        olivia) text2speech_voice="en-US_OliviaV3Voice" ;;
-        *)
-          voice=lisa
-          text2speech_voice="en-US_LisaV3Voice"
-          ;;
-      esac
-
-      local text2speech_output=$(echo "$msg" | sed 's/ /-/g')
-      local text2speech_text=$(echo "$msg" | sed 's/ /%20/g')
-      local test2speech_accept="audio%2Fwav"
-      local text2speech_api_url="https://api.us-east.text-to-speech.watson.cloud.ibm.com/instances/afbf1900-fd96-4d18-beec-8fca13a6cf51/v1/synthesize"
-      local text2speech_api_key=$(cat ~/.text2speech-api-key)
-
-      text2speech_output="${voice}-${text2speech_output}.wav"
-
-      # echo "curl -X GET -u \"apikey:${text2speech_api_key}\" --output ${text2speech_output} \"${text2speech_api_url}?accept=${test2speech_accept}&text=${text2speech_text}&voice=${text2speech_voice}\""
-      curl -X GET -u "apikey:${text2speech_api_key}" --output ${text2speech_output} "${text2speech_api_url}?accept=${test2speech_accept}&text=${text2speech_text}&voice=${text2speech_voice}"
-    }
     # }}}
-    alias text2speech="__text2speech__"
-
-    # {{{ function __convert_to_ulaw__ 
+    # {{{ alias convert_to_ulaw
     function __convert_to_ulaw__ {
       local input_file="$1"
       local ffmpeg_bin="$(which ffmpeg)"
@@ -716,24 +669,62 @@ case "$(hostname)" in
 
       ${ffmpeg_bin} -y -i ${input_file} -ar 8000 -ac 1 -ab 64 -f mulaw ${ulaw_file} -map 0:0 1>/dev/null 2>/dev/null
     }
-    # }}}
     alias convert_to_ulaw="__convert_to_ulaw__"
-
-    # {{{ function __mk_mail_dir__ 
-    function __mk_mail_dir__ {
-      local dirname="$1"
-      mkdir -p /home/jcarson/Mail/INBOX/${dirname}/{cur,new,tmp}
-      chmod -R 0700 /home/jcarson/Mail/INBOX/${dirname}
-    }
     # }}}
-    alias mk_mail_dir="__mk_mail_dir__"
+    # {{{ getpcap
+    function __getpcap__ {
+      local host="$1"
+      local ssh_bin=$(which ssh 2>/dev/null)
+      local scp_bin=$(which scp 2>/dev/null)
 
-    alias xymon_ctl="XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/bin/xymon /home/jcarson/git_clones/xymon/script/xymon_ctl.sh"
+      local latest_pcap=$($ssh_bin $host "ls -t /home/jcarson/pcaps/* | head -1")
+      local dst_dir=/home/jcarson/pcaps/${host}
 
-    alias minicom="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 minicom@mtt3"
+      mkdir -p $dst_dir
 
-    alias t38router="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss -c 3des-cbc 64.19.145.26"
+      $scp_bin -l 10000 ${host}:${latest_pcap} $dst_dir
+    }
+    alias getpcap="__getpcap__"
+    # }}}
+    # {{{ alias git_xtract_dir
+    function __git_extract_dir__ {
+      :
+      # I didn't get this working, but check out https://github.com/monmouthtelecom/call_blaster/wiki/Repo-from-Hosted-Subdir
 
+      # local dir_to_move="$1"
+      # local new_repo_url="$2"
+      # local original_dir="$(pwd)"
+      # local temp_remote_name=tmp_remote
+
+      # [[ -z "$dir_to_move" ]] && echo -e "[\033[0;31mERROR\033[0;0m] - no dir_to_move provided" && cd $original_dir && return 1
+      # [[ -z "$new_repo_url" ]] && echo -e "[\033[0;31mERROR\033[0;0m] - no new_repo_url provided" && cd $original_dir && return 1
+
+      # [[ ! -e "./${dir_to_move}" ]] && echo -e "[\033[0;31mERROR\033[0;0m] - dir_to_move does not exist" && cd $original_dir && return 1
+
+      # local git_bin=$(which git)
+      # local git_filter_repo_url=git@github.com:newren/git-filter-repo.git
+      # local git_filter_bin=~/git_clones/git-filter-repo/git-filter-repo
+
+      # if [[ -e ~/git_clones/git-filter-repo ]]; then
+      #   cd ~/git_clones/git-filter-repo && $git_bin pull
+      # elif [[ -e ~/git_clones ]]; then
+      #   cd ~/git_clones && $git_bin clone $git_filter_repo_url
+      # fi
+
+      # $git_bin remote add $temp_remote_name $new_repo_url
+      # $git_bin fetch $temp_remote_name
+      # $git_bin pull $temp_remote_name master
+      # $git_bin push -u $temp_remote_name 
+      # $git_filter_bin --path $dir_to_move
+      # $git_filter_bin --subdirectory-filter $dir_to_move
+
+      # # $git_bin remote remove $temp_remote_name
+
+      # cd $original_dir
+    }
+    alias git_xtract_dir="__git_extract_dir__"
+    # }}}
+    # {{{ alias imagemagick_pkgconfig
     function __imagemagick_pkgconfig__ {
       local version="$1"
       local imagemagick6_dir=/usr/local/ImageMagick/6.9.12-34/lib/pkgconfig
@@ -759,20 +750,8 @@ case "$(hostname)" in
       esac
     }
     alias imagemagick_pkgconfig="__imagemagick_pkgconfig__"
-
-    # {{{ function __sync_ssh_config__
-    function __sync_ssh_config__ {
-      local f="/home/jcarson/.ssh/config"
-      local users=(asterisk orderapp)
-
-      for u in "${users[@]}"; do
-        sudo cp $f /home/$u/.ssh/config
-        sudo chown $u:$u /home/$u/.ssh/config
-      done
-    }
     # }}}
-    alias sync_ssh_config="__sync_ssh_config__"
-
+    # {{{ alias listen_to_latest_dev_recording
     function __listen_to_latest_dev_recording__ {
       local year="$(date +'%Y')"
       local month="$(date +'%m')"
@@ -798,8 +777,30 @@ case "$(hostname)" in
       fi
     }
     alias listen_to_latest_dev_recording="__listen_to_latest_dev_recording__"
-
-    # {{{ function __sync_hpbxgui_session_id__ 
+    # }}}
+    alias minicom="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 minicom@mtt3"
+    # {{{ alias mk_mail_dir
+    function __mk_mail_dir__ {
+      local dirname="$1"
+      mkdir -p /home/jcarson/Mail/INBOX/${dirname}/{cur,new,tmp}
+      chmod -R 0700 /home/jcarson/Mail/INBOX/${dirname}
+    }
+    alias mk_mail_dir="__mk_mail_dir__"
+    # }}}
+    # {{{ alias mount_rwolflaw/umount_rwolflaw
+    if [[ -f ~/.rwolflaw_samba_pass ]]; then
+      alias mount_rwolflaw="sudo mkdir -p /mnt/rwolflaw && sudo mount -t cifs //gs5.monmouth.com/rwolflaw /mnt/rwolflaw -o 'username=rwolflaw,password=$(cat ~/.rwolflaw_samba_pass),vers=1.0'"
+      alias umount_rwolflaw="sudo umount /mnt/rwolflaw && sudo rm -R /mnt/rwolflaw"
+    fi
+    # }}}
+    # {{{ alias spectra2/mount_spectra2/umount_spectra2
+    if [[ -f ~/.spectra2_pass ]]; then
+      alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"
+      alias mount_spectra2="sudo mkdir -p /mnt/spectra2 && sudo mount -t cifs //200.255.100.185/spectra2 /mnt/spectra2 -o 'username=Administrator,password=$(cat ~/.spectra2_pass),vers=1.0'"
+      alias umount_spectra2="sudo umount /mnt/spectra2 && sudo rm -R /mnt/spectra2"
+    fi
+    # }}}
+    # {{{ alias sync_hpbxgui_session_id
     function __sync_hpbxgui_session_id__ {
       local my_hpbxgui_user="$1"
       [[ -z "$my_hpbxgui_user" ]] && my_hpbxgui_user=mttpbx-284
@@ -872,8 +873,63 @@ case "$(hostname)" in
         echo -e "\033[0;31mFAIL\033[0;0m"
       fi
     }
-    # }}}
     alias sync_hpbxgui_session_id="__sync_hpbxgui_session_id__"
+    # }}}
+    # {{{ alias sync_ssh_config
+    function __sync_ssh_config__ {
+      local f="/home/jcarson/.ssh/config"
+      local users=(asterisk orderapp)
+
+      for u in "${users[@]}"; do
+        sudo cp $f /home/$u/.ssh/config
+        sudo chown $u:$u /home/$u/.ssh/config
+      done
+    }
+    alias sync_ssh_config="__sync_ssh_config__"
+    # }}}
+    alias t38router="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss -c 3des-cbc 64.19.145.26"
+    # {{{ alias text2speech
+    function __text2speech__ {
+      # Possible Voices
+      # en-US_AllisonVoice,
+      # en-US_AllisonV3Voice,
+      # en-US_EmilyV3Voice,
+      # en-US_HenryV3Voice,
+      # en-US_KevinV3Voice,
+      # en-US_LisaVoice,
+      # en-US_LisaV3Voice,
+      # en-US_MichaelVoice,
+      # en-US_MichaelV3Voice,
+      # en-US_OliviaV3Voice
+
+      local msg="$1"
+      local voice="$2"
+
+      case "$voice" in
+        allison) text2speech_voice="en-US_AllisonV3Voice" ;;
+        emily) text2speech_voice="en-US_EmilyV3Voice" ;;
+        lisa) text2speech_voice="en-US_LisaV3Voice" ;;
+        olivia) text2speech_voice="en-US_OliviaV3Voice" ;;
+        *)
+          voice=lisa
+          text2speech_voice="en-US_LisaV3Voice"
+          ;;
+      esac
+
+      local text2speech_output=$(echo "$msg" | sed 's/ /-/g')
+      local text2speech_text=$(echo "$msg" | sed 's/ /%20/g')
+      local test2speech_accept="audio%2Fwav"
+      local text2speech_api_url="https://api.us-east.text-to-speech.watson.cloud.ibm.com/instances/afbf1900-fd96-4d18-beec-8fca13a6cf51/v1/synthesize"
+      local text2speech_api_key=$(cat ~/.text2speech-api-key)
+
+      text2speech_output="${voice}-${text2speech_output}.wav"
+
+      # echo "curl -X GET -u \"apikey:${text2speech_api_key}\" --output ${text2speech_output} \"${text2speech_api_url}?accept=${test2speech_accept}&text=${text2speech_text}&voice=${text2speech_voice}\""
+      curl -X GET -u "apikey:${text2speech_api_key}" --output ${text2speech_output} "${text2speech_api_url}?accept=${test2speech_accept}&text=${text2speech_text}&voice=${text2speech_voice}"
+    }
+    alias text2speech="__text2speech__"
+    # }}}
+    alias xymon_ctl="XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/bin/xymon /home/jcarson/git_clones/xymon/script/xymon_ctl.sh"
     # }}}
     # {{{ Recompile Aliases (After pacman -Syu)
     # {{{ function __compile_mcl__ 
@@ -985,6 +1041,7 @@ function __git_first_push__ {
 }
 # }}}
 alias git_first_push="__git_first_push__"
+alias gfp="__git_first_push__"
 
 # {{{ function __git_sync_master__ 
 function __git_sync_master__ {
@@ -1022,6 +1079,44 @@ function __git_sync_master__ {
 }
 # }}}
 alias git_sync_master="__git_sync_master__"
+alias gsm="__git_sync_master__"
+
+# {{{ __git_prep_deploy__
+function __git_prep_deploy__ {
+  local git_bin=$(which git)
+
+  if [[ $($git_bin branch --list stable | wc -l) == 0 ]]; then
+    __echo_proc_step__ "checking out master"
+    $git_bin checkout master --quiet
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+    __echo_proc_step__ "pulling"
+    $git_bin pull --quiet
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+  else
+    __echo_proc_step__ "checking out master"
+    $git_bin checkout master --quiet
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+    __echo_proc_step__ "pulling"
+    $git_bin pull --quiet
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+    __echo_proc_step__ "checking out stable"
+    $git_bin checkout stable --quiet
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+    __echo_proc_step__ "merging master -> stable"
+    $git_bin merge --no-edit --no-ff --quiet master
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+    __echo_proc_step__ "pushing stable"
+    $git_bin push --quiet
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+  fi
+}
+# }}}
+alias git_prep_deploy="__git_prep_deploy__"
 
 alias gits="git status --short"
 alias grep="grep --color=auto"
