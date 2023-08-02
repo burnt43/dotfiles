@@ -199,6 +199,8 @@ nnoremap <leader>zoc zMzv
 " NOTE: These should really be in the ruby group.
 " (m)ake (m)ark (e)nd
 nnoremap <leader>mme o# }}}<esc>
+" (m)ake (m)ark (f)actory
+nnoremap <leader>mmf ^y2WO# {{{ <esc>p
 " (m)ake (m)ark (m)ethod
 nnoremap <leader>mmm ^y2wO# {{{ <esc>p
 " (m)ake (m)ark (s)cope

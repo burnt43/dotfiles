@@ -1,500 +1,500 @@
-mv hpbxgui_classes.rb ./lib/
-mv media_gateway_server.rb ./lib/
-mv smp_helpers.rb ./lib/
-mv virtual_server.rb ./lib/
-ls -l
-ls -l lib/
-cat config/rpush.rb 
-mv config/rpush.rb ./lib/
-mv lib/rpush.rb lib/rpush_config.rb
-ls -l
-cd lib/
-ls -l
-mkdir fem
-mv config.rb fem/
-ls -l
-cd ../
-ls -l
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-ls -l lib
-./script/eventmachine.sh 
-
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-irb
-grep -R "gem" ./
-grep -R "bundle" ./
-bundle exec irb
-bundle exec /usr/local/ruby/ruby-2.6.10/bin/irb
-irb
-find /home/jcarson/.gems -type f -name 'conversions.rb'
-bundle install
-bundle update
-bundle update
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-mv database.yml ./config/
-cat /etc/my.cnf
-grep -R "database.yml" ./
-cat /etc/my.cnf
-./script/eventmachine.sh 
-grep -R "require" ./lib/
-ls -l lib
-head lib/smp_helpers.rb 
-grep "Global" ./
-grep -R "Global" ./
-grep -R "require" ./lib/
-ls -l lib/
-./script/eventmachine.sh 
-./script/eventmachine.sh 
-./script/eventmachine.sh 
+dns_test_run
+gits
+git checkout -b update-dns-scripts-for-current-use-case
 gits
 git add -A
 gits
-git commit -m 'clean up project a bit. get eventmachine daemon to run.'
-git push
-~/.fehbg
+git commit -m "small update. also removed pacemaker script tests. i don't think those are necessary and are brittle. we only need to test the generic dns_record_changer.sh script."
+gfp
 gits
-git diff
+./dns_record_changer.sh -h
+ruby_file_text Functions
+ruby_file_text GlobalVars
+ruby_file_text Args
+ruby_file_text Validate
+ruby_file_text Defaults
+ruby_file_text HostBasedVars
+ruby_file_text PrintVars
+ls -l dev/
+ls -l dev/assets/
+ls -l dev/assets/alt-
+ls -l dev/assets/alt-dns1-like-dns.db
+ruby_file_text LocalBasedVars
+ruby_file_text RemoteBasedVars
+./dns_record_changer.sh -h
+./script/change_server_records.sh 
+./script/change_server_records.sh -d rdbk
+./script/change_server_records.sh -d rdbk -t app
+./script/change_server_records.sh -d rdbk -t app -v
+./script/change_server_records.sh -h
+./script/change_server_records.sh -d rdbk -t app -v -f
+./script/change_server_records.sh -d rdbk -t app -v -f
+./dns_record_changer.sh -
+./script/change_server_records.sh -d rdbk -t app -v
+gits
+git diff dev/assets/alt-dns1-like-dns.db
+git checkout dev/assets/alt-dns1-like-dns.db
+gits
 git add -A
 gits
-git commit -m "update start up script"
+git commit -m 'more changes'
 git push
+./script/change_server_records.sh -d rdbk -t app -v
+./script/change_server_records.sh -d rdbk -t app -v
+./script/change_server_records.sh -d rdbk -t app -v
 gits
-git add -A
+git diff dev/assets/alt-dns1-like-dns.db
+./dns_record_changer.sh -h
+./script/initd/activate_dns-rdbk-app.sh start
+./script/initd/activate_dns-rdbk-app.sh start
 gits
-git commit -m 'another update'
+git diff dev/assets/alt-dns1-like-dns.db
+git checkout dev/assets/alt-dns1-like-dns.db
+gits
+gits
+git add dev/assets/alt-dns1-like-dns.db
+gits
+git commit -m 'make dev file look like how production is now.'
 git push
-gits
-grep -Ri "ami" ./
-grep -Ri "Rj%8" ./
-grep -Ri "::connect" ./
-ping nk-app0
-ping app1
-ping app0
+./script/initd/activate_dns-rdbk-app.sh start
+git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
 ping hosted
-ssh 209.191.9.25
-vim ~/.tmp/poop
-cat ~/.tmp/poo
-cat ~/.tmp/poop
-ping appdev0
-cat ~/.ssh/id_rsa.pub 
-git remote -v
 gits
-git diff
+git checkout dev/assets/alt-dns1-like-dns.db
+./script/initd/activate_dns-rdbk-app.sh start
+./script/initd/activate_dns-rdbk-app.sh start
+git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
+gits
+git checkout dev/assets/alt-dns1-like-dns.db
+./script/initd/activate_dns-rdbk-app.sh start
+git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
+./dns_record_changer.sh -h
+ssh hosted
+./script/initd/activate_dns-rdbk-app.sh status
+echo $?
+./script/initd/activate_dns-nwrk-app.sh status
+echo $?
+./script/initd/activate_dns-nwrk-app.sh status
+dig hosted.monmouth.com +short
+which difg
+which dig
+dig hosted.monmouth.com +short
+./script/initd/activate_dns-nwrk-app.sh status
+./script/initd/activate_dns-nwrk-app.sh status
+./script/initd/activate_dns-nwrk-app.sh status
+./script/initd/activate_dns-nwrk-app.sh status
+./script/initd/activate_dns-nwrk-app.sh status
+./script/initd/activate_dns-nwrk-app.sh status
+./script/initd/activate_dns-nwrk-app.sh status
+echo $?
+echo $?
+./script/initd/activate_dns-nwrk-app.sh status
+./script/initd/activate_dns-nwrk-app.sh status
+./script/initd/activate_dns-rdbk-app.sh status
+echo $?
+gits
+git checkout dev/assets/alt-dns1-like-dns.db
+script/initd/activate_dns-nwrk-db.sh start
+git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
+script/initd/activate_dns-rdbk-db.sh start
+git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
+script/initd/activate_dns-nwrk-db.sh start
+git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
+ls -l script/
+rm script/change_server_records.sh 
+gits
 git add -A
 gits
-git commit -m 'add some comments explaining how to set up the server to get the daemons to run.'
+git commit -m 'remove the change_server_records.sh script. it was a middle man that was supposed to simplify things, but it made things more complicated. the initd scripts can just call dns_record_changer.sh directly and its a lot more to the point.'
+git push
+ping vhpbx1
+ping nk-hpbx2
+ping hpbx2
+./dns_record_changer.sh -h
+ls -l dev/assets/
+gits
+gits
+git add -A
+gits
+git commit -m 'update'
 git push
 gits
+cat .gitignore 
+gits
+ruby_file_text App
+ruby_file_text app
+ruby_file_text db
+ruby_file_text hpbx
+ruby_file_text bin
+ruby_file_text function
 gits
 git add -A
 gits
-git commit -m 'add a way to configure what servers you want to connect to the ami'
-git push
-gits
-gits
-git add -A
-gitsd
-gits
-date
-gits
-gits
-git add -A
-gits
-git commit -m 'fix yaml'
-git push
-gi
-gits
-git checkout safe_eventmachine
-ls -l
-gits
-git add -A
-gits
-git commit -m 'remove safe script and use the generic safe script. update the initd to support this.'
-git push
-ls -l
-ls -l
-gits
-git add -A
-gits
-git commit -m 'add start script for faye'
-git push
-ls -l lib/
-./script/faye.sh 
-./script/faye.sh 
-./script/faye.sh 
-bundle exec thin --help
-irb
-ls -l lib
-grep -R "faye?" ./
-grep -R "eventmachine?" ./
-irb
-FOOBAR=1 irb
-grep -R "rpush_config" ./
-./script/faye.sh 
-./script/faye.sh 
-gits
-git add -A
-gits
-git commit -m 'update faye start script'
-git push
-date
-grep -R "PORT" ./
-ls -l
-./script/faye.sh 
-./script/faye.sh 
-gits
-git add -A
-gits
-git commit -m 'update faye script a bit to support config'
+git commit -m 'changes'
 git push
 gits
 ls -l
-./script/faye.sh 
+./script/initd/activate_dns-rdbk-hpbx2.sh start
 gits
+git diff dev/assets/hosted-like-dns.db.template
+git diff dev/assets/hosted-like-dns.db
+./script/initd/activate_dns-nwrk-hpbx2.sh start
+gits
+git diff dev/assets/hosted-like-dns.db.template
+git diff dev/assets/hosted-like-dns.db
 gits
 git add -A
 gits
-git commit -m "update faye initd script"
+git commit -m 'changes'
 git push
+ls -l script/
+rm script/change_tenant_records.sh 
 gits
+git add -A
+gits
+git commit -m 'remove dumb middle man script'
+git push
+cd script/initd/
+ls -l
+mv activate_dns-nwrk-hpbx2.sh activate_dns-nwrk-vhpbx1.sh
+mv activate_dns-rdbk-hpbx2.sh activate_dns-rdbk-vhpbx1.sh
 ls -l
 gits
-gits
-gits
-date
-exit
-~/.fehbg
-~/.fehbg
-vim ~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-exit
-ssh hosted
-ssh 209.191.9.14
-ssh 209.191.9.15
-ping nk-app0
-ssh hosted-db0
-exit
-ssh app1
-ssh app2
-ssh hosted-db0
-ssh hosted-db1
-ssh hosted-db0
-ssh app1
-ssh app0
-ssh nk-app0
-ssh hosted-db0
-ping 209.191.9.40
-ssh 209.191.9.40
-exit
-ssh recorder1
-ssh pbx
-exit
-ssh hosted
-ssh recorder0
-exit
-ssh hosted-db
-exit
-~/.bashrc
-source ~/.bashrc
-date
-sudo su asterisk
-ruby2
-cd ~/git_clones/hosted/hpbxgui/
-ruby2
-sudo su asterisk
-sour3ce ~/.bashrc
-source ~/.bashrc
-ssh hosted
-hpbxgui_dev
-ssh hosted
-git checkout master
-gsm
-vim app/models/virtual_server.rb 
-vim app/models/hpbx_num.rb 
-ping mtt4
-vim app/models/hpbx_num.rb 
-vim app/models/virtual_server.rb 
-source ~/.bashrc
-ssh hosted-db
-source ~/.bashrc
-ssh hosted
-exit
-ssh hosted
-exit
-ssh hosted
-exit
-ssh hosted
-exit
-ssh hosted
-exit
-ssh app0
-ssh app0
-ssh hosted-db
-exit
-dig -x 209.191.9.40
-ping mttpbx-dev.monmouth.com
-which remote_sync_dotfiles.sh 
-vim /home/jcarson/git_clones/work-scripts/personal/remote_sync_dotfiles.sh
-remote_sync_dotfiles.sh -s mttpbx-dev
-ssh mttpbx-dev
-cat ~/.ssh/id_rsa.pub 
-ssh mttpbx-dev
-cat ~/.ssh/id_rsa.pub 
-ssh mttpbx-dev
-ssh mttpbx-dev
-which remote_sync_dotfiles.sh 
-vim /home/jcarson/git_clones/work-scripts/personal/remote_sync_dotfiles.sh
-remote_sync_dotfiles.sh -s mttpbx-dev
-ssh mttpbx-dev
-remote_sync_dotfiles.sh -s mttpbx-dev
-ping 209.191.9.41
-ping 209.191.9.42
-cd ~/git_clones/
-ls -l
-cd engoncall/
-ls -l
-grep "xymon" ./
-grep -R  "xymon" ./
-grep -R  "sms" ./
-vim ./script/xymon_server/send_sms.sh
-mysql -u xymon -ph4lf*l1fe -h hosted-db
-mysql -u xymon -ph4lf*l1fe -h hosted-db0
-ssh app1
-ssh app2
-ssh hosted-db0
-ping 64.19.189.6
-dig -x 64.19.189.6
-ssh hosted-db0
-ping 209.191.9.42
+cd ../
 cd ../
 ls -l
-ssh recorder0
-cd ~/git_clones/
-git clone git@github.com:monmouthtelecom/recorder.git
-cd recorder/
-ls -l
-cat config/database.yml 
-ssh hosted-db
-ssh hosted-db0
-dig -x 209.191.9.7
-history | grep 'dig'
-man dig
-dig -x 209.191.9.7 +noall +answer
-dig -x 209.191.9.7 +noall +answer | awk '{print $4}'
-dig -x 209.191.9.7 +noall +answer | awk '{print $5}'
-dig -x 209.191.9.7 +noall +answer | awk '{print $5}' | sed 's/\.$//g'
-dig -x 209.191.9.70 +noall +answer | awk '{print $5}' | sed 's/\.$//g'
-irb
-ssh hosted-db
-ssh hosted-db0
-ping 209.191.9.7
-ssh 209.191.9.7
-ping 209.191.9.40
-ssh 209.191.9.40
-ping 209.191.9.26
-ssh 209.191.9.26
-cd ~git/
-cd ~/git_clones/
-ls -l
-git clone git@github.com:monmouthtelecom/Fail2BanExtended.git
-ssh hosted-db0
-ssh hosted
-mysql -u backup -pjk28*cwhf -h hosted-db
-mysql -u backup -pjk28*cwhf -h hosted-db
-exit
-mysql -u command_queuer -pb20vMGI2NzQxNmQt -h hosted-db
-ssh hosted-db
-ssh hosted-db0
-mysql -u billing -pbi11ing -h hosted-db
-mysql -u billing -prhO0keLd -h hosted-db
-ssh hosted-db
-ssh hosted-db0
-mysql -u backup -pUcnk8CtWTie&HeMSHdF5 -h hosted-db
-mysql -u backup -p'Ucnk8CtWTie&HeMSHdF5' -h hosted-db
-ssh mtt3
-ssh app0
-ssh order
-ssh app0
-ssh mtt3
-ssh app0
-exit
-ssh hosted-db0
-ssh hosted-db0
-exit
-auto_dialer_dev
-ls -l
-cat database.yml 
-asterisk_cdr_dev
-ls -l
-grep "password" config/production/*.yaml
-grep -B 1 "password" config/production/*.yaml
-cd ~/git_clones/ami-replication/
-ls -l
-ls -l config/
-cat config/production.yaml 
-exit
-ssh hosted
-exit
-ssh hosted
-exit
-ruby2
-sudo su asterisk
-ssh hosted
-exit
-ssh hosted
-exit
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-exit
-ssh hosted
-exit
-hpbxgui_dev
-git checkout -b fix-psvl-geo-route-generation
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
 gits
 git add -A
 gits
-git commit -m 'fix for cmdn'
+git commit -m 'small changes'
+git push
+./script/initd/activate_dns-rdbk-vhpbx1.sh start
+gits
+git diff dev/assets/hosted-like-dns.db
+git diff dev/assets/hosted-like-dns.db.template
+gits
+gits
+git add -A
+gits
+git commit -m 'changes'
+git push
+gsm
+git checkout -b support-changing-hpbx-dns
+gits
+ls -l
+ls -l test/
+ls -l test/assets/
+ls -l test/assets/perm/
+ls -l test/assets/perm/
+vim test/assets/perm/hpbx-hosted-like-dns.db
+vim test/assets/perm/hpbx-hosted-prov-like-dns.db
+vim test/assets/perm/hpbx-hosted-prov-like-dns.db
+gits
+git add -A
+gits
+git commit -m 'add files from production so I can use them in the test env'
+gfp
+ruby_file_text HpbxLike
+dns_test_run
+dns_test_run
+ls -l
+ls -l lib/
+ls -l test/
+ls -l test/assets/
+ls -l test/assets/perm/
+dns_test_run
+gits
+git add -A
+gits
+git commit -m "support new files to test in the test env"
+git push
+dns_test_run
+dns_test_run
+dns_test_run
+dns_test_run
+dns_test_run
+dns_test_run
+gits
+git add -A
+gits
+git commit -m "add test for changing hosted records on hpbx servers"
+git push
+git push
+dns_test_run
+dns_test_run
+dns_test_run
+dns_test_run
+gits
+git add -A
+gits
+gits
+git add -A
+git commit -m 'add test for files on hpbx servers'
+git push
+dns_test_run
+ping hpbx0
+ping hpbx1
+ping hpbx2
+ping hpbx3
+ping hpbx4
+ping hpbx5
+ping hpbx6
+ping nk-hpbx2
+ping nk-hpbx0
+./dns_record_changer.sh -h
+./script/initd/activate_dns-nwrk-app.sh start
+./script/initd/activate_dns-nwrk-app.sh start
+./script/initd/activate_dns-nwrk-app.sh start
+./script/initd/activate_dns-nwrk-app.sh start
+gits
+git add -A
+gits
+git commit -m 'add some print out'
+git push
+gits
+git add -A
+gits
+git commit -m 'update scripts'
+git push
+gits
+gits
+git add -A
+gits
+git commit -m 'todo reminder'
+git push
+gsm
+gits
+git checkout -b fixes-to-initd-scripts
+gits
+git add -A
+gits
+git commit -m "fix missing backslashes and fix wrong source and dest ips"
 git push
 gfp
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
+gsm
+gsm
+git checkout -b handle-trailing-whitespace
+gits
+git diff
+dns_test_run
+gits
+git diff
 gits
 git add -A
 gits
-git commit -m 'add support for psvl'
-git push
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/hpbx_num_test.rb"
+git commit -m "hanlde trailing whitespace"
+gfp
+gsm
+git checkout -b more-changes
 gits
 git add -A
 gits
-git commit -m 'fix'
+git commit -m "change colors"
+gfp
+dns_test_run
+gits
+git add -A
+gits
+git commit -m 'conditionally reload based on what the output file it'
 git push
+gsm
+exit
+hpbxgui_dev
+mysql hpbxgui_jcarson_dev
+exit
+hpbxgui_dev
+gsm
+git checkout -b fix-queue-reload-script
+grep -R "\.queue_command" ./
+grep -R "\.queue_command" ./ | grep -v 'legacy'
+irb
+hpbxgui_console
+./script/queue_asterisk_reload.rb 
+ls -l /usr/local/bin/rub
+ls -l /usr/local/bin/ruby
+sudo ln -s /usr/local/bin/ruby $(which ruby)
+sudo ln -s $(which ruby) /usr/local/bin/ruby
+./script/queue_asterisk_reload.rb 
+./script/queue_asterisk_reload.rb  
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+ls -l config/database.yml 
+./script/queue_asterisk_reload.rb --name mttpbx
+which gem
+gem list
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+ls -l app/models/server
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+ls -l /home/jcarson/git_clones/hosted/hpbxgui/app/models/server/virtual_server.rb
+ls -l /home/jcarson/git_clones/hosted/hpbxgui/app
+ls -l /home/jcarson/git_clones/hosted/hpbxgui/app/models
+ls -l /home/jcarson/git_clones/hosted/hpbxgui/app/models/server
+ls -l /home/jcarson/git_clones/hosted/hpbxgui/app/models/server/can_perform_asterisk_reloads.rb
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+find ./ -type f -name '*global*'
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+ls -l app/models/
+grep "class.*VirtualServer" app/models/*.rb
+grep "class.*VirtualServer" app/models/*.rb | cut -d: -f1
+grep "class.*VirtualServer" app/models/*.rb | cut -d: -f1 | sort | uniq
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+grep -R "class.*SipConf" ./app/models/
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+find ./app -type f -name '*recon*'
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+find ./app -type f -name '*move*'
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+./script/queue_asterisk_reload.rb --name mttpbx --conference
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --conference
+mysql -u hpbxgui -peasypeasy2 -h nk-app0
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --conference
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --dialplan
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --dialplan
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --features
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --feature
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --features
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --moh
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --queue
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --sip
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --voicemail
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --voicemail
+gits
+git add -A
+gits
+git commit -m "changes for the queue script"
+gfp
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --voicemail
+gits
+RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --voicemail
 gits
 gits
 gsm
+gits
+gits
+gsm
+git checkout -b voicemail-confinate-fix
+hpbxgui_test_run
+hpbxgui_test_run
+gits
+git add -A
+gits
+git commit -m 'quick reorg of extenable'
+git push
+gfp
+grep -R "should_confinate" ./app
+grep -R "should_confinate" ./app
+hpbxgui_test_run
+gits
+git add -A
+gits
+git commit -m 'add basis of conditionally confinating'
+git push
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+gits
+gits
+git add -A
+gits
+git commit -m 'start changing tests to be able to test this new feature'
+git push
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+gits
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+grep -R "TenantEnv" ./hpbxgui_test/
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+gits
+git add -A
+gits
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+gits
+git add -A
+gits
+git commit -m 'test currently fails intentionally until I writ ethe feature'
+git push
+hpbxgui_console
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
+hpbxgui_console
 exit
-ssh hpbx0
-ssh vhpbx1
-ssh hpbx0
+mysql hpbxgui_jcarson_dev
 exit
-ssh nk-hpbx2
+source ~/.bashrc 
+ruby2
+sudo su asterisk
+ssh hosted
 exit
-ssh hpbx1
+ssh hosted
+ssh pbx
 exit
-ssh hpbx2
+~/.fehbg
+~/.fehbg
+~/.fehbg
+~/.fehbg
+~/.fehbg
+~/.fehbg
 exit
-ssh hpbx3
-exit
-ssh hpbx4
-exit
-ssh hpbx5
+~/.fehbg
+~/.fehbg
+~/.fehbg
+~/.fehbg
+~/.fehbg
+~/.fehbg
+~/.fehbg
+~/.fehbg
 exit
 ssh pbx
 exit
-ssh hosted
-ssh hpbx0
-vim ~/.ssh/
-vim ~/.ssh/config 
-exit
-cd ~/git_clones/
-ls -l
-cd xymon-reporter/
-ls -l
-tree ./
-cat config/production/fs0.yaml 
-vim config/deploy/production.rb 
-grep -R "database" ./
-cd ../xymon
-ls -l
-grep -R "database" ./
-cat test/
-ls -l test/
-ls -l script/
-cat script/xymon_ctl.sh 
-hpbxgui_dev
-gsm
-vim hpbxgui_test/tests/models/hpbx_num_test.rb 
-exit
-cd ~/git_clones/ami-fw-proxy/
-ls -l
-cat database.yml 
-cd ../auto_dialer/
-ls -l
-cat database.yml 
-cd ../faye/
-ls -l
-cat config/database.yml 
-cd ../hop
-cd ../operator-panel/
-ls -l
-cat config/env_config.yml | grep 'pass'
-cat config/env_config.yml | grep -B 1 'pass'
-cd ../hosted/hpbxgui/
-cat config/database.yml 
-cd ../../mtt_crm/
-ls -l
-cat config/database.yml 
-cd ../recorder/
-ls -l
-cat config/database.yml 
-cd ../stir-shaken-server
-ls -l
-cat config/production.yaml 
-grep "pass" config/production.yaml 
-ls -l
-ls -l config/
-vim config/deploy/production.rb 
 ~/.fehbg
-cd ../work-scripts/
-git pull
-cat mtt/development/mysql_user_audit/mysql_user_audit.rb
-cat mtt/development/mysql_user_audit/script/mysql_user_audit.sh 
-ssh nk-hpbx2
-ssh hpbx2
-ssh nk-hpbx2
+~/.fehbg
+~/.fehbg
+~/.fehbg
+exit
 ssh app0
-ssh nk-app0
+exit
+~/.fehbg
+exit]
+exit
+telnet pl-2820-1
+exit
 ssh mtt3
-ssh app0
-ssh dadmin
-ping dadmin
-ping prog-dev
-ssh dadmin
-mysql -u command_queuer -pb20vMGI2NzQxNmQt -h app0
-mysql -u command_queuer -pb20vMGI2NzQxNmQt -h hosted-db0
-ssh hosted-db
-mysql -u command_queuer -pb20vMGI2NzQxNmQt -h hosted-db0
-mysql -u command_queuer -pb20vMGI2NzQxNmQt -h hosted-db0
+exit
+ssh vhpbx0
+ssh hosted
+exit
+ssh mcm.sip.monmouth.com
+exit
+cd $(work.sh)
+scp -l 10000 hpbx1:/home/jcarson/poop.cap ./
+scp -l 10000 hpbx1:/home/jcarson/poop2.cap ./
+exit
+echo "4158423095"
+exit
+ssh hpbx1
 exit

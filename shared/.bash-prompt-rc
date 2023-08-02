@@ -22,32 +22,46 @@ my_formatted_bash_version=$(printf "%02d%02d%02d" $my_bash_version_major $my_bas
 
 my_hostname=$(hostname | sed 's/\.monmouth\.com$//')
 
-case "$my_hostname" in
-  # Camden (Gray)
-  cm-*)
-    host_color_code=37
-    ;;
-  # New Brunswick (Cyan)
-  nb-*)
+interfaces_to_check=(bond0 eth0 eth1 enp6s0)
+for interface in "${interfaces_to_check[@]}"; do
+  my_network=$(ip -4 addr show $interface 2>/dev/null | grep -E '^\s*inet' | head -1 | awk '{print $2}' | cut -d\/ -f1 | awk -F. '{printf("%s.%s.%s", $1, $2, $3);}')
+  [[ ! -z "$my_network" ]] && break
+done
+
+case "$my_network" in
+  # Camden (Cyan)
+  209.191.44)
     host_color_code=36
     ;;
-  # Newark (Fuschia)
-  hosted-db0|nk-*|mg5|mg6)
-    host_color_code=35
+  # New Brunswick (Yellow)
+  64.19.147)
+    host_color_code=33
     ;;
-  # Pleasantville (Blue)
-  pl-*)
+  # Newark (Blue)
+  64.19.142|64.19.189|209.191.49)
     host_color_code=34
     ;;
+  # Pleasantville (Fuschia)
+  209.191.30)
+    host_color_code=35
+    ;;
   # Red Bank (Red)
-  app0|app1|app2|appdev0|conf0|conf1|dadmin|fs0|fs1|fsdev|gs3|gs4|gs5|gs6|gs7|gs8|hpbx0|hpbx1|hpbx2|hpbx3|hpbx4|hpbx5|hpbxdev|mg0|mg3|mg4|mtt3|mtt4|pbx|prog-dev|recorder0|recorder1|vidconf0|vidconf1)
+  64.19.145|172.16.0|173.63.3|200.255.100|209.191.1|209.191.9)
     host_color_code=31
     ;;
-  # VM (Black)
-  order)
+  # Other (Black)
+  *)
     host_color_code=30
     ;;
 esac
+
+if [[ "$host_color_code" == "30" ]]; then
+  case "$my_hostname" in
+    mtt3*)
+      host_color_code=31
+      ;;
+  esac
+fi
 
 function __shell_last_command__ {
   if [[ "$?" == "0" ]]; then
