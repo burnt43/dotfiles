@@ -1,42 +1,3 @@
-exit
-startx
-sudo pacman -S archlinux-keyring
-sudo pacman -Syu
-sudo pacman -Syu --noconfirm
-shutdown ow
-shutdown now
-udisksctl 
-udisksctl umount
-udisksctl unmount
-udisksctl unmount -b /dev/sdc1
-history | grep 'udisk'
-udisksctl
-udisksctl status
-udisksctl unmount -b /dev/sdc
-udisksctl unmount -b /dev/sdc1
-udisksctl unmount -b /dev/sdc1
-history
-startx
-shutdown now
-startx
-shutdown now
-startx
-shutdown now
-startx
-shutdown now
-startx
-shutdown now
-startx
-startx
-shutdown now
-startx
-startx
-shutdown now
-startx
-startx
-shutdown now
-shutdown now
-startx
 shutdown nwo
 shutdown now
 startx
@@ -497,4 +458,43 @@ exit
 hostname
 exit
 workvpn
+exit
+sshwork
+cd ~/git_clones/wor
+cd ~/git_clones/do
+cd ~/git_clones/dotfiles/
+ls -l
+./scripts/sync_local_to_repo.sh 
+gits
+git status .
+git diff
+git status .
+git checkout shared/.Xresources shared/.bash-prompt-rc shared/.bash_history shared/.bashrc shared/.config/i3/config shared/.fehbg shared/.vimrc
+gits
+git status .
+git pull
+./scripts/sync_local_to_repo.sh 
+git status .
+git diff shared/.bashrc
+git checkout shared/.Xresources shared/.bash-prompt-rc shared/.bash_history shared/.bashrc shared/.config/i3/config shared/.fehbg shared/.vimrc
+gits
+./scripts/sync_repo_to_local.sh 
+./scripts/sync_repo_to_local.sh 
+vim ~/.bashrc 
+gits
+./scripts/sync_local_to_repo.sh 
+git status .
+git diff shared/.bashrc
+git add -A
+gits
+git status .
+git commit -m 'add stuff from home comp'
+git push
+exit
+vim ~/.bashrc 
+vim ~/delete-me.txt
+cat ~/delete-me.txt 
+exit
+vim ~/.bashrc 
+exit
 exit

@@ -1190,6 +1190,8 @@ export XDG_CONFIG_HOME=$HOME/.config
 # {{{ Shell Welcome Text
 # {{{ function __print_md__ 
 function __print_md__ {
+  [[ ! -e /proc/mdstat ]] && return 0
+
   which mdadm 1>/dev/null 2>/dev/null
   if [[ "$?" == "0" ]]; then
     for md_device in $(cat /proc/mdstat | grep '^md' | awk '{print $1}'); do
