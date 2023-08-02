@@ -1006,7 +1006,13 @@ case "$(hostname)" in
     alias recompile_ruby="__recompile_ruby__"
     # }}}
     ;;
-    # }}}
+  # }}}
+  # {{{ Aliases.fakebiz0
+  fakebiz0)
+    alias workvpn="sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn"
+    alias sshwork="ssh 200.255.100.116"
+    ;;
+  # }}}
 esac
 # {{{ Aliases.Global
 alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"

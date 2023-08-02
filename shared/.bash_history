@@ -1,500 +1,500 @@
-dns_test_run
-gits
-git checkout -b update-dns-scripts-for-current-use-case
-gits
-git add -A
-gits
-git commit -m "small update. also removed pacemaker script tests. i don't think those are necessary and are brittle. we only need to test the generic dns_record_changer.sh script."
-gfp
-gits
-./dns_record_changer.sh -h
-ruby_file_text Functions
-ruby_file_text GlobalVars
-ruby_file_text Args
-ruby_file_text Validate
-ruby_file_text Defaults
-ruby_file_text HostBasedVars
-ruby_file_text PrintVars
-ls -l dev/
-ls -l dev/assets/
-ls -l dev/assets/alt-
-ls -l dev/assets/alt-dns1-like-dns.db
-ruby_file_text LocalBasedVars
-ruby_file_text RemoteBasedVars
-./dns_record_changer.sh -h
-./script/change_server_records.sh 
-./script/change_server_records.sh -d rdbk
-./script/change_server_records.sh -d rdbk -t app
-./script/change_server_records.sh -d rdbk -t app -v
-./script/change_server_records.sh -h
-./script/change_server_records.sh -d rdbk -t app -v -f
-./script/change_server_records.sh -d rdbk -t app -v -f
-./dns_record_changer.sh -
-./script/change_server_records.sh -d rdbk -t app -v
-gits
-git diff dev/assets/alt-dns1-like-dns.db
-git checkout dev/assets/alt-dns1-like-dns.db
-gits
-git add -A
-gits
-git commit -m 'more changes'
-git push
-./script/change_server_records.sh -d rdbk -t app -v
-./script/change_server_records.sh -d rdbk -t app -v
-./script/change_server_records.sh -d rdbk -t app -v
-gits
-git diff dev/assets/alt-dns1-like-dns.db
-./dns_record_changer.sh -h
-./script/initd/activate_dns-rdbk-app.sh start
-./script/initd/activate_dns-rdbk-app.sh start
-gits
-git diff dev/assets/alt-dns1-like-dns.db
-git checkout dev/assets/alt-dns1-like-dns.db
-gits
-gits
-git add dev/assets/alt-dns1-like-dns.db
-gits
-git commit -m 'make dev file look like how production is now.'
-git push
-./script/initd/activate_dns-rdbk-app.sh start
-git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
-ping hosted
-gits
-git checkout dev/assets/alt-dns1-like-dns.db
-./script/initd/activate_dns-rdbk-app.sh start
-./script/initd/activate_dns-rdbk-app.sh start
-git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
-gits
-git checkout dev/assets/alt-dns1-like-dns.db
-./script/initd/activate_dns-rdbk-app.sh start
-git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
-./dns_record_changer.sh -h
-ssh hosted
-./script/initd/activate_dns-rdbk-app.sh status
-echo $?
-./script/initd/activate_dns-nwrk-app.sh status
-echo $?
-./script/initd/activate_dns-nwrk-app.sh status
-dig hosted.monmouth.com +short
-which difg
-which dig
-dig hosted.monmouth.com +short
-./script/initd/activate_dns-nwrk-app.sh status
-./script/initd/activate_dns-nwrk-app.sh status
-./script/initd/activate_dns-nwrk-app.sh status
-./script/initd/activate_dns-nwrk-app.sh status
-./script/initd/activate_dns-nwrk-app.sh status
-./script/initd/activate_dns-nwrk-app.sh status
-./script/initd/activate_dns-nwrk-app.sh status
-echo $?
-echo $?
-./script/initd/activate_dns-nwrk-app.sh status
-./script/initd/activate_dns-nwrk-app.sh status
-./script/initd/activate_dns-rdbk-app.sh status
-echo $?
-gits
-git checkout dev/assets/alt-dns1-like-dns.db
-script/initd/activate_dns-nwrk-db.sh start
-git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
-script/initd/activate_dns-rdbk-db.sh start
-git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
-script/initd/activate_dns-nwrk-db.sh start
-git diff /home/jcarson/git_clones/dns-record-changer/dev/assets/alt-dns1-like-dns.db
-ls -l script/
-rm script/change_server_records.sh 
-gits
-git add -A
-gits
-git commit -m 'remove the change_server_records.sh script. it was a middle man that was supposed to simplify things, but it made things more complicated. the initd scripts can just call dns_record_changer.sh directly and its a lot more to the point.'
-git push
-ping vhpbx1
-ping nk-hpbx2
-ping hpbx2
-./dns_record_changer.sh -h
-ls -l dev/assets/
-gits
-gits
-git add -A
-gits
-git commit -m 'update'
-git push
-gits
-cat .gitignore 
-gits
-ruby_file_text App
-ruby_file_text app
-ruby_file_text db
-ruby_file_text hpbx
-ruby_file_text bin
-ruby_file_text function
-gits
-git add -A
-gits
-git commit -m 'changes'
-git push
-gits
+exit
+startx
+sudo pacman -S archlinux-keyring
+sudo pacman -Syu
+sudo pacman -Syu --noconfirm
+shutdown ow
+shutdown now
+udisksctl 
+udisksctl umount
+udisksctl unmount
+udisksctl unmount -b /dev/sdc1
+history | grep 'udisk'
+udisksctl
+udisksctl status
+udisksctl unmount -b /dev/sdc
+udisksctl unmount -b /dev/sdc1
+udisksctl unmount -b /dev/sdc1
+history
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+startx
+startx
+shutdown now
+startx
+startx
+shutdown now
+startx
+startx
+shutdown now
+shutdown now
+startx
+shutdown nwo
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+zoepalg1029XOW*
+startx
+shutdown now
+shutdown now
+startx
+shutdown now
+exit
+startx
+shutdown now
+startx
+shutdown now
+startx
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
+exit
+startx
+ssh 200.255.100.116
+ping 200.255.100.116
+shutdown now
+ssh 200.255.100.116
+exit
+startx
+ssh 200.255.100.116
+ssh 200.255.100.116
+ssh 200.255.100.116
+ssh 200.255.100.116
+ping 200.255.100.116
+exit
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
+exit
+startx
+shutdown now
+startx
+shutdown now
+startx
+shutdown now
+startx
+sudo pacman -Ss libre
+sudo pacman -Ss libre | head
+sudo pacman -Ss libreoffice-still
+sudo pacman -S libreoffice-still
+sudo pacman -Syu
+sudo shutdown now
+~/.fehbg
+~/.fehbg
+exit
+startx
+sudo pacman -S libreoffice-still
+sudo shutdown now
+shutdown now
+which cups
+exit
+sudo pacman -S cups
+systemctl status cups.service
+sudo systemctl restart cups.service
+systemctl status cups.service
+exit
+startx
+shutdown now
+startx
+pacman -Ss hunspell
+sudo pacman -S extra/hunspell-en_us
+shutdown now
+startx
+shutdown now
+ssh 200.255.100.116
+exit
+ssh 200.255.100.116
+exit
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
+exit
+startx
+shutdown now
+startx
+shutdown ow
+shutdown now
+startx
+startx
+ssh 200.255.100.116
+exit
+ssh 200.255.100.116
+exit
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
+exit
+startx'
+startx
+shutdown now
+ssh 200.255.100.116
+ssh 200.255.100.116
+ssh 200.255.100.116
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
+exit
+startx
+shutdown now
+ssh 200.255.100.116
+ssh 200.255.100.116
+ssh 200.255.100.116
+exit
+ssh 200.255.100.116
+exit
+ssh 200.255.100.116
+ssh 200.255.100.116
+exit
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
+exit
+startx
+~/.fehbg
+shutdown now
+startx
+shutdown now
+exit
+man udisckctl
+man udisksctl 
+dmesg
+sudo dmesg
+udisksctl mount /dev/sdc
+udisksctl mount -b /dev/sdc
+udisksctl mount -b /dev/sdc1
+ls -l /run/media/jcarson/boot
+cd /run/media/jcarson/boot
 ls -l
-./script/initd/activate_dns-rdbk-hpbx2.sh start
-gits
-git diff dev/assets/hosted-like-dns.db.template
-git diff dev/assets/hosted-like-dns.db
-./script/initd/activate_dns-nwrk-hpbx2.sh start
-gits
-git diff dev/assets/hosted-like-dns.db.template
-git diff dev/assets/hosted-like-dns.db
-gits
-git add -A
-gits
-git commit -m 'changes'
-git push
-ls -l script/
-rm script/change_tenant_records.sh 
-gits
-git add -A
-gits
-git commit -m 'remove dumb middle man script'
-git push
-cd script/initd/
+rm -Rf ./*
 ls -l
-mv activate_dns-nwrk-hpbx2.sh activate_dns-nwrk-vhpbx1.sh
-mv activate_dns-rdbk-hpbx2.sh activate_dns-rdbk-vhpbx1.sh
+pwd
+cd ~
+ls -l /run/media/jcarson/EC95-4FBB
+cd Music
 ls -l
-gits
+cd /run/media/jcarson/EC95-4FBB
+ls -l
+cd Music/
+ls -l
+pwd
+ls -l
+cd ~
+cd /run/media/jcarson/EC95-4FBB/Music/
+ls -l
+ls -l
+ls -l
 cd ../
+ls -l
+cd Music
+ls -l
+rm ./*.mp3
+ls -l
+pwd
+ls -l
+ls -l
+rm ./*.mp3
+pwd
+ls -l
+pwd
+ls -l
+ls -l
+rm Wizard\ of\ Loneliness\ -\ X\ -\ 04\ Rikku\ リュック.mp3 
+rm Wizard\ of\ Loneliness\ -\ X\ -\ 18\ Summoner\'s\ Salt\ \(Bonus\ Vocal\ Mix\).mp3 
+rm Wizard\ of\ Loneliness\ -\ X\ -\ 19\ Cloister\ of\ Trials\ \(Bonus\ Vocal\ Mix\).mp3 
+rm Wizard\ of\ Loneliness\ -\ X\ -\ 06\ The\ Principle\ of\ Repentance.mp3 
+rm Wizard\ of\ Loneliness\ -\ X\ -\ 09\ Lulu\ ルールー.mp3 
+rm Wizard\ of\ Loneliness\ -\ X\ -\ 11\ Hymn\ Of\ The\ Shoopuf.mp3 
+ls -l
+du -hs ./
+pwd
+ls -l
+ls -l *Count*
+ls -l
+rm cover.*
+ls -l
+cd ~
+cd /run/media/jcarson/EC95-4FBB/Music/
+ls -lt | head
+cd ~
+ping 200.255.100.116
+ssh 200.255.100.116
+ping 200.255.100.116
+exit
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
+exit
+startx
+cd ~/Downloads/
+ls -lt | head
+mkdir ~/music_for_mp3_player
+mv ~/Downloads/Pizza* ~/music_for_mp3_player/
+cd ~/music_for_mp3_player/
+ls -l
+unzip ./Pizza\ Hotline\ -\ LEVEL\ SELECT.zip 
+ls -l
+mkdir pizza_hotline---level_select
+mv *.mp3 ./pizza_hotline---level_select/
+ls -l
+cp pizza_hotline---level_select/*.mp3 /run/media/jcarson/boot
+udisksctl unmount
+udisksctl unmount -b /dev/sdc1
+udisksctl mount -b /dev/sdc1
+sudo dmesg
+ls -l /dev/sd*
+udisksctl mount -b /dev/sdc1
+ls -l
+cd pizza_hotline---level_select/
+ls -l
+cp *.mp3 /run/media/jcarson/EC95-4FBB/Music
+udisksctl unmount -b /dev/sdc1
+udisksctl mount -b /dev/sdc1
 cd ../
 ls -l
-gits
-git add -A
-gits
-git commit -m 'small changes'
-git push
-./script/initd/activate_dns-rdbk-vhpbx1.sh start
-gits
-git diff dev/assets/hosted-like-dns.db
-git diff dev/assets/hosted-like-dns.db.template
-gits
-gits
-git add -A
-gits
-git commit -m 'changes'
-git push
-gsm
-git checkout -b support-changing-hpbx-dns
-gits
+man unzip
+unzip Pizza\ Hotline\ -\ DELIVERY\ BOY\ 2099\ -\ 配達少年2099.zip 
 ls -l
-ls -l test/
-ls -l test/assets/
-ls -l test/assets/perm/
-ls -l test/assets/perm/
-vim test/assets/perm/hpbx-hosted-like-dns.db
-vim test/assets/perm/hpbx-hosted-prov-like-dns.db
-vim test/assets/perm/hpbx-hosted-prov-like-dns.db
-gits
-git add -A
-gits
-git commit -m 'add files from production so I can use them in the test env'
-gfp
-ruby_file_text HpbxLike
-dns_test_run
-dns_test_run
+mkdir pizza_hotline---delivery_boy_2099
+mv *.mp3 ./pizza_hotline---delivery_boy_2099/
 ls -l
-ls -l lib/
-ls -l test/
-ls -l test/assets/
-ls -l test/assets/perm/
-dns_test_run
-gits
-git add -A
-gits
-git commit -m "support new files to test in the test env"
-git push
-dns_test_run
-dns_test_run
-dns_test_run
-dns_test_run
-dns_test_run
-dns_test_run
-gits
-git add -A
-gits
-git commit -m "add test for changing hosted records on hpbx servers"
-git push
-git push
-dns_test_run
-dns_test_run
-dns_test_run
-dns_test_run
-gits
-git add -A
-gits
-gits
-git add -A
-git commit -m 'add test for files on hpbx servers'
-git push
-dns_test_run
-ping hpbx0
-ping hpbx1
-ping hpbx2
-ping hpbx3
-ping hpbx4
-ping hpbx5
-ping hpbx6
-ping nk-hpbx2
-ping nk-hpbx0
-./dns_record_changer.sh -h
-./script/initd/activate_dns-nwrk-app.sh start
-./script/initd/activate_dns-nwrk-app.sh start
-./script/initd/activate_dns-nwrk-app.sh start
-./script/initd/activate_dns-nwrk-app.sh start
-gits
-git add -A
-gits
-git commit -m 'add some print out'
-git push
-gits
-git add -A
-gits
-git commit -m 'update scripts'
-git push
-gits
-gits
-git add -A
-gits
-git commit -m 'todo reminder'
-git push
-gsm
-gits
-git checkout -b fixes-to-initd-scripts
-gits
-git add -A
-gits
-git commit -m "fix missing backslashes and fix wrong source and dest ips"
-git push
-gfp
-gsm
-gsm
-git checkout -b handle-trailing-whitespace
-gits
-git diff
-dns_test_run
-gits
-git diff
-gits
-git add -A
-gits
-git commit -m "hanlde trailing whitespace"
-gfp
-gsm
-git checkout -b more-changes
-gits
-git add -A
-gits
-git commit -m "change colors"
-gfp
-dns_test_run
-gits
-git add -A
-gits
-git commit -m 'conditionally reload based on what the output file it'
-git push
-gsm
+unzip Pizza\ Hotline\ -\ Pressing\ Business.zip 
+ls -l
+mkdir pizza_hotline---pressing_business
+ls -l
+mv *.mp3 ./pizza_hotline---pressing_business/
+ls -l
+ls -l
+ls -l ~/Downloads/
+ls -l
+ls -l ~/Downloads/
+ls -l ~/Downloads/*.zip
+mv *.zip ~/music_for_mp3_player/
+cd ~/music_for_mp3_player/
+ls -l
+mv ~/Downloads/*.zip ./
+ls -l
+find ./ -type d
+find ./ -type d -max-level 1
+find ./ -type d -max-depth 0
+man find
+find ./ -type d -maxdepth 0
+find ./ -type d -maxdepth 1
+find ./ -type d -maxdepth 1 - exec rm -R {}\;
+find ./ -maxdepth 1 -type d -exec rm -R {}\;
+find ./ -maxdepth 1 -type d -exec rm -R {} \;
+ls -l
+ls -l ./*.zip
+ls -l ./*.zip | xargs -I foo unzip foo -d /run/media/jcarson/EC95-4FBB/Music
+ls -l ./*.zip | xargs -I foo unzip -d /run/media/jcarson/EC95-4FBB/Music foo
+ls ./*.zip | xargs -I foo unzip foo -d /run/media/jcarson/EC95-4FBB/Music
+ls -l
+unzip First\ Word\ Records\ -\ FW\ is\ 10-\ Future\ Classics\ EP.zip -d /run/media/jcarson/EC95-4FBB/Music
+man unzip
+ls -l
+unzip Marcus\ D\ -\ Kirin.zip -o -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Marcus\ D\ -\ Kirin.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Marcus\ D\ -\ Retro\'d\ 2.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Marcus\ D\ -\ 龍神の夢\ \(Ryujin\ no\ Yume\).zip -d /run/media/jcarson/EC95-4FBB/Music
+ls -l
+unzip -o Pizza\ Hotline\ -\ DELIVERY\ BOY\ 2099\ -\ 配達少年2099.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Pizza\ Hotline\ -\ LEVEL\ SELECT.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Pizza\ Hotline\ -\ Pressing\ Business.zip -d /run/media/jcarson/EC95-4FBB/Music
+ls -l
+unzip -o SPIN\ MASTER\ A-1\ \&\ Shing02\ -\ 246911.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Tall\ Black\ Guy\ -\ Let\'s\ Take\ A\ Trip.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Various\ Artists\ -\ FW\ is\ 10\!\ Celebrating\ Ten\ years\ of\ First\ Word\ Records.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Wizard\ of\ Loneliness\ -\ X.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o 猫\ シ\ Corp.\ \&\ t\ e\ l\ e\ p\ a\ t\ h\ テレパシー能力者\ -\ Building\ a\ Better\ World.zip -d /run/media/jcarson/EC95-4FBB/Music
+ls -l
+mkdir processed
+ls -l
+mv *.zip ./processed/
+ls -l
+ls -l ~/Downloads/
+ls -l ~/Downloads/
+mv ~/Downloads/*zip ./
+ls -l
+unzip -o *.zip -d /run/media/jcarson/EC95-4FBB/Music
+ls -l
+unzip -o Count\ Bass\ D\ -\ BEGBORROWSTEEL\ \(Bonus\ Tracks\).zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Count\ Bass\ D\ -\ Edibles.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Count\ Bass\ D\ -\ Edibles\ 2.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Daniel\ Bachman\ -\ River.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Floating\ Points\ -\ Elaenia.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Jack\ Rose\ -\ Dr.\ Ragtime\ \&\ His\ Pals.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Marcus\ D\ -\ Retro\'d.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Substantial\ -\ The\ Garden.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o Various\ Artists\ -\ The\ Cool\ vol.\ 2-\ The\ Art\ of\ Boom\ Bap\ Jazz.zip -d /run/media/jcarson/EC95-4FBB/Music
+udisksctl unmount -b /dev/sdc1
+pacman -Ss easytag
+sudo pacman -Ss extra/easytag
+sudo pacman -S extra/easytag
+ls -l ~/Downloads/
+ls -l ~/Downloads/*.mp3
+man easytag
+easytag
+ls -l
+mv *.zip ./processed/
+ls -l
+mv ~/Downloads/*.mp3 ./
+ls -l
+udisksctl mount -b /dev/sdc1
+cp *.mp3 /run/media/jcarson/EC95-4FBB/Music/
+udisksctl unmount -b /dev/sdc1
+udisksctl unmount -b /dev/sdc1
+startx
+shutdown ow
+shutdown now
+startx
+shutdown now
+ssh 200.255.100.116
+ssh 200.255.100.116
+ssh 200.255.100.116
+ping 200.255.100.116
 exit
-hpbxgui_dev
-mysql hpbxgui_jcarson_dev
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
 exit
-hpbxgui_dev
-gsm
-git checkout -b fix-queue-reload-script
-grep -R "\.queue_command" ./
-grep -R "\.queue_command" ./ | grep -v 'legacy'
-irb
-hpbxgui_console
-./script/queue_asterisk_reload.rb 
-ls -l /usr/local/bin/rub
-ls -l /usr/local/bin/ruby
-sudo ln -s /usr/local/bin/ruby $(which ruby)
-sudo ln -s $(which ruby) /usr/local/bin/ruby
-./script/queue_asterisk_reload.rb 
-./script/queue_asterisk_reload.rb  
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-ls -l config/database.yml 
-./script/queue_asterisk_reload.rb --name mttpbx
-which gem
-gem list
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-ls -l app/models/server
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-ls -l /home/jcarson/git_clones/hosted/hpbxgui/app/models/server/virtual_server.rb
-ls -l /home/jcarson/git_clones/hosted/hpbxgui/app
-ls -l /home/jcarson/git_clones/hosted/hpbxgui/app/models
-ls -l /home/jcarson/git_clones/hosted/hpbxgui/app/models/server
-ls -l /home/jcarson/git_clones/hosted/hpbxgui/app/models/server/can_perform_asterisk_reloads.rb
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-find ./ -type f -name '*global*'
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-ls -l app/models/
-grep "class.*VirtualServer" app/models/*.rb
-grep "class.*VirtualServer" app/models/*.rb | cut -d: -f1
-grep "class.*VirtualServer" app/models/*.rb | cut -d: -f1 | sort | uniq
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-grep -R "class.*SipConf" ./app/models/
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-find ./app -type f -name '*recon*'
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-find ./app -type f -name '*move*'
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-./script/queue_asterisk_reload.rb --name mttpbx --conference
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --conference
-mysql -u hpbxgui -peasypeasy2 -h nk-app0
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --conference
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --dialplan
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --dialplan
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --features
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --feature
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --features
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --moh
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --queue
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --sip
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --voicemail
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --voicemail
-gits
-git add -A
-gits
-git commit -m "changes for the queue script"
-gfp
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --voicemail
-gits
-RAILS_ENV=jcarson_dev ./script/queue_asterisk_reload.rb --name mttpbx --voicemail
-gits
-gits
-gsm
-gits
-gits
-gsm
-git checkout -b voicemail-confinate-fix
-hpbxgui_test_run
-hpbxgui_test_run
-gits
-git add -A
-gits
-git commit -m 'quick reorg of extenable'
-git push
-gfp
-grep -R "should_confinate" ./app
-grep -R "should_confinate" ./app
-hpbxgui_test_run
-gits
-git add -A
-gits
-git commit -m 'add basis of conditionally confinating'
-git push
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-gits
-gits
-git add -A
-gits
-git commit -m 'start changing tests to be able to test this new feature'
-git push
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-gits
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-grep -R "TenantEnv" ./hpbxgui_test/
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-gits
-git add -A
-gits
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-gits
-git add -A
-gits
-git commit -m 'test currently fails intentionally until I writ ethe feature'
-git push
-hpbxgui_console
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_test_run TEST="hpbxgui_test/tests/models/voicemail_test.rb"
-hpbxgui_console
+startx
+shutdown now
 exit
-mysql hpbxgui_jcarson_dev
+ssh 200.255.100.116
 exit
-source ~/.bashrc 
-ruby2
-sudo su asterisk
-ssh hosted
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
 exit
-ssh hosted
-ssh pbx
+startx
+shutdown now
+udisksctl mount -b /dev/sdc1
+ls -l /run/media/jcarson/3233-3531
+ls -l
+udisksctl umount
+udisksctl umount -b /dev/sdc1
+udisksctl unmount -b /dev/sdc1
+which parted
+parted /dev/sdc1
+sudo parted /dev/sdc1
+?
+parted /dev/sdc1
+sudo parted /dev/sdc1
+udisksctl unmount -b /dev/sdc1
+sudo dmesg
+sudo parted /dev/sdc1
+sudo mkfs.fat /dev/sdc1
+udisksctl mount -b /dev/sdc1
+ls -l /run/media/jcarson/7E31-1F7C
+ls -l /run/media/jcarson/7E31-1F7C
+udisksctl unmount -b /dev/sdc1
+exit
+cd ~/music_for_mp3_player/
+ls -l
+cd processed/
+ls -l
+unzip -o ./SPIN\ MASTER\ A-1\ \&\ Shing02\ -\ 246911.zip -d /run/media/jcarson/EC95-4FBB/Music
+unzip -o ./SPIN\ MASTER\ A-1\ \&\ Shing02\ -\ 246911.zip -d /run/media/jcarson/3233-3531
+unzip -o ./SPIN\ MASTER\ A-1\ \&\ Shing02\ -\ 246911.zip -d /run/media/jcarson/7E31-1F7C
+exit
+startx
+shutdown now
+startx
+cd ~/music_for_mp3_player/
+ls -l
+ls -l For\ The\ Tyme\ Being
+history | grep 'pacman'
+man easytag
+which ffmpeg
+ffprobe
+ls -l
+cd For\ The\ Tyme\ Being
+ls -l
+pwd
+cd For\ The\ Tyme\ Being
+cd ~/music_for_mp3_player/
+ls -l
+cd For\ The\ Tyme\ Being/
+cd ~/music_for_mp3_player/
+ls -l
+ls -l For\ The\ Tyme\ Being/01\ Intro.mp3 
+ffprobe For\ The\ Tyme\ Being/01\ Intro.mp3 
+ls -l
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 | grep -A5 Metadata:
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 | grep -A5 -E "^\s*Metadata:"
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -A5 -E "^\s*Metadata:"
+man ffprobe
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 -print_format json
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -E '^\s*title\s*:'
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -E '^\s*title\s*:' | head -1
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -E '^\s*title\s*:' | head -1 | cut -d: -f2
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -E '^\s*title\s*:' | head -1 | cut -d: -f2 | sed 's/mix//g'
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -E '^\s*title\s*:' | head -1 | cut -d: -f2 | sed 's/mix//g' | sed 's/Fonki Cheff//g'
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -E '^\s*title\s*:' | head -1 | cut -d: -f2 | sed 's/mix//g' | sed 's/Fonki Cheff//g' | sed -R 's/^\s*//g'
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -E '^\s*title\s*:' | head -1 | cut -d: -f2 | sed 's/mix//g' | sed 's/Fonki Cheff//g' | sed -E 's/^\s*//g'
+ffprobe ./Fonki\ Cheff\ -\ Roots\,\ Reggae\,\ Rocksteady\ mix\ Fonki\ Cheff.mp3 2>&1 | grep -E '^\s*title\s*:' | head -1 | cut -d: -f2 | sed 's/mix//g' | sed 's/Fonki Cheff//g' | sed -E 's/^\s*//g' | sed -E 's/\s*$//g'
+exit
+udisksctl mount -b /dev/sdc1
+cd /run/media/jcarson/3630-3734
+ls -l
+cd ~
+udisksctl unmount -b /dev/sdc1
+sudo parted /dev/sdc1
+mkfs.fat /dev/sdc1
+sudo mkfs.fat /dev/sdc1
+udisksctl mount -b /dev/sdc1
+cd /run/media/jcarson/030A-1F2C
+ls -l
+ls -l /home/jcarson/music_for_mp3_player/
+ls -l /home/jcarson/music_for_mp3_player/processed/
+unzip /home/jcarson/music_for_mp3_player/processed/Count\ Bass\ D\ -\ BEGBORROWSTEEL\ \(Bonus\ Tracks\).zip -d ./
+ls -l
+pwd
+cd ~
+udisksctl unmount -b /dev/sdc1
+udisksctl mount -b /dev/sdc1
+cd ~/Downloads/
+ls -l
+mkdir 2023-07-31
+mv * ./2023-07-31/
+ls -l
+ls -l
+cd ~/music_for_mp3_player/
+ls -l
+rm -Rf ./*
+ls -l
+mv ~/Downloads/*.zip ./
+mv ~/Downloads/*.mp3 ./
+ls -l
+ls -l ~/Downloads/
+udisksctl unmount -b /dev/sdc1
+sudo dmesg
+udisksctl mount -b /dev/sdc1
+ls -l /run/media/jcarson/FTTB
+cp -r /run/media/jcarson/FTTB/* ./
+udisksctl unmount -b /dev/sdc1
+exit
+startx
+shutdown now
+ssh 200.255.100.116
 exit
 ~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
+sudo openvpn --config /home/jcarson/.vpn/vpn2-UDP4-1200-jcarson-config.ovpn
+cd ~/git_clones/dotfiles/
+git pull
+./scripts/sync_repo_to_local.sh 
 exit
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
+vim ~/.bashrc 
 exit
-ssh pbx
+hostname
 exit
-~/.fehbg
-~/.fehbg
-~/.fehbg
-~/.fehbg
-exit
-ssh app0
-exit
-~/.fehbg
-exit]
-exit
-telnet pl-2820-1
-exit
-ssh mtt3
-exit
-ssh vhpbx0
-ssh hosted
-exit
-ssh mcm.sip.monmouth.com
-exit
-cd $(work.sh)
-scp -l 10000 hpbx1:/home/jcarson/poop.cap ./
-scp -l 10000 hpbx1:/home/jcarson/poop2.cap ./
-exit
-echo "4158423095"
-exit
-ssh hpbx1
+workvpn
 exit
