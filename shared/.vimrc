@@ -239,6 +239,15 @@ nnoremap <leader>S( mzF(xf)x`z
 nnoremap <leader>v :set paste<cr>
 nnoremap <leader>V :set nopaste<cr>
 
+" (c)lear (y)ank
+nnoremap <leader>cy :let @z=""<cr>
+" (a)ppend (y)ank
+nnoremap <leader>ay :let @z=@z.",".@@<cr>
+" (p)aste (y)ank
+nnoremap <leader>py "zp
+" (P)aste (y)ank
+nnoremap <leader>Py "zP
+
 " (c)lip(b)oard c(o)py
 nnoremap <leader>cbqo :let @q=@@<cr>
 nnoremap <leader>cbwo :let @w=@@<cr>
