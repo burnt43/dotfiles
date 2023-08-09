@@ -1131,6 +1131,37 @@ alias ruby_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/s
 alias sbrc="source ~/.bashrc"
 alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
 alias systemd_top="top -p \$(ps aux | grep 'systemd' | grep -v "grep" | awk '{print \$2}' | paste -sd,)"
+
+function __ytbg__ {
+  __echo_proc_step__ "checking for wget"
+  which wget 1>/dev/null 2>/dev/null
+  ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  __echo_proc_step__ "checking for sqlite3"
+  which sqlite3 1>/dev/null 2>/dev/null
+  ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  __echo_proc_step__ "checking for feh"
+  which feh 1>/dev/null 2>/dev/null
+  ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  __echo_proc_step__ "checking for mozilla db file"
+  local firefox_db_file=$(find ~/.mozilla -type f -name 'places.sqlite')
+  ([[ ! -z "$firefox_db_file" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  __echo_proc_step__ "checking for latest YouTube ID"
+  local ytid=$(sqlite3 "file:$firefox_db_file?immutable=1" "SELECT moz_places.url FROM moz_places INNER JOIN moz_historyvisits ON moz_historyvisits.place_id=moz_places.id WHERE moz_places.url LIKE 'https://www.youtube.com/watch?v=%' AND moz_places.url NOT LIKE '%t=%' ORDER BY moz_historyvisits.visit_date DESC LIMIT 1;" | sed 's/^.*=//g')
+  ([[ ! -z "$ytid" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  echo "YouTube ID: ${ytid}"
+
+  __echo_proc_step__ "downloading thumbnail"
+  wget -q https://img.youtube.com/vi/${ytid}/maxresdefault.jpg -O ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
+  ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+
+  feh --bg-fill --no-fehbg ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
+}
+alias ytbg="__ytbg__"
 # }}}
 # }}}
 # {{{ Exports
