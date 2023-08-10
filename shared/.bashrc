@@ -1150,16 +1150,21 @@ function __ytbg__ {
   ([[ ! -z "$firefox_db_file" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
   __echo_proc_step__ "checking for latest YouTube ID"
-  local ytid=$(sqlite3 "file:$firefox_db_file?immutable=1" "SELECT moz_places.url FROM moz_places INNER JOIN moz_historyvisits ON moz_historyvisits.place_id=moz_places.id WHERE moz_places.url LIKE 'https://www.youtube.com/watch?v=%' AND moz_places.url NOT LIKE '%t=%' ORDER BY moz_historyvisits.visit_date DESC LIMIT 1;" | sed 's/^.*=//g')
+  local ytid=$(sqlite3 "file:$firefox_db_file?immutable=1" "SELECT moz_places.url FROM moz_places INNER JOIN moz_historyvisits ON moz_historyvisits.place_id=moz_places.id WHERE moz_places.url LIKE 'https://www.youtube.com/watch?v=%' ORDER BY moz_historyvisits.visit_date DESC LIMIT 1;" | sed 's/&.*//g' | sed 's/^.*=//g')
   ([[ ! -z "$ytid" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
   echo "YouTube ID: ${ytid}"
 
-  __echo_proc_step__ "downloading thumbnail"
-  wget -q https://img.youtube.com/vi/${ytid}/maxresdefault.jpg -O ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
-  ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+  possible_thumbnails=(maxresdefault.jpg hqdefault.jpg mqdefault.jpg sddefault.jpg)
 
-  feh --bg-fill --no-fehbg ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
+  for fname in "${possible_thumbnails[@]}"; do
+    __echo_proc_step__ "downloading thumbnail(${fname})"
+    cd ~/git_clones/wallpapers/youtube-tmp && wget -q https://img.youtube.com/vi/${ytid}/maxresdefault.jpg -O ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
+    ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && continue)
+
+    feh --bg-fill --no-fehbg ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
+    break
+  done
 }
 alias ytbg="__ytbg__"
 # }}}
