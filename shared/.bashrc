@@ -247,7 +247,7 @@ function __echo_error__ {
 function __echo_proc_step__ {
   local msg="$1"
 
-  echo -n "$msg..."
+  echo -e -n "$msg..."
 }
 # }}}
 # {{{ __echo_fail__
@@ -514,7 +514,7 @@ case "$(hostname)" in
     alias hpbxgui_dev="ruby2 && cd ~/git_clones/hosted/hpbxgui"
     alias hpbxgui_runner="hpbxgui_dev && hpbxgui_bundle exec rails runner -e jcarson_dev"
     alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=jcarson_dev JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:db:reset"
-    alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:run"
+    alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:run_no_controllers"
     # }}}
     # {{{ httpd
     # {{{ function __httpd_ruby__
@@ -575,6 +575,10 @@ case "$(hostname)" in
     alias mtt_crm_meta_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:meta:run"
     alias mtt_crm_runner="mtt_crm_dev && MTT_CRM_AUTO_LOAD_TENANT_ID=270 bundle exec rails runner -e jcarson_dev"
     alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:run"
+    # }}}
+    # {{{ rails_env_loader (gem)
+    alias rails_env_loader_dev="ruby2 && cd ~/git_clones/rails-env-loader"
+    alias rails_env_loader_test_run="rails_env_loader_dev && bundle exec rake rails_env_loader:test:run"
     # }}}
     # {{{ rec_mon (app)
     alias rec_mon_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/rec-mon"
@@ -1133,6 +1137,8 @@ alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/sh
 alias systemd_top="top -p \$(ps aux | grep 'systemd' | grep -v "grep" | awk '{print \$2}' | paste -sd,)"
 
 function __ytbg__ {
+  local input_ytid="$1"
+
   __echo_proc_step__ "checking for wget"
   which wget 1>/dev/null 2>/dev/null
   ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
@@ -1145,26 +1151,48 @@ function __ytbg__ {
   which feh 1>/dev/null 2>/dev/null
   ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
-  __echo_proc_step__ "checking for mozilla db file"
-  local firefox_db_file=$(find ~/.mozilla -type f -name 'places.sqlite')
-  ([[ ! -z "$firefox_db_file" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+  if [[ -z "$input_ytid" ]]; then
+    __echo_proc_step__ "checking for mozilla db file"
+    local firefox_db_file=$(find ~/.mozilla -type f -name 'places.sqlite')
+    ([[ ! -z "$firefox_db_file" ]] && __echo_ok__) || (__echo_fail__ && return 1)
 
-  __echo_proc_step__ "checking for latest YouTube ID"
-  local ytid=$(sqlite3 "file:$firefox_db_file?immutable=1" "SELECT moz_places.url FROM moz_places INNER JOIN moz_historyvisits ON moz_historyvisits.place_id=moz_places.id WHERE moz_places.url LIKE 'https://www.youtube.com/watch?v=%' ORDER BY moz_historyvisits.visit_date DESC LIMIT 1;" | sed 's/&.*//g' | sed 's/^.*=//g')
-  ([[ ! -z "$ytid" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+    echo -e "\033[0;35mCurrent Time\033[0;0m: $(date +"%Y-%m-%d %H:%M:%S"), \033[0;36mLast DB Update\033[0;0m: $(stat -c %y $firefox_db_file)"
+    echo -n "Continue?(Y/n): "
+    read user_answer
 
-  echo "YouTube ID: ${ytid}"
+    [[ "$user_answer" != "Y" ]] && return 1
 
-  possible_thumbnails=(maxresdefault.jpg hqdefault.jpg mqdefault.jpg sddefault.jpg)
+    __echo_proc_step__ "checking for latest YouTube IDs"
+    local ytids="$(sqlite3 "file:$firefox_db_file?immutable=1" "SELECT moz_places.url FROM moz_places INNER JOIN moz_historyvisits ON moz_historyvisits.place_id=moz_places.id WHERE moz_places.url LIKE 'https://www.youtube.com/watch?v=%' ORDER BY moz_historyvisits.visit_date DESC LIMIT 50;" | sed 's/&.*//g' | sed 's/^.*=//g')"
+    ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && return 1)
+  else
+    local ytids=(${input_ytid})
+  fi
 
-  for fname in "${possible_thumbnails[@]}"; do
-    __echo_proc_step__ "downloading thumbnail(${fname})"
-    cd ~/git_clones/wallpapers/youtube-tmp && wget -q https://img.youtube.com/vi/${ytid}/maxresdefault.jpg -O ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
-    ([[ "$?" = "0" ]] && __echo_ok__) || (__echo_fail__ && continue)
+  for ytid in $ytids; do
+    [[ -z "$ytid" ]] && continue
 
-    feh --bg-fill --no-fehbg ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
-    break
+    possible_thumbnails=(maxresdefault.jpg hqdefault.jpg mqdefault.jpg sddefault.jpg)
+    for fname in "${possible_thumbnails[@]}"; do
+      __echo_proc_step__ "downloading thumbnail(\033[0;35m${fname}\033[0;0m) for YouTube ID: \033[0;36m${ytid}\033[0;0m"
+      cd ~/git_clones/wallpapers/youtube-tmp && wget -q https://img.youtube.com/vi/${ytid}/${fname} -O ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
+      if [[ "$?" = "0" ]]; then
+        __echo_ok__
+      else
+        __echo_fail__
+        continue
+      fi
+
+      feh --bg-fill --no-fehbg ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
+      echo -n "This Wallpaper?(Y/n): "
+      read user_answer
+
+      [[ "$user_answer" = "Y" ]] && return 0
+      break
+    done
   done
+
+  return 0
 }
 alias ytbg="__ytbg__"
 # }}}
