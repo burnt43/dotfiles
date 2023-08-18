@@ -40,17 +40,20 @@ function __shell_git_plugin__ {
 
   [[ "$in_git_repo" == "0" ]] && return
 
-  if [[ "$(git status --porcelain | grep -P "^( M|\?)" | wc -l | sed -E 's/^[[:space:]]+//g')" == "0" ]]; then
-    local changes_present="0"
-  else
-    local changes_present="1"
-  fi
-
   local branch=$(git branch --show-current)
 
-  if [[ "$changes_present" == "0" ]]; then
+  local files="$(git status --porcelain | wc -l | sed -E 's/^[[:space:]]+//g')"
+  local files_changed_and_committed="$(git status --porcelain | grep -P '^M[^M]' | wc -l | sed -E 's/^[[:space:]]+//g')"
+  local files_changed_and_not_committed="$(git status --porcelain | grep -P "^(.M|\?)" | wc -l | sed -E 's/^[[:space:]]+//g')"
+
+  if [[ "$files_changed_and_committed" != "0" && "$files_changed_and_committed" == "$files" ]]; then
+    # all changes ready to be committed
+    echo -ne "(\033[0;33m$branch\033[0;0m)"
+  elif [[ "$files_changed_and_not_committed" == "0" ]]; then
+    # clean
     echo -ne "(\033[0;36m$branch\033[0;0m)"
   else
+    # dirty
     echo -ne "(\033[0;31m$branch\033[0;0m)"
   fi
 }
@@ -1184,8 +1187,12 @@ function __ytbg__ {
       fi
 
       feh --bg-fill --no-fehbg ~/git_clones/wallpapers/youtube-tmp/${ytid}.jpg
-      echo -n "This Wallpaper?(Y/n): "
-      read user_answer
+      if [[ -z "$input_ytid" ]]; then
+        echo -n "This Wallpaper?(Y/n): "
+        read user_answer
+      else
+        user_answer=Y
+      fi
 
       [[ "$user_answer" = "Y" ]] && return 0
       break
