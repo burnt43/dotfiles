@@ -6,5 +6,84 @@
 
 config_version: 2
 settings:
+  auto_save.session:
+    global: true
+  colors.downloads.stop.fg:
+    global: white
+  colors.hints.bg:
+    global: '#000000'
+  colors.hints.fg:
+    global: '#FFFFFF'
+  colors.hints.match.fg:
+    global: '#80FF80'
+  colors.keyhint.bg:
+    global: '#333355'
+  colors.keyhint.fg:
+    global: '#CCFFCC'
+  colors.keyhint.suffix.fg:
+    global: '#FFFFFF'
+  colors.messages.info.fg:
+    global: white
+  colors.tabs.bar.bg:
+    global: '#000000'
+  colors.tabs.even.bg:
+    global: '#000000'
+  colors.tabs.even.fg:
+    global: '#FFFFFF'
+  colors.tabs.indicator.error:
+    global: '#000000'
+  colors.tabs.indicator.start:
+    global: '#000000'
+  colors.tabs.indicator.stop:
+    global: '#000000'
+  colors.tabs.odd.bg:
+    global: '#000000'
+  colors.tabs.odd.fg:
+    global: '#FFFFFF'
+  colors.tabs.selected.even.bg:
+    global: '#80EEEE'
+  colors.tabs.selected.even.fg:
+    global: '#000000'
+  colors.tabs.selected.odd.bg:
+    global: '#80EEEE'
+  colors.tabs.selected.odd.fg:
+    global: '#000000'
   content.notifications.enabled:
+    https://www.mi-webmail.com: false
     https://www.youtube.com: false
+  content.register_protocol_handler:
+    https://mail.google.com?extsrc=mailto&url=%25s: false
+  downloads.position:
+    global: bottom
+  fonts.default_size:
+    global: 12pt
+  fonts.web.family.fantasy:
+    global: null
+  fonts.web.family.serif:
+    global: null
+  hints.auto_follow_timeout:
+    global: 0
+  hints.border:
+    global: '2px solid #9977FF'
+  hints.chars:
+    global: hlgfaxpunk
+  tabs.favicons.scale:
+    global: 1.25
+  tabs.indicator.width:
+    global: 0
+  tabs.max_width:
+    global: 200
+  tabs.min_width:
+    global: 100
+  tabs.mousewheel_switching:
+    global: false
+  tabs.new_position.related:
+    global: last
+  tabs.position:
+    global: left
+  tabs.title.format:
+    global: '{index}: {current_title}'
+  tabs.tooltips:
+    global: false
+  tabs.width:
+    global: 10%

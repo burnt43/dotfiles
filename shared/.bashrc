@@ -324,6 +324,40 @@ function __cap_deploy__ {
 case "$(hostname)" in
   # {{{ Aliases.burnt43
   burnt43)
+    # {{{ Functions
+    # {{{ function __ngrok_shuffle__ 
+    function __ngrok_shuffle__ {
+      local input="$1"
+      local confd=/etc/httpd/conf.d
+      local skip_confd=/etc/httpd/conf.d/skip_include
+
+      # Move all files to the skip directory
+      sudo find $confd -maxdepth 1 -type f -exec mv {} $skip_confd \;
+
+      # Set which files are required by the input we chose.
+      case "$input" in
+        hpbxgui)
+          local reqfiles=(00-passenger.conf 20-hpbxgui.conf)
+          ;;
+        *)
+          local reqfiles=all
+          ;;
+      esac
+
+      # Move the necessary files
+      if [[ "$reqfiles" == "all" ]]; then
+        sudo mv ${skip_confd}/* $confd
+      else
+        for fname in ${reqfiles[@]}; do
+          sudo mv ${skip_confd}/${fname} $confd
+        done
+      fi
+
+      # Restart Apache
+      sudo systemctl restart httpd
+    }
+    # }}}
+    # }}}
     # {{{ Development Software Run/Test Helpers
     # {{{ ruby
     alias ruby2='source $(rubyv -v 2.6.10)'
@@ -517,6 +551,7 @@ case "$(hostname)" in
     alias hpbxgui_dev="ruby2 && cd ~/git_clones/hosted/hpbxgui"
     alias hpbxgui_log="hpbxgui_dev && tail -f ./log/jcarson_dev.log"
     alias hpbxgui_jlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log | grep 'JCARSON'"
+    alias hpbxgui_ngrok="__ngrok_shuffle__ hpbxgui && ngrok http https://jcarson-hpbxgui.monmouth.com --domain loving-bold-alpaca.ngrok-free.app"
     alias hpbxgui_rlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log  | grep -A 1 -B 1 'Processing by'"
     alias hpbxgui_runner="hpbxgui_dev && hpbxgui_bundle exec rails runner -e jcarson_dev"
     alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=jcarson_dev JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:db:reset"
