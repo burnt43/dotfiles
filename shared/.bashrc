@@ -511,10 +511,13 @@ case "$(hostname)" in
     __hpbxgui_test_pass__=LfG*b95A8ehEQsr7
     __hpbxgui_test_socket__=/usr/local/mysql/mysql-5.7.21/data/mysql.sock 
 
-    alias hpbxgui_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/hosted/hpbxgui"
     alias hpbxgui_bundle="LD_LIBRARY_PATH=\"${__rmagick_lib_path__}\" bundle"
     alias hpbxgui_console="hpbxgui_dev && hpbxgui_bundle exec rails console -e jcarson_dev"
+    alias hpbxgui_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/hosted/hpbxgui"
     alias hpbxgui_dev="ruby2 && cd ~/git_clones/hosted/hpbxgui"
+    alias hpbxgui_log="hpbxgui_dev && tail -f ./log/jcarson_dev.log"
+    alias hpbxgui_jlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log | grep 'JCARSON'"
+    alias hpbxgui_rlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log  | grep -A 1 -B 1 'Processing by'"
     alias hpbxgui_runner="hpbxgui_dev && hpbxgui_bundle exec rails runner -e jcarson_dev"
     alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=jcarson_dev JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake db:schema:dump && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:db:reset"
     alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:run_no_controllers"
@@ -1221,7 +1224,7 @@ case "$(hostname)" in
       /usr/local/sbin
       /usr/local/ruby/ruby-3.1.1/bin
       /usr/local/mysql/mysql-5.7.21/bin/
-      /usr/local/openssh/openssh-8.1p1/bin/
+      /usr/local/openssh/openssh-9.0p1/bin/
       /home/jcarson/.npm-packages/bin
       /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/gems/passenger-6.0.12/bin
       /home/jcarson/git_clones/work-scripts/personal
