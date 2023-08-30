@@ -838,6 +838,7 @@ case "$(hostname)" in
       alias umount_rwolflaw="sudo umount /mnt/rwolflaw && sudo rm -R /mnt/rwolflaw"
     fi
     # }}}
+      alias reset_httpd="__ngrok_shuffle__ all"
     # {{{ alias spectra2/mount_spectra2/umount_spectra2
     if [[ -f ~/.spectra2_pass ]]; then
       alias spectra2="/usr/bin/rdesktop -u Administrator -p  spectra2 -g 1028x768 200.255.100.185"

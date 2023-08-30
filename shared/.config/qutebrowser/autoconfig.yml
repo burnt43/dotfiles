@@ -8,8 +8,20 @@ config_version: 2
 settings:
   auto_save.session:
     global: true
+  colors.downloads.bar.bg:
+    global: '#141413'
+  colors.downloads.error.bg:
+    global: '#ff9eb8'
+  colors.downloads.error.fg:
+    global: '#141413'
+  colors.downloads.start.bg:
+    global: '#ffa724'
+  colors.downloads.start.fg:
+    global: '#141413'
+  colors.downloads.stop.bg:
+    global: '#8cffba'
   colors.downloads.stop.fg:
-    global: white
+    global: '#141413'
   colors.hints.bg:
     global: '#000000'
   colors.hints.fg:
@@ -24,12 +36,36 @@ settings:
     global: '#FFFFFF'
   colors.messages.info.fg:
     global: white
+  colors.statusbar.command.bg:
+    global: '#aeee00'
+  colors.statusbar.command.fg:
+    global: '#000000'
+  colors.statusbar.insert.bg:
+    global: '#ffa724'
+  colors.statusbar.insert.fg:
+    global: '#000000'
+  colors.statusbar.normal.bg:
+    global: '#0a9dff'
+  colors.statusbar.normal.fg:
+    global: '#000000'
+  colors.statusbar.url.error.fg:
+    global: '#000000'
+  colors.statusbar.url.fg:
+    global: '#000000'
+  colors.statusbar.url.hover.fg:
+    global: '#000000'
+  colors.statusbar.url.success.http.fg:
+    global: '#000000'
+  colors.statusbar.url.success.https.fg:
+    global: '#000000'
+  colors.statusbar.url.warn.fg:
+    global: '#000000'
   colors.tabs.bar.bg:
-    global: '#000000'
+    global: '#141413'
   colors.tabs.even.bg:
-    global: '#000000'
+    global: '#1c1b1a'
   colors.tabs.even.fg:
-    global: '#FFFFFF'
+    global: '#DDDDDD'
   colors.tabs.indicator.error:
     global: '#000000'
   colors.tabs.indicator.start:
@@ -37,18 +73,19 @@ settings:
   colors.tabs.indicator.stop:
     global: '#000000'
   colors.tabs.odd.bg:
-    global: '#000000'
+    global: '#1c1b1a'
   colors.tabs.odd.fg:
-    global: '#FFFFFF'
+    global: '#DDDDDD'
   colors.tabs.selected.even.bg:
-    global: '#80EEEE'
+    global: '#aeee00'
   colors.tabs.selected.even.fg:
     global: '#000000'
   colors.tabs.selected.odd.bg:
-    global: '#80EEEE'
+    global: '#aeee00'
   colors.tabs.selected.odd.fg:
     global: '#000000'
   content.notifications.enabled:
+    https://www.accuweather.com: false
     https://www.mi-webmail.com: false
     https://www.youtube.com: false
   content.register_protocol_handler:
@@ -56,7 +93,7 @@ settings:
   downloads.position:
     global: bottom
   fonts.default_size:
-    global: 12pt
+    global: 14pt
   fonts.web.family.fantasy:
     global: null
   fonts.web.family.serif:
@@ -81,6 +118,8 @@ settings:
     global: last
   tabs.position:
     global: left
+  tabs.title.elide:
+    global: right
   tabs.title.format:
     global: '{index}: {current_title}'
   tabs.tooltips:

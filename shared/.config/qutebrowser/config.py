@@ -24,6 +24,8 @@ config.bind('g2m3', 'open -t http://mtt3.monmouth.com', mode='normal')
 config.bind('g2ma', 'open -t https://www.mi-webmail.com/rc/?_task=mail&_mbox=INBOX', mode='normal')
 # ngrok
 config.bind('g2ng', 'open -t https://dashboard.ngrok.com', mode='normal')
+# New Jersey Weather
+config.bind('g2njw', 'open -t https://www.accuweather.com/en/us/new-jersey/weather-radar', mode='normal')
 # Options
 config.bind('g2op', 'open -t qute://settings', mode='normal')
 # EqptGUI
