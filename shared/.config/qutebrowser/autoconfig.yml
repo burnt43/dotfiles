@@ -23,11 +23,11 @@ settings:
   colors.downloads.stop.fg:
     global: '#141413'
   colors.hints.bg:
-    global: '#000000'
+    global: '#141413'
   colors.hints.fg:
-    global: '#FFFFFF'
+    global: '#d9cec3'
   colors.hints.match.fg:
-    global: '#80FF80'
+    global: '#aeee00'
   colors.keyhint.bg:
     global: '#333355'
   colors.keyhint.fg:
@@ -98,12 +98,16 @@ settings:
     global: null
   fonts.web.family.serif:
     global: null
+  hints.auto_follow:
+    global: unique-match
   hints.auto_follow_timeout:
     global: 0
   hints.border:
-    global: '2px solid #9977FF'
+    global: '3px solid #0a9dff'
   hints.chars:
     global: hlgfaxpunk
+  hints.dictionary:
+    global: /usr/share/dict/words
   tabs.favicons.scale:
     global: 1.25
   tabs.indicator.width:
