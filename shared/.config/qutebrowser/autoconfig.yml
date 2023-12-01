@@ -84,9 +84,19 @@ settings:
     global: '#aeee00'
   colors.tabs.selected.odd.fg:
     global: '#000000'
+  content.geolocation:
+    https://riders.harley-davidson.com: false
+    https://suzukicycles.com: true
+    https://www.autozone.com: false
+    https://www.harley-davidson.com: false
+    https://www.homedepot.com: false
+    https://www.tacoholicsnj.com: true
+    https://www.ups.com: false
   content.notifications.enabled:
+    https://auto.howstuffworks.com: false
     https://www.accuweather.com: false
     https://www.mi-webmail.com: false
+    https://www.sportskeeda.com: false
     https://www.youtube.com: false
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false

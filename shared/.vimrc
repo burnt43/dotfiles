@@ -196,17 +196,6 @@ nnoremap <leader>zF :set foldcolumn=0<cr>
 " fold(z).(o)nly.(c)urrent
 nnoremap <leader>zoc zMzv
 
-" NOTE: These should really be in the ruby group.
-" (m)ake (m)ark (e)nd
-nnoremap <leader>mme o# }}}<esc>
-" (m)ake (m)ark (f)actory
-nnoremap <leader>mmf ^y2WO# {{{ <esc>p
-" (m)ake (m)ark (m)ethod
-nnoremap <leader>mmm ^y2wO# {{{ <esc>p
-" (m)ake (m)ark (s)cope
-nnoremap <leader>mms ^yt,O# {{{ <esc>p
-" (m)ake (m)ark (t)ask
-nnoremap <leader>mmt ^y2WO# {{{ <esc>p
 
 " marks
 " (m)ark (c)lear
@@ -362,6 +351,11 @@ augroup filetype_javascript
   autocmd!
   autocmd FileType javascript setlocal foldmethod=marker
   autocmd FileType javascript iabbrev <buffer> functionn function () {<left><left><left>
+
+  " (m)ake (m)ark (e)nd
+  autocmd FileType javascript nnoremap <leader>mme o// }}}<esc>
+  " (m)ake (m)ark (m)ethod
+  autocmd FileType javascript nnoremap <leader>mmm ^y2wO// {{{ <esc>pa()<esc>
 augroup END
 " }}}
 " muttrc {{{
@@ -416,6 +410,17 @@ augroup filetype_ruby
   " match
   autocmd FileType ruby nnoremap <buffer> <localleader>w :match Error /\v.{80}\zs.+\ze/<cr>
   autocmd FileType ruby nnoremap <buffer> <localleader>W :match none<cr>
+
+  " (m)ake (m)ark (e)nd
+  autocmd FileType ruby nnoremap <leader>mme o# }}}<esc>
+  " (m)ake (m)ark (f)actory
+  autocmd FileType ruby nnoremap <leader>mmf ^y2WO# {{{ <esc>p
+  " (m)ake (m)ark (m)ethod
+  autocmd FileType ruby nnoremap <leader>mmm ^y2wO# {{{ <esc>p
+  " (m)ake (m)ark (s)cope
+  autocmd FileType ruby nnoremap <leader>mms ^yt,O# {{{ <esc>p
+  " (m)ake (m)ark (t)ask
+  autocmd FileType ruby nnoremap <leader>mmt ^y2WO# {{{ <esc>p
 
   " ruby.vim
 

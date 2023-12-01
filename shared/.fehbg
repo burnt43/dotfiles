@@ -13,8 +13,10 @@ HOST=$(hostname)
 
 case $HOST in
 burnt43)
-  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/git_clones/wallpapers/cryochamber' 
+  # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/git_clones/wallpapers/cryochamber' 
   # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/git_clones/wallpapers/nature' 
+  # 'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/git_clones/wallpapers/youtube-tmp' 
+  'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/git_clones/wallpapers/bryce3d-like' 
   ;;
 fakebiz0)
   'feh' '--bg-fill' '--randomize' '--no-fehbg' '/home/jcarson/git_clones/wallpapers/nature' 
