@@ -88,6 +88,7 @@ settings:
     https://riders.harley-davidson.com: false
     https://suzukicycles.com: true
     https://www.autozone.com: false
+    https://www.cannondale.com: false
     https://www.harley-davidson.com: false
     https://www.homedepot.com: false
     https://www.tacoholicsnj.com: true
