@@ -1,0 +1,6 @@
+alias solr_mon_dev="ruby2 && cd ~/git_clones/solr-file-monitor"
+alias solr_mon_run="solr_mon_dev && SOLR_FILE_MONITOR_ENV=development ruby -I/home/jcarson/git_clones/solr-file-monitor-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./file_monitor_daemon.rb"
+alias solr_mon_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/solr-file-monitor"
+alias solr_mon_start_daemon="solr_mon_dev && ./safe-solr-file-monitor"
+alias solr_mon_stop_daemon="ps aux | grep 'safe-solr-file-monitor' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid && ps aux | grep 'file_monitor_daemon\.rb' | grep -v 'grep' | awk '{print \$2}' | xargs -I pid kill -9 pid"
+alias solr_mon_test_run="solr_mon_dev && SOLR_FILE_MONITOR_ENV=test bundle exec rake solr_file_monitor:test:run"

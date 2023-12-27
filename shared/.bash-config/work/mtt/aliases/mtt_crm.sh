@@ -1,0 +1,6 @@
+alias mtt_crm_clean_branches="~/gist_clones/git_branch_cleaner/git_branch_cleaner.sh ~/git_clones/mtt_crm-burnt43 mtt"
+alias mtt_crm_console="mtt_crm_dev && MTT_CRM_AUTO_LOAD_TENANT_ID=270 bundle exec rails console -e jcarson_dev"
+alias mtt_crm_dev="ruby2 && cd ~/git_clones/mtt_crm"
+alias mtt_crm_meta_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:meta:run"
+alias mtt_crm_runner="mtt_crm_dev && MTT_CRM_AUTO_LOAD_TENANT_ID=270 bundle exec rails runner -e jcarson_dev"
+alias mtt_crm_test_run="mtt_crm_dev && RAILS_ENV=test bundle exec rake crm:test:run"
