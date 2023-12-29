@@ -56,6 +56,7 @@ case "$(hostname)" in
       work/mtt/aliases/soft_phone.sh
       work/mtt/aliases/solr_mon.sh
       work/mtt/aliases/stir_shaken_server.sh
+      work/mtt/aliases/system_upgrade.sh
       work/mtt/aliases/thingspace.sh
       work/mtt/aliases/xymon.sh
       work/mtt/aliases/xymon_reporter.sh
