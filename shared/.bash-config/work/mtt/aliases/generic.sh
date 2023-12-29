@@ -311,7 +311,7 @@ function __compile_mcl__ {
 function __recompile_passenger__ {
   # Find the bundle path, because this is where the gems are installed.
   # We're looking for the passenger gem for this project.
-  local bundle_path_output=$(bundle config get path | tail -1)
+  local bundle_path_output=$(bundle config path | tail -1)
 
   # See if the output is configured or not. If not configured, then bail
   # out.

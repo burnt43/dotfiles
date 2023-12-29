@@ -15,21 +15,21 @@ function __httpd_ruby__ {
   esac
 }
 # NOTE: If pacman overwrites the httpd systemd file. This is what is
-#   should look like to support httpd_ruby alias.
-# [Unit]
-# Description=Apache Web Server
-# After=network.target remote-fs.target nss-lookup.target
+#   should look like to support httpd_ruby alias:
+#     [Unit]
+#     Description=Apache Web Server
+#     After=network.target remote-fs.target nss-lookup.target
 
-# [Service]
-# Type=simple
-# ExecStart=/usr/bin/httpd -k start -DFOREGROUND -DRuby3
-# ExecStop=/usr/bin/httpd -k graceful-stop
-# ExecReload=/usr/bin/httpd -k graceful
-# PrivateTmp=true
-# LimitNOFILE=infinity
-# KillMode=mixed
-# # Environment=LD_LIBRARY_PATH=/usr/local/ImageMagick/6.9.12-34/lib
+#     [Service]
+#     Type=simple
+#     ExecStart=/usr/bin/httpd -k start -DFOREGROUND -DRuby3
+#     ExecStop=/usr/bin/httpd -k graceful-stop
+#     ExecReload=/usr/bin/httpd -k graceful
+#     PrivateTmp=true
+#     LimitNOFILE=infinity
+#     KillMode=mixed
+#     # Environment=LD_LIBRARY_PATH=/usr/local/ImageMagick/6.9.12-34/lib
 
-# [Install]
-# WantedBy=multi-user.target
+#     [Install]
+#     WantedBy=multi-user.target
 alias httpd_ruby="__httpd_ruby__"
