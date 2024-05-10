@@ -89,6 +89,7 @@ settings:
     https://suzukicycles.com: true
     https://www.autozone.com: false
     https://www.cannondale.com: false
+    https://www.google.com: false
     https://www.harley-davidson.com: false
     https://www.homedepot.com: false
     https://www.tacoholicsnj.com: true

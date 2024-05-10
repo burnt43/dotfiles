@@ -1,1 +1,1 @@
-echo "BASHPROFILE"
+[[ -f "~/.bashrc" ]] && source ~/.bashrc

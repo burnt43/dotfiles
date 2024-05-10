@@ -9,7 +9,7 @@ my_paths=(
   /usr/bin
   /usr/local/bin
   /usr/local/sbin
-  /usr/local/ruby/ruby-3.1.1/bin
+  /usr/local/ruby/ruby-3.3.1/bin
   /usr/local/mysql/mysql-5.7.21/bin/
   /usr/local/openssh/openssh-9.0p1/bin/
   /home/jcarson/.npm-packages/bin

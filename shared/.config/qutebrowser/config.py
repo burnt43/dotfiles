@@ -43,6 +43,21 @@ config.bind('g2ghe', 'open -t https://github.com/monmouthtelecom/eqpt-gui', mode
 # Github - hosted
 config.bind('g2ghh', 'open -t https://github.com/monmouthtelecom/hosted', mode='normal')
 
+#  ___ _
+# |_ _| |__  _ __ ___
+#  | || '_ \| '_ ` _ \
+#  | || |_) | | | | | |
+# |___|_.__/|_| |_| |_|
+
+# Watson Assistant v1 API
+config.bind('g2ibmapiv1', 'open -t https://cloud.ibm.com/apidocs/assistant-v1', mode='normal')
+
+# Watson Assistant v2 API
+config.bind('g2ibmapiv2', 'open -t https://cloud.ibm.com/apidocs/assistant-v2', mode='normal')
+
+# Watson Assistant Portal
+config.bind('g2ibmai', 'open -t https://us-south.assistant.watson.cloud.ibm.com/crn%3Av1%3Abluemix%3Apublic%3Aconversation%3Aus-south%3Aa%2Fa6881506600644338c7897a8f1deee9a%3Af41da03a-adca-4e49-b697-fcada36974d8%3A%3A/assistants/b1c60766-c785-4753-adee-23147ea7647e/home', mode='normal')
+
 #  _     _  __      
 # | |   (_)/ _| ___ 
 # | |   | | |_ / _ \
@@ -54,6 +69,9 @@ config.bind('g2dd', 'open -t https://start.duckduckgo.com', mode='normal')
 
 # Google Maps
 config.bind('g2gm', 'open -t https://maps.google.com', mode='normal')
+
+# Youtube Music
+config.bind('g2mu', 'open -t https://music.youtube.com', mode='normal')
 
 # New Jersey Weather
 config.bind('g2njw', 'open -t https://www.accuweather.com/en/us/new-jersey/weather-radar', mode='normal')

@@ -81,6 +81,25 @@ function __hpbxgui_test_sia__ {
   $mysql_bin -u ${hpbxgui_db[username]} -p${hpbxgui_db[password]} -h ${hpbxgui_db[host]} ${hpbxgui_db[database]} -e "DELETE FROM chat_message_medias WHERE id=${chat_message_media_id}"
 }
 
+alias hpbxgui_chat_recompile="hpbxgui_dev && rm -f public/assets/chat-*.js && hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
+function __hpbxgui_chat_syntax__ {
+  local node_bin=$(which node)
+  local grep_bin=$(which grep)
+
+  for js in $(ls ./app/assets/javascripts/chat/*.js); do
+    $node_bin $js 1>/dev/null 2>/dev/null
+
+    if [[ "$?" != "0" ]]; then
+      local node_result=$($node_bin $js 2>&1)
+      echo "$node_result" | $grep_bin -q '^ReferenceError: \$ is not defined'
+      if [[ "$?" != "0" ]]; then
+        echo $js
+      fi
+    fi
+  done
+}
+alias hpbxgui_chat_syntax="hpbxgui_dev && __hpbxgui_chat_syntax__"
+
 alias hpbxgui_clear_assets="hpbxgui_dev && rm -f public/assets/application-*.js && rm -f public/assets/application-*.css && rm -f public/assets/jcarson-dev-*.js && rm -f public/assets/jcarson-dev-*.css && rm -f public/assets/chat-*.js && rm -f public/assets/chat-*.css && rm -f public/assets/dev-*.js && rm -f public/assets/dev-*.css"
 alias hpbxgui_bundle="LD_LIBRARY_PATH=\"${__rmagick_lib_path__}\" bundle"
 alias hpbxgui_console="hpbxgui_dev && hpbxgui_bundle exec rails console -e jcarson_dev"

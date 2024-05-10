@@ -30,7 +30,7 @@ case "$(hostname)" in
       work/mtt/aliases/auto_dialer.sh
       work/mtt/aliases/bootstrap_helper.sh
       work/mtt/aliases/call_blaster.sh
-      work/mtt/aliases/call_recording.sh
+      work/mtt/aliases/call_recorder.sh
       work/mtt/aliases/cli_builder.sh
       work/mtt/aliases/cti.sh
       work/mtt/aliases/data_monitor.sh
@@ -43,11 +43,14 @@ case "$(hostname)" in
       work/mtt/aliases/hop_client.sh
       work/mtt/aliases/hpbxgui.sh
       work/mtt/aliases/httpd.sh
+      work/mtt/aliases/ibm_s2t_api.sh
+      work/mtt/aliases/ibm_t2s_api.sh
       work/mtt/aliases/influxdb.sh
       work/mtt/aliases/liteorm.sh
       work/mtt/aliases/mobile_app.sh
       work/mtt/aliases/msteams.sh
       work/mtt/aliases/mtt_crm.sh
+      work/mtt/aliases/openai_api.sh
       work/mtt/aliases/rails_env_loader.sh
       work/mtt/aliases/rec_mon.sh
       work/mtt/aliases/rma.sh
