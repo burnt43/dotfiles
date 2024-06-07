@@ -10,18 +10,25 @@ which gem 1>/dev/null 2>/dev/null && alias gem_dir="cd $(gem environment | grep 
 
 alias genpass="__genpass__"
 
+# REVIEW: Maybe I should have all the git aliases in their own file.
+
+# (g)it (c)ommit (p)rogress
+alias gcp="git add -A && git commit -m 'progress'"
+# (g)it (f)irst (p)ush
 alias gfp="__git_first_push__"
 alias git_first_push="__git_first_push__"
 alias git_prep_deploy="__git_prep_deploy__"
 alias git_sync_master="__git_sync_master__"
 alias gits="git status --short"
 alias grep="grep --color=auto"
+# (g)it (s)ync (m)aster
 alias gsm="__git_sync_master__"
 alias ls="ls --color=auto"
 alias ruby_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/standard.flf"
 alias sbrc="source ~/.bashrc"
 alias script_banner_text="which figlet 1>/dev/null 2>/dev/null && [[ -e "/usr/share/figlet/fonts/banner.flf" ]] && figlet -w 100 -f /usr/share/figlet/fonts/banner.flf"
 alias systemd_top="top -p \$(ps aux | grep 'systemd' | grep -v "grep" | awk '{print \$2}' | paste -sd,)"
+# (y)ou (t)ube (b)ack (g)round
 alias ytbg="__ytbg__"
 
 function __change_terminal_title__ {
