@@ -9,3 +9,7 @@ tunnels:
     proto: tcp
     addr: 'jcarson-faye.monmouth.com:9293'
     remote_addr: '9.tcp.ngrok.io:23453'
+  mysql:
+    proto: tcp
+    addr: 'jcarson-mysql.monmouth.com:3306'
+    remote_addr: '9.tcp.ngrok.io:23453'

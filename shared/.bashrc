@@ -39,6 +39,7 @@ case "$(hostname)" in
       work/mtt/aliases/engoncall.sh
       work/mtt/aliases/eqpt_gui.sh
       work/mtt/aliases/faye.sh
+      work/mtt/aliases/flow_lang.sh
       work/mtt/aliases/hop.sh
       work/mtt/aliases/hop_client.sh
       work/mtt/aliases/hpbxgui.sh
@@ -49,6 +50,7 @@ case "$(hostname)" in
       work/mtt/aliases/liteorm.sh
       work/mtt/aliases/mobile_app.sh
       work/mtt/aliases/msteams.sh
+      work/mtt/aliases/mtt_ai.sh
       work/mtt/aliases/mtt_crm.sh
       work/mtt/aliases/openai_api.sh
       work/mtt/aliases/rails_env_loader.sh
