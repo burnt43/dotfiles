@@ -81,6 +81,8 @@ function __hpbxgui_test_sia__ {
   $mysql_bin -u ${hpbxgui_db[username]} -p${hpbxgui_db[password]} -h ${hpbxgui_db[host]} ${hpbxgui_db[database]} -e "DELETE FROM chat_message_medias WHERE id=${chat_message_media_id}"
 }
 
+alias hpbxgui_assets="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake hpbxgui:themed_assets:generate && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
+
 alias hpbxgui_chat_recompile="hpbxgui_dev && rm -f public/assets/chat-*.js && hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
 function __hpbxgui_chat_syntax__ {
   local node_bin=$(which node)

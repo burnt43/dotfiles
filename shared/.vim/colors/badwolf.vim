@@ -202,8 +202,8 @@ call s:HL('MatchParen', 'dalespale', 'darkgravel', 'bold')
 call s:HL('NonText',    'deepgravel', 'bg')
 call s:HL('SpecialKey', 'deepgravel', 'bg')
 
-call s:HL('Visual',    '',  'deepgravel')
-call s:HL('VisualNOS', '',  'deepgravel')
+call s:HL('Visual',    'brightgravel',  'deepgravel')
+call s:HL('VisualNOS', 'brightgravel',  'deepgravel')
 
 call s:HL('Search',    'coal', 'dalespale', 'bold')
 call s:HL('IncSearch', 'coal', 'tardis',    'bold')

@@ -96,6 +96,7 @@ settings:
     https://www.ups.com: false
   content.notifications.enabled:
     https://auto.howstuffworks.com: false
+    https://knowyourmeme.com: false
     https://www.accuweather.com: false
     https://www.mi-webmail.com: false
     https://www.sportskeeda.com: false
