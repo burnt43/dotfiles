@@ -81,6 +81,40 @@ function __hpbxgui_test_sia__ {
   $mysql_bin -u ${hpbxgui_db[username]} -p${hpbxgui_db[password]} -h ${hpbxgui_db[host]} ${hpbxgui_db[database]} -e "DELETE FROM chat_message_medias WHERE id=${chat_message_media_id}"
 }
 
+function __hpbxgui_permission_diff__ {
+  local pfile=~/.lapaz/mysql
+
+  local mysql_username_for_production=$(grep "^solo_lectura" $pfile | head -1 | cut -d\( -f1)
+  local mysql_password_for_production=$(grep "^solo_lectura" $pfile | head -1 | awk '{print $2}')
+  local mysql_host_for_production=hosted-db
+  local mysql_db_for_production=hpbx_production
+
+  local grep_after=6
+  local dev_env_name=jcarson_dev
+  local database_config_file=./config/database.yml
+
+  local mysql_username_for_dev=$(grep -A $grep_after "^${dev_env_name}:" $database_config_file | grep -E '^\s*username' | awk '{print $2}')
+  local mysql_password_for_dev=$(grep -A $grep_after "^${dev_env_name}:" $database_config_file | grep -E '^\s*password' | awk '{print $2}')
+  local mysql_host_for_dev=$(grep -A $grep_after "^${dev_env_name}:" $database_config_file | grep -E '^\s*host' | awk '{print $2}')
+  local mysql_db_for_dev=$(grep -A $grep_after "^${dev_env_name}:" $database_config_file | grep -E '^\s*database' | awk '{print $2}')
+
+  local production_result_filename=/tmp/hpbxgui-permission-diff-production.txt
+  local dev_result_filename=/tmp/hpbxgui-permission-diff-dev.txt
+
+  mysql -u $mysql_username_for_production -p${mysql_password_for_production} -h $mysql_host_for_production $mysql_db_for_production --skip-column-names --batch -e "SELECT name FROM permissions ORDER BY name;" | sort > $production_result_filename
+  mysql -u $mysql_username_for_dev -p${mysql_password_for_dev} -h $mysql_host_for_dev $mysql_db_for_dev --skip-column-names --batch -e "SELECT name FROM permissions ORDER BY name;" | sort > $dev_result_filename
+
+  local num_lines=$(comm -23 $dev_result_filename $production_result_filename | wc -l)
+
+  if [[ "$num_lines" == "0" ]]; then
+    echo -e "\033[0;32mOK\033[0;0m"
+  else
+    echo "----------------------------------------------------------------------"
+    echo -e "\033[0;31mThe following permissions are in DEV, but not PRODUCTION\033[0;0m"
+    comm -23 $dev_result_filename $production_result_filename
+  fi
+}
+
 alias hpbxgui_assets="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake hpbxgui:themed_assets:generate && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
 
 alias hpbxgui_chat_recompile="hpbxgui_dev && rm -f public/assets/chat-*.js && hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
@@ -114,6 +148,7 @@ alias hpbxgui_jlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log | grep 'JCARSON
 alias hpbxgui_migrate="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake db:migrate"
 alias hpbxgui_migrate_status="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake db:migrate:status"
 alias hpbxgui_ngrok="__ngrok_shuffle__ hpbxgui && ngrok http https://jcarson-hpbxgui.monmouth.com --domain loving-bold-alpaca.ngrok-free.app"
+alias hpbxgui_permission_diff="hpbxgui_dev && __hpbxgui_permission_diff__"
 alias hpbxgui_rlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log  | grep -A 1 -B 1 'Processing by'"
 alias hpbxgui_runner="hpbxgui_dev && hpbxgui_bundle exec rails runner -e jcarson_dev"
 alias hpbxgui_seed="ruby2 && indie_crm_ctl.sh -c restore_all -r mttpbx"
