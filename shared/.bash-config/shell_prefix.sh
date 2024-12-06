@@ -36,13 +36,22 @@ function __shell_git_plugin__ {
 
   if [[ "$files_changed_and_committed" != "0" && "$files_changed_and_committed" == "$files" ]]; then
     # all changes ready to be committed
-    echo -ne "(\033[0;33m$branch\033[0;0m)"
+    echo -ne "(\033[0;33m$branch\033[0;0m"
   elif [[ "$files_changed_and_not_committed" == "0" ]]; then
     # clean
-    echo -ne "(\033[0;36m$branch\033[0;0m)"
+    echo -ne "(\033[0;36m$branch\033[0;0m"
   else
     # dirty
-    echo -ne "(\033[0;31m$branch\033[0;0m)"
+    echo -ne "(\033[0;31m$branch\033[0;0m"
+  fi
+
+  local find_gem_result=$(find ${my_dir} -maxdepth 1 -name '*.gem' | head -1)
+
+  if [[ ! -z "$find_gem_result" ]]; then
+    local gem_version=$(basename $find_gem_result | sed 's/^.*-//g' | sed 's/\.gem//g')
+    echo -n "/${gem_version})"
+  else
+    echo -n ")"
   fi
 }
 

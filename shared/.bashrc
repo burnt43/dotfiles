@@ -23,6 +23,7 @@ case "$(hostname)" in
       work/mtt/aliases/ami_message_capture.sh
       work/mtt/aliases/ami_rep.sh
       work/mtt/aliases/ami_socket.sh
+      work/mtt/aliases/asterisk_ari.sh
       work/mtt/aliases/asterisk_cdr.sh
       work/mtt/aliases/asterisk_config.sh
       work/mtt/aliases/asterisk_database.sh
@@ -52,11 +53,14 @@ case "$(hostname)" in
       work/mtt/aliases/msteams.sh
       work/mtt/aliases/mtt_ai.sh
       work/mtt/aliases/mtt_crm.sh
+      work/mtt/aliases/oni_ractor.sh
       work/mtt/aliases/openai_api.sh
       work/mtt/aliases/rails_env_loader.sh
       work/mtt/aliases/rec_mon.sh
       work/mtt/aliases/rma.sh
       work/mtt/aliases/rdm.sh
+      work/mtt/aliases/ruby-ractor-utils.sh
+      work/mtt/aliases/ruby-rtp.sh
       work/mtt/aliases/sip_utils.sh
       work/mtt/aliases/soft_phone.sh
       work/mtt/aliases/solr_mon.sh
