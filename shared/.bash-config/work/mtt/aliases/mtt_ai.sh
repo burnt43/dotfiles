@@ -1,11 +1,13 @@
-alias mtt_ai_agi_console="mtt_ai_dev && ./script/console.sh -t agi"
-alias mtt_ai_agi_server="mtt_ai_dev && ./script/agi_server.sh"
-alias mtt_ai_ari_console="mtt_ai_dev && ./script/console.sh -t ari"
-alias mtt_ai_ari_server="mtt_ai_dev && ./script/ari_server.sh"
+mtt_ai_gem_home=/home/jcarson/.gems/mtt-ai/ruby/3.3.0
+
+alias mtt_ai_command_client="mtt_ai_dev && ./script/ari_command_client.sh"
+alias mtt_ai_core_run="mtt_ai_dev && ./script/ari_server.sh"
 alias mtt_ai_dev="ruby3 && cd ~/git_clones/mtt-ai"
-alias mtt_ai_console="mtt_ai_dev && ./script/console.sh"
-alias mtt_ai_test_run="mtt_ai_dev && MTT_AI_ENV=test bundle exec rake mtt_ai:test:run"
-alias mtt_ai_test_reset="mtt_ai_dev && MTT_AI_ENV=test bundle exec rake mtt_ai:test:db:reset"
+alias mtt_ai_cmd_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari -p mtt_ai/ari/command_client_runner"
+alias mtt_ai_core_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari -p mtt_ai/ari/core_runner"
+alias mtt_ai_node_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari -p mtt_ai/ari/node_runner"
+alias mtt_ai_test_run="mtt_ai_dev && MTT_AI_ENV=jcarson_test MTT_CRM_TENANT_ID=270 RUBYOPT=-W0 GEM_HOME=${mtt_ai_gem_home} GEM_PATH=\"\" rake mtt_ai:test:run"
+alias mtt_ai_test_reset="mtt_ai_dev && MTT_AI_ENV=jcarson_test RUBYOPT=-W0 GEM_HOME=${mtt_ai_gem_home} GEM_PATH=\"\" rake mtt_ai:test:db:reset"
 
 function __gem_sanity_check_version_compare__ {
   local project_name=$1

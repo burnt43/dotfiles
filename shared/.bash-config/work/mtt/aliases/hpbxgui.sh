@@ -115,9 +115,9 @@ function __hpbxgui_permission_diff__ {
   fi
 }
 
-alias hpbxgui_assets="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake hpbxgui:themed_assets:generate && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
+# alias hpbxgui_assets="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake hpbxgui:themed_assets:generate && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
 
-alias hpbxgui_chat_recompile="hpbxgui_dev && rm -f public/assets/chat-*.js && hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
+# alias hpbxgui_chat_recompile="hpbxgui_dev && rm -f public/assets/chat-*.js && hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
 function __hpbxgui_chat_syntax__ {
   local node_bin=$(which node)
   local grep_bin=$(which grep)
@@ -134,24 +134,33 @@ function __hpbxgui_chat_syntax__ {
     fi
   done
 }
-alias hpbxgui_chat_syntax="hpbxgui_dev && __hpbxgui_chat_syntax__"
+# alias hpbxgui_chat_syntax="hpbxgui_dev && __hpbxgui_chat_syntax__"
 
-alias hpbxgui_clear_assets="hpbxgui_dev && rm -f public/assets/application-*.js && rm -f public/assets/application-*.css && rm -f public/assets/jcarson-dev-*.js && rm -f public/assets/jcarson-dev-*.css && rm -f public/assets/chat-*.js && rm -f public/assets/chat-*.css && rm -f public/assets/dev-*.js && rm -f public/assets/dev-*.css"
-alias hpbxgui_bundle="LD_LIBRARY_PATH=\"${__rmagick_lib_path__}\" bundle"
-alias hpbxgui_console="hpbxgui_dev && hpbxgui_bundle exec rails console -e jcarson_dev"
-alias hpbxgui_create_migration="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rails generate migration"
-alias hpbxgui_db_dump="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake db:schema:dump"
-alias hpbxgui_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/hosted/hpbxgui"
-alias hpbxgui_dev="ruby2 && cd ~/git_clones/hosted/hpbxgui"
-alias hpbxgui_log="hpbxgui_dev && tail -f ./log/jcarson_dev.log"
-alias hpbxgui_jlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log | grep 'JCARSON'"
-alias hpbxgui_migrate="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake db:migrate"
-alias hpbxgui_migrate_status="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake db:migrate:status"
-alias hpbxgui_ngrok="__ngrok_shuffle__ hpbxgui && ngrok http https://jcarson-hpbxgui.monmouth.com --domain loving-bold-alpaca.ngrok-free.app"
-alias hpbxgui_permission_diff="hpbxgui_dev && __hpbxgui_permission_diff__"
-alias hpbxgui_rlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log  | grep -A 1 -B 1 'Processing by'"
-alias hpbxgui_runner="hpbxgui_dev && hpbxgui_bundle exec rails runner -e jcarson_dev"
-alias hpbxgui_seed="ruby2 && indie_crm_ctl.sh -c restore_all -r mttpbx"
-alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:db:reset"
-alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:run_no_controllers"
-alias hpbxgui_test_sia="__hpbxgui_test_sia__"
+# alias hpbxgui_clear_assets="hpbxgui_dev && rm -f public/assets/application-*.js && rm -f public/assets/application-*.css && rm -f public/assets/jcarson-dev-*.js && rm -f public/assets/jcarson-dev-*.css && rm -f public/assets/chat-*.js && rm -f public/assets/chat-*.css && rm -f public/assets/dev-*.js && rm -f public/assets/dev-*.css"
+# alias hpbxgui_bundle="LD_LIBRARY_PATH=\"${__rmagick_lib_path__}\" bundle"
+# alias hpbxgui_bundle="bundle"
+# alias hpbxgui_console="hpbxgui_dev && hpbxgui_bundle exec rails console -e jcarson_dev"
+# alias hpbxgui_create_migration="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rails generate migration"
+# alias hpbxgui_db_dump="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake db:schema:dump"
+# alias hpbxgui_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/hosted/hpbxgui"
+# alias hpbxgui_log="hpbxgui_dev && tail -f ./log/jcarson_dev.log"
+# alias hpbxgui_jlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log | grep 'JCARSON'"
+# alias hpbxgui_migrate="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake db:migrate"
+# alias hpbxgui_migrate_status="hpbxgui_dev && RAILS_ENV=jcarson_dev hpbxgui_bundle exec rake db:migrate:status"
+# alias hpbxgui_ngrok="__ngrok_shuffle__ hpbxgui && ngrok http https://jcarson-hpbxgui.monmouth.com --domain loving-bold-alpaca.ngrok-free.app"
+# alias hpbxgui_permission_diff="hpbxgui_dev && __hpbxgui_permission_diff__"
+# alias hpbxgui_rlog="hpbxgui_dev && tail -f ./log/jcarson_dev.log  | grep -A 1 -B 1 'Processing by'"
+# alias hpbxgui_runner="hpbxgui_dev && hpbxgui_bundle exec rails runner -e jcarson_dev"
+# alias hpbxgui_seed="ruby2 && indie_crm_ctl.sh -c restore_all -r mttpbx"
+# alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:db:reset"
+# alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:run_no_controllers"
+# alias hpbxgui_test_sia="__hpbxgui_test_sia__"
+
+alias hpbxgui_assets="hpbxgui_bundle exec rake assets:precompile && touch tmp/restart.txt"
+alias hpbxgui_bundle="hpbxgui_dev && RAILS_ENV=jcarson_dev bundle"
+alias hpbxgui_console="hpbxgui_bundle exec rails console -e jcarson_dev"
+alias hpbxgui_create_migration="hpbxgui_bundle exec rails generate migration"
+alias hpbxgui_dev="ruby3 && cd ~/git_clones/hosted/hpbxgui"
+alias hpbxgui_db_migrate_status="hpbxgui_bundle exec rake db:migrate:status"
+alias hpbxgui_db_migrate="hpbxgui_bundle exec rake db:migrate"
+alias hpbxgui_schema_dump="hpbxgui_bundle exec rake db:schema:dump"

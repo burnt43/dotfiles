@@ -177,3 +177,10 @@ function __ytbg__ {
 
   return 0
 }
+
+alias list_colors="__list_colors__"
+function __list_colors__ {
+  for color_code in $(seq 0 255); do
+    echo -e "${color_code} \033[38;5;${color_code}mamakakeru ryu no hirameki\033[0;0m"
+  done
+}

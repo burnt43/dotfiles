@@ -339,6 +339,9 @@ function __recompile_passenger__ {
   # our project.
   local gem_home=$(dirname $(dirname "$passenger_path"))
 
+  echo "GEM_HOME: $gem_home"
+  echo "$passenger_path/bin/passenger-install-apache2-module"
+
   # Run the install script, which will compile the passenger module for apache.
   GEM_HOME="$gem_home" GEM_PATH="" $passenger_path/bin/passenger-install-apache2-module
 }

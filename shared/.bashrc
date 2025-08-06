@@ -41,6 +41,7 @@ case "$(hostname)" in
       work/mtt/aliases/eqpt_gui.sh
       work/mtt/aliases/faye.sh
       work/mtt/aliases/flow_lang.sh
+      work/mtt/aliases/fuzzy.sh
       work/mtt/aliases/hop.sh
       work/mtt/aliases/hop_client.sh
       work/mtt/aliases/hpbxgui.sh
@@ -53,10 +54,12 @@ case "$(hostname)" in
       work/mtt/aliases/msteams.sh
       work/mtt/aliases/mtt_ai.sh
       work/mtt/aliases/mtt_crm.sh
+      work/mtt/aliases/muxi.sh
       work/mtt/aliases/oni_ractor.sh
       work/mtt/aliases/openai_api.sh
       work/mtt/aliases/rails_env_loader.sh
       work/mtt/aliases/rec_mon.sh
+      work/mtt/aliases/rfm.sh
       work/mtt/aliases/rma.sh
       work/mtt/aliases/rdm.sh
       work/mtt/aliases/ruby-ractor-utils.sh
@@ -69,6 +72,7 @@ case "$(hostname)" in
       work/mtt/aliases/thingspace.sh
       work/mtt/aliases/xymon.sh
       work/mtt/aliases/xymon_reporter.sh
+      work/mtt/aliases/zoom.sh
       work/mtt/aliases/generic.sh
       work/mtt/exports.sh
       exports.sh
