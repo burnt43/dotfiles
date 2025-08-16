@@ -92,6 +92,13 @@ case "$(hostname)" in
       shell_welcome.sh
     )
     ;;
+  fakebiz42069*)
+    base_path=~/.bash-config
+    my_paths=(
+      shell_prefix.sh
+      home/fakebiz42069/aliases.sh
+    )
+    ;;
 esac
 
 for p in "${my_paths[@]}"; do

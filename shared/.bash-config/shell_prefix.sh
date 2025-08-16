@@ -55,4 +55,12 @@ function __shell_git_plugin__ {
   fi
 }
 
-PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n┴% '
+my_hostname="$(hostname)"
+case "$my_hostname" in
+  fakebiz42069*)
+    PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n ┴% '
+    ;;
+  *)
+    PS1=' ┌$(__shell_last_command__) $(__shell_basic_info__)$(__shell_git_plugin__)\n┴% '
+    ;;
+esac

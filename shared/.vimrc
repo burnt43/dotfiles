@@ -5,6 +5,11 @@
 "  \ V /| | | | | | | | | (__ 
 "   \_/ |_|_| |_| |_|_|  \___|
 "
+" {{{ Turn off Dumb Shit
+set mouse=
+set noerrorbells
+set nohlsearch
+" }}}
 " vundle {{{
 set nocompatible
 filetype off
