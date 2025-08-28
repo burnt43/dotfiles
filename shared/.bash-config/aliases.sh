@@ -18,6 +18,7 @@ alias gcp="git add -A && git commit -m 'progress'"
 alias gfp="__git_first_push__"
 alias git_first_push="__git_first_push__"
 alias git_prep_deploy="__git_prep_deploy__"
+alias gpd="__git_prep_deploy__"
 alias git_sync_master="__git_sync_master__"
 alias gits="git status --short"
 alias grep="grep --color=auto"
@@ -81,6 +82,7 @@ function __git_sync_master__ {
   fi
 }
 
+# {{{ __git_prep_deploy__
 function __git_prep_deploy__ {
   local git_bin=$(which git)
 
@@ -105,6 +107,10 @@ function __git_prep_deploy__ {
     $git_bin checkout stable --quiet
     ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
 
+    __echo_proc_step__ "pulling"
+    $git_bin pull --quiet
+    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
     __echo_proc_step__ "merging master -> stable"
     $git_bin merge --no-edit --no-ff --quiet master
     ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
@@ -114,6 +120,7 @@ function __git_prep_deploy__ {
     ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
   fi
 }
+# }}}
 
 function __ytbg__ {
   local input_ytid="$1"
