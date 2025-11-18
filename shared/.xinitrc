@@ -20,6 +20,11 @@ xmodmap ~/.Xmodmap
 # start i3 window manager
 case "$(hostname)" in
   burnt43)
+    xrandr --output DP-1 --mode 2560x1440 --rate 59.95
+    # Temp Bad 2nd Monitor
+    xrandr --output DVI-D-1 --mode 1920x1200 --rate 59.95 --rotate left --left-of DP-1
+    # Good 2nd Monitor
+    # xrandr --output HDMI-1 --mode 2560x1440 --rate 59.95 --rotate left --left-of DP-1
     exec i3
     ;;
   fakebiz0)

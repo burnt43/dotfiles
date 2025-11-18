@@ -84,40 +84,103 @@ function __git_sync_master__ {
 
 # {{{ __git_prep_deploy__
 function __git_prep_deploy__ {
+  # NOTE: This is not comprehensive.
+
   local git_bin=$(which git)
+  local remote_name=mtt
+  local remote_stable_branch_name=stable
+  local remote_master_branch_name=master
+  local local_name=origin
+  local local_stable_branch_name=stable
+  local local_master_branch_name=master
 
-  if [[ $($git_bin branch --list stable | wc -l) == 0 ]]; then
-    __echo_proc_step__ "checking out master"
-    $git_bin checkout master --quiet
+  __echo_proc_step__ "checking if remote mtt exists"
+  local mtt_remote_size=$($git_bin remote | grep "^${remote_name}" | wc -l)
+  ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+  if [[ "$mtt_remote_size" == "1" ]]; then
+    # We have an remote, so this remote is the main fork that we need to maintain.
+
+    # REVIEW: Probably need to check if the remote has a stable.
+
+    __echo_proc_step__ "fetching ${remote_name}/${remote_stable_branch_name} and ${remote_name}/${remote_master_branch_name}"
+    $git_bin fetch -q ${remote_name} ${remote_stable_branch_name} ${remote_master_branch_name}
     ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
 
-    __echo_proc_step__ "pulling"
-    $git_bin pull --quiet
+    __echo_proc_step__ "checking if ${local_name}/${local_stable_branch_name} exists"
+    local local_stable_branch_size=$($git_bin branch | grep "${local_stable_branch_name}" | wc -l)
     ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+    # Make a local stable if we don't have one.
+    if [[ "$local_stable_branch_size" == "0" ]]; then
+      $git_bin checkout -q -b ${local_stable_branch_name}
+      local_stable_branch_size=1
+    fi
+
+    if [[ "$local_stable_branch_size" == "1" ]]; then
+      # We have a stable branch.
+
+      __echo_proc_step__ "checking out ${local_name}/${local_stable_branch_name}"
+      $git_bin checkout -q $local_stable_branch_name
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      __echo_proc_step__ "pulling ${remote_name}/${remote_stable_branch_name}"
+      $git_bin pull -q $remote_name $remote_stable_branch_name
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      __echo_proc_step__ "merging ${remote_name}/${remote_master_branch_name}"
+      $git_bin merge -q --no-edit --no-ff ${remote_name}/${remote_master_branch_name}
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      __echo_proc_step__ "pushing ${remote_name}/${remote_stable_branch_name}"
+      $git_bin push -q ${remote_name} ${remote_stable_branch_name}
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+    else
+      # We don't have a local stable branch!?
+      :
+    fi
   else
-    __echo_proc_step__ "checking out master"
-    $git_bin checkout master --quiet
-    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+    # We don't have a remote, so this is assumed to be the main fork.
 
-    __echo_proc_step__ "pulling"
-    $git_bin pull --quiet
-    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+    if [[ $($git_bin branch --list $local_stable_branch_name | wc -l) == 0 ]]; then
+      # This project doesn't have a stable branch, so we assume everything
+      # is done off master and we don't need to merge master into stable.
 
-    __echo_proc_step__ "checking out stable"
-    $git_bin checkout stable --quiet
-    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+      __echo_proc_step__ "checking out $local_master_branch_name"
+      $git_bin checkout $local_master_branch_name --quiet
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
 
-    __echo_proc_step__ "pulling"
-    $git_bin pull --quiet
-    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+      __echo_proc_step__ "pulling"
+      $git_bin pull --quiet
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+    else
+      # We have a stable, so we assume that we need to get master up to date
+      # and get stable up to date and then merging master into stable.
 
-    __echo_proc_step__ "merging master -> stable"
-    $git_bin merge --no-edit --no-ff --quiet master
-    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+      __echo_proc_step__ "checking out $local_master_branch_name"
+      $git_bin checkout $local_master_branch_name --quiet
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
 
-    __echo_proc_step__ "pushing stable"
-    $git_bin push --quiet
-    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+      __echo_proc_step__ "pulling"
+      $git_bin pull --quiet
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      __echo_proc_step__ "checking out $local_stable_branch_name"
+      $git_bin checkout $local_stable_branch_name --quiet
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      __echo_proc_step__ "pulling"
+      $git_bin pull --quiet
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      __echo_proc_step__ "merging $local_master_branch_name -> $local_stable_branch_name"
+      $git_bin merge --no-edit --no-ff --quiet $local_master_branch_name
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      __echo_proc_step__ "pushing $local_stable_branch_name"
+      $git_bin push --quiet
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+    fi
   fi
 }
 # }}}

@@ -7,6 +7,8 @@ alias mtt_ai_cmd_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari
 alias mtt_ai_core_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari -p mtt_ai/ari/core_runner"
 alias mtt_ai_node_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari -p mtt_ai/ari/node_runner"
 alias mtt_ai_sim="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429 --model gpt-4o-realtime-preview-2025-06-03"
+alias mtt_ai_sim_o="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429 --model gpt-4o-realtime-preview-2025-06-03"
+alias mtt_ai_sim_g="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429 --model models/gemini-live-2.5-flash-preview"
 alias mtt_ai_test_run="mtt_ai_dev && MTT_AI_ENV=jcarson_test MTT_CRM_TENANT_ID=270 RUBYOPT=-W0 GEM_HOME=${mtt_ai_gem_home} GEM_PATH=\"\" rake mtt_ai:test:run"
 alias mtt_ai_test_reset="mtt_ai_dev && MTT_AI_ENV=jcarson_test RUBYOPT=-W0 GEM_HOME=${mtt_ai_gem_home} GEM_PATH=\"\" rake mtt_ai:test:db:reset"
 

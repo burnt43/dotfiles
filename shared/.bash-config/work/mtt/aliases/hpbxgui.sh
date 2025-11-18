@@ -156,13 +156,15 @@ function __hpbxgui_chat_syntax__ {
 # alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} hpbxgui_bundle exec rake hpbxgui:test:run_no_controllers"
 # alias hpbxgui_test_sia="__hpbxgui_test_sia__"
 
-alias hpbxgui_assets="hpbxgui_bundle exec rake hpbxgui:themed_assets:generate assets:precompile && touch tmp/restart.txt"
-alias hpbxgui_bundle="hpbxgui_dev && RAILS_ENV=jcarson_dev bundle"
-alias hpbxgui_console="hpbxgui_bundle exec rails console -e jcarson_dev"
-alias hpbxgui_create_migration="hpbxgui_bundle exec rails generate migration"
+alias hpbxgui_assets="RAILS_ENV=jcarson_dev bundle exec rake hpbxgui:themed_assets:generate assets:precompile && touch tmp/restart.txt"
+alias hpbxgui_console="bundle exec rails console -e jcarson_dev"
+alias hpbxgui_create_migration="RAILS_ENV=jcarson_dev bundle exec rails generate migration"
+alias hpbxgui_db_migrate_status="RAILS_ENV=jcarson_dev bundle exec rake db:migrate:status"
+alias hpbxgui_db_migrate="RAILS_ENV=jcarson_dev bundle exec rake db:migrate"
 alias hpbxgui_dev="ruby3 && cd ~/git_clones/hosted/hpbxgui"
-alias hpbxgui_db_migrate_status="hpbxgui_bundle exec rake db:migrate:status"
-alias hpbxgui_db_migrate="hpbxgui_bundle exec rake db:migrate"
+alias hpbxgui_schema_dump="hpbxgui_dev && RAILS_ENV=jcarson_dev bundle exec rake db:schema:dump"
+alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_HACK_A=1 JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} bundle exec rake hpbxgui:test:db:reset"
+alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} bundle exec rake hpbxgui:test:run_no_controllers"
 
 function __hpbxgui_db_rollback__ {
   local rollback="$1"
@@ -174,5 +176,3 @@ function __hpbxgui_db_rollback__ {
   fi
 }
 alias hpbxgui_db_rollback="__hpbxgui_db_rollback__"
-
-alias hpbxgui_schema_dump="hpbxgui_bundle exec rake db:schema:dump"

@@ -12,6 +12,7 @@ my_paths=(
   /usr/local/ruby/ruby-3.3.1/bin
   /usr/local/mysql/mysql-5.7.21/bin/
   /usr/local/openssh/openssh-9.7p1/bin/
+  /usr/local/python/python-3.13.7/bin/
   /home/jcarson/.npm-packages/bin
   /home/jcarson/.gems/eqpt-gui/ruby/3.1.0/gems/passenger-6.0.12/bin
   /home/jcarson/git_clones/work-scripts/personal

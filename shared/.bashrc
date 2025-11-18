@@ -42,6 +42,7 @@ case "$(hostname)" in
       work/mtt/aliases/faye.sh
       work/mtt/aliases/flow_lang.sh
       work/mtt/aliases/fuzzy.sh
+      work/mtt/aliases/google.sh
       work/mtt/aliases/hop.sh
       work/mtt/aliases/hop_client.sh
       work/mtt/aliases/hpbxgui.sh
