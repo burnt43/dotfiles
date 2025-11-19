@@ -22,3 +22,13 @@ for repo_filename in $(find ./$hostname ./shared -mindepth 1 -type f 2>/dev/null
     cp $system_filename $repo_filename
   fi
 done
+
+# TODO: need some way of syncing new stuff in directories. particularly this one.
+ls ~/.bash-config/work/mtt/aliases/ | sort | uniq > local
+ls /home/jcarson/git_clones/dotfiles/shared/.bash-config/work/mtt/aliases/ | sort | uniq > repo
+comm -23 local repo
+fuzzy.sh
+google.sh
+muxi.sh
+rfm.sh
+zoom.sh
