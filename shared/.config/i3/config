@@ -1,18 +1,29 @@
-# aliases {{{
-# workspace names
-set $workspace1  "1"
-set $workspace2  "2"
-set $workspace3  "3"
-set $workspace4  "4"
-set $workspace5  "5"
-set $workspace6  "6"
-set $workspace7  "7"
-set $workspace8  "8"
-set $workspace9  "9"
-set $workspace10 "10"
+set $workspace1a 1
+set $workspace2a 2
+set $workspace3a 3
+set $workspace4a 4
+set $workspace5a 5
+set $workspace6a 6
+set $workspace7a 7
+set $workspace8a 8
+set $workspace9a 9
+set $workspace0a 10
+
+set $workspace1b 11
+set $workspace2b 12
+set $workspace3b 13
+set $workspace4b 14
+set $workspace5b 15
+set $workspace6b 16
+set $workspace7b 17
+set $workspace8b 18
+set $workspace9b 19
+set $workspace0b 20
+
+set $mon1 DP-1
+set $mon2 DVI-D-1
 
 set $terminal exec urxvt -title Foo
-set $feh exec --no-startup-id feh --bg-center --no-fehbg
 set $Locker i3lock && sleep 1
 
 set $badwolf_plain #f8f6f2
@@ -42,20 +53,14 @@ set $badwolf_darkroast #88633f
 set $molokai_fuschia #F92672
 set $molokai_orange #FD971F
 set $molokai_purple #AE81FF
-# }}}
 
-# basic config {{{
-# use windows key
+# Mod4 = Windows Key
 set $mod Mod4
+# Mod1 = Alt
+set $alt Mod1
 
-# mouse settings
 focus_follows_mouse no
-# }}}
 
-floating_minimum_size 2300 x 1300
-
-# modes {{{
-# resize mode
 mode "resize" {
   bindsym j resize shrink height 10 px or 10 ppt
   bindsym k resize grow height 10 px or 10 ppt
@@ -67,7 +72,6 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 
-# keybinds {{{
 # start a terminal
 bindsym $mod+Return $terminal
 
@@ -97,49 +101,41 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+f floating toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-# bindsym $mod+Shift+space 
-
-
-# change focus between tiling / floating windows
-# bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindsym $mod+1 exec "i3-msg 'workspace $workspace1a; move workspace to output $mon1'"
+bindsym $mod+2 exec "i3-msg 'workspace $workspace2a; move workspace to output $mon1'"
+bindsym $mod+3 exec "i3-msg 'workspace $workspace3a; move workspace to output $mon1'"
+bindsym $mod+4 exec "i3-msg 'workspace $workspace4a; move workspace to output $mon1'"
+bindsym $mod+5 exec "i3-msg 'workspace $workspace5a; move workspace to output $mon1'"
+bindsym $mod+6 exec "i3-msg 'workspace $workspace6a; move workspace to output $mon1'"
+bindsym $mod+7 exec "i3-msg 'workspace $workspace7a; move workspace to output $mon1'"
+bindsym $mod+8 exec "i3-msg 'workspace $workspace8a; move workspace to output $mon1'"
+bindsym $mod+9 exec "i3-msg 'workspace $workspace9a; move workspace to output $mon1'"
+bindsym $mod+0 exec "i3-msg 'workspace $workspace0a; move workspace to output $mon1'"
+
+bindsym $mod+$alt+1 exec "i3-msg 'workspace $workspace1b; move workspace to output $mon2'"
+bindsym $mod+$alt+2 exec "i3-msg 'workspace $workspace2b; move workspace to output $mon2'"
+bindsym $mod+$alt+3 exec "i3-msg 'workspace $workspace3b; move workspace to output $mon2'"
+bindsym $mod+$alt+4 exec "i3-msg 'workspace $workspace4b; move workspace to output $mon2'"
+bindsym $mod+$alt+5 exec "i3-msg 'workspace $workspace5b; move workspace to output $mon2'"
+bindsym $mod+$alt+6 exec "i3-msg 'workspace $workspace6b; move workspace to output $mon2'"
+bindsym $mod+$alt+7 exec "i3-msg 'workspace $workspace7b; move workspace to output $mon2'"
+bindsym $mod+$alt+8 exec "i3-msg 'workspace $workspace8b; move workspace to output $mon2'"
+bindsym $mod+$alt+9 exec "i3-msg 'workspace $workspace9b; move workspace to output $mon2'"
+bindsym $mod+$alt+0 exec "i3-msg 'workspace $workspace0b; move workspace to output $mon2'"
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
+# bindsym $mod+Shift+1 move container to workspace $workspace1
+# bindsym $mod+Shift+2 move container to workspace $workspace2
+# bindsym $mod+Shift+3 move container to workspace $workspace3
+# bindsym $mod+Shift+4 move container to workspace $workspace4
+# bindsym $mod+Shift+5 move container to workspace $workspace5
+# bindsym $mod+Shift+6 move container to workspace $workspace6
+# bindsym $mod+Shift+7 move container to workspace $workspace7
+# bindsym $mod+Shift+8 move container to workspace $workspace8
+# bindsym $mod+Shift+9 move container to workspace $workspace9
+# bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -156,8 +152,6 @@ bindsym $mod+Shift+p exec --no-startup-id $Locker
 # enter resize mode
 bindsym $mod+r mode "resize"
 
-# window style {{{
-
 # no title, width 3 border
 new_window pixel 6
 
@@ -170,9 +164,7 @@ gaps outer 4
 gaps inner 8
 smart_borders on
 
-# window colors
 #                       border                  background    text          indicator               child_border
-client.focused          $molokai_purple         $badwolf_coal $badwolf_snow $molokai_purple         $molokai_purple
+client.focused          $badwolf_tardis         $badwolf_coal $badwolf_snow $badwolf_tardis         $badwolf_tardis
 client.focused_inactive $badwolf_blackestgravel $badwolf_coal $badwolf_snow $badwolf_blackestgravel $badwolf_blackestgravel
 client.unfocused        $badwolf_blackestgravel $badwolf_coal $badwolf_snow $badwolf_blackestgravel $badwolf_blackestgravel
-# }}}

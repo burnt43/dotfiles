@@ -1,6 +1,7 @@
 alias compile_mcl="__compile_mcl__"
 alias convert_to_ulaw="__convert_to_ulaw__"
 alias ensure_mttpbx_virtual_server_exists="__ensure_mttpbx_virtual_server_exists__"
+alias feh_dir="feh -d -S filename "
 alias getpcap="__getpcap__"
 alias git_xtract_dir="__git_extract_dir__"
 alias imagemagick_pkgconfig="__imagemagick_pkgconfig__"
