@@ -6,7 +6,7 @@ mobile_studio_jdk=/usr/lib/jvm/java-17-openjdk
 alias ast="LD_LIBRARY_PATH=$mobile_ld_library_path STUDIO_JDK=$mobile_studio_jdk /home/jcarson/.android-studio/bin/studio.sh"
 
 alias mobile_build="mobile_dev && ANDROID_HOME=$mobile_android_home LD_LIBRARY_PATH=$mobile_ld_library_path JAVA_HOME=$mobile_java_home cordova build android"
-alias mobile_dev="ruby2 && cd /home/jcarson/git_clones/mobileapp"
+alias mobile_dev="ruby2 && cd /home/jcarson/git_clones/mobileapp && __echo_dev_name__ MobileDev"
 alias mobile_install="mobile_dev && mobile_status && adb install /home/jcarson/git_clones/mobileapp/platforms/android/app/build/outputs/apk/debug/app-debug.apk"
 alias mobile_prepare="mobile_dev && ANDROID_HOME=$mobile_android_home LD_LIBRARY_PATH=$mobile_ld_library_path JAVA_HOME=$mobile_java_home cordova prepare android"
 

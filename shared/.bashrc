@@ -28,6 +28,7 @@ case "$(hostname)" in
       work/mtt/aliases/asterisk_config.sh
       work/mtt/aliases/asterisk_database.sh
       work/mtt/aliases/asterisk_queue_ctl.sh
+      work/mtt/aliases/authlogic_ext.sh
       work/mtt/aliases/auto_dialer.sh
       work/mtt/aliases/bootstrap_helper.sh
       work/mtt/aliases/call_blaster.sh
@@ -35,6 +36,7 @@ case "$(hostname)" in
       work/mtt/aliases/cli_builder.sh
       work/mtt/aliases/cti.sh
       work/mtt/aliases/data_monitor.sh
+      work/mtt/aliases/db_utils.sh
       work/mtt/aliases/delayed_jobs.sh
       work/mtt/aliases/dns.sh
       work/mtt/aliases/engoncall.sh
@@ -56,8 +58,11 @@ case "$(hostname)" in
       work/mtt/aliases/mtt_ai.sh
       work/mtt/aliases/mtt_crm.sh
       work/mtt/aliases/muxi.sh
+      work/mtt/aliases/ninja_one.sh
       work/mtt/aliases/oni_ractor.sh
       work/mtt/aliases/openai_api.sh
+      work/mtt/aliases/pipejam.sh
+      work/mtt/aliases/qbench.sh
       work/mtt/aliases/rails_env_loader.sh
       work/mtt/aliases/rec_mon.sh
       work/mtt/aliases/rfm.sh
@@ -71,6 +76,7 @@ case "$(hostname)" in
       work/mtt/aliases/stir_shaken_server.sh
       work/mtt/aliases/system_upgrade.sh
       work/mtt/aliases/thingspace.sh
+      work/mtt/aliases/tickets.sh
       work/mtt/aliases/xymon.sh
       work/mtt/aliases/xymon_reporter.sh
       work/mtt/aliases/zoom.sh

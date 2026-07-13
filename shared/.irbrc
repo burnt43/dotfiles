@@ -1,2 +1,3 @@
 IRB.conf[:USE_AUTOCOMPLETE] = false
-IRB.conf[:USE_COLORIZE] = false
+IRB.conf[:USE_COLORIZE] = true
+IRB.conf[:BACK_TRACE_LIMIT] = 1000

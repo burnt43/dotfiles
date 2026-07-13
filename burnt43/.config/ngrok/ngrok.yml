@@ -3,7 +3,7 @@ authtoken: 2UfGX6uNVXWmbC7aYid6RdIBXMa_JWoRXWd4Z69vP4fwQtwh
 tunnels:
   hpbxgui:
     proto:  http
-    addr:   https://jcarson-hpbxgui.monmouth.com
+    addr:   https://jcarson-eqpt-gui.monmouth.com
     domain: loving-bold-alpaca.ngrok-free.app
   faye:
     proto: tcp

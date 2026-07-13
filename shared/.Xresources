@@ -97,25 +97,25 @@ URxvt.font:          xft:Hack-Regular:pixelsize=18,style=regular
 ! URxvt.foreground:    #ffffff
 ! }}}
 ! badwolf scheme {{{
-URxvt.color0: badwolf_deepgravel
-URxvt.color1: badwolf_taffy
-URxvt.color2: badwolf_lime
-URxvt.color3: badwolf_orange
-URxvt.color4: badwolf_tardis
-URxvt.color5: badwolf_dress
-URxvt.color6: badwolf_saltwatertaffy
-URxvt.color7: badwolf_brightgravel
-URxvt.color8: badwolf_deepgravel
-URxvt.color9: badwolf_taffy
-URxvt.color10: badwolf_lime
-URxvt.color11: badwolf_orange
-URxvt.color12: badwolf_tardis
-URxvt.color13: badwolf_dress
-URxvt.color14: badwolf_saltwatertaffy
-URxvt.color15: badwolf_brightgravel
-URxvt.depth:         32
-URxvt.background:    badwolf_coal
-URxvt.foreground:    badwolf_plain
+! URxvt.color0: badwolf_deepgravel
+! URxvt.color1: badwolf_taffy
+! URxvt.color2: badwolf_lime
+! URxvt.color3: badwolf_orange
+! URxvt.color4: badwolf_tardis
+! URxvt.color5: badwolf_dress
+! URxvt.color6: badwolf_saltwatertaffy
+! URxvt.color7: badwolf_brightgravel
+! URxvt.color8: badwolf_deepgravel
+! URxvt.color9: badwolf_taffy
+! URxvt.color10: badwolf_lime
+! URxvt.color11: badwolf_orange
+! URxvt.color12: badwolf_tardis
+! URxvt.color13: badwolf_dress
+! URxvt.color14: badwolf_saltwatertaffy
+! URxvt.color15: badwolf_brightgravel
+! URxvt.depth:         32
+! URxvt.background:    badwolf_coal
+! URxvt.foreground:    badwolf_plain
 ! }}}
 ! molokai scheme {{{
 ! URxvt.color0: badwolf_deepgravel
@@ -137,6 +137,28 @@ URxvt.foreground:    badwolf_plain
 ! URxvt.depth:         32
 ! URxvt.background:    badwolf_coal
 ! URxvt.foreground:    badwolf_plain
+! }}}
+! custom scheme {{{
+URxvt.color0: badwolf_mediumgravel
+URxvt.color1: molokai_red
+URxvt.color2: molokai_green
+URxvt.color3: badwolf_orange
+URxvt.color4: badwolf_tardis
+URxvt.color5: molokai_purple
+URxvt.color6: molokai_blue
+URxvt.color7: badwolf_brightgravel
+
+URxvt.color8: badwolf_mediumgravel
+URxvt.color9: molokai_red
+URxvt.color10: molokai_green
+URxvt.color11: badwolf_orange
+URxvt.color12: badwolf_tardis
+URxvt.color13: molokai_purple
+URxvt.color14: molokai_blue
+URxvt.color15: badwolf_brightgravel
+URxvt.depth:         32
+URxvt.background:    badwolf_coal
+URxvt.foreground:    badwolf_plain
 ! }}}
 ! 'fake transparency' {{{
 URxvt.inheritPixmap: true

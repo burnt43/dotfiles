@@ -28,5 +28,5 @@ function __hop_client__ {
   node ./hop_js_client.js wss://jcarson-hop.monmouth.com:11081 $session_id 2>/dev/null
 }
 
-alias hop_client_dev="cd ~/git_clones/hop_js_client"
+alias hop_client_dev="cd ~/git_clones/hop_js_client && __echo_dev_name__ HopClientDev"
 alias hop_client_run="__hop_client__"

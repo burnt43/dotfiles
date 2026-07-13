@@ -2,13 +2,19 @@ mtt_ai_gem_home=/home/jcarson/.gems/mtt-ai/ruby/3.3.0
 
 alias mtt_ai_command_client="mtt_ai_dev && ./script/ari_command_client.sh"
 alias mtt_ai_core_run="mtt_ai_dev && ./script/ari_server.sh"
-alias mtt_ai_dev="ruby3 && cd ~/git_clones/mtt-ai"
-alias mtt_ai_cmd_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari -p mtt_ai/ari/command_client_runner"
-alias mtt_ai_core_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari -p mtt_ai/ari/core_runner"
-alias mtt_ai_node_console="mtt_ai_dev && ./script/console.sh -c 270 -p mtt_ai/ari -p mtt_ai/ari/node_runner"
-alias mtt_ai_sim="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429 --model gpt-4o-realtime-preview-2025-06-03"
-alias mtt_ai_sim_o="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429 --model gpt-4o-realtime-preview-2025-06-03"
-alias mtt_ai_sim_g="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429 --model models/gemini-live-2.5-flash-preview"
+alias mtt_ai_dev="ruby3 && cd ~/git_clones/mtt-ai && __echo_dev_name__ MttAiDev"
+alias mtt_ai_cmd_console="mtt_ai_dev && ./script/console.sh -c 6 -p mtt_ai/ari -p mtt_ai/ari/command_client_runner"
+alias mtt_ai_core_console="mtt_ai_dev && ./script/console.sh -c 6 -p mtt_ai/ari -p mtt_ai/ari/core_runner"
+alias mtt_ai_generate_email="mtt_ai_dev && ./script/ari_command_client.sh --generate-email-for-summary-dev --email-auth-user jcarson@monmouth.com --email-to create-mtt-crm-dev@monmouth.com"
+alias mtt_ai_node_console="mtt_ai_dev && ./script/console.sh -c 6 -p mtt_ai/ari -p mtt_ai/ari/node_runner"
+alias mtt_ai_sim="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429"
+alias mtt_ai_summarize_audio_file="mtt_ai_dev && ./script/ari_command_client.sh --summary-tenant eng --summary-ext 429 --summarize-audio-file --audio-file"
+alias mtt_ai_summarize_emails="mtt_ai_dev && ./script/ari_command_client.sh --summarize-emails --email-auth-address mail.monmouth.com --email-auth-password leuk*wudu --email-auth-user create-mtt-crm-dev@monmouth.com --email-auth-method pop3 --email-auth-port 110 --email-count ALL"
+
+# NOTE: You can just update the tier in the GUI.
+# alias mtt_ai_sim_o="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429 --model gpt-4o-realtime-preview-2025-06-03"
+# alias mtt_ai_sim_g="mtt_ai_dev && ./script/ari_command_client.sh --ai-agent-console --ai-agent-id 6 --ai-agent-calling-number 429 --model models/gemini-2.0-flash-exp"
+
 alias mtt_ai_test_run="mtt_ai_dev && MTT_AI_ENV=jcarson_test MTT_CRM_TENANT_ID=270 RUBYOPT=-W0 GEM_HOME=${mtt_ai_gem_home} GEM_PATH=\"\" rake mtt_ai:test:run"
 alias mtt_ai_test_reset="mtt_ai_dev && MTT_AI_ENV=jcarson_test RUBYOPT=-W0 GEM_HOME=${mtt_ai_gem_home} GEM_PATH=\"\" rake mtt_ai:test:db:reset"
 

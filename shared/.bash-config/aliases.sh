@@ -1,5 +1,8 @@
 alias conf_file_text="which figlet && figlet -w 100 -f /usr/share/figlet/fonts/big.flf"
 
+# (c)laude (r)esume (s)ession
+alias crs="/home/jcarson/git_clones/work-scripts/mtt/development/claude_hook.rb -t jcarson.load_claude"
+
 # (c)hange (t)erminal (t)itle
 alias ctt="__change_terminal_title__"
 
@@ -19,6 +22,8 @@ alias gfp="__git_first_push__"
 alias git_first_push="__git_first_push__"
 alias git_prep_deploy="__git_prep_deploy__"
 alias gpd="__git_prep_deploy__"
+alias git_hide="git update-index --assume-unchanged"
+alias git_show="git update-index --no-assume-unchanged"
 alias git_sync_master="__git_sync_master__"
 alias gits="git status --short"
 alias grep="grep --color=auto"
@@ -101,48 +106,82 @@ function __git_prep_deploy__ {
   if [[ "$mtt_remote_size" == "1" ]]; then
     # We have an remote, so this remote is the main fork that we need to maintain.
 
-    # REVIEW: Probably need to check if the remote has a stable.
-
-    __echo_proc_step__ "fetching ${remote_name}/${remote_stable_branch_name} and ${remote_name}/${remote_master_branch_name}"
-    $git_bin fetch -q ${remote_name} ${remote_stable_branch_name} ${remote_master_branch_name}
+    # Do we have a stable branch that we need to merge master into?
+    __echo_proc_step__ "checking if stable branch exists in the remote"
+    local stable_branch_check_size=$($git_bin ls-remote --heads $remote_name $remote_stable_branch_name | wc -l)
     ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
 
-    __echo_proc_step__ "checking if ${local_name}/${local_stable_branch_name} exists"
-    local local_stable_branch_size=$($git_bin branch | grep "${local_stable_branch_name}" | wc -l)
-    ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
-
-    # Make a local stable if we don't have one.
-    if [[ "$local_stable_branch_size" == "0" ]]; then
-      $git_bin checkout -q -b ${local_stable_branch_name}
-      local_stable_branch_size=1
-    fi
-
-    if [[ "$local_stable_branch_size" == "1" ]]; then
-      # We have a stable branch.
-
-      __echo_proc_step__ "checking out ${local_name}/${local_stable_branch_name}"
-      $git_bin checkout -q $local_stable_branch_name
-      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
-
-      __echo_proc_step__ "pulling ${remote_name}/${remote_stable_branch_name}"
-      $git_bin pull -q $remote_name $remote_stable_branch_name
-      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
-
-      __echo_proc_step__ "merging ${remote_name}/${remote_master_branch_name}"
-      $git_bin merge -q --no-edit --no-ff ${remote_name}/${remote_master_branch_name}
-      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
-
-      __echo_proc_step__ "pushing ${remote_name}/${remote_stable_branch_name}"
-      $git_bin push -q ${remote_name} ${remote_stable_branch_name}
-      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
-    else
-      # We don't have a local stable branch!?
+    if [[ "$stable_branch_check_size" == "0" ]]; then
+      #  ____                      _       _   _      ____  _        _     _      
+      # |  _ \ ___ _ __ ___   ___ | |_ ___| \ | | ___/ ___|| |_ __ _| |__ | | ___ 
+      # | |_) / _ \ '_ ` _ \ / _ \| __/ _ \  \| |/ _ \___ \| __/ _` | '_ \| |/ _ \
+      # |  _ <  __/ | | | | | (_) | ||  __/ |\  | (_) |__) | || (_| | |_) | |  __/
+      # |_| \_\___|_| |_| |_|\___/ \__\___|_| \_|\___/____/ \__\__,_|_.__/|_|\___|
+      echo -e "[\033[0;34mSUMMARY\033[0;0m] - remote($remote_name) exists, but branch($remote_stable_branch_name) does not. nothing to do."
       :
+    else
+      #  ____                      _     __        ___ _   _     ____  _        _     _      
+      # |  _ \ ___ _ __ ___   ___ | |_ __\ \      / (_) |_| |__ / ___|| |_ __ _| |__ | | ___ 
+      # | |_) / _ \ '_ ` _ \ / _ \| __/ _ \ \ /\ / /| | __| '_ \\___ \| __/ _` | '_ \| |/ _ \
+      # |  _ <  __/ | | | | | (_) | ||  __/\ V  V / | | |_| | | |___) | || (_| | |_) | |  __/
+      # |_| \_\___|_| |_| |_|\___/ \__\___| \_/\_/  |_|\__|_| |_|____/ \__\__,_|_.__/|_|\___|
+
+      # fetch both stable and master on the remote.
+      __echo_proc_step__ "fetching ${remote_name}/${remote_stable_branch_name} and ${remote_name}/${remote_master_branch_name}"
+      $git_bin fetch -q ${remote_name} ${remote_stable_branch_name} ${remote_master_branch_name}
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      # see if our local has a stable branch.
+      __echo_proc_step__ "checking if ${local_name}/${local_stable_branch_name} exists"
+      local local_stable_branch_size=$($git_bin branch | grep "${local_stable_branch_name}" | wc -l)
+      ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+      # Make a local stable if we don't have one.
+      if [[ "$local_stable_branch_size" == "0" ]]; then
+        $git_bin checkout -q -b ${local_stable_branch_name}
+        local_stable_branch_size=1
+      fi
+
+      if [[ "$local_stable_branch_size" == "1" ]]; then
+        # We have a stable branch.
+
+        # Switch to local stable branch.
+        __echo_proc_step__ "checking out ${local_name}/${local_stable_branch_name}"
+        $git_bin checkout -q $local_stable_branch_name
+        ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+        # Pull the remote's stable branch I guess into the local stable.
+        __echo_proc_step__ "pulling ${remote_name}/${remote_stable_branch_name}"
+        $git_bin pull -q $remote_name $remote_stable_branch_name
+        ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+        # Merge remote's master into our local stable(which is effectively remote's stable).
+        __echo_proc_step__ "merging ${remote_name}/${remote_master_branch_name}"
+        $git_bin merge -q --no-edit --no-ff ${remote_name}/${remote_master_branch_name}
+        ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+        # Push our stable into remote's stable.
+        __echo_proc_step__ "pushing ${remote_name}/${remote_stable_branch_name}"
+        $git_bin push -q ${remote_name} ${remote_stable_branch_name}
+        ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
+
+        echo -e "[\033[0;34mSUMMARY\033[0;0m] - remote($remote_name) exists, branch($remote_stable_branch_name) exists. Merging ${remote_name}/${remote_master_branch_name} into ${remote_name}/${remote_stable_branch_name}"
+      else
+        # We don't have a local stable branch!? If we didn't have one, it should have
+        # been created above. How did we get here?
+        :
+      fi
     fi
   else
     # We don't have a remote, so this is assumed to be the main fork.
 
     if [[ $($git_bin branch --list $local_stable_branch_name | wc -l) == 0 ]]; then
+      #  _                    _ _   _      ____  _        _     _      
+      # | |    ___   ___ __ _| | \ | | ___/ ___|| |_ __ _| |__ | | ___ 
+      # | |   / _ \ / __/ _` | |  \| |/ _ \___ \| __/ _` | '_ \| |/ _ \
+      # | |__| (_) | (_| (_| | | |\  | (_) |__) | || (_| | |_) | |  __/
+      # |_____\___/ \___\__,_|_|_| \_|\___/____/ \__\__,_|_.__/|_|\___|
+
       # This project doesn't have a stable branch, so we assume everything
       # is done off master and we don't need to merge master into stable.
 
@@ -154,6 +193,12 @@ function __git_prep_deploy__ {
       $git_bin pull --quiet
       ([[ "$?" == "0" ]] && __echo_ok__) || __echo_fail__
     else
+      #  _                    ___        ___ _   _     ____  _        _     _      
+      # | |    ___   ___ __ _| \ \      / (_) |_| |__ / ___|| |_ __ _| |__ | | ___ 
+      # | |   / _ \ / __/ _` | |\ \ /\ / /| | __| '_ \\___ \| __/ _` | '_ \| |/ _ \
+      # | |__| (_) | (_| (_| | | \ V  V / | | |_| | | |___) | || (_| | |_) | |  __/
+      # |_____\___/ \___\__,_|_|  \_/\_/  |_|\__|_| |_|____/ \__\__,_|_.__/|_|\___|
+
       # We have a stable, so we assume that we need to get master up to date
       # and get stable up to date and then merging master into stable.
 

@@ -21,7 +21,7 @@ set $workspace9b 19
 set $workspace0b 20
 
 set $mon1 DP-1
-set $mon2 DVI-D-1
+set $mon2 HDMI-1
 
 set $terminal exec urxvt -title Foo
 set $Locker i3lock && sleep 1
@@ -126,16 +126,27 @@ bindsym $mod+$alt+9 exec "i3-msg 'workspace $workspace9b; move workspace to outp
 bindsym $mod+$alt+0 exec "i3-msg 'workspace $workspace0b; move workspace to output $mon2'"
 
 # move focused container to workspace
-# bindsym $mod+Shift+1 move container to workspace $workspace1
-# bindsym $mod+Shift+2 move container to workspace $workspace2
-# bindsym $mod+Shift+3 move container to workspace $workspace3
-# bindsym $mod+Shift+4 move container to workspace $workspace4
-# bindsym $mod+Shift+5 move container to workspace $workspace5
-# bindsym $mod+Shift+6 move container to workspace $workspace6
-# bindsym $mod+Shift+7 move container to workspace $workspace7
-# bindsym $mod+Shift+8 move container to workspace $workspace8
-# bindsym $mod+Shift+9 move container to workspace $workspace9
-# bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+1 move container to workspace $workspace1a
+bindsym $mod+Shift+2 move container to workspace $workspace2a
+bindsym $mod+Shift+3 move container to workspace $workspace3a
+bindsym $mod+Shift+4 move container to workspace $workspace4a
+bindsym $mod+Shift+5 move container to workspace $workspace5a
+bindsym $mod+Shift+6 move container to workspace $workspace6a
+bindsym $mod+Shift+7 move container to workspace $workspace7a
+bindsym $mod+Shift+8 move container to workspace $workspace8a
+bindsym $mod+Shift+9 move container to workspace $workspace9a
+bindsym $mod+Shift+0 move container to workspace $workspace0a
+
+bindsym $mod+$alt+Shift+1 move container to workspace $workspace1b
+bindsym $mod+$alt+Shift+2 move container to workspace $workspace2b
+bindsym $mod+$alt+Shift+3 move container to workspace $workspace3b
+bindsym $mod+$alt+Shift+4 move container to workspace $workspace4b
+bindsym $mod+$alt+Shift+5 move container to workspace $workspace5b
+bindsym $mod+$alt+Shift+6 move container to workspace $workspace6b
+bindsym $mod+$alt+Shift+7 move container to workspace $workspace7b
+bindsym $mod+$alt+Shift+8 move container to workspace $workspace8b
+bindsym $mod+$alt+Shift+9 move container to workspace $workspace9b
+bindsym $mod+$alt+Shift+0 move container to workspace $workspace0b
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -160,8 +171,8 @@ font pango:Hack-Regular 12
 
 # gaps
 smart_gaps on
-gaps outer 4
-gaps inner 8
+gaps outer 0
+gaps inner 16
 smart_borders on
 
 #                       border                  background    text          indicator               child_border

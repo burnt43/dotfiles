@@ -3,6 +3,7 @@ export PATH=""
 
 # List of directories to add to the path in ascending order of priority.
 my_paths=(
+  /home/jcarson/.local/bin
   /usr/bin/core_perl
   /usr/bin/vendor_perl
   /usr/bin/site_perl

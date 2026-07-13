@@ -1,6 +1,6 @@
 alias asterisk_cdr_console="asterisk_cdr_dev && ./script/console"
 alias asterisk_cdr_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/asterisk-cdr"
-alias asterisk_cdr_dev="ruby2 && cd ~/git_clones/asterisk-cdr"
+alias asterisk_cdr_dev="ruby2 && cd ~/git_clones/asterisk-cdr && __echo_dev_name__ AsteriskCdrDev"
 alias asterisk_cdr_syncer_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=jcarson_dev bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_syncer.rb"
 alias asterisk_cdr_finder_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=jcarson_dev bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_finder.rb"
 alias asterisk_cdr_data_run="asterisk_cdr_dev && ASTERISK_CDR_ENV=jcarson_dev bundle exec ruby -I/home/jcarson/git_clones/asterisk-cdr/lib ./asterisk_cdr_data_processor.rb"

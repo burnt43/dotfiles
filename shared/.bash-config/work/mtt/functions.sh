@@ -28,3 +28,8 @@ function __ngrok_shuffle__ {
   # Restart Apache
   sudo systemctl restart httpd
 }
+
+function __echo_dev_name__ {
+  local input="$1"
+  echo -ne "\033[0;33m" && figlet -w 100 $input && echo -ne "\033[0;0m"
+}

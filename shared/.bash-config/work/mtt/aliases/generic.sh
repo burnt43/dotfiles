@@ -1,4 +1,5 @@
 alias compile_mcl="__compile_mcl__"
+alias convert_slin_to_google_pcm8="__convert_slin_to_google_pcm8__"
 alias convert_to_ulaw="__convert_to_ulaw__"
 alias ensure_mttpbx_virtual_server_exists="__ensure_mttpbx_virtual_server_exists__"
 alias feh_dir="feh -d -S filename "
@@ -9,6 +10,9 @@ alias listen_to_latest_dev_recording="__listen_to_latest_dev_recording__"
 alias minicom="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 minicom@mtt3"
 alias mk_mail_dir="__mk_mail_dir__"
 alias play_ulaw="play -t raw -r 8000 -e u-law -b 8 -c 1"
+alias play_slin="play -t raw -r 8000 -e signed-integer -b 16 -c 1 -B"
+alias play_slin16="play -t raw -r 16000 -e signed-integer -b 16 -c 1 -B"
+alias play_slin24="play -t raw -r 24000 -e signed-integer -b 16 -c 1 -B"
 alias recompile_mysql_5="cd ~/sources/mysql-5.7.21 && cmake --install-prefix=/usr/local/mysql/mysql-5.7.21 -DWITH_BOOST=~/sources/boost_1_59_0.tar.gz ./ && make"
 alias recompile_passenger="__recompile_passenger__"
 alias recompile_ruby="__recompile_ruby__"
@@ -18,6 +22,13 @@ alias sync_ssh_config="__sync_ssh_config__"
 alias t38router="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss -c 3des-cbc 64.19.145.26"
 alias text2speech="__text2speech__"
 alias xymon_ctl="XYMSRV=209.191.1.133 XYMON=/home/jcarson/xymon/bin/xymon /home/jcarson/git_clones/xymon/script/xymon_ctl.sh"
+
+function __convert_slin_to_google_pcm8__ {
+  local input_file="$1"
+  local output_file="$2"
+
+  sox -t raw -r 8000 -e signed-integer -b 16 -B "$input_file" -t raw -r 8000 -e signed-integer -b 16 -L "$output_file"
+}
 
 function __convert_to_ulaw__ {
   local input_file="$1"

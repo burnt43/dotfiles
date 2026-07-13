@@ -1,4 +1,4 @@
-alias solr_mon_dev="ruby2 && cd ~/git_clones/solr-file-monitor"
+alias solr_mon_dev="ruby2 && cd ~/git_clones/solr-file-monitor && __echo_dev_name__ SolrMonDev"
 alias solr_mon_run="solr_mon_dev && SOLR_FILE_MONITOR_ENV=development ruby -I/home/jcarson/git_clones/solr-file-monitor-burnt43/lib -I/usr/local/ruby/ruby-2.6.1/lib/ruby/gems/2.6.0/gems/bundler-2.0.2/lib/ ./file_monitor_daemon.rb"
 alias solr_mon_deploy="ruby2 && __cap_deploy__ asterisk /home/asterisk/git_clones/solr-file-monitor"
 alias solr_mon_start_daemon="solr_mon_dev && ./safe-solr-file-monitor"
