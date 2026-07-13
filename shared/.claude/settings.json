@@ -1,0 +1,15 @@
+{
+  "theme": "custom:green",
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/jcarson/git_clones/work-scripts/mtt/development/claude_hook.rb -t SessionEnd"
+          }
+        ]
+      }
+    ]
+  }
+}
