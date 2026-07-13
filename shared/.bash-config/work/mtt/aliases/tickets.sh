@@ -1,0 +1,6 @@
+alias tickets_assets="tickets_dev && RAILS_ENV=jcarson_dev bundle exec rake assets:precompile"
+alias tickets_console="tickets_dev && RAILS_ENV=jcarson_dev bin/rails console"
+alias tickets_db="tickets_dev && sqlite3 /home/jcarson/.app-data/tickets/storage/jcarson_dev.sqlite3"
+alias tickets_db_migrate="tickets_dev && RAILS_ENV=jcarson_dev bundle exec rake db:migrate"
+alias tickets_db_migrate_status="tickets_dev && RAILS_ENV=jcarson_dev bundle exec rake db:migrate:status"
+alias tickets_dev="ruby4 && cd ~/git_clones/tickets && __echo_dev_name__ TicketsDev"
