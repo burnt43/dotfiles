@@ -165,6 +165,7 @@ alias hpbxgui_dev="ruby3 && cd ~/git_clones/hosted/hpbxgui && __echo_dev_name__ 
 alias hpbxgui_schema_dump="hpbxgui_dev && RAILS_ENV=jcarson_dev bundle exec rake db:schema:dump"
 alias hpbxgui_test_db_reset="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_HACK_A=1 JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} bundle exec rake hpbxgui:test:db:reset"
 alias hpbxgui_test_run="hpbxgui_dev && RAILS_ENV=hpbxgui_test JC_DB=${__hpbxgui_test_db__} JC_USER=${__hpbxgui_test_user__} JC_PASS=${__hpbxgui_test_pass__} JC_SOCK=${__hpbxgui_test_socket__} bundle exec rake hpbxgui:test:run_no_controllers"
+alias hpbxgui_web="__activate_webapp__ hpbxgui"
 
 function __hpbxgui_db_rollback__ {
   local rollback="$1"

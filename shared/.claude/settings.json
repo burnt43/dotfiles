@@ -1,5 +1,4 @@
 {
-  "theme": "custom:green",
   "hooks": {
     "SessionEnd": [
       {
@@ -11,5 +10,7 @@
         ]
       }
     ]
-  }
+  },
+  "theme": "custom:green",
+  "tui": "fullscreen"
 }

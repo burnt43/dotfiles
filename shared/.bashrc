@@ -77,6 +77,7 @@ case "$(hostname)" in
       work/mtt/aliases/system_upgrade.sh
       work/mtt/aliases/thingspace.sh
       work/mtt/aliases/tickets.sh
+      work/mtt/aliases/tickets_api.sh
       work/mtt/aliases/xymon.sh
       work/mtt/aliases/xymon_reporter.sh
       work/mtt/aliases/zoom.sh

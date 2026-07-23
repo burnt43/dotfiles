@@ -299,3 +299,11 @@ function __list_colors__ {
     echo -e "${color_code} \033[38;5;${color_code}mamakakeru ryu no hirameki\033[0;0m"
   done
 }
+
+__mysql8_bin_path=/usr/local/mysql/mysql-8.0.45/bin
+__mysql8_login_file=/usr/local/mysql/mysql-8.0.45/etc/.mylogin.cnf
+__mysql_binaries_to_alias=(mysql mysqldump mysql_config_editor mysql_tzinfo_to_sql)
+
+for bin_name in "${__mysql_binaries_to_alias[@]}"; do
+  alias ${bin_name}8="MYSQL_TEST_LOGIN_FILE=${__mysql8_login_file} ${__mysql8_bin_path}/${bin_name}"
+done

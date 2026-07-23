@@ -1,27 +1,92 @@
-set $workspace1a 1
-set $workspace2a 2
-set $workspace3a 3
-set $workspace4a 4
-set $workspace5a 5
-set $workspace6a 6
-set $workspace7a 7
-set $workspace8a 8
-set $workspace9a 9
-set $workspace0a 10
-
-set $workspace1b 11
-set $workspace2b 12
-set $workspace3b 13
-set $workspace4b 14
-set $workspace5b 15
-set $workspace6b 16
-set $workspace7b 17
-set $workspace8b 18
-set $workspace9b 19
-set $workspace0b 20
-
 set $mon1 DP-1
 set $mon2 HDMI-1
+
+# Project workspace pairs: $mod+N switches both monitors at once (yoko = $mon1,
+# tate = $mon2). $mod+1..0 covers slots 1-10, $mod+alt+1..0 covers slots 11-20.
+# Names are generic for now (ProjectA..ProjectT) and get renamed per-project later.
+set $project1_yoko   "1:Home"
+set $project1_tate   "1b:Home"
+set $project2_yoko   "2:Browser"
+set $project2_tate   "2b:Browser"
+set $project3_yoko   "3:Chat"
+set $project3_tate   "3b:Chat"
+set $project4_yoko   "4:ProjectD"
+set $project4_tate   "4b:ProjectD"
+set $project5_yoko   "5:MttAi"
+set $project5_tate   "5b:MttAi"
+set $project6_yoko   "6:HpbxGUI"
+set $project6_tate   "6b:HpbxGUI"
+set $project7_yoko   "7:EqptGUI"
+set $project7_tate   "7b:EqptGUI"
+set $project8_yoko   "8:TicketsGUI"
+set $project8_tate   "8b:TicketsGUI"
+set $project9_yoko   "9:TicketsAPI"
+set $project9_tate   "9b:TicketsAPI"
+set $project10_yoko  "10:Troubleshoot"
+set $project10_tate  "10b:Troubleshoot"
+
+set $project11_yoko  "11:ProjectK"
+set $project11_tate  "11b:ProjectK"
+set $project12_yoko  "12:ProjectL"
+set $project12_tate  "12b:ProjectL"
+set $project13_yoko  "13:ProjectM"
+set $project13_tate  "13b:ProjectM"
+set $project14_yoko  "14:ProjectN"
+set $project14_tate  "14b:ProjectN"
+set $project15_yoko  "15:ProjectO"
+set $project15_tate  "15b:ProjectO"
+set $project16_yoko  "16:ProjectP"
+set $project16_tate  "16b:ProjectP"
+set $project17_yoko  "17:ProjectQ"
+set $project17_tate  "17b:ProjectQ"
+set $project18_yoko  "18:ProjectR"
+set $project18_tate  "18b:ProjectR"
+set $project19_yoko  "19:ProjectS"
+set $project19_tate  "19b:ProjectS"
+set $project20_yoko  "20:ProjectT"
+set $project20_tate  "20b:ProjectT"
+
+# Pin each half of every pair to its monitor so they always open in the right place
+workspace $project1_yoko output $mon1
+workspace $project1_tate output $mon2
+workspace $project2_yoko output $mon1
+workspace $project2_tate output $mon2
+workspace $project3_yoko output $mon1
+workspace $project3_tate output $mon2
+workspace $project4_yoko output $mon1
+workspace $project4_tate output $mon2
+workspace $project5_yoko output $mon1
+workspace $project5_tate output $mon2
+workspace $project6_yoko output $mon1
+workspace $project6_tate output $mon2
+workspace $project7_yoko output $mon1
+workspace $project7_tate output $mon2
+workspace $project8_yoko output $mon1
+workspace $project8_tate output $mon2
+workspace $project9_yoko output $mon1
+workspace $project9_tate output $mon2
+workspace $project10_yoko output $mon1
+workspace $project10_tate output $mon2
+workspace $project11_yoko output $mon1
+workspace $project11_tate output $mon2
+workspace $project12_yoko output $mon1
+workspace $project12_tate output $mon2
+workspace $project13_yoko output $mon1
+workspace $project13_tate output $mon2
+workspace $project14_yoko output $mon1
+workspace $project14_tate output $mon2
+workspace $project15_yoko output $mon1
+workspace $project15_tate output $mon2
+workspace $project16_yoko output $mon1
+workspace $project16_tate output $mon2
+workspace $project17_yoko output $mon1
+workspace $project17_tate output $mon2
+workspace $project18_yoko output $mon1
+workspace $project18_tate output $mon2
+workspace $project19_yoko output $mon1
+workspace $project19_tate output $mon2
+workspace $project20_yoko output $mon1
+workspace $project20_tate output $mon2
 
 set $terminal exec urxvt -title Foo
 set $Locker i3lock && sleep 1
@@ -60,6 +125,9 @@ set $mod Mod4
 set $alt Mod1
 
 focus_follows_mouse no
+
+# polybar (one instance per monitor, shows project-named workspaces)
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 mode "resize" {
   bindsym j resize shrink height 10 px or 10 ppt
@@ -102,51 +170,60 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# switch to workspace
-bindsym $mod+1 exec "i3-msg 'workspace $workspace1a; move workspace to output $mon1'"
-bindsym $mod+2 exec "i3-msg 'workspace $workspace2a; move workspace to output $mon1'"
-bindsym $mod+3 exec "i3-msg 'workspace $workspace3a; move workspace to output $mon1'"
-bindsym $mod+4 exec "i3-msg 'workspace $workspace4a; move workspace to output $mon1'"
-bindsym $mod+5 exec "i3-msg 'workspace $workspace5a; move workspace to output $mon1'"
-bindsym $mod+6 exec "i3-msg 'workspace $workspace6a; move workspace to output $mon1'"
-bindsym $mod+7 exec "i3-msg 'workspace $workspace7a; move workspace to output $mon1'"
-bindsym $mod+8 exec "i3-msg 'workspace $workspace8a; move workspace to output $mon1'"
-bindsym $mod+9 exec "i3-msg 'workspace $workspace9a; move workspace to output $mon1'"
-bindsym $mod+0 exec "i3-msg 'workspace $workspace0a; move workspace to output $mon1'"
+# switch to a project pair: both monitors jump together, focus ends on yoko ($mon1)
+bindsym $mod+1 workspace $project1_tate, workspace $project1_yoko
+bindsym $mod+2 workspace $project2_tate, workspace $project2_yoko
+bindsym $mod+3 workspace $project3_tate, workspace $project3_yoko
+bindsym $mod+4 workspace $project4_tate, workspace $project4_yoko
+# ensure-dev-terminal auto-launch, disabled for now, uncomment to re-enable:
+# bindsym $mod+5 workspace $project5_tate, workspace $project5_yoko, exec --no-startup-id ~/.config/i3/scripts/ensure-dev-terminal.sh "5:MttAi" mtt_ai_dev
+# bindsym $mod+6 workspace $project6_tate, workspace $project6_yoko, exec --no-startup-id ~/.config/i3/scripts/ensure-dev-terminal.sh "6:HpbxGUI" hpbxgui_dev
+# bindsym $mod+7 workspace $project7_tate, workspace $project7_yoko, exec --no-startup-id ~/.config/i3/scripts/ensure-dev-terminal.sh "7:EqptGUI" eqpt_gui_dev
+# bindsym $mod+8 workspace $project8_tate, workspace $project8_yoko, exec --no-startup-id ~/.config/i3/scripts/ensure-dev-terminal.sh "8:TicketsGUI" tickets_dev
+# bindsym $mod+9 workspace $project9_tate, workspace $project9_yoko, exec --no-startup-id ~/.config/i3/scripts/ensure-dev-terminal.sh "9:TicketsAPI" tickets_api_dev
+bindsym $mod+5 workspace $project5_tate, workspace $project5_yoko
+bindsym $mod+6 workspace $project6_tate, workspace $project6_yoko
+bindsym $mod+7 workspace $project7_tate, workspace $project7_yoko
+bindsym $mod+8 workspace $project8_tate, workspace $project8_yoko
+bindsym $mod+9 workspace $project9_tate, workspace $project9_yoko
+bindsym $mod+0 workspace $project10_tate, workspace $project10_yoko
 
-bindsym $mod+$alt+1 exec "i3-msg 'workspace $workspace1b; move workspace to output $mon2'"
-bindsym $mod+$alt+2 exec "i3-msg 'workspace $workspace2b; move workspace to output $mon2'"
-bindsym $mod+$alt+3 exec "i3-msg 'workspace $workspace3b; move workspace to output $mon2'"
-bindsym $mod+$alt+4 exec "i3-msg 'workspace $workspace4b; move workspace to output $mon2'"
-bindsym $mod+$alt+5 exec "i3-msg 'workspace $workspace5b; move workspace to output $mon2'"
-bindsym $mod+$alt+6 exec "i3-msg 'workspace $workspace6b; move workspace to output $mon2'"
-bindsym $mod+$alt+7 exec "i3-msg 'workspace $workspace7b; move workspace to output $mon2'"
-bindsym $mod+$alt+8 exec "i3-msg 'workspace $workspace8b; move workspace to output $mon2'"
-bindsym $mod+$alt+9 exec "i3-msg 'workspace $workspace9b; move workspace to output $mon2'"
-bindsym $mod+$alt+0 exec "i3-msg 'workspace $workspace0b; move workspace to output $mon2'"
+bindsym $mod+$alt+1 workspace $project11_tate, workspace $project11_yoko
+bindsym $mod+$alt+2 workspace $project12_tate, workspace $project12_yoko
+bindsym $mod+$alt+3 workspace $project13_tate, workspace $project13_yoko
+bindsym $mod+$alt+4 workspace $project14_tate, workspace $project14_yoko
+bindsym $mod+$alt+5 workspace $project15_tate, workspace $project15_yoko
+bindsym $mod+$alt+6 workspace $project16_tate, workspace $project16_yoko
+bindsym $mod+$alt+7 workspace $project17_tate, workspace $project17_yoko
+bindsym $mod+$alt+8 workspace $project18_tate, workspace $project18_yoko
+bindsym $mod+$alt+9 workspace $project19_tate, workspace $project19_yoko
+bindsym $mod+$alt+0 workspace $project20_tate, workspace $project20_yoko
 
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1a
-bindsym $mod+Shift+2 move container to workspace $workspace2a
-bindsym $mod+Shift+3 move container to workspace $workspace3a
-bindsym $mod+Shift+4 move container to workspace $workspace4a
-bindsym $mod+Shift+5 move container to workspace $workspace5a
-bindsym $mod+Shift+6 move container to workspace $workspace6a
-bindsym $mod+Shift+7 move container to workspace $workspace7a
-bindsym $mod+Shift+8 move container to workspace $workspace8a
-bindsym $mod+Shift+9 move container to workspace $workspace9a
-bindsym $mod+Shift+0 move container to workspace $workspace0a
+# move focused container to a project's yoko workspace
+bindsym $mod+Shift+1 move container to workspace $project1_yoko
+bindsym $mod+Shift+2 move container to workspace $project2_yoko
+bindsym $mod+Shift+3 move container to workspace $project3_yoko
+bindsym $mod+Shift+4 move container to workspace $project4_yoko
+bindsym $mod+Shift+5 move container to workspace $project5_yoko
+bindsym $mod+Shift+6 move container to workspace $project6_yoko
+bindsym $mod+Shift+7 move container to workspace $project7_yoko
+bindsym $mod+Shift+8 move container to workspace $project8_yoko
+bindsym $mod+Shift+9 move container to workspace $project9_yoko
+bindsym $mod+Shift+0 move container to workspace $project10_yoko
 
-bindsym $mod+$alt+Shift+1 move container to workspace $workspace1b
-bindsym $mod+$alt+Shift+2 move container to workspace $workspace2b
-bindsym $mod+$alt+Shift+3 move container to workspace $workspace3b
-bindsym $mod+$alt+Shift+4 move container to workspace $workspace4b
-bindsym $mod+$alt+Shift+5 move container to workspace $workspace5b
-bindsym $mod+$alt+Shift+6 move container to workspace $workspace6b
-bindsym $mod+$alt+Shift+7 move container to workspace $workspace7b
-bindsym $mod+$alt+Shift+8 move container to workspace $workspace8b
-bindsym $mod+$alt+Shift+9 move container to workspace $workspace9b
-bindsym $mod+$alt+Shift+0 move container to workspace $workspace0b
+bindsym $mod+$alt+Shift+1 move container to workspace $project11_yoko
+bindsym $mod+$alt+Shift+2 move container to workspace $project12_yoko
+bindsym $mod+$alt+Shift+3 move container to workspace $project13_yoko
+bindsym $mod+$alt+Shift+4 move container to workspace $project14_yoko
+bindsym $mod+$alt+Shift+5 move container to workspace $project15_yoko
+bindsym $mod+$alt+Shift+6 move container to workspace $project16_yoko
+bindsym $mod+$alt+Shift+7 move container to workspace $project17_yoko
+bindsym $mod+$alt+Shift+8 move container to workspace $project18_yoko
+bindsym $mod+$alt+Shift+9 move container to workspace $project19_yoko
+bindsym $mod+$alt+Shift+0 move container to workspace $project20_yoko
+
+# flip the focused window between the yoko and tate half of its current project pair
+bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/toggle-yoko-tate.sh
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -167,7 +244,7 @@ bindsym $mod+r mode "resize"
 new_window pixel 6
 
 # font
-font pango:Hack-Regular 12
+font pango:Hack Nerd Font 12
 
 # gaps
 smart_gaps on

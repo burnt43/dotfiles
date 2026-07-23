@@ -59,6 +59,7 @@ solr_mon.sh
 stir_shaken_server.sh
 system_upgrade.sh
 thingspace.sh
+tickets_api.sh
 tickets.sh
 xymon_reporter.sh
 xymon.sh

@@ -8,6 +8,7 @@ config_to_binary[.config/compton.conf]=compton
 config_to_binary[.config/i3/*]=i3
 config_to_binary[.config/i3status/*]=i3status
 config_to_binary[.config/neofetch/*]=neofetch
+config_to_binary[.config/polybar/*]=polybar
 config_to_binary[.config/ranger/*]=ranger
 config_to_binary[.fdm.conf]=fdm
 config_to_binary[.fehbg]=feh
