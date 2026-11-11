@@ -52,6 +52,7 @@ case "$my_network" in
   # Local Virtual Machines (Green/Blue)
   10.111.159)
     host_color_code=(32 35 33)
+    host_color_n=3
     ;;
   # Other (Black)
   *)
@@ -99,6 +100,8 @@ function __shell_basic_info__ {
 
   # Handle Multiple Colors(if host_color_code is an array)
   if [[ $(declare -p host_color_code 2>/dev/null) == "declare -a"* ]]; then
+    [[ -z "$host_color_n" ]] && host_color_n=1
+
     local mc_text="$my_hostname"
     local mc_out=""
     local mc_i mc_c mc_n=0
@@ -108,7 +111,7 @@ function __shell_basic_info__ {
       if [[ "$mc_c" == " " ]]; then
         mc_out+=" "                      # spaces don't use up a color
       else
-        mc_out+="\033[1;${host_color_code[mc_n % ${#host_color_code[@]}]}m${mc_c}"
+        mc_out+="\033[1;${host_color_code[(mc_n / host_color_n) % ${#host_color_code[@]}]}m${mc_c}"
         (( mc_n++ ))
       fi
     done
