@@ -1,4 +1,8 @@
 {
+  "permissions": {
+    "defaultMode": "default",
+    "disableAutoMode": "disable"
+  },
   "hooks": {
     "SessionEnd": [
       {
@@ -11,6 +15,54 @@
       }
     ]
   },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "2-Stroking",
+      "4-Stroking",
+      "636-ing",
+      "765-ing",
+      "ABS-Deleting",
+      "Aprillia'ing",
+      "Bezzing",
+      "Blackbirding",
+      "Copse-ing",
+      "Dovizioso-ing",
+      "DRZ-ing",
+      "Ducati'ing",
+      "Fireblading",
+      "Gixxer'ing",
+      "Going Free",
+      "Goldwinging",
+      "Hayabusa'ing",
+      "High-Siding",
+      "Honda'ing",
+      "Isle-of-Mann-ing",
+      "Kawasaki'ing",
+      "KTM'ing",
+      "Low-Siding",
+      "Maggots-and-Beckets-ing",
+      "Martinatoring",
+      "Marquezing",
+      "Ninja'ing",
+      "On-The-Piping",
+      "Pecco'ing",
+      "Qualifying",
+      "Quatararo-ing",
+      "Revving",
+      "Rossi'ing",
+      "Stonering",
+      "Suzuki'ing",
+      "Tire-Warming",
+      "Topraking",
+      "Track-Standing",
+      "Trail-Braking",
+      "Triumphing",
+      "Wheelie-ing",
+      "Yamaha'ing"
+    ]
+  },
+  "tui": "fullscreen",
   "theme": "custom:green",
-  "tui": "fullscreen"
+  "feedbackDrafts": "off"
 }

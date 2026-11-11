@@ -3,15 +3,15 @@ set $mon2 HDMI-1
 
 # Project workspace pairs: $mod+N switches both monitors at once (yoko = $mon1,
 # tate = $mon2). $mod+1..0 covers slots 1-10, $mod+alt+1..0 covers slots 11-20.
-# Names are generic for now (ProjectA..ProjectT) and get renamed per-project later.
+# Names are generic for now (ProjectA..ProjectS) and get renamed per-project later.
 set $project1_yoko   "1:Home"
 set $project1_tate   "1b:Home"
 set $project2_yoko   "2:Browser"
 set $project2_tate   "2b:Browser"
 set $project3_yoko   "3:Chat"
 set $project3_tate   "3b:Chat"
-set $project4_yoko   "4:ProjectD"
-set $project4_tate   "4b:ProjectD"
+set $project4_yoko   "4:MttCRM"
+set $project4_tate   "4b:MttCRM"
 set $project5_yoko   "5:MttAi"
 set $project5_tate   "5b:MttAi"
 set $project6_yoko   "6:HpbxGUI"
@@ -25,26 +25,76 @@ set $project9_tate   "9b:TicketsAPI"
 set $project10_yoko  "10:Troubleshoot"
 set $project10_tate  "10b:Troubleshoot"
 
-set $project11_yoko  "11:ProjectK"
-set $project11_tate  "11b:ProjectK"
-set $project12_yoko  "12:ProjectL"
-set $project12_tate  "12b:ProjectL"
-set $project13_yoko  "13:ProjectM"
-set $project13_tate  "13b:ProjectM"
-set $project14_yoko  "14:ProjectN"
-set $project14_tate  "14b:ProjectN"
-set $project15_yoko  "15:ProjectO"
-set $project15_tate  "15b:ProjectO"
-set $project16_yoko  "16:ProjectP"
-set $project16_tate  "16b:ProjectP"
-set $project17_yoko  "17:ProjectQ"
-set $project17_tate  "17b:ProjectQ"
-set $project18_yoko  "18:ProjectR"
-set $project18_tate  "18b:ProjectR"
-set $project19_yoko  "19:ProjectS"
-set $project19_tate  "19b:ProjectS"
-set $project20_yoko  "20:ProjectT"
-set $project20_tate  "20b:ProjectT"
+set $project11_yoko  "11:NinjaOneAPI"
+set $project11_tate  "11b:NinjaOneAPI"
+set $project12_yoko  "12:OpenAiAPI"
+set $project12_tate  "12b:OpenAiAPI"
+set $project13_yoko  "13:GoogleAiAPI"
+set $project13_tate  "13b:GoogleAiAPI"
+set $project14_yoko  "14:AmiReplication"
+set $project14_tate  "14b:AmiReplication"
+set $project15_yoko  "15:RecordingFileMonitor"
+set $project15_tate  "15b:RecordingFileMonitor"
+set $project16_yoko  "16:VoicemailFileMonitor"
+set $project16_tate  "16b:VoicemailFileMonitor"
+set $project17_yoko  "17:SipUtils"
+set $project17_tate  "17b:SipUtils"
+set $project18_yoko  "18:CallRecording"
+set $project18_tate  "18b:CallRecording"
+set $project19_yoko  "19:AmiSocket"
+set $project19_tate  "19b:AmiSocket"
+set $project20_yoko  "20:Troubleshoot 2"
+set $project20_tate  "20b:Troubleshoot 2"
+
+# Function-key pairs: $mod+F1..F12 covers slots 21-32, $mod+alt+F1..F12 covers slots 33-44.
+set $project21_yoko  "21:Slot21"
+set $project21_tate  "21b:Slot21"
+set $project22_yoko  "22:Slot22"
+set $project22_tate  "22b:Slot22"
+set $project23_yoko  "23:Slot23"
+set $project23_tate  "23b:Slot23"
+set $project24_yoko  "24:Slot24"
+set $project24_tate  "24b:Slot24"
+set $project25_yoko  "25:Slot25"
+set $project25_tate  "25b:Slot25"
+set $project26_yoko  "26:Slot26"
+set $project26_tate  "26b:Slot26"
+set $project27_yoko  "27:Slot27"
+set $project27_tate  "27b:Slot27"
+set $project28_yoko  "28:Slot28"
+set $project28_tate  "28b:Slot28"
+set $project29_yoko  "29:Slot29"
+set $project29_tate  "29b:Slot29"
+set $project30_yoko  "30:Slot30"
+set $project30_tate  "30b:Slot30"
+set $project31_yoko  "31:Slot31"
+set $project31_tate  "31b:Slot31"
+set $project32_yoko  "32:Slot32"
+set $project32_tate  "32b:Slot32"
+set $project33_yoko  "33:Slot33"
+set $project33_tate  "33b:Slot33"
+set $project34_yoko  "34:Slot34"
+set $project34_tate  "34b:Slot34"
+set $project35_yoko  "35:Slot35"
+set $project35_tate  "35b:Slot35"
+set $project36_yoko  "36:Slot36"
+set $project36_tate  "36b:Slot36"
+set $project37_yoko  "37:Slot37"
+set $project37_tate  "37b:Slot37"
+set $project38_yoko  "38:Slot38"
+set $project38_tate  "38b:Slot38"
+set $project39_yoko  "39:Slot39"
+set $project39_tate  "39b:Slot39"
+set $project40_yoko  "40:Slot40"
+set $project40_tate  "40b:Slot40"
+set $project41_yoko  "41:Slot41"
+set $project41_tate  "41b:Slot41"
+set $project42_yoko  "42:Slot42"
+set $project42_tate  "42b:Slot42"
+set $project43_yoko  "43:Slot43"
+set $project43_tate  "43b:Slot43"
+set $project44_yoko  "44:Slot44"
+set $project44_tate  "44b:Slot44"
 
 # Pin each half of every pair to its monitor so they always open in the right place
 workspace $project1_yoko output $mon1
@@ -87,6 +137,54 @@ workspace $project19_yoko output $mon1
 workspace $project19_tate output $mon2
 workspace $project20_yoko output $mon1
 workspace $project20_tate output $mon2
+workspace $project21_yoko output $mon1
+workspace $project21_tate output $mon2
+workspace $project22_yoko output $mon1
+workspace $project22_tate output $mon2
+workspace $project23_yoko output $mon1
+workspace $project23_tate output $mon2
+workspace $project24_yoko output $mon1
+workspace $project24_tate output $mon2
+workspace $project25_yoko output $mon1
+workspace $project25_tate output $mon2
+workspace $project26_yoko output $mon1
+workspace $project26_tate output $mon2
+workspace $project27_yoko output $mon1
+workspace $project27_tate output $mon2
+workspace $project28_yoko output $mon1
+workspace $project28_tate output $mon2
+workspace $project29_yoko output $mon1
+workspace $project29_tate output $mon2
+workspace $project30_yoko output $mon1
+workspace $project30_tate output $mon2
+workspace $project31_yoko output $mon1
+workspace $project31_tate output $mon2
+workspace $project32_yoko output $mon1
+workspace $project32_tate output $mon2
+workspace $project33_yoko output $mon1
+workspace $project33_tate output $mon2
+workspace $project34_yoko output $mon1
+workspace $project34_tate output $mon2
+workspace $project35_yoko output $mon1
+workspace $project35_tate output $mon2
+workspace $project36_yoko output $mon1
+workspace $project36_tate output $mon2
+workspace $project37_yoko output $mon1
+workspace $project37_tate output $mon2
+workspace $project38_yoko output $mon1
+workspace $project38_tate output $mon2
+workspace $project39_yoko output $mon1
+workspace $project39_tate output $mon2
+workspace $project40_yoko output $mon1
+workspace $project40_tate output $mon2
+workspace $project41_yoko output $mon1
+workspace $project41_tate output $mon2
+workspace $project42_yoko output $mon1
+workspace $project42_tate output $mon2
+workspace $project43_yoko output $mon1
+workspace $project43_tate output $mon2
+workspace $project44_yoko output $mon1
+workspace $project44_tate output $mon2
 
 set $terminal exec urxvt -title Foo
 set $Locker i3lock && sleep 1
@@ -142,6 +240,10 @@ mode "resize" {
 
 # start a terminal
 bindsym $mod+Return $terminal
+
+# taskwarrior-tui scratchpad, toggles from any workspace/monitor
+for_window [instance="taskwarrior-scratch"] floating enable, resize set 1200 900, move position center, move scratchpad
+bindsym $mod+t exec --no-startup-id ~/.config/i3/scripts/toggle-todo.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -199,6 +301,32 @@ bindsym $mod+$alt+8 workspace $project18_tate, workspace $project18_yoko
 bindsym $mod+$alt+9 workspace $project19_tate, workspace $project19_yoko
 bindsym $mod+$alt+0 workspace $project20_tate, workspace $project20_yoko
 
+bindsym $mod+F1 workspace $project21_tate, workspace $project21_yoko
+bindsym $mod+F2 workspace $project22_tate, workspace $project22_yoko
+bindsym $mod+F3 workspace $project23_tate, workspace $project23_yoko
+bindsym $mod+F4 workspace $project24_tate, workspace $project24_yoko
+bindsym $mod+F5 workspace $project25_tate, workspace $project25_yoko
+bindsym $mod+F6 workspace $project26_tate, workspace $project26_yoko
+bindsym $mod+F7 workspace $project27_tate, workspace $project27_yoko
+bindsym $mod+F8 workspace $project28_tate, workspace $project28_yoko
+bindsym $mod+F9 workspace $project29_tate, workspace $project29_yoko
+bindsym $mod+F10 workspace $project30_tate, workspace $project30_yoko
+bindsym $mod+F11 workspace $project31_tate, workspace $project31_yoko
+bindsym $mod+F12 workspace $project32_tate, workspace $project32_yoko
+
+bindsym $mod+$alt+F1 workspace $project33_tate, workspace $project33_yoko
+bindsym $mod+$alt+F2 workspace $project34_tate, workspace $project34_yoko
+bindsym $mod+$alt+F3 workspace $project35_tate, workspace $project35_yoko
+bindsym $mod+$alt+F4 workspace $project36_tate, workspace $project36_yoko
+bindsym $mod+$alt+F5 workspace $project37_tate, workspace $project37_yoko
+bindsym $mod+$alt+F6 workspace $project38_tate, workspace $project38_yoko
+bindsym $mod+$alt+F7 workspace $project39_tate, workspace $project39_yoko
+bindsym $mod+$alt+F8 workspace $project40_tate, workspace $project40_yoko
+bindsym $mod+$alt+F9 workspace $project41_tate, workspace $project41_yoko
+bindsym $mod+$alt+F10 workspace $project42_tate, workspace $project42_yoko
+bindsym $mod+$alt+F11 workspace $project43_tate, workspace $project43_yoko
+bindsym $mod+$alt+F12 workspace $project44_tate, workspace $project44_yoko
+
 # move focused container to a project's yoko workspace
 bindsym $mod+Shift+1 move container to workspace $project1_yoko
 bindsym $mod+Shift+2 move container to workspace $project2_yoko
@@ -221,6 +349,32 @@ bindsym $mod+$alt+Shift+7 move container to workspace $project17_yoko
 bindsym $mod+$alt+Shift+8 move container to workspace $project18_yoko
 bindsym $mod+$alt+Shift+9 move container to workspace $project19_yoko
 bindsym $mod+$alt+Shift+0 move container to workspace $project20_yoko
+
+bindsym $mod+Shift+F1 move container to workspace $project21_yoko
+bindsym $mod+Shift+F2 move container to workspace $project22_yoko
+bindsym $mod+Shift+F3 move container to workspace $project23_yoko
+bindsym $mod+Shift+F4 move container to workspace $project24_yoko
+bindsym $mod+Shift+F5 move container to workspace $project25_yoko
+bindsym $mod+Shift+F6 move container to workspace $project26_yoko
+bindsym $mod+Shift+F7 move container to workspace $project27_yoko
+bindsym $mod+Shift+F8 move container to workspace $project28_yoko
+bindsym $mod+Shift+F9 move container to workspace $project29_yoko
+bindsym $mod+Shift+F10 move container to workspace $project30_yoko
+bindsym $mod+Shift+F11 move container to workspace $project31_yoko
+bindsym $mod+Shift+F12 move container to workspace $project32_yoko
+
+bindsym $mod+$alt+Shift+F1 move container to workspace $project33_yoko
+bindsym $mod+$alt+Shift+F2 move container to workspace $project34_yoko
+bindsym $mod+$alt+Shift+F3 move container to workspace $project35_yoko
+bindsym $mod+$alt+Shift+F4 move container to workspace $project36_yoko
+bindsym $mod+$alt+Shift+F5 move container to workspace $project37_yoko
+bindsym $mod+$alt+Shift+F6 move container to workspace $project38_yoko
+bindsym $mod+$alt+Shift+F7 move container to workspace $project39_yoko
+bindsym $mod+$alt+Shift+F8 move container to workspace $project40_yoko
+bindsym $mod+$alt+Shift+F9 move container to workspace $project41_yoko
+bindsym $mod+$alt+Shift+F10 move container to workspace $project42_yoko
+bindsym $mod+$alt+Shift+F11 move container to workspace $project43_yoko
+bindsym $mod+$alt+Shift+F12 move container to workspace $project44_yoko
 
 # flip the focused window between the yoko and tate half of its current project pair
 bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/toggle-yoko-tate.sh
@@ -253,6 +407,6 @@ gaps inner 16
 smart_borders on
 
 #                       border                  background    text          indicator               child_border
-client.focused          $badwolf_tardis         $badwolf_coal $badwolf_snow $badwolf_tardis         $badwolf_tardis
+client.focused          $badwolf_orange         $badwolf_coal $badwolf_snow $badwolf_tardis         $badwolf_orange
 client.focused_inactive $badwolf_blackestgravel $badwolf_coal $badwolf_snow $badwolf_blackestgravel $badwolf_blackestgravel
 client.unfocused        $badwolf_blackestgravel $badwolf_coal $badwolf_snow $badwolf_blackestgravel $badwolf_blackestgravel

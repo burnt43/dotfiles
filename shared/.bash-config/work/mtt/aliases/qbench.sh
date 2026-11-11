@@ -1,4 +1,4 @@
-alias qbench_dev="ruby3 && cd ~/git_clones/quartz-bench && __echo_dev_name__ QbenchDev"
+alias qbench_dev="ruby3 && cd ~/git_clones/quartz-bench"
 alias qbench_sanity_check="qbench_dev && ./script/sanity_check.sh"
 
 qbench_data_prefixes=(rtp-delta time-to-wait-before-send-out-rtp-packet)

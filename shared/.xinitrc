@@ -25,7 +25,18 @@ case "$(hostname)" in
     # Good 2nd Monitor
     xrandr --output HDMI-1 --mode 2560x1440 --rate 59.95 --rotate left --left-of DP-1
 
-    feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/youtube-tmp/oPniCBlk4VU.jpg /home/jcarson/git_clones/wallpapers/youtube-tmp/eh2bA1lcIds.jpg
+    # Blue Aquatic
+    # feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/youtube-tmp/oPniCBlk4VU.jpg /home/jcarson/git_clones/wallpapers/youtube-tmp/eh2bA1lcIds.jpg
+
+    feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/vertical/pexels-photo-1496372-2460121101.jpg /home/jcarson/git_clones/wallpapers/fanathem/moto_guzzi_v85_desktop_wallpaper1.png
+
+    # Nature Leaves
+    # feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/youtube-tmp/D3U_HehgEmU.jpg /home/jcarson/git_clones/wallpapers/vertical/838195-402826361.jpg
+    # feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/youtube-tmp/D3U_HehgEmU.jpg /home/jcarson/git_clones/wallpapers/vertical/wp9203631-1060677111.jpg
+
+    # Pretty Cool Combo
+    # feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/nature/wp10573520-planter-wallpapers.jpg /home/jcarson/git_clones/wallpapers/vertical/pexels-photo-1496372-2460121101.jpg
+
     # feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/youtube-tmp/D3U_HehgEmU.jpg /home/jcarson/git_clones/wallpapers/youtube-tmp/eh2bA1lcIds.jpg
     # feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/cryochamber/temple_of_cthulhu.jpg /home/jcarson/git_clones/wallpapers/youtube-tmp/eh2bA1lcIds.jpg
     # feh --bg-fill --no-fehbg /home/jcarson/git_clones/wallpapers/youtube-tmp/9wk28F6v_PQ.jpg /home/jcarson/git_clones/wallpapers/youtube-tmp/eh2bA1lcIds.jpg

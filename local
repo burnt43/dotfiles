@@ -33,6 +33,7 @@ hpbxgui.sh
 httpd.sh
 ibm_s2t_api.sh
 ibm_t2s_api.sh
+incus.sh
 influxdb.sh
 liteorm.sh
 mobile_app.sh
@@ -61,6 +62,7 @@ system_upgrade.sh
 thingspace.sh
 tickets_api.sh
 tickets.sh
+vfm.sh
 xymon_reporter.sh
 xymon.sh
 zoom.sh

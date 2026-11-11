@@ -32,4 +32,5 @@ function __httpd_ruby__ {
 
 #     [Install]
 #     WantedBy=multi-user.target
-alias httpd_ruby="__httpd_ruby__"
+# DEPRECATED: use eqpt_gui_web/hpbxgui_web/tickets_web/etc...
+# alias httpd_ruby="__httpd_ruby__"

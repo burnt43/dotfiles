@@ -51,6 +51,7 @@ case "$(hostname)" in
       work/mtt/aliases/httpd.sh
       work/mtt/aliases/ibm_s2t_api.sh
       work/mtt/aliases/ibm_t2s_api.sh
+      work/mtt/aliases/incus.sh
       work/mtt/aliases/influxdb.sh
       work/mtt/aliases/liteorm.sh
       work/mtt/aliases/mobile_app.sh
@@ -78,6 +79,7 @@ case "$(hostname)" in
       work/mtt/aliases/thingspace.sh
       work/mtt/aliases/tickets.sh
       work/mtt/aliases/tickets_api.sh
+      work/mtt/aliases/vfm.sh
       work/mtt/aliases/xymon.sh
       work/mtt/aliases/xymon_reporter.sh
       work/mtt/aliases/zoom.sh

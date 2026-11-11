@@ -2,7 +2,7 @@ mtt_ai_gem_home=/home/jcarson/.gems/mtt-ai/ruby/3.3.0
 
 alias mtt_ai_command_client="mtt_ai_dev && ./script/ari_command_client.sh"
 alias mtt_ai_core_run="mtt_ai_dev && ./script/ari_server.sh"
-alias mtt_ai_dev="ruby3 && cd ~/git_clones/mtt-ai && __echo_dev_name__ MttAiDev"
+alias mtt_ai_dev="ruby3 && cd ~/git_clones/mtt-ai"
 alias mtt_ai_cmd_console="mtt_ai_dev && ./script/console.sh -c 6 -p mtt_ai/ari -p mtt_ai/ari/command_client_runner"
 alias mtt_ai_core_console="mtt_ai_dev && ./script/console.sh -c 6 -p mtt_ai/ari -p mtt_ai/ari/core_runner"
 alias mtt_ai_generate_email="mtt_ai_dev && ./script/ari_command_client.sh --generate-email-for-summary-dev --email-auth-user jcarson@monmouth.com --email-to create-mtt-crm-dev@monmouth.com"

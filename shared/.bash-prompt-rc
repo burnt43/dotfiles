@@ -49,6 +49,10 @@ case "$my_network" in
   64.19.145|172.16.0|173.63.3|200.255.100|209.191.1|209.191.9)
     host_color_code=31
     ;;
+  # Local Virtual Machines (Green/Blue)
+  10.111.159)
+    host_color_code=(32 35 33)
+    ;;
   # Other (Black)
   *)
     host_color_code=30
@@ -93,7 +97,27 @@ function __shell_basic_info__ {
       ;;
   esac
 
-  echo -ne "$effective_user@\033[1;${host_color_code}m$my_hostname\033[0;0m \033[0;34m$effective_dir\033[0;0m"
+  # Handle Multiple Colors(if host_color_code is an array)
+  if [[ $(declare -p host_color_code 2>/dev/null) == "declare -a"* ]]; then
+    local mc_text="$my_hostname"
+    local mc_out=""
+    local mc_i mc_c mc_n=0
+
+    for (( mc_i = 0; mc_i < ${#mc_text}; mc_i++ )); do
+      mc_c="${mc_text:mc_i:1}"
+      if [[ "$mc_c" == " " ]]; then
+        mc_out+=" "                      # spaces don't use up a color
+      else
+        mc_out+="\033[1;${host_color_code[mc_n % ${#host_color_code[@]}]}m${mc_c}"
+        (( mc_n++ ))
+      fi
+    done
+  else
+    # just use single color
+    mc_out="\033[1;${host_color_code}m$my_hostname\033[0;0m"
+  fi
+
+  echo -ne "$effective_user@${mc_out} \033[0;34m$effective_dir\033[0;0m"
 }
 
 function __shell_git_plugin__ {

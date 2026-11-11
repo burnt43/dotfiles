@@ -1,3 +1,4 @@
+alias alixdev="sshpass -p 'mute*onyx' ssh admin@96.242.3.29"
 alias compile_mcl="__compile_mcl__"
 alias convert_slin_to_google_pcm8="__convert_slin_to_google_pcm8__"
 alias convert_to_ulaw="__convert_to_ulaw__"

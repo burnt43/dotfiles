@@ -58,6 +58,17 @@ function __git_sync_master__ {
   local remote_target_branch=master
   local remote_git_remote=mtt
 
+  local repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+  local remote_override_file="${repo_root}/.git_sync_remote"
+
+  if [[ -n "$repo_root" && -f "$remote_override_file" ]]; then
+    local preferred_remote=$(head -n1 "$remote_override_file" | tr -d '[:space:]')
+
+    if [[ -n "$preferred_remote" ]] && git remote -v | grep -q "^${preferred_remote}"; then
+      remote_git_remote="$preferred_remote"
+    fi
+  fi
+
   git remote -v | grep -q "^${remote_git_remote}" && has_git_remote=1
 
   __echo_proc_step__ "changing to $local_target_branch branch"
